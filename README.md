@@ -7,18 +7,18 @@ The demo canvas is self-contained; the page is static and has no build step.
 
 - Repository: https://github.com/hello532/figcraft (public, `main`)
 - GitHub Pages: enabled, latest build `status=built`
-- Cloudflare DNS: `figcraft.rerivo.com CNAME hello532.github.io` (DNS only)
-- HTTPS certificate: pending at the time of writing (`https_certificate` null)
+- Cloudflare DNS: `figcraft.rerivo.com CNAME hello532.github.io`, **proxied** (orange cloud)
+- Cloudflare SSL: `Flexible`, Universal SSL active; `Always Use HTTPS` on
+- Verified externally: `http://` returns **301** to `https://`; `https://` returns **200**
+  with the page title and canonical `https://figcraft.rerivo.com/`.
 - Local note: this machine resolves `*.rerivo.com` through a proxy to 198.18.x
-  virtual IPs, so a local `curl` may fail before the proxy routing updates.
-
-After the certificate is issued, the page should answer 200 at
-`https://figcraft.rerivo.com/`.
+  virtual IPs, so a local `curl` may not show the same path as an external client.
 
 ## Verify
 
 ```bash
-curl -I https://figcraft.rerivo.com/
+curl -I http://figcraft.rerivo.com/        # expect 301, Location: https://...
+curl -I https://figcraft.rerivo.com/       # expect 200
 curl -s https://figcraft.rerivo.com/ | grep -o '<title>[^<]*'
 ```
 
