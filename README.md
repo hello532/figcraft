@@ -3,25 +3,14 @@
 Single-page D0 for the radar term `figcraft` (2026-10-19). No login, no payment.
 The demo canvas is self-contained; the page is static and has no build step.
 
-## Deploy (GitHub Pages)
+## Status (2026-10-19)
 
-```bash
-git init
-git add .
-git commit -m "figcraft D0"
-gh repo create hello532/figcraft --public --source=. --remote=origin --push
-gh api -X POST repos/hello532/figcraft/pages -f 'source[branch]=main' -f 'source[path]=/'
-```
-
-GitHub Pages reads `CNAME` and serves `https://figcraft.rerivo.com/` once DNS points there.
-
-## DNS (Cloudflare)
-
-Add a CNAME record:
-
-| Name | Type | Target | Proxy |
-|---|---|---|---|
-| figcraft | CNAME | hello532.github.io | DNS only (grey cloud) first |
+- Repository: https://github.com/hello532/figcraft (public, `main`)
+- GitHub Pages: enabled, latest build `status=built`
+- Cloudflare DNS: `figcraft.rerivo.com CNAME hello532.github.io` (DNS only)
+- HTTPS certificate: pending at the time of writing (`https_certificate` null)
+- Local note: this machine resolves `*.rerivo.com` through a proxy to 198.18.x
+  virtual IPs, so a local `curl` may fail before the proxy routing updates.
 
 After the certificate is issued, the page should answer 200 at
 `https://figcraft.rerivo.com/`.
