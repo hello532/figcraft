@@ -3,15 +3,25 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>FigCraft — Open-Source Figma Alternative in Rust (Guide + Studio)</title>
-<meta name="description" content="FigCraft is an open-source Figma alternative written in pure Rust: auto layout, components, vector networks, prototypes, Dev Mode, offline files. Guide, honest alpha status, install steps and a customizable browser canvas studio.">
+<title>FigCraft — Open-Source Figma Alternative in Rust (Guide, Issues, Studio)</title>
+<meta name="description" content="FigCraft is an open-source Figma alternative written in pure Rust: auto layout, components, vector networks, prototypes, Dev Mode, offline files. Guide with known GitHub issues, install steps, FAQ and a customizable browser canvas studio.">
+<meta name="robots" content="index,follow,max-image-preview:large">
+<meta name="author" content="FigCraft Guide">
+<meta name="theme-color" content="#2563eb">
 <link rel="canonical" href="https://figcraft.rerivo.com/">
 <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='16' fill='%232563eb'/%3E%3Ctext x='32' y='45' font-family='Arial,sans-serif' font-size='38' font-weight='700' fill='white' text-anchor='middle'%3EF%3C/text%3E%3C/svg%3E">
 <meta property="og:title" content="FigCraft — Open-Source Figma Alternative in Rust">
-<meta property="og:description" content="What FigCraft does, where it stands against Figma, how to install it, and a customizable browser canvas studio. Independent guide.">
+<meta property="og:description" content="What FigCraft does, where it stands against Figma, the known GitHub issues, how to install it, and a customizable browser canvas studio.">
 <meta property="og:type" content="website">
 <meta property="og:url" content="https://figcraft.rerivo.com/">
+<meta property="og:image" content="https://figcraft.rerivo.com/og.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="FigCraft — a Figma alternative written in pure Rust">
 <meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="FigCraft — Open-Source Figma Alternative in Rust">
+<meta name="twitter:description" content="Guide, known GitHub issues, install steps, FAQ and a customizable browser studio for FigCraft.">
+<meta name="twitter:image" content="https://figcraft.rerivo.com/og.png">
 <style>
   :root{
     --bg:#f7f7f5; --surface:#fff; --fg:#161616; --muted:#5f6368; --border:#e4e4df;
@@ -148,6 +158,7 @@
     <nav aria-label="Sections">
       <a href="#what">What it is</a>
       <a href="#compare">vs Figma</a>
+      <a href="#issues">Issues</a>
       <a href="#get-started">Install</a>
       <a href="#demo">Studio</a>
       <a href="#faq">FAQ</a>
@@ -297,6 +308,23 @@
     <p class="note">“Better” depends on the job. For a solo designer who wants a local file and an inspectable engine, FigCraft is interesting now. For a team that needs multiplayer and a mature plugin ecosystem today, Figma is still the safer choice.</p>
   </section>
 
+  <section id="issues">
+    <h2>Known issues from the GitHub tracker</h2>
+    <p class="sub">These are the problems users actually report on <a href="https://github.com/storytold/figcraft/issues" rel="noopener">storytold/figcraft</a>. They are not reasons to avoid the project; they are the edges to know before you trust it with a deadline. Issue state checked 2026-10-19; open the link before acting.</p>
+    <div class="grid">
+      <div class="card"><h3>Large <code>.fig</code> imports</h3><p>Importing big Figma files can fail or take a long time. The tracker has an open import umbrella (<a href="https://github.com/storytold/figcraft/issues/321" rel="noopener">#321</a>) and a report for large files (<a href="https://github.com/storytold/figcraft/issues/574" rel="noopener">#574</a>); opening large <code>.fig</code> files was improved in <a href="https://github.com/storytold/figcraft/issues/315" rel="noopener">#315</a>. Keep the original file and try a smaller page or a fresh export.</p></div>
+      <div class="card"><h3>Missing fonts fall back silently</h3><p>Text in a font you do not have can render in another font without a warning (<a href="https://github.com/storytold/figcraft/issues/752" rel="noopener">#752</a>, closed). Install the <code>craft-fonts</code> repo next to the app; font rescan/load work is tracked in <a href="https://github.com/storytold/figcraft/issues/821" rel="noopener">#821</a>.</p></div>
+      <div class="card"><h3>macOS 27 / M1 launch crash</h3><p>There is an open crash on launch on macOS 27.0.1 with an uncaught <code>NSException</code> in <code>_NSTouchBarFinderObservation</code> (<a href="https://github.com/storytold/figcraft/issues/781" rel="noopener">#781</a>). Try the latest release and report your build; do not assume every Mac is affected.</p></div>
+      <div class="card"><h3>Blurred Windows UI after restore</h3><p>Restored Windows windows can render a blurred DX12 UI; the fix is tracked in <a href="https://github.com/storytold/figcraft/issues/779" rel="noopener">#779</a>. Resizing or restarting the window is the usual workaround until it lands.</p></div>
+      <div class="card"><h3>Small UI on 1440p monitors</h3><p>The interface can feel small on high-DPI 1440p screens (<a href="https://github.com/storytold/figcraft/issues/540" rel="noopener">#540</a>). An interface-size preference is in progress (<a href="https://github.com/storytold/figcraft/issues/818" rel="noopener">#818</a>); OS scaling still helps today.</p></div>
+      <div class="card"><h3>Web build file access</h3><p>The browser build can open local files through <em>File ▸ Open</em>, import and drag-and-drop; the work is tracked in <a href="https://github.com/storytold/figcraft/issues/830" rel="noopener">#830</a>. If a picker does not appear, use a current release and check the issue.</p></div>
+      <div class="card"><h3>Variable collection crashes (fixed)</h3><p>Creating a local variable collection used to crash the app (<a href="https://github.com/storytold/figcraft/issues/224" rel="noopener">#224</a>, <a href="https://github.com/storytold/figcraft/issues/613" rel="noopener">#613</a>). Both are closed; update before reproducing an old crash.</p></div>
+      <div class="card"><h3>CLI path roots</h3><p>CLI commands are being confined to automation roots (<a href="https://github.com/storytold/figcraft/issues/839" rel="noopener">#839</a>). Keep <code>figcraft-cli</code> inputs and outputs inside the directory you launched it from.</p></div>
+      <div class="card"><h3>Collaboration is a preview</h3><p>Live sessions have no accounts, teams or cloud yet, and the public server is not end-to-end encrypted. Self-host the server or use local-network sharing for confidential work.</p></div>
+    </div>
+    <p class="note">A closed issue is not a guarantee that every build has the fix: check the release date against the issue’s close date. The most useful bug report includes the OS, build, exact steps and a sample file that can be shared.</p>
+  </section>
+
   <section id="get-started">
     <h2>How to run FigCraft</h2>
     <p class="sub">Prebuilt installers for macOS, Windows, Linux, FreeBSD and the web are attached to each <a href="https://github.com/storytold/figcraft/releases" rel="noopener">GitHub release</a>. To build from source you need a Rust toolchain:</p>
@@ -332,6 +360,10 @@ cargo run --release -p figcraft-server</code></pre>
     <details><summary>Does FigCraft open Figma <code>.fig</code> files?</summary><p>Only best effort. The project says <code>.fig</code> import is not reliable yet; keep the original Figma file and expect fixes to be needed. Native files are <code>.figcraft</code> archives.</p></details>
     <details><summary>Can I use the exported JSON in another tool?</summary><p>The studio's export is a plain layer list plus canvas settings (type, x, y, width, height, colour, radius, opacity, text, font size), intentionally simple so you can transform it with a script. It is not FigCraft's native file format.</p></details>
     <details><summary>Is multiplayer ready for a team?</summary><p>Not yet. Live sessions are a preview: no accounts, teams or cloud, and the public server is not end-to-end encrypted. For confidential work, self-host the server or use local-network sharing on a network you trust.</p></details>
+    <details><summary>Why does a large <code>.fig</code> import fail?</summary><p>Large Figma files are a known import issue, tracked in <a href="https://github.com/storytold/figcraft/issues/574" rel="noopener">#574</a> and the open import umbrella <a href="https://github.com/storytold/figcraft/issues/321" rel="noopener">#321</a>. Keep the original, try a smaller page or a fresh export, and check the issue for the current status. Large <code>.fig</code> opening itself was improved in <a href="https://github.com/storytold/figcraft/issues/315" rel="noopener">#315</a>.</p></details>
+    <details><summary>Why is my text in the wrong font?</summary><p>If a font is missing, FigCraft can fall back without a warning (<a href="https://github.com/storytold/figcraft/issues/752" rel="noopener">#752</a>, closed). Clone <code>craft-fonts</code> next to the repository and rebuild; font rescan/load work is tracked in <a href="https://github.com/storytold/figcraft/issues/821" rel="noopener">#821</a>.</p></details>
+    <details><summary>Why does FigCraft crash on macOS 27 / M1?</summary><p>There is an open launch crash report on macOS 27.0.1 with an uncaught <code>NSException</code> in <code>_NSTouchBarFinderObservation</code> (<a href="https://github.com/storytold/figcraft/issues/781" rel="noopener">#781</a>). Use the latest release, attach the crash log to the issue, and do not assume every Mac is affected.</p></details>
+    <details><summary>Why is the UI small on a 1440p monitor?</summary><p>This is tracked in <a href="https://github.com/storytold/figcraft/issues/540" rel="noopener">#540</a>; an interface-size preference is in progress (<a href="https://github.com/storytold/figcraft/issues/818" rel="noopener">#818</a>). Until it ships, OS display scaling is the workaround.</p></details>
   </section>
 </main>
 
@@ -346,11 +378,32 @@ cargo run --release -p figcraft-server</code></pre>
      "operatingSystem":"macOS, Windows, Linux, FreeBSD, Web",
      "offers":{"@type":"Offer","price":"0","priceCurrency":"USD"},
      "license":"MIT OR Apache-2.0","url":"https://github.com/storytold/figcraft"},
+    {"@type":"Article","headline":"FigCraft: an open-source Figma alternative written in pure Rust",
+     "description":"A guide to FigCraft: what it does, how it compares with Figma, the known GitHub issues, install steps and a customizable browser studio.",
+     "datePublished":"2026-10-19","dateModified":"2026-10-19",
+     "author":{"@type":"Organization","name":"FigCraft Guide"},
+     "publisher":{"@type":"Organization","name":"FigCraft Guide"},
+     "mainEntityOfPage":{"@type":"WebPage","@id":"https://figcraft.rerivo.com/"}},
+    {"@type":"BreadcrumbList","itemListElement":[
+      {"@type":"ListItem","position":1,"name":"Home","item":"https://figcraft.rerivo.com/"},
+      {"@type":"ListItem","position":2,"name":"FigCraft guide","item":"https://figcraft.rerivo.com/#what"}
+    ]},
+    {"@type":"HowTo","name":"How to run FigCraft from source",
+     "description":"Build the FigCraft desktop app from its GitHub repository with a Rust toolchain.",
+     "totalTime":"PT10M",
+     "tool":[{"@type":"HowToTool","name":"Rust toolchain"},{"@type":"HowToTool","name":"Git"}],
+     "step":[
+       {"@type":"HowToStep","position":1,"name":"Clone the repository","text":"git clone https://github.com/storytold/figcraft"},
+       {"@type":"HowToStep","position":2,"name":"Add the fonts","text":"git clone https://github.com/storytold/craft-fonts ../craft-fonts"},
+       {"@type":"HowToStep","position":3,"name":"Run the desktop app","text":"cargo run --release -p figcraft"}
+     ]},
     {"@type":"FAQPage","mainEntity":[
       {"@type":"Question","name":"Is FigCraft really free?","acceptedAnswer":{"@type":"Answer","text":"Yes. The source is licensed MIT OR Apache-2.0 and the installers are free. It is early alpha and you run it yourself or use the community server preview."}},
       {"@type":"Question","name":"Do I need to install anything?","acceptedAnswer":{"@type":"Answer","text":"For the real FigCraft app, yes: download an installer or build it with Cargo. The canvas studio on this page needs no install and no account."}},
       {"@type":"Question","name":"How is it different from Figma?","acceptedAnswer":{"@type":"Answer","text":"Figma is a mature hosted product with real-time team collaboration. FigCraft is open source, offline-first and built in Rust; its multiplayer is a preview and its feature coverage is about 49% by its own estimate."}},
-      {"@type":"Question","name":"Does FigCraft open Figma .fig files?","acceptedAnswer":{"@type":"Answer","text":"Only best effort. Native files are .figcraft archives; .fig import is not reliable yet."}},
+      {"@type":"Question","name":"Does FigCraft open Figma .fig files?","acceptedAnswer":{"@type":"Answer","text":"Only best effort. Native files are .figcraft archives; large .fig imports are a known issue tracked in the GitHub repository."}},
+      {"@type":"Question","name":"Why does a large .fig import fail?","acceptedAnswer":{"@type":"Answer","text":"Large Figma files are a known import issue. Keep the original, try a smaller page or a fresh export, and check GitHub issues 574 and 321 for the current status."}},
+      {"@type":"Question","name":"Why is my text in the wrong font?","acceptedAnswer":{"@type":"Answer","text":"A missing font can fall back without a warning. Clone craft-fonts next to the repository and rebuild; font rescan support is tracked in issue 821."}},
       {"@type":"Question","name":"Is multiplayer ready for a team?","acceptedAnswer":{"@type":"Answer","text":"Not yet. Live sessions are a preview with no accounts, teams or cloud, and the public server is not end-to-end encrypted."}}
     ]}
   ]
@@ -442,7 +495,7 @@ cargo run --release -p figcraft-server</code></pre>
   function fitZoom() {
     const aw = Math.max(240, viewport.clientWidth - 56);
     const ah = Math.max(200, viewport.clientHeight - 56);
-    state.zoom = Math.min(1, Math.max(0.2, Math.min(aw / state.board.w, ah / state.board.h)));
+    state.zoom = Math.min(1, Math.max(0.1, Math.min(aw / state.board.w, ah / state.board.h)));
     state.fit = true;
     $('#zoom').value = 'fit';
     resizeCanvas();
@@ -574,15 +627,19 @@ cargo run --release -p figcraft-server</code></pre>
     return { x: (e.clientX - r.left) / state.zoom, y: (e.clientY - r.top) / state.zoom };
   }
   function addLayer(type, p) {
-    snapshot();
     const id = state.seq++;
     let l;
     if (type === 'text') {
-      const text = prompt('Text', 'Button') || 'Button';
+      const answer = prompt('Text', 'Button');
+      if (answer == null) return;
+      const text = answer.trim() || 'Text';
+      snapshot();
       l = { id, type, name: text.slice(0, 24), text, x: p.x, y: p.y, w: Math.max(40, text.length * 10), h: 24, color: darkBoard() ? '#ffffff' : '#111827', fontSize: 20, opacity: 1, radius: 0, hidden: false };
     } else if (type === 'frame') {
+      snapshot();
       l = { id, type, name: 'Frame ' + id, x: p.x - 140, y: p.y - 90, w: 280, h: 180, color: '#2563eb', opacity: 1, radius: 0, hidden: false };
     } else {
+      snapshot();
       l = { id, type: 'rect', name: 'Rectangle ' + id, x: p.x - 60, y: p.y - 36, w: 120, h: 72, color: state.color, opacity: 1, radius: 10, hidden: false };
     }
     state.layers.push(l);
@@ -713,7 +770,8 @@ cargo run --release -p figcraft-server</code></pre>
     const key = e.target.dataset.prop;
     if (!key) return;
     const v = e.target.value;
-    if (['x', 'y', 'w', 'h'].includes(key)) l[key] = Number(v) || 0;
+    if (key === 'x' || key === 'y') l[key] = Number(v) || 0;
+    else if (key === 'w' || key === 'h') l[key] = Math.max(8, Number(v) || 8);
     else if (key === 'opacity') l.opacity = Number(v);
     else if (key === 'fontSize') l.fontSize = Number(v) || 20;
     else if (key === 'radius') l.radius = Math.max(0, Number(v) || 0);
@@ -774,6 +832,9 @@ cargo run --release -p figcraft-server</code></pre>
     state.history = [];
     state.future = [];
     state.seq = 1;
+    state.zoom = 1;
+    state.fit = false;
+    $('#zoom').value = '1';
     syncBoardInputs();
     resizeCanvas();
     syncPanels();
@@ -794,12 +855,7 @@ cargo run --release -p figcraft-server</code></pre>
     c.height = state.board.h * scale;
     const g = c.getContext('2d');
     g.scale(scale, scale);
-    if (state.board.alpha) {
-      for (let y = 0; y < state.board.h; y += 16) for (let x = 0; x < state.board.w; x += 16) {
-        g.fillStyle = ((x / 16 + y / 16) % 2) ? '#e9e9e6' : '#f6f6f3';
-        g.fillRect(x, y, 16, 16);
-      }
-    } else {
+    if (!state.board.alpha) {
       g.fillStyle = state.board.bg; g.fillRect(0, 0, state.board.w, state.board.h);
     }
     g.save();
@@ -854,6 +910,7 @@ cargo run --release -p figcraft-server</code></pre>
     $('#board-bg').value = state.board.bg;
     $('#board-alpha').checked = !!state.board.alpha;
     $('#grid-on').checked = !!state.board.grid;
+    $('#grid-on').disabled = !!state.board.alpha;
     $('#grid-size').value = state.board.gridSize;
     const key = state.board.w + 'x' + state.board.h;
     const preset = $('#preset');
@@ -872,7 +929,7 @@ cargo run --release -p figcraft-server</code></pre>
     state.board.w = w; state.board.h = h; applyBoard();
   });
   $('#board-bg').addEventListener('input', (e) => { state.board.bg = e.target.value; state.board.alpha = false; $('#board-alpha').checked = false; draw(); save(); });
-  $('#board-alpha').addEventListener('change', (e) => { state.board.alpha = e.target.checked; draw(); save(); });
+  $('#board-alpha').addEventListener('change', (e) => { state.board.alpha = e.target.checked; $('#grid-on').disabled = state.board.alpha; draw(); save(); });
   $('#grid-on').addEventListener('change', (e) => { state.board.grid = e.target.checked; draw(); save(); });
   $('#grid-size').addEventListener('change', (e) => { state.board.gridSize = Math.max(4, Math.min(200, Number(e.target.value) || 32)); draw(); save(); });
   $('#zoom').addEventListener('change', (e) => setZoom(e.target.value));
