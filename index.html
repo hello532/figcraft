@@ -122,6 +122,11 @@
   .author-box strong{font-size:14px}
   .author-box p{margin:3px 0 5px;color:var(--muted);font-size:13px;max-width:75ch}
   .author-box small{color:var(--muted);font-size:11px}
+  .intent-grid{grid-template-columns:repeat(3,1fr)}
+  .intent-list{list-style:none;padding:0;margin:10px 0 0;display:flex;flex-wrap:wrap;gap:6px}
+  .intent-list a{display:inline-block;border:1px solid var(--border);background:var(--bg);color:var(--muted);border-radius:999px;padding:3px 9px;font-size:12px;line-height:1.5}
+  .intent-list a:hover{border-color:var(--accent);color:var(--accent);text-decoration:none}
+  @media (max-width:900px){.intent-grid{grid-template-columns:1fr}}
   footer{border-top:1px solid var(--border);padding:28px 0;color:var(--muted);font-size:13px}
 
   /* ---------- studio ---------- */
@@ -267,6 +272,7 @@
     <a href="#what">What it is</a>
     <a href="#demo">Studio</a>
     <a href="#compare">vs Figma</a>
+    <a href="#search-intent">Search intent</a>
     <a href="#issues">Issues</a>
     <a href="#get-started">Install</a>
     <a href="#guides">Guides</a>
@@ -281,6 +287,7 @@
     <a href="#what">What it is</a>
     <a href="#compare">vs Figma</a>
     <a href="#alternatives">Alternatives</a>
+    <a href="#search-intent">Search intent</a>
     <a href="#issues">Issues</a>
     <a href="#whats-new">0.7.0</a>
     <a href="#get-started">Install</a>
@@ -597,6 +604,64 @@ cargo run --release -p figcraft-server</code></pre>
     </div>
   </section>
 
+  <section id="search-intent">
+    <h2>Search intent guide</h2>
+    <p class="sub">People arrive with different questions. These are the Google autocomplete clusters around FigCraft and Figma alternatives, grouped by what you are trying to do. Every chip links to the section or source that answers it.</p>
+    <div class="grid intent-grid">
+      <div class="card"><h3>Free &amp; open source</h3><ul class="intent-list">
+        <li><a href="#compare">free figma alternative</a></li>
+        <li><a href="#compare">open source figma alternative</a></li>
+        <li><a href="#alternatives">best open source figma alternative</a></li>
+        <li><a href="#compare">free open source figma alternative</a></li>
+        <li><a href="#alternatives">open source self hosted figma alternative</a></li>
+        <li><a href="#faq">completely free figma alternative</a></li>
+      </ul></div>
+      <div class="card"><h3>By platform</h3><ul class="intent-list">
+        <li><a href="#get-started">figma alternative for mac</a></li>
+        <li><a href="#get-started">figma alternative for macos</a></li>
+        <li><a href="#get-started">figma alternatives for linux</a></li>
+        <li><a href="#get-started">figma alternatives for mobile</a></li>
+        <li><a href="#get-started">figma alternative for ipad</a></li>
+        <li><a href="#faq">figma alternatives for android</a></li>
+      </ul></div>
+      <div class="card"><h3>AI, MCP &amp; developers</h3><ul class="intent-list">
+        <li><a href="#what">figma alternative with mcp</a></li>
+        <li><a href="#what">open source figma alternative with mcp</a></li>
+        <li><a href="#what">figma alternatives ai</a></li>
+        <li><a href="https://github.com/storytold/figcraft" rel="noopener">figma alternative github</a></li>
+        <li><a href="#guides">figcraft cli</a></li>
+        <li><a href="#what">figcraft rust</a></li>
+      </ul></div>
+      <div class="card"><h3>FigCraft specifics</h3><ul class="intent-list">
+        <li><a href="https://github.com/storytold/figcraft" rel="noopener">figcraft github</a></li>
+        <li><a href="#demo">figcraft online</a></li>
+        <li><a href="#get-started">figcraft download</a></li>
+        <li><a href="#faq">figcraft free</a></li>
+        <li><a href="#get-started">figcraft app</a></li>
+        <li><a href="#faq">figcraft review</a></li>
+        <li><a href="#how">figcraft tutorial</a></li>
+        <li><a href="#who">figcraft templates</a></li>
+        <li><a href="#demo">figcraft icons</a></li>
+      </ul></div>
+      <div class="card"><h3>Comparisons</h3><ul class="intent-list">
+        <li><a href="#compare">figcraft vs figma</a></li>
+        <li><a href="#alternatives">penpot vs figma</a></li>
+        <li><a href="#compare">penpot vs figma 2026</a></li>
+        <li><a href="#faq">penpot vs figma reddit</a></li>
+        <li><a href="#alternatives">penpot vs figma features</a></li>
+        <li><a href="#alternatives">penpot or figma</a></li>
+      </ul></div>
+      <div class="card"><h3>Problems &amp; how-to</h3><ul class="intent-list">
+        <li><a href="#issues">figcraft .fig import</a></li>
+        <li><a href="#issues">figcraft large fig import</a></li>
+        <li><a href="#issues">figcraft fonts</a></li>
+        <li><a href="#issues">figcraft macos crash</a></li>
+        <li><a href="#faq">figcraft multiplayer</a></li>
+        <li><a href="#how">figcraft export svg</a></li>
+      </ul></div>
+    </div>
+  </section>
+
   <div class="author-box">
     <div class="author-mark">F</div>
     <div>
@@ -623,6 +688,11 @@ cargo run --release -p figcraft-server</code></pre>
     <details><summary>Can I export SVG?</summary><p>Yes. The footer exports PNG at 1×/2×/3×, SVG, or JSON. The SVG keeps frames, rectangles, text, icons, radii, colours and opacity; the JSON includes the board settings and every layer.</p></details>
     <details><summary>Does the studio include an icon library?</summary><p>Yes. The sparkle button in the tool rail opens 69 original icons: 50 line icons for UI, media and files, plus 19 iOS-style glass tiles such as Phone, Messages, Safari, Camera, Photos, Mail, Calendar, Clock, Weather, Maps, Music, Settings, Wallet, Notes, Reminders, Health, Files, App Store and Face ID. Search or filter by category; click one to add it to the canvas.</p></details>
     <details><summary>Does it have precise alignment and numeric controls?</summary><p>Yes. The tool-options bar aligns a layer left, centre, right, top, middle or bottom, or centres it on the canvas. The inspector accepts 0.5 px steps for X, Y, W and H, supports a ratio lock, exact fill/stroke hex values, stroke width, radius and opacity. The HUD shows rounded X/Y/W/H, aspect ratio and the live pointer position; the zoom field accepts any percentage from 10% to 400%.</p></details>
+    <details><summary>What is the best free open-source Figma alternative?</summary><p>There is no single winner. For a native Rust app with local files and an inspectable command engine, FigCraft is the closest fit; for a web-first, self-hosted team workspace, Penpot is stronger today; for vector and procedural illustration, look at Graphite. Figma remains the mature cloud incumbent. See the <a href="#alternatives">alternatives comparison</a>.</p></details>
+    <details><summary>Is there a Figma alternative for Linux?</summary><p>Yes. FigCraft ships native builds for Linux and FreeBSD as well as macOS and Windows, plus a WebAssembly browser build. Penpot and Graphite are browser-based alternatives. Check the <a href="https://github.com/storytold/figcraft/releases" rel="noopener">releases</a> for your distribution.</p></details>
+    <details><summary>Is there an open-source Figma alternative with MCP?</summary><p>FigCraft exposes an MCP server, a CLI and a JSON control channel over the same 400+ commands as the UI, so an agent can create nodes, bind variables, render and export. Read the <a href="https://github.com/storytold/figcraft/blob/main/docs/mcp.md" rel="noopener">MCP docs</a> before scripting it.</p></details>
+    <details><summary>Can I use FigCraft online without installing it?</summary><p>The project ships a WebAssembly browser build; see the README and releases. The studio on this page is an independent canvas demo, not the official hosted editor. To open the real app in a browser, use the project’s current web build.</p></details>
+    <details><summary>Does FigCraft have an iPad or iPhone app?</summary><p>No dedicated iOS app is listed. FigCraft’s official platforms are macOS, Windows, Linux, FreeBSD and the web. On an iPad or iPhone, try the browser build; it is not a native iOS app.</p></details>
   </section>
 </main>
 
@@ -683,7 +753,12 @@ cargo run --release -p figcraft-server</code></pre>
       {"@type":"Question","name":"Does the studio have keyboard shortcuts?","acceptedAnswer":{"@type":"Answer","text":"Yes: V, F, R and T for tools; Delete to remove; Cmd/Ctrl+Z to undo; Cmd/Ctrl+D to duplicate; Cmd/Ctrl+C and V to copy and paste; arrows to nudge; Space+drag to pan; Cmd/Ctrl+wheel to zoom; question mark for the dialog."}},
       {"@type":"Question","name":"Can I export SVG?","acceptedAnswer":{"@type":"Answer","text":"Yes. Export PNG at 1x, 2x or 3x, SVG, or JSON. The SVG keeps frames, rectangles, text, icons, radii, colours and opacity; JSON includes the board settings and every layer."}},
       {"@type":"Question","name":"Does the studio include an icon library?","acceptedAnswer":{"@type":"Answer","text":"Yes. The sparkle button opens 69 original icons: 50 line icons and 19 iOS-style glass tiles, including Phone, Messages, Safari, Camera, Photos, Mail, Calendar, Weather, Maps, Music, Settings, Wallet, Notes, Reminders, Health, Files, App Store and Face ID."}},
-      {"@type":"Question","name":"Does it have precise alignment and numeric controls?","acceptedAnswer":{"@type":"Answer","text":"Yes. The tool-options bar aligns a layer left, centre, right, top, middle or bottom, or centres it on the canvas. The inspector accepts 0.5 px steps for X, Y, W and H, a ratio lock, exact fill and stroke hex values, stroke width, radius and opacity. The HUD shows X, Y, W, H, aspect ratio and the live pointer position; zoom accepts 10 to 400 percent."}}
+      {"@type":"Question","name":"Does it have precise alignment and numeric controls?","acceptedAnswer":{"@type":"Answer","text":"Yes. The tool-options bar aligns a layer left, centre, right, top, middle or bottom, or centres it on the canvas. The inspector accepts 0.5 px steps for X, Y, W and H, a ratio lock, exact fill and stroke hex values, stroke width, radius and opacity. The HUD shows X, Y, W, H, aspect ratio and the live pointer position; zoom accepts 10 to 400 percent."}},
+      {"@type":"Question","name":"What is the best free open-source Figma alternative?","acceptedAnswer":{"@type":"Answer","text":"There is no single winner. FigCraft fits a native Rust app with local files and an inspectable command engine; Penpot fits a web-first, self-hosted team workspace; Graphite fits vector and procedural illustration; Figma remains the mature cloud incumbent."}},
+      {"@type":"Question","name":"Is there a Figma alternative for Linux?","acceptedAnswer":{"@type":"Answer","text":"Yes. FigCraft ships native builds for Linux and FreeBSD as well as macOS and Windows, plus a WebAssembly browser build. Penpot and Graphite are browser-based alternatives."}},
+      {"@type":"Question","name":"Is there an open-source Figma alternative with MCP?","acceptedAnswer":{"@type":"Answer","text":"FigCraft exposes an MCP server, a CLI and a JSON control channel over the same 400+ commands as the UI, so an agent can create nodes, bind variables, render and export."}},
+      {"@type":"Question","name":"Can I use FigCraft online without installing it?","acceptedAnswer":{"@type":"Answer","text":"The project ships a WebAssembly browser build; the studio on this page is an independent canvas demo, not the official hosted editor. Use the project's current web build for the real app."}},
+      {"@type":"Question","name":"Does FigCraft have an iPad or iPhone app?","acceptedAnswer":{"@type":"Answer","text":"No dedicated iOS app is listed. Official platforms are macOS, Windows, Linux, FreeBSD and the web; on iPad or iPhone, try the browser build."}}
     ]}
   ]
 }
