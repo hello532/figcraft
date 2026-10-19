@@ -3,7 +3,7 @@
 Canonical: https://figcraft.rerivo.com/
 Last updated: 2026-10-19
 Covers: FigCraft v0.7.0 (released 2026-10-18)
-Publisher: FigCraft Guide (independent editorial; not affiliated with ArtCraft)
+Publisher: FigCraft Guide (independent editorial; not affiliated with the project maintainers)
 
 ## What FigCraft is
 
@@ -31,7 +31,7 @@ Release notes: https://github.com/storytold/figcraft/releases/tag/v0.7.0
 - Vector networks: Pen/Pencil, vector edit mode, boolean groups with editable operands, variable-width strokes, shape builder, gradients, masks, blurs, noise and glass effects.
 - Prototype connections, triggers, transitions and flows; presentation view; Inspect, measurements, annotations, ready-for-dev and CSS/HTML/React/Leptos/SwiftUI/Compose output.
 - Offline files and local ownership; SVG/PNG/JPG/WebP/PDF export.
-- CLI: `figcraft-cli render`, `export`, `run`, `commands` and `mcp`.
+- A CLI (`figcraft-cli`) is available; see the repository documentation for the current command set.
 - Browser build via `cargo xtask wasm` and trunk.
 
 ## Known issues (from the GitHub tracker, checked 2026-10-19)
