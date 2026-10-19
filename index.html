@@ -3,11 +3,12 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>FigCraft — Open-Source Figma Alternative in Rust (Guide + Demo)</title>
-<meta name="description" content="FigCraft is an open-source Figma alternative written in pure Rust: auto layout, components, vector networks, prototypes, Dev Mode, offline files. Guide, honest alpha status, install steps and a no-signup canvas demo.">
+<title>FigCraft — Open-Source Figma Alternative in Rust (Guide + Studio)</title>
+<meta name="description" content="FigCraft is an open-source Figma alternative written in pure Rust: auto layout, components, vector networks, prototypes, Dev Mode, offline files. Guide, honest alpha status, install steps and a customizable browser canvas studio.">
 <link rel="canonical" href="https://figcraft.rerivo.com/">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='16' fill='%232563eb'/%3E%3Ctext x='32' y='45' font-family='Arial,sans-serif' font-size='38' font-weight='700' fill='white' text-anchor='middle'%3EF%3C/text%3E%3C/svg%3E">
 <meta property="og:title" content="FigCraft — Open-Source Figma Alternative in Rust">
-<meta property="og:description" content="What FigCraft does, where it stands against Figma, how to install it, and a no-signup browser demo. Independent guide.">
+<meta property="og:description" content="What FigCraft does, where it stands against Figma, how to install it, and a customizable browser canvas studio. Independent guide.">
 <meta property="og:type" content="website">
 <meta property="og:url" content="https://figcraft.rerivo.com/">
 <meta name="twitter:card" content="summary_large_image">
@@ -26,38 +27,30 @@
   body{margin:0;background:var(--bg);color:var(--fg);line-height:1.6;-webkit-font-smoothing:antialiased}
   a{color:var(--accent);text-decoration:none}
   a:hover{text-decoration:underline}
-  .wrap{max-width:1080px;margin:0 auto;padding:0 24px}
-  header{position:sticky;top:0;z-index:10;background:color-mix(in srgb,var(--bg) 86%,transparent);backdrop-filter:blur(10px);border-bottom:1px solid var(--border)}
+  button,input,select{font:inherit}
+  .wrap{max-width:1180px;margin:0 auto;padding:0 24px}
+  header{position:sticky;top:0;z-index:20;background:color-mix(in srgb,var(--bg) 86%,transparent);backdrop-filter:blur(10px);border-bottom:1px solid var(--border)}
   .nav{display:flex;align-items:center;justify-content:space-between;gap:16px;height:60px}
   .brand{display:flex;align-items:center;gap:10px;font-weight:700;letter-spacing:-.02em}
   .mark{width:26px;height:26px;border-radius:8px;background:linear-gradient(135deg,var(--accent),#8b5cf6);display:grid;place-items:center;color:#fff;font-size:13px}
   .nav nav{display:flex;gap:18px;font-size:14px}
   .nav nav a{color:var(--muted)}
   .nav nav a:hover{color:var(--fg)}
-  main{padding:64px 0 40px}
-  .hero{display:grid;grid-template-columns:1.05fr .95fr;gap:40px;align-items:center}
+  main{padding:56px 0 40px}
+  .hero{max-width:900px;padding-bottom:42px}
   .eyebrow{font-size:13px;font-weight:700;text-transform:uppercase;letter-spacing:.08em;color:var(--accent)}
-  h1{font-size:clamp(34px,5vw,56px);line-height:1.05;letter-spacing:-.04em;margin:12px 0 16px}
-  .lede{font-size:18px;color:var(--muted);max-width:52ch;margin:0 0 24px}
+  h1{font-size:clamp(34px,5vw,58px);line-height:1.04;letter-spacing:-.04em;margin:12px 0 16px}
+  .lede{font-size:18px;color:var(--muted);max-width:66ch;margin:0 0 24px}
   .cta{display:flex;gap:12px;flex-wrap:wrap}
-  .btn{display:inline-flex;align-items:center;gap:8px;padding:11px 18px;border-radius:10px;font-weight:650;font-size:15px;border:1px solid transparent}
+  .btn{display:inline-flex;align-items:center;gap:8px;padding:11px 18px;border-radius:10px;font-weight:650;font-size:15px;border:1px solid transparent;cursor:pointer}
   .btn.primary{background:var(--accent);color:#fff}
   .btn.primary:hover{background:var(--accent-2);text-decoration:none}
   .btn.ghost{background:var(--surface);border-color:var(--border);color:var(--fg)}
-  .facts{display:flex;gap:22px;flex-wrap:wrap;margin-top:24px;color:var(--muted);font-size:13px}
+  .facts{display:flex;gap:26px;flex-wrap:wrap;margin-top:26px;color:var(--muted);font-size:13px}
   .facts strong{display:block;color:var(--fg);font-size:18px;letter-spacing:-.02em}
-  .demo{background:var(--surface);border:1px solid var(--border);border-radius:16px;box-shadow:var(--shadow);overflow:hidden}
-  .demo-bar{display:flex;align-items:center;gap:8px;padding:10px 12px;border-bottom:1px solid var(--border);flex-wrap:wrap}
-  .tool{border:1px solid var(--border);background:var(--bg);color:var(--fg);border-radius:8px;padding:6px 10px;font-size:13px;cursor:pointer}
-  .tool[aria-pressed="true"]{border-color:var(--accent);color:var(--accent);background:color-mix(in srgb,var(--accent) 10%,var(--bg))}
-  .tool.danger{color:var(--warn)}
-  .demo canvas{display:block;width:100%;height:auto;touch-action:none;background:
-    linear-gradient(90deg,transparent 31px,var(--border) 32px,transparent 33px) 0 0/32px 32px,
-    linear-gradient(0deg,transparent 31px,var(--border) 32px,transparent 33px) 0 0/32px 32px}
-  .demo-foot{display:flex;justify-content:space-between;gap:12px;padding:8px 12px;border-top:1px solid var(--border);font-size:12px;color:var(--muted)}
   section{padding:56px 0;border-top:1px solid var(--border)}
   h2{font-size:28px;letter-spacing:-.03em;margin:0 0 10px}
-  .sub{color:var(--muted);margin:0 0 28px;max-width:70ch}
+  .sub{color:var(--muted);margin:0 0 28px;max-width:75ch}
   .grid{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}
   .card{background:var(--surface);border:1px solid var(--border);border-radius:14px;padding:20px}
   .card h3{margin:0 0 6px;font-size:16px}
@@ -78,7 +71,74 @@
   details p{margin:10px 0 0;color:var(--muted)}
   .note{font-size:13px;color:var(--muted);margin-top:18px}
   footer{border-top:1px solid var(--border);padding:28px 0;color:var(--muted);font-size:13px}
-  @media (max-width:820px){.hero{grid-template-columns:1fr}.grid{grid-template-columns:1fr}main{padding-top:40px}.nav nav{display:none}}
+
+  /* ---------- studio ---------- */
+  .studio-section{padding-top:0;border-top:0}
+  .studio-head{display:flex;align-items:flex-end;justify-content:space-between;gap:24px;flex-wrap:wrap;margin-bottom:18px}
+  .studio-head .sub{margin-bottom:0}
+  .studio-head-actions{display:flex;gap:8px}
+  .studio{background:var(--surface);border:1px solid var(--border);border-radius:16px;box-shadow:var(--shadow);overflow:hidden;max-width:100%;min-width:0}
+  .studio-top{display:flex;align-items:center;justify-content:space-between;gap:14px;flex-wrap:wrap;padding:10px 14px;border-bottom:1px solid var(--border);background:color-mix(in srgb,var(--surface) 88%,var(--bg))}
+  .file{display:flex;align-items:center;gap:8px;font-size:13px;color:var(--muted);white-space:nowrap}
+  .file strong{color:var(--fg)}
+  .file .dot{width:8px;height:8px;border-radius:50%;background:var(--ok)}
+  .file-sub{font-size:11px;text-transform:uppercase;letter-spacing:.06em}
+  .canvas-controls{display:flex;align-items:center;gap:8px;flex-wrap:wrap;font-size:12px;color:var(--muted)}
+  .canvas-controls label{display:flex;align-items:center;gap:6px;white-space:nowrap}
+  .canvas-controls input[type=number]{width:66px;padding:6px 8px;border:1px solid var(--border);border-radius:7px;background:var(--surface);color:var(--fg)}
+  .canvas-controls select{padding:6px 8px;border:1px solid var(--border);border-radius:7px;background:var(--surface);color:var(--fg)}
+  .canvas-controls input[type=color]{width:30px;height:28px;padding:0;border:1px solid var(--border);border-radius:7px;background:var(--surface);cursor:pointer}
+  .canvas-controls input[type=checkbox]{accent-color:var(--accent)}
+  .studio-body{display:grid;grid-template-columns:54px minmax(0,1fr) 288px;min-height:540px;min-width:0;max-width:100%}
+  .toolrail{display:flex;flex-direction:column;align-items:center;gap:6px;padding:10px 6px;border-right:1px solid var(--border);background:color-mix(in srgb,var(--surface) 90%,var(--bg))}
+  .toolrail button{width:38px;height:38px;border-radius:9px;border:1px solid transparent;background:transparent;color:var(--muted);font-size:16px;cursor:pointer;display:grid;place-items:center}
+  .toolrail button:hover{background:var(--bg);color:var(--fg)}
+  .toolrail button[aria-pressed="true"]{background:color-mix(in srgb,var(--accent) 12%,var(--surface));border-color:color-mix(in srgb,var(--accent) 40%,var(--border));color:var(--accent)}
+  .rail-sep{width:26px;height:1px;background:var(--border);margin:6px 0}
+  .viewport{position:relative;overflow:auto;padding:28px;display:grid;place-items:center;min-width:0;max-width:100%;background:
+    radial-gradient(circle at 1px 1px,color-mix(in srgb,var(--fg) 9%,transparent) 1px,transparent 0) 0 0/18px 18px,
+    color-mix(in srgb,var(--bg) 75%,var(--surface))}
+  .board-wrap{position:relative;flex:0 0 auto;box-shadow:0 2px 6px rgba(0,0,0,.08),0 18px 40px rgba(0,0,0,.10);background:#fff}
+  #canvas{display:block;touch-action:none;cursor:crosshair}
+  .inspector{border-left:1px solid var(--border);display:flex;flex-direction:column;min-width:0;background:var(--surface)}
+  .panel{border-bottom:1px solid var(--border);padding:12px 14px;min-height:0;overflow-y:auto;overflow-x:hidden}
+  .panel:last-child{border-bottom:0;flex:1}
+  .panel-head{display:flex;align-items:center;justify-content:space-between;gap:8px;margin-bottom:8px}
+  .panel-head h3{margin:0;font-size:12px;text-transform:uppercase;letter-spacing:.08em;color:var(--muted)}
+  .panel-head span{font-size:11px;color:var(--muted)}
+  .layers{display:flex;flex-direction:column;gap:3px;max-height:210px;overflow:auto}
+  .layer{display:flex;align-items:center;gap:8px;width:100%;padding:7px 8px;border:1px solid transparent;border-radius:7px;background:transparent;color:var(--fg);font-size:13px;cursor:pointer;text-align:left}
+  .layer:hover{background:var(--bg)}
+  .layer[aria-pressed="true"]{background:color-mix(in srgb,var(--accent) 10%,var(--surface));border-color:color-mix(in srgb,var(--accent) 32%,var(--border))}
+  .layer .ltype{width:18px;text-align:center;color:var(--muted);flex:0 0 auto}
+  .layer .lname{flex:1;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+  .layer .leye{border:0;background:transparent;color:var(--muted);cursor:pointer;padding:2px 4px;font-size:13px}
+  .empty{margin:4px 0 8px;color:var(--muted);font-size:12px;line-height:1.45}
+  .props{display:flex;flex-direction:column;gap:10px;min-width:0;overflow-x:hidden}
+  .prop-grid{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:8px;min-width:0}
+  .prop-grid label{display:flex;flex-direction:column;gap:4px;font-size:11px;color:var(--muted);min-width:0;overflow:hidden}
+  .prop-grid label.wide{grid-column:1/-1}
+  .prop-grid input,.prop-grid select{width:100%;padding:6px 8px;border:1px solid var(--border);border-radius:7px;background:var(--surface);color:var(--fg);font-size:12px}
+  .prop-grid input[type=range]{padding:0;accent-color:var(--accent)}
+  .prop-row{display:flex;gap:6px;flex-wrap:wrap}
+  .prop-row button{flex:1;padding:6px 8px;border:1px solid var(--border);border-radius:7px;background:var(--bg);color:var(--fg);font-size:12px;cursor:pointer}
+  .prop-row button:hover{border-color:var(--accent);color:var(--accent)}
+  .studio-foot{display:flex;align-items:center;justify-content:space-between;gap:12px;flex-wrap:wrap;padding:8px 12px;border-top:1px solid var(--border);font-size:12px;color:var(--muted);background:color-mix(in srgb,var(--surface) 88%,var(--bg))}
+  .studio-foot .foot-actions{display:flex;gap:6px;flex-wrap:wrap}
+  .studio-foot .tool{border:1px solid var(--border);background:var(--surface);color:var(--fg);border-radius:7px;padding:5px 9px;font-size:12px;cursor:pointer}
+  .studio-foot .tool:hover{border-color:var(--accent);color:var(--accent)}
+  .studio-foot .tool:disabled{opacity:.45;cursor:not-allowed}
+  @media (max-width:900px){
+    .hero{grid-template-columns:1fr}
+    .grid{grid-template-columns:1fr}
+    .studio-body{grid-template-columns:1fr}
+    .toolrail{flex-direction:row;border-right:0;border-bottom:1px solid var(--border);overflow:auto}
+    .inspector{border-left:0;border-top:1px solid var(--border);display:grid;grid-template-columns:1fr 1fr}
+    .panel{max-height:260px}
+    .viewport{min-height:360px;padding:18px}
+    .nav nav{display:none}
+    .studio-head{align-items:flex-start}
+  }
 </style>
 </head>
 <body>
@@ -89,7 +149,7 @@
       <a href="#what">What it is</a>
       <a href="#compare">vs Figma</a>
       <a href="#get-started">Install</a>
-      <a href="#demo">Demo</a>
+      <a href="#demo">Studio</a>
       <a href="#faq">FAQ</a>
     </nav>
   </div>
@@ -103,7 +163,7 @@
       <p class="lede">FigCraft is an open-source interface design and prototyping app: frames, auto layout, components and variants, vector networks, prototypes and Dev Mode. It runs as a native app on macOS, Windows, Linux and FreeBSD, and compiles to WebAssembly for the browser. No account, no telemetry, files stay on your disk.</p>
       <div class="cta">
         <a class="btn primary" href="#get-started">Get FigCraft</a>
-        <a class="btn ghost" href="#demo">Try the canvas demo</a>
+        <a class="btn ghost" href="#demo">Open the studio</a>
         <a class="btn ghost" href="https://github.com/storytold/figcraft" rel="noopener">Source</a>
       </div>
       <div class="facts">
@@ -113,17 +173,93 @@
         <div><strong>~49%</strong>alpha parity</div>
       </div>
     </div>
-    <div class="demo" id="demo">
-      <div class="demo-bar" role="toolbar" aria-label="Canvas tools">
-        <button class="tool" data-tool="select" aria-pressed="true">Select</button>
-        <button class="tool" data-tool="frame" aria-pressed="false">Frame</button>
-        <button class="tool" data-tool="rect" aria-pressed="false">Rectangle</button>
-        <button class="tool" data-tool="text" aria-pressed="false">Text</button>
-        <button class="tool" id="color" title="Change fill color">Color</button>
-        <button class="tool danger" id="clear">Clear</button>
+  </section>
+
+  <section id="demo" class="studio-section">
+    <div class="studio-head">
+      <div>
+        <div class="eyebrow">Browser studio</div>
+        <h2>Try the canvas. Make it yours.</h2>
+        <p class="sub">A small design surface with layers, properties, resizing, undo and export. Set the canvas size, background and grid; everything stays in your browser. This is an independent demo, not the FigCraft editor.</p>
       </div>
-      <canvas id="canvas" width="720" height="460" aria-label="Interactive design canvas"></canvas>
-      <div class="demo-foot"><span id="hint">Pick a tool, then click the canvas. Drag a shape to move it.</span><button class="tool" id="export">Export JSON</button></div>
+      <div class="studio-head-actions">
+        <button class="btn ghost" id="reset">Reset canvas</button>
+        <button class="btn primary" id="export-png">Export PNG</button>
+      </div>
+    </div>
+
+    <div class="studio" id="studio">
+      <div class="studio-top">
+        <div class="file"><span class="dot"></span><strong>Untitled</strong><span class="file-sub">local · demo</span></div>
+        <div class="canvas-controls">
+          <label>Canvas
+            <select id="preset">
+              <option value="720x460">Landing · 720 × 460</option>
+              <option value="1440x900">Desktop · 1440 × 900</option>
+              <option value="1280x800">Laptop · 1280 × 800</option>
+              <option value="834x1112">Tablet · 834 × 1112</option>
+              <option value="390x844">Phone · 390 × 844</option>
+              <option value="1080x1080">Square · 1080 × 1080</option>
+              <option value="custom">Custom</option>
+            </select>
+          </label>
+          <label>W <input id="board-w" type="number" min="100" max="2400" step="1" value="720" aria-label="Canvas width"></label>
+          <label>H <input id="board-h" type="number" min="100" max="2400" step="1" value="460" aria-label="Canvas height"></label>
+          <label>BG <input id="board-bg" type="color" value="#ffffff" aria-label="Canvas background"></label>
+          <label><input id="board-alpha" type="checkbox"> Transparent</label>
+          <label><input id="grid-on" type="checkbox" checked> Grid</label>
+          <label>Grid px <input id="grid-size" type="number" min="4" max="200" step="1" value="32" aria-label="Grid spacing in pixels"></label>
+          <label>Zoom
+            <select id="zoom">
+              <option value="fit">Fit</option>
+              <option value="0.5">50%</option>
+              <option value="0.75">75%</option>
+              <option value="1" selected>100%</option>
+              <option value="1.25">125%</option>
+              <option value="1.5">150%</option>
+              <option value="2">200%</option>
+            </select>
+          </label>
+        </div>
+      </div>
+
+      <div class="studio-body">
+        <div class="toolrail" role="toolbar" aria-label="Tools">
+          <button data-tool="select" aria-pressed="true" title="Select (V)">↖</button>
+          <button data-tool="frame" aria-pressed="false" title="Frame (F)">▭</button>
+          <button data-tool="rect" aria-pressed="false" title="Rectangle (R)">■</button>
+          <button data-tool="text" aria-pressed="false" title="Text (T)">T</button>
+          <span class="rail-sep"></span>
+          <button id="duplicate" title="Duplicate (Ctrl/Cmd+D)">⧉</button>
+          <button id="delete" title="Delete (Del)">⌫</button>
+        </div>
+
+        <div class="viewport" id="viewport">
+          <div class="board-wrap" id="board-wrap">
+            <canvas id="canvas" width="720" height="460" aria-label="Customizable design canvas"></canvas>
+          </div>
+        </div>
+
+        <aside class="inspector">
+          <div class="panel">
+            <div class="panel-head"><h3>Layers</h3><span id="layer-count">0</span></div>
+            <div id="layers" class="layers"><p class="empty">No layers yet. Pick a tool and click the canvas.</p></div>
+          </div>
+          <div class="panel">
+            <div class="panel-head"><h3>Properties</h3></div>
+            <div id="props" class="props"><p class="empty">Select a layer to edit its position, size and fill.</p></div>
+          </div>
+        </aside>
+      </div>
+
+      <div class="studio-foot">
+        <span id="hint">V select · F frame · R rectangle · T text · Del delete · Cmd/Ctrl+Z undo · Shift+arrows move 10 px</span>
+        <div class="foot-actions">
+          <button class="tool" id="undo">Undo</button>
+          <button class="tool" id="redo">Redo</button>
+          <button class="tool" id="export-json">Export JSON</button>
+        </div>
+      </div>
     </div>
   </section>
 
@@ -139,7 +275,7 @@
       <div class="card"><h3>Offline and yours</h3><p>Files are plain <code>.figcraft</code> archives on your disk. No account and no telemetry; nothing leaves the machine unless you share. SVG, PNG, JPG, WebP and PDF export; <code>.fig</code> opens best effort.</p></div>
     </div>
     <p class="note"><strong>Honest status:</strong> FigCraft calls itself early alpha — about 49% of the way to replacing proprietary tools for real work, by its own estimate. The editor works end to end, but expect rough edges, best-effort <code>.fig</code> import, and only a preview of multiplayer. Check the <a href="https://github.com/storytold/figcraft/blob/main/ROADMAP.md" rel="noopener">roadmap</a> before trusting it with a team project.</p>
-    <p class="note">This is an independent guide, not the official FigCraft site. The demo below is a small canvas built for this page; the real application is linked above.</p>
+    <p class="note">This is an independent guide, not the official FigCraft site. The studio above is a small canvas built for this page; the real application is linked above.</p>
   </section>
 
   <section id="compare">
@@ -179,22 +315,22 @@ cargo run --release -p figcraft-server</code></pre>
   </section>
 
   <section id="how">
-    <h2>How the browser demo works</h2>
-    <p class="sub">Three actions are enough to judge whether a design tool fits your hands: create, arrange, export.</p>
+    <h2>How the browser studio works</h2>
+    <p class="sub">Three actions are enough to judge whether a design tool fits your hands: create, arrange, export. The studio keeps its state in localStorage, so a refresh does not lose your work.</p>
     <ol class="steps">
-      <li><strong>Create.</strong> Choose Frame, Rectangle or Text, then click the canvas. A frame is a screen; a rectangle is a block; text is a label.</li>
-      <li><strong>Arrange.</strong> Switch to Select and drag any shape. The selected shape gets a blue outline and its position is kept in the layer list.</li>
-      <li><strong>Export.</strong> Press Export JSON to copy the layer tree. Use it as a handoff file or a starting point for code generation.</li>
+      <li><strong>Create.</strong> Pick Frame, Rectangle or Text, then click the canvas. A frame is a screen; a rectangle is a block; text is a label. The canvas can be resized, recoloured and re-gridded from the top bar.</li>
+      <li><strong>Arrange.</strong> Switch to Select and drag a layer, or drag one of its eight handles to resize. The inspector edits X, Y, W, H, fill, radius, opacity, text and font size; layers can be hidden, renamed or deleted.</li>
+      <li><strong>Export.</strong> Export a PNG at 2× or a JSON layer tree. Undo and redo cover every edit; the reset button returns to a clean 720 × 460 canvas.</li>
     </ol>
   </section>
 
   <section id="faq">
     <h2>FAQ</h2>
-    <details open><summary>Is FigCraft really free?</summary><p>Yes. The source is licensed MIT OR Apache-2.0 and the installers are free. You pay with your own time: it is early alpha and you run it yourself (or use the community server preview). This guide and demo are also free.</p></details>
-    <details><summary>Do I need to install anything?</summary><p>For the real FigCraft app, yes — download an installer or build it with Cargo. The canvas demo on this page needs no install and no account; it is an independent teaching demo, not the full editor.</p></details>
+    <details open><summary>Is FigCraft really free?</summary><p>Yes. The source is licensed MIT OR Apache-2.0 and the installers are free. You pay with your own time: it is early alpha and you run it yourself (or use the community server preview). This guide and studio are also free.</p></details>
+    <details><summary>Do I need to install anything?</summary><p>For the real FigCraft app, yes — download an installer or build it with Cargo. The canvas studio on this page needs no install and no account; it is an independent teaching demo, not the full editor.</p></details>
     <details><summary>How is it different from Figma?</summary><p>Figma is a mature hosted product with real-time team collaboration. FigCraft is open source, offline-first and built in Rust; its multiplayer is a preview and its feature coverage is about 49% by the project's own estimate. See the comparison table above for the full tradeoff.</p></details>
     <details><summary>Does FigCraft open Figma <code>.fig</code> files?</summary><p>Only best effort. The project says <code>.fig</code> import is not reliable yet; keep the original Figma file and expect fixes to be needed. Native files are <code>.figcraft</code> archives.</p></details>
-    <details><summary>Can I use the exported JSON in another tool?</summary><p>The demo's export is a plain layer list (type, x, y, width, height, text, colour), intentionally simple so you can transform it with a script. It is not FigCraft's native file format.</p></details>
+    <details><summary>Can I use the exported JSON in another tool?</summary><p>The studio's export is a plain layer list plus canvas settings (type, x, y, width, height, colour, radius, opacity, text, font size), intentionally simple so you can transform it with a script. It is not FigCraft's native file format.</p></details>
     <details><summary>Is multiplayer ready for a team?</summary><p>Not yet. Live sessions are a preview: no accounts, teams or cloud, and the public server is not end-to-end encrypted. For confidential work, self-host the server or use local-network sharing on a network you trust.</p></details>
   </section>
 </main>
@@ -212,7 +348,7 @@ cargo run --release -p figcraft-server</code></pre>
      "license":"MIT OR Apache-2.0","url":"https://github.com/storytold/figcraft"},
     {"@type":"FAQPage","mainEntity":[
       {"@type":"Question","name":"Is FigCraft really free?","acceptedAnswer":{"@type":"Answer","text":"Yes. The source is licensed MIT OR Apache-2.0 and the installers are free. It is early alpha and you run it yourself or use the community server preview."}},
-      {"@type":"Question","name":"Do I need to install anything?","acceptedAnswer":{"@type":"Answer","text":"For the real FigCraft app, yes: download an installer or build it with Cargo. The canvas demo on this page needs no install and no account."}},
+      {"@type":"Question","name":"Do I need to install anything?","acceptedAnswer":{"@type":"Answer","text":"For the real FigCraft app, yes: download an installer or build it with Cargo. The canvas studio on this page needs no install and no account."}},
       {"@type":"Question","name":"How is it different from Figma?","acceptedAnswer":{"@type":"Answer","text":"Figma is a mature hosted product with real-time team collaboration. FigCraft is open source, offline-first and built in Rust; its multiplayer is a preview and its feature coverage is about 49% by its own estimate."}},
       {"@type":"Question","name":"Does FigCraft open Figma .fig files?","acceptedAnswer":{"@type":"Answer","text":"Only best effort. Native files are .figcraft archives; .fig import is not reliable yet."}},
       {"@type":"Question","name":"Is multiplayer ready for a team?","acceptedAnswer":{"@type":"Answer","text":"Not yet. Live sessions are a preview with no accounts, teams or cloud, and the public server is not end-to-end encrypted."}}
@@ -223,95 +359,568 @@ cargo run --release -p figcraft-server</code></pre>
 
 <script>
 (() => {
-  const canvas = document.getElementById('canvas');
+  const $ = (s) => document.querySelector(s);
+  const canvas = $('#canvas');
   const ctx = canvas.getContext('2d');
-  const hint = document.getElementById('hint');
-  const state = { tool: 'select', color: '#2563eb', layers: [], selected: null, drag: null, seq: 1 };
-  const palette = ['#2563eb', '#7c3aed', '#0f7b4f', '#b45309', '#db2777', '#0891b2'];
+  const viewport = $('#viewport');
+  const wrap = $('#board-wrap');
+  const layersEl = $('#layers');
+  const propsEl = $('#props');
+  const countEl = $('#layer-count');
+  const hint = $('#hint');
+  const DEFAULT = { w: 720, h: 460, bg: '#ffffff', alpha: false, grid: true, gridSize: 32 };
+  const COLORS = ['#2563eb', '#7c3aed', '#0f7b4f', '#b45309', '#db2777', '#0891b2', '#111827'];
+  const state = {
+    board: { ...DEFAULT },
+    zoom: 1,
+    fit: false,
+    tool: 'select',
+    color: COLORS[0],
+    layers: [],
+    selected: null,
+    drag: null,
+    seq: 1,
+    history: [],
+    future: [],
+  };
+  const dpr = () => Math.max(1, Math.min(3, window.devicePixelRatio || 1));
+  const clone = (v) => JSON.parse(JSON.stringify(v));
+  const save = () => {
+    try {
+      localStorage.setItem('figcraft-studio-v2', JSON.stringify({ board: state.board, layers: state.layers, seq: state.seq }));
+    } catch (_) {}
+  };
+  const load = () => {
+    try {
+      const raw = localStorage.getItem('figcraft-studio-v2');
+      if (!raw) return;
+      const d = JSON.parse(raw);
+      if (d.board) Object.assign(state.board, d.board);
+      if (Array.isArray(d.layers)) state.layers = d.layers;
+      state.seq = d.seq || state.layers.length + 1;
+    } catch (_) {}
+  };
+  const snapshot = () => {
+    state.history.push(clone(state.layers));
+    if (state.history.length > 60) state.history.shift();
+    state.future = [];
+    refreshHistory();
+  };
+  const refreshHistory = () => {
+    $('#undo').disabled = !state.history.length;
+    $('#redo').disabled = !state.future.length;
+  };
+  const undo = () => {
+    if (!state.history.length) return;
+    const id = state.selected && state.selected.id;
+    state.future.push(clone(state.layers));
+    state.layers = state.history.pop();
+    state.selected = state.layers.find((l) => l.id === id) || null;
+    draw(); syncPanels(); save(); refreshHistory();
+  };
+  const redo = () => {
+    if (!state.future.length) return;
+    const id = state.selected && state.selected.id;
+    state.history.push(clone(state.layers));
+    state.layers = state.future.pop();
+    state.selected = state.layers.find((l) => l.id === id) || null;
+    draw(); syncPanels(); save(); refreshHistory();
+  };
 
-  function resize() {
-    const ratio = window.devicePixelRatio || 1;
-    const rect = canvas.getBoundingClientRect();
-    canvas.width = Math.round(rect.width * ratio);
-    canvas.height = Math.round(rect.height * ratio);
-    ctx.setTransform(ratio, 0, 0, ratio, 0, 0);
+  function boardScale() { return dpr() * state.zoom; }
+  function resizeCanvas() {
+    const s = boardScale();
+    canvas.width = Math.round(state.board.w * s);
+    canvas.height = Math.round(state.board.h * s);
+    canvas.style.width = state.board.w * state.zoom + 'px';
+    canvas.style.height = state.board.h * state.zoom + 'px';
+    wrap.style.width = canvas.style.width;
+    wrap.style.height = canvas.style.height;
+    ctx.setTransform(s, 0, 0, s, 0, 0);
     draw();
   }
+  function fitZoom() {
+    const aw = Math.max(240, viewport.clientWidth - 56);
+    const ah = Math.max(200, viewport.clientHeight - 56);
+    state.zoom = Math.min(1, Math.max(0.2, Math.min(aw / state.board.w, ah / state.board.h)));
+    state.fit = true;
+    $('#zoom').value = 'fit';
+    resizeCanvas();
+  }
+  function setZoom(value) {
+    state.fit = value === 'fit';
+    if (state.fit) return fitZoom();
+    state.zoom = Number(value) || 1;
+    resizeCanvas();
+  }
+
+  function darkBoard() {
+    if (state.board.alpha) return false;
+    const m = /^#?([0-9a-f]{6})$/i.exec(state.board.bg || '');
+    if (!m) return false;
+    const n = parseInt(m[1], 16);
+    const r = (n >> 16) & 255, g = (n >> 8) & 255, b = n & 255;
+    return (0.2126 * r + 0.7152 * g + 0.0722 * b) < 128;
+  }
+  function drawGrid() {
+    if (!state.board.grid || state.board.alpha) return;
+    const g = Math.max(4, state.board.gridSize || 32);
+    ctx.save();
+    ctx.strokeStyle = darkBoard() ? 'rgba(255,255,255,.13)' : 'rgba(17,24,39,.08)';
+    ctx.lineWidth = 1 / state.zoom;
+    for (let x = g; x < state.board.w; x += g) { ctx.beginPath(); ctx.moveTo(x, 0); ctx.lineTo(x, state.board.h); ctx.stroke(); }
+    for (let y = g; y < state.board.h; y += g) { ctx.beginPath(); ctx.moveTo(0, y); ctx.lineTo(state.board.w, y); ctx.stroke(); }
+    ctx.restore();
+  }
+  function roundRect(l) {
+    const r = Math.min(l.radius || 0, l.w / 2, l.h / 2);
+    ctx.beginPath();
+    if (!r) { ctx.rect(l.x, l.y, l.w, l.h); return; }
+    ctx.moveTo(l.x + r, l.y);
+    ctx.arcTo(l.x + l.w, l.y, l.x + l.w, l.y + l.h, r);
+    ctx.arcTo(l.x + l.w, l.y + l.h, l.x, l.y + l.h, r);
+    ctx.arcTo(l.x, l.y + l.h, l.x, l.y, r);
+    ctx.arcTo(l.x, l.y, l.x + l.w, l.y, r);
+    ctx.closePath();
+  }
   function draw() {
-    const w = canvas.width / (window.devicePixelRatio || 1);
-    const h = canvas.height / (window.devicePixelRatio || 1);
-    ctx.clearRect(0, 0, w, h);
-    for (const l of state.layers) {
-      ctx.save();
-      if (l.type === 'frame') {
-        ctx.fillStyle = 'rgba(37,99,235,.05)';
-        ctx.fillRect(l.x, l.y, l.w, l.h);
-        ctx.strokeStyle = '#2563eb'; ctx.setLineDash([6, 4]); ctx.strokeRect(l.x, l.y, l.w, l.h); ctx.setLineDash([]);
-        ctx.fillStyle = '#2563eb'; ctx.font = '12px ui-sans-serif'; ctx.fillText(l.name, l.x + 6, l.y + 16);
-      } else if (l.type === 'rect') {
-        ctx.fillStyle = l.color; ctx.globalAlpha = .9; ctx.fillRect(l.x, l.y, l.w, l.h); ctx.globalAlpha = 1;
-      } else {
-        ctx.fillStyle = l.color; ctx.font = '600 18px ui-sans-serif';
-        ctx.fillText(l.text, l.x, l.y + 18);
+    ctx.clearRect(0, 0, state.board.w, state.board.h);
+    if (state.board.alpha) {
+      for (let y = 0; y < state.board.h; y += 16) for (let x = 0; x < state.board.w; x += 16) {
+        ctx.fillStyle = ((x / 16 + y / 16) % 2) ? '#e9e9e6' : '#f6f6f3';
+        ctx.fillRect(x, y, 16, 16);
       }
-      if (state.selected === l) { ctx.strokeStyle = '#111'; ctx.lineWidth = 1.5; ctx.strokeRect(l.x - 2, l.y - 2, l.w + 4, l.h + 4); }
+    } else {
+      ctx.fillStyle = state.board.bg;
+      ctx.fillRect(0, 0, state.board.w, state.board.h);
+    }
+    drawGrid();
+    for (const l of state.layers) {
+      if (l.hidden) continue;
+      ctx.save();
+      ctx.globalAlpha = l.opacity == null ? 1 : l.opacity;
+      if (l.type === 'frame') {
+        ctx.fillStyle = 'rgba(37,99,235,.04)';
+        ctx.fillRect(l.x, l.y, l.w, l.h);
+        ctx.strokeStyle = '#2563eb';
+        ctx.lineWidth = 1 / state.zoom;
+        ctx.setLineDash([6 / state.zoom, 4 / state.zoom]);
+        ctx.strokeRect(l.x, l.y, l.w, l.h);
+        ctx.setLineDash([]);
+        ctx.fillStyle = '#2563eb';
+        ctx.font = `${12 / state.zoom}px ui-sans-serif`;
+        ctx.fillText(l.name, l.x + 6 / state.zoom, l.y + 15 / state.zoom);
+      } else if (l.type === 'rect') {
+        ctx.fillStyle = l.color;
+        roundRect(l);
+        ctx.fill();
+      } else {
+        ctx.fillStyle = l.color;
+        ctx.font = `600 ${l.fontSize || 20}px ui-sans-serif`;
+        ctx.textBaseline = 'top';
+        ctx.fillText(l.text || 'Text', l.x, l.y);
+        l.w = Math.max(20, ctx.measureText(l.text || 'Text').width);
+        l.h = l.fontSize || 20;
+      }
       ctx.restore();
     }
+    if (state.selected) drawSelection(state.selected);
   }
-  function pos(e) {
-    const r = canvas.getBoundingClientRect();
-    return { x: e.clientX - r.left, y: e.clientY - r.top };
+  function drawSelection(l) {
+    ctx.save();
+    const ink = darkBoard() ? '#fff' : '#111';
+    const paper = darkBoard() ? '#111' : '#fff';
+    ctx.strokeStyle = ink;
+    ctx.lineWidth = 1.5 / state.zoom;
+    ctx.setLineDash([]);
+    ctx.strokeRect(l.x, l.y, l.w, l.h);
+    const s = 8 / state.zoom;
+    ctx.fillStyle = paper;
+    ctx.strokeStyle = ink;
+    for (const [hx, hy] of handles(l)) {
+      ctx.beginPath();
+      ctx.rect(hx - s / 2, hy - s / 2, s, s);
+      ctx.fill();
+      ctx.stroke();
+    }
+    ctx.restore();
+  }
+  function handles(l) {
+    return [
+      [l.x, l.y, 'nw'], [l.x + l.w / 2, l.y, 'n'], [l.x + l.w, l.y, 'ne'],
+      [l.x + l.w, l.y + l.h / 2, 'e'], [l.x + l.w, l.y + l.h, 'se'],
+      [l.x + l.w / 2, l.y + l.h, 's'], [l.x, l.y + l.h, 'sw'], [l.x, l.y + l.h / 2, 'w'],
+    ];
   }
   function hit(p) {
     for (let i = state.layers.length - 1; i >= 0; i--) {
       const l = state.layers[i];
+      if (l.hidden) continue;
       if (p.x >= l.x && p.x <= l.x + l.w && p.y >= l.y && p.y <= l.y + l.h) return l;
     }
     return null;
   }
-  canvas.addEventListener('pointerdown', (e) => {
-    const p = pos(e);
-    if (state.tool === 'select') {
-      const l = hit(p);
-      state.selected = l;
-      if (l) state.drag = { l, dx: p.x - l.x, dy: p.y - l.y };
-    } else if (state.tool === 'text') {
-      const text = prompt('Label text:', 'Button') || 'Button';
-      state.layers.push({ id: state.seq++, type: 'text', name: text, text, x: p.x, y: p.y, w: Math.max(60, text.length * 10), h: 26, color: state.color });
-      state.selected = state.layers[state.layers.length - 1];
-    } else if (state.tool === 'frame') {
-      state.layers.push({ id: state.seq++, type: 'frame', name: 'Frame ' + state.seq, x: p.x - 120, y: p.y - 80, w: 240, h: 160, color: '#2563eb' });
-      state.selected = state.layers[state.layers.length - 1];
-    } else {
-      state.layers.push({ id: state.seq++, type: 'rect', name: 'Rectangle', x: p.x - 50, y: p.y - 30, w: 100, h: 60, color: state.color });
-      state.selected = state.layers[state.layers.length - 1];
+  function hitHandle(p) {
+    const l = state.selected;
+    if (!l) return null;
+    const s = 10 / state.zoom;
+    for (const [hx, hy, name] of handles(l)) {
+      if (Math.abs(p.x - hx) <= s && Math.abs(p.y - hy) <= s) return name;
     }
-    draw();
+    return null;
+  }
+  function pointer(e) {
+    const r = canvas.getBoundingClientRect();
+    return { x: (e.clientX - r.left) / state.zoom, y: (e.clientY - r.top) / state.zoom };
+  }
+  function addLayer(type, p) {
+    snapshot();
+    const id = state.seq++;
+    let l;
+    if (type === 'text') {
+      const text = prompt('Text', 'Button') || 'Button';
+      l = { id, type, name: text.slice(0, 24), text, x: p.x, y: p.y, w: Math.max(40, text.length * 10), h: 24, color: darkBoard() ? '#ffffff' : '#111827', fontSize: 20, opacity: 1, radius: 0, hidden: false };
+    } else if (type === 'frame') {
+      l = { id, type, name: 'Frame ' + id, x: p.x - 140, y: p.y - 90, w: 280, h: 180, color: '#2563eb', opacity: 1, radius: 0, hidden: false };
+    } else {
+      l = { id, type: 'rect', name: 'Rectangle ' + id, x: p.x - 60, y: p.y - 36, w: 120, h: 72, color: state.color, opacity: 1, radius: 10, hidden: false };
+    }
+    state.layers.push(l);
+    state.selected = l;
+    document.querySelector('[data-tool="select"]').click();
+    draw(); syncPanels(); save();
+  }
+  canvas.addEventListener('pointerdown', (e) => {
+    const p = pointer(e);
+    if (state.tool !== 'select') { addLayer(state.tool, p); return; }
+    const handle = hitHandle(p);
+    if (handle) {
+      snapshot();
+      state.drag = { mode: 'resize', handle, start: p, rect: { ...state.selected } };
+      return;
+    }
+    const l = hit(p);
+    state.selected = l;
+    if (l) {
+      snapshot();
+      state.drag = { mode: 'move', start: p, rect: { ...l } };
+    }
+    draw(); syncPanels();
   });
   canvas.addEventListener('pointermove', (e) => {
-    if (!state.drag) return;
-    const p = pos(e); const d = state.drag;
-    d.l.x = Math.max(0, p.x - d.dx); d.l.y = Math.max(0, p.y - d.dy); draw();
+    const d = state.drag;
+    if (!d) return;
+    const p = pointer(e);
+    const dx = p.x - d.start.x, dy = p.y - d.start.y;
+    const l = state.selected;
+    if (!l) return;
+    if (d.mode === 'move') {
+      l.x = Math.max(-l.w, Math.min(state.board.w, d.rect.x + dx));
+      l.y = Math.max(-l.h, Math.min(state.board.h, d.rect.y + dy));
+    } else {
+      const h = d.handle, r = d.rect;
+      let x = r.x, y = r.y, w = r.w, hh = r.h;
+      if (h.includes('e')) w = Math.max(12, r.w + dx);
+      if (h.includes('s')) hh = Math.max(12, r.h + dy);
+      if (h.includes('w')) { const nw = Math.max(12, r.w - dx); x = r.x + (r.w - nw); w = nw; }
+      if (h.includes('n')) { const nh = Math.max(12, r.h - dy); y = r.y + (r.h - nh); hh = nh; }
+      Object.assign(l, { x, y, w, h: hh });
+    }
+    draw(); syncProps();
   });
-  canvas.addEventListener('pointerup', () => { state.drag = null; });
-  canvas.addEventListener('pointercancel', () => { state.drag = null; });
-  document.querySelectorAll('[data-tool]').forEach(b => b.addEventListener('click', () => {
+  const endDrag = () => { if (state.drag) { state.drag = null; save(); } };
+  canvas.addEventListener('pointerup', endDrag);
+  canvas.addEventListener('pointercancel', endDrag);
+  canvas.addEventListener('dblclick', (e) => {
+    const l = hit(pointer(e));
+    if (!l || l.type !== 'text') return;
+    const text = prompt('Edit text', l.text || '');
+    if (text == null) return;
+    snapshot();
+    l.text = text; l.name = text.slice(0, 24); l.w = Math.max(20, text.length * 10);
+    draw(); syncPanels(); save();
+  });
+
+  function selectLayer(id) {
+    state.selected = state.layers.find((l) => String(l.id) === String(id)) || null;
+    draw(); syncPanels();
+  }
+  function syncPanels() {
+    countEl.textContent = String(state.layers.length);
+    if (!state.layers.length) {
+      layersEl.innerHTML = '<p class="empty">No layers yet. Pick a tool and click the canvas.</p>';
+    } else {
+      layersEl.innerHTML = state.layers.slice().reverse().map((l) => {
+        const icon = l.type === 'frame' ? '▭' : l.type === 'text' ? 'T' : '■';
+        return `<button class="layer" data-id="${l.id}" aria-pressed="${state.selected && state.selected.id === l.id}">
+          <span class="ltype">${icon}</span><span class="lname">${escapeHtml(l.name)}</span>
+          <span class="leye" data-eye="${l.id}" title="Hide or show">${l.hidden ? '◌' : '●'}</span>
+        </button>`;
+      }).join('');
+    }
+    syncProps();
+  }
+  function syncProps() {
+    const l = state.selected;
+    if (!l) {
+      propsEl.innerHTML = '<p class="empty">Select a layer to edit its position, size and fill.</p>';
+      return;
+    }
+    const textField = l.type === 'text'
+      ? `<label class="wide">Text <input data-prop="text" type="text" value="${escapeAttr(l.text || '')}"></label>
+         <label>Font size <input data-prop="fontSize" type="number" min="8" max="96" step="1" value="${l.fontSize || 20}"></label>` : '';
+    const radiusField = l.type === 'rect'
+      ? `<label>Radius <input data-prop="radius" type="number" min="0" max="200" step="1" value="${l.radius || 0}"></label>` : '';
+    propsEl.innerHTML = `<div class="prop-grid">
+      <label>X <input data-prop="x" type="number" step="1" value="${Math.round(l.x)}"></label>
+      <label>Y <input data-prop="y" type="number" step="1" value="${Math.round(l.y)}"></label>
+      <label>W <input data-prop="w" type="number" min="8" step="1" value="${Math.round(l.w)}"></label>
+      <label>H <input data-prop="h" type="number" min="8" step="1" value="${Math.round(l.h)}"></label>
+      <label>Fill <input data-prop="color" type="color" value="${l.color || '#2563eb'}"></label>
+      ${radiusField}
+      <label>Opacity <input data-prop="opacity" type="range" min="0.05" max="1" step="0.05" value="${l.opacity == null ? 1 : l.opacity}"></label>
+      ${textField}
+      <div class="prop-row wide">
+        <button data-action="front">Bring forward</button>
+        <button data-action="back">Send back</button>
+        <button data-action="duplicate">Duplicate</button>
+        <button data-action="delete">Delete</button>
+      </div>
+    </div>`;
+  }
+  layersEl.addEventListener('click', (e) => {
+    const eye = e.target.closest('[data-eye]');
+    if (eye) {
+      const l = state.layers.find((x) => String(x.id) === eye.dataset.eye);
+      if (l) { snapshot(); l.hidden = !l.hidden; draw(); syncPanels(); save(); }
+      return;
+    }
+    const row = e.target.closest('[data-id]');
+    if (row) selectLayer(row.dataset.id);
+  });
+  layersEl.addEventListener('dblclick', (e) => {
+    const row = e.target.closest('[data-id]');
+    if (!row) return;
+    const l = state.layers.find((x) => String(x.id) === row.dataset.id);
+    if (!l) return;
+    const name = prompt('Layer name', l.name);
+    if (name == null) return;
+    snapshot(); l.name = name.slice(0, 40); draw(); syncPanels(); save();
+  });
+  propsEl.addEventListener('input', (e) => {
+    const l = state.selected;
+    if (!l) return;
+    const key = e.target.dataset.prop;
+    if (!key) return;
+    const v = e.target.value;
+    if (['x', 'y', 'w', 'h'].includes(key)) l[key] = Number(v) || 0;
+    else if (key === 'opacity') l.opacity = Number(v);
+    else if (key === 'fontSize') l.fontSize = Number(v) || 20;
+    else if (key === 'radius') l.radius = Math.max(0, Number(v) || 0);
+    else if (key === 'text') { l.text = v; l.name = v.slice(0, 24); }
+    else l.color = v;
+    draw();
+  });
+  propsEl.addEventListener('change', (e) => {
+    if (!e.target.dataset.prop) return;
+    if (e.target.dataset.prop === 'text') syncPanels();
+    else save();
+  });
+  propsEl.addEventListener('click', (e) => {
+    const b = e.target.closest('[data-action]');
+    if (!b || !state.selected) return;
+    const action = b.dataset.action;
+    const l = state.selected;
+    if (action === 'delete') return removeSelected();
+    if (action === 'duplicate') return duplicateSelected();
+    snapshot();
+    const i = state.layers.indexOf(l);
+    if (action === 'front' && i < state.layers.length - 1) { state.layers.splice(i, 1); state.layers.splice(i + 1, 0, l); }
+    if (action === 'back' && i > 0) { state.layers.splice(i, 1); state.layers.splice(i - 1, 0, l); }
+    draw(); syncPanels(); save();
+  });
+  function removeSelected() {
+    if (!state.selected) return;
+    snapshot();
+    state.layers = state.layers.filter((l) => l !== state.selected);
+    state.selected = null;
+    draw(); syncPanels(); save();
+  }
+  function duplicateSelected() {
+    if (!state.selected) return;
+    snapshot();
+    const l = state.selected;
+    const copy = { ...clone(l), id: state.seq++, x: l.x + 16, y: l.y + 16, name: l.name + ' copy' };
+    state.layers.push(copy);
+    state.selected = copy;
+    draw(); syncPanels(); save();
+  }
+
+  document.querySelectorAll('[data-tool]').forEach((b) => b.addEventListener('click', () => {
     state.tool = b.dataset.tool;
-    document.querySelectorAll('[data-tool]').forEach(x => x.setAttribute('aria-pressed', String(x === b)));
-    hint.textContent = state.tool === 'select' ? 'Drag a shape to move it.' : 'Click the canvas to add a ' + state.tool + '.';
+    document.querySelectorAll('[data-tool]').forEach((x) => x.setAttribute('aria-pressed', String(x === b)));
+    canvas.style.cursor = state.tool === 'select' ? 'default' : 'crosshair';
+    hint.textContent = state.tool === 'select' ? 'Drag a layer to move it, or a handle to resize.' : 'Click the canvas to add a ' + state.tool + '.';
   }));
-  document.getElementById('color').addEventListener('click', () => {
-    state.color = palette[(palette.indexOf(state.color) + 1) % palette.length];
-    document.getElementById('color').style.color = state.color;
+  $('#duplicate').addEventListener('click', duplicateSelected);
+  $('#delete').addEventListener('click', removeSelected);
+  $('#undo').addEventListener('click', undo);
+  $('#redo').addEventListener('click', redo);
+  $('#reset').addEventListener('click', () => {
+    if (!confirm('Reset the canvas and all layers?')) return;
+    state.board = { ...DEFAULT };
+    state.layers = [];
+    state.selected = null;
+    state.history = [];
+    state.future = [];
+    state.seq = 1;
+    syncBoardInputs();
+    resizeCanvas();
+    syncPanels();
+    refreshHistory();
+    save();
   });
-  document.getElementById('clear').addEventListener('click', () => { state.layers = []; state.selected = null; draw(); });
-  document.getElementById('export').addEventListener('click', async () => {
-    const json = JSON.stringify({ page: 'figcraft-demo', layers: state.layers }, null, 2);
-    try { await navigator.clipboard.writeText(json); hint.textContent = 'Layer JSON copied to the clipboard.'; }
-    catch { hint.textContent = json.slice(0, 120) + '…'; }
+  $('#export-json').addEventListener('click', () => {
+    const text = JSON.stringify({ board: state.board, layers: state.layers }, null, 2);
+    download('figcraft-studio.json', text, 'application/json');
+    if (navigator.clipboard && navigator.clipboard.writeText) {
+      navigator.clipboard.writeText(text).then(() => { hint.textContent = 'Layer JSON downloaded and copied to the clipboard.'; }).catch(() => {});
+    }
   });
-  window.addEventListener('resize', resize);
-  resize();
+  $('#export-png').addEventListener('click', () => {
+    const scale = 2;
+    const c = document.createElement('canvas');
+    c.width = state.board.w * scale;
+    c.height = state.board.h * scale;
+    const g = c.getContext('2d');
+    g.scale(scale, scale);
+    if (state.board.alpha) {
+      for (let y = 0; y < state.board.h; y += 16) for (let x = 0; x < state.board.w; x += 16) {
+        g.fillStyle = ((x / 16 + y / 16) % 2) ? '#e9e9e6' : '#f6f6f3';
+        g.fillRect(x, y, 16, 16);
+      }
+    } else {
+      g.fillStyle = state.board.bg; g.fillRect(0, 0, state.board.w, state.board.h);
+    }
+    g.save();
+    g.strokeStyle = darkBoard() ? 'rgba(255,255,255,.13)' : 'rgba(17,24,39,.08)';
+    g.lineWidth = 1;
+    if (state.board.grid && !state.board.alpha) {
+      const gs = Math.max(4, state.board.gridSize || 32);
+      for (let x = gs; x < state.board.w; x += gs) { g.beginPath(); g.moveTo(x, 0); g.lineTo(x, state.board.h); g.stroke(); }
+      for (let y = gs; y < state.board.h; y += gs) { g.beginPath(); g.moveTo(0, y); g.lineTo(state.board.w, y); g.stroke(); }
+    }
+    for (const l of state.layers) {
+      if (l.hidden) continue;
+      g.globalAlpha = l.opacity == null ? 1 : l.opacity;
+      if (l.type === 'frame') {
+        g.fillStyle = 'rgba(37,99,235,.04)'; g.fillRect(l.x, l.y, l.w, l.h);
+        g.strokeStyle = '#2563eb'; g.setLineDash([6, 4]); g.strokeRect(l.x, l.y, l.w, l.h); g.setLineDash([]);
+      } else if (l.type === 'rect') {
+        g.fillStyle = l.color;
+        const r = Math.min(l.radius || 0, l.w / 2, l.h / 2);
+        g.beginPath(); g.moveTo(l.x + r, l.y);
+        g.arcTo(l.x + l.w, l.y, l.x + l.w, l.y + l.h, r);
+        g.arcTo(l.x + l.w, l.y + l.h, l.x, l.y + l.h, r);
+        g.arcTo(l.x, l.y + l.h, l.x, l.y, r);
+        g.arcTo(l.x, l.y, l.x + l.w, l.y, r); g.closePath(); g.fill();
+      } else {
+        g.fillStyle = l.color; g.font = `600 ${l.fontSize || 20}px ui-sans-serif`;
+        g.textBaseline = 'top'; g.fillText(l.text || 'Text', l.x, l.y);
+      }
+    }
+    g.restore();
+    c.toBlob((blob) => {
+      const url = URL.createObjectURL(blob);
+      const a = document.createElement('a');
+      a.href = url; a.download = 'figcraft-canvas.png'; a.click();
+      setTimeout(() => URL.revokeObjectURL(url), 3000);
+    }, 'image/png');
+  });
+
+  function download(name, text, type) {
+    const blob = new Blob([text], { type });
+    const url = URL.createObjectURL(blob);
+    const a = document.createElement('a');
+    a.href = url; a.download = name; a.click();
+    setTimeout(() => URL.revokeObjectURL(url), 3000);
+  }
+  function escapeHtml(s) { return String(s).replace(/[&<>"']/g, (c) => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c])); }
+  function escapeAttr(s) { return escapeHtml(s); }
+
+  function syncBoardInputs() {
+    $('#board-w').value = state.board.w;
+    $('#board-h').value = state.board.h;
+    $('#board-bg').value = state.board.bg;
+    $('#board-alpha').checked = !!state.board.alpha;
+    $('#grid-on').checked = !!state.board.grid;
+    $('#grid-size').value = state.board.gridSize;
+    const key = state.board.w + 'x' + state.board.h;
+    const preset = $('#preset');
+    preset.value = [...preset.options].some((o) => o.value === key) ? key : 'custom';
+  }
+  function applyBoard() {
+    if (state.fit || state.board.w > viewport.clientWidth - 56) fitZoom(); else resizeCanvas();
+    syncBoardInputs();
+    save();
+  }
+  $('#board-w').addEventListener('change', (e) => { state.board.w = Math.max(100, Math.min(2400, Number(e.target.value) || 720)); applyBoard(); });
+  $('#board-h').addEventListener('change', (e) => { state.board.h = Math.max(100, Math.min(2400, Number(e.target.value) || 460)); applyBoard(); });
+  $('#preset').addEventListener('change', (e) => {
+    if (e.target.value === 'custom') return;
+    const [w, h] = e.target.value.split('x').map(Number);
+    state.board.w = w; state.board.h = h; applyBoard();
+  });
+  $('#board-bg').addEventListener('input', (e) => { state.board.bg = e.target.value; state.board.alpha = false; $('#board-alpha').checked = false; draw(); save(); });
+  $('#board-alpha').addEventListener('change', (e) => { state.board.alpha = e.target.checked; draw(); save(); });
+  $('#grid-on').addEventListener('change', (e) => { state.board.grid = e.target.checked; draw(); save(); });
+  $('#grid-size').addEventListener('change', (e) => { state.board.gridSize = Math.max(4, Math.min(200, Number(e.target.value) || 32)); draw(); save(); });
+  $('#zoom').addEventListener('change', (e) => setZoom(e.target.value));
+
+  document.addEventListener('keydown', (e) => {
+    const tag = (e.target.tagName || '').toLowerCase();
+    if (tag === 'input' || tag === 'select' || tag === 'textarea') return;
+    const meta = e.metaKey || e.ctrlKey;
+    if (meta && e.key.toLowerCase() === 'z') { e.preventDefault(); e.shiftKey ? redo() : undo(); return; }
+    if (meta && e.key.toLowerCase() === 'd') { e.preventDefault(); duplicateSelected(); return; }
+    if (e.key === 'Delete' || e.key === 'Backspace') { e.preventDefault(); removeSelected(); return; }
+    const map = { v: 'select', f: 'frame', r: 'rect', t: 'text' };
+    if (!meta && map[e.key.toLowerCase()]) {
+      const tool = map[e.key.toLowerCase()];
+      document.querySelector(`[data-tool="${tool}"]`).click();
+      return;
+    }
+    if (!state.selected) return;
+    const step = e.shiftKey ? 10 : 1;
+    if (['ArrowLeft', 'ArrowRight', 'ArrowUp', 'ArrowDown'].includes(e.key)) {
+      e.preventDefault();
+      snapshot();
+      if (e.key === 'ArrowLeft') state.selected.x -= step;
+      if (e.key === 'ArrowRight') state.selected.x += step;
+      if (e.key === 'ArrowUp') state.selected.y -= step;
+      if (e.key === 'ArrowDown') state.selected.y += step;
+      draw(); syncProps(); save();
+    }
+  });
+
+  window.addEventListener('resize', () => { if (state.fit) fitZoom(); });
+  load();
+  syncBoardInputs();
+  syncPanels();
+  refreshHistory();
+  if (state.board.w > viewport.clientWidth - 56) fitZoom(); else resizeCanvas();
+  if (!state.layers.length) {
+    state.layers = [
+      { id: state.seq++, type: 'frame', name: 'Hero card', x: 70, y: 84, w: 360, h: 280, color: '#2563eb', opacity: 1, radius: 0, hidden: false },
+      { id: state.seq++, type: 'rect', name: 'Accent block', x: 104, y: 118, w: 140, h: 96, color: '#2563eb', opacity: 1, radius: 14, hidden: false },
+      { id: state.seq++, type: 'text', name: 'A Figma alternative', text: 'A Figma alternative', x: 104, y: 238, w: 220, h: 24, color: '#111827', fontSize: 22, opacity: 1, radius: 0, hidden: false },
+      { id: state.seq++, type: 'text', name: 'written in pure Rust', text: 'written in pure Rust', x: 104, y: 272, w: 220, h: 24, color: '#2563eb', fontSize: 22, opacity: 1, radius: 0, hidden: false },
+      { id: state.seq++, type: 'rect', name: 'Button', x: 104, y: 318, w: 126, h: 40, color: '#111827', opacity: 1, radius: 999, hidden: false },
+      { id: state.seq++, type: 'text', name: 'Get FigCraft', text: 'Get FigCraft', x: 132, y: 328, w: 80, h: 20, color: '#ffffff', fontSize: 15, opacity: 1, radius: 0, hidden: false },
+    ];
+    state.selected = state.layers[0];
+    draw(); syncPanels(); save();
+  }
 })();
 </script>
 </body>
