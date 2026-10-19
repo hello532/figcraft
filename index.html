@@ -1,0 +1,259 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>FigCraft Guide — Open-Source Figma Alternative (Browser Demo)</title>
+<meta name="description" content="What FigCraft is, how the open-source Figma alternative works, and a no-signup browser demo: draw frames, arrange layers, export JSON. Independent guide.">
+<link rel="canonical" href="https://figcraft.rerivo.com/">
+<meta property="og:title" content="FigCraft Guide — Open-Source Figma Alternative">
+<meta property="og:description" content="A no-signup browser demo and plain-English guide to FigCraft, the open-source UI design tool.">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://figcraft.rerivo.com/">
+<meta name="twitter:card" content="summary_large_image">
+<style>
+  :root{
+    --bg:#f7f7f5; --surface:#fff; --fg:#161616; --muted:#5f6368; --border:#e4e4df;
+    --accent:#2563eb; --accent-2:#1d4ed8; --ok:#0f7b4f; --warn:#b45309;
+    --shadow:0 1px 2px rgba(0,0,0,.04),0 12px 32px rgba(0,0,0,.06);
+    font-family:ui-sans-serif,system-ui,-apple-system,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;
+  }
+  @media (prefers-color-scheme:dark){
+    :root{--bg:#0f1115;--surface:#171a21;--fg:#f3f4f6;--muted:#a1a7b3;--border:#2a2f3a;--accent:#7aa2ff;--accent-2:#a7c0ff;--ok:#5ee0a0;--warn:#f3b35b;--shadow:0 1px 2px rgba(0,0,0,.3),0 12px 32px rgba(0,0,0,.35)}
+  }
+  *{box-sizing:border-box}
+  html{scroll-behavior:smooth}
+  body{margin:0;background:var(--bg);color:var(--fg);line-height:1.6;-webkit-font-smoothing:antialiased}
+  a{color:var(--accent);text-decoration:none}
+  a:hover{text-decoration:underline}
+  .wrap{max-width:1080px;margin:0 auto;padding:0 24px}
+  header{position:sticky;top:0;z-index:10;background:color-mix(in srgb,var(--bg) 86%,transparent);backdrop-filter:blur(10px);border-bottom:1px solid var(--border)}
+  .nav{display:flex;align-items:center;justify-content:space-between;gap:16px;height:60px}
+  .brand{display:flex;align-items:center;gap:10px;font-weight:700;letter-spacing:-.02em}
+  .mark{width:26px;height:26px;border-radius:8px;background:linear-gradient(135deg,var(--accent),#8b5cf6);display:grid;place-items:center;color:#fff;font-size:13px}
+  .nav nav{display:flex;gap:18px;font-size:14px}
+  .nav nav a{color:var(--muted)}
+  .nav nav a:hover{color:var(--fg)}
+  main{padding:64px 0 40px}
+  .hero{display:grid;grid-template-columns:1.05fr .95fr;gap:40px;align-items:center}
+  .eyebrow{font-size:13px;font-weight:700;text-transform:uppercase;letter-spacing:.08em;color:var(--accent)}
+  h1{font-size:clamp(34px,5vw,56px);line-height:1.05;letter-spacing:-.04em;margin:12px 0 16px}
+  .lede{font-size:18px;color:var(--muted);max-width:52ch;margin:0 0 24px}
+  .cta{display:flex;gap:12px;flex-wrap:wrap}
+  .btn{display:inline-flex;align-items:center;gap:8px;padding:11px 18px;border-radius:10px;font-weight:650;font-size:15px;border:1px solid transparent}
+  .btn.primary{background:var(--accent);color:#fff}
+  .btn.primary:hover{background:var(--accent-2);text-decoration:none}
+  .btn.ghost{background:var(--surface);border-color:var(--border);color:var(--fg)}
+  .facts{display:flex;gap:22px;flex-wrap:wrap;margin-top:24px;color:var(--muted);font-size:13px}
+  .facts strong{display:block;color:var(--fg);font-size:18px;letter-spacing:-.02em}
+  .demo{background:var(--surface);border:1px solid var(--border);border-radius:16px;box-shadow:var(--shadow);overflow:hidden}
+  .demo-bar{display:flex;align-items:center;gap:8px;padding:10px 12px;border-bottom:1px solid var(--border);flex-wrap:wrap}
+  .tool{border:1px solid var(--border);background:var(--bg);color:var(--fg);border-radius:8px;padding:6px 10px;font-size:13px;cursor:pointer}
+  .tool[aria-pressed="true"]{border-color:var(--accent);color:var(--accent);background:color-mix(in srgb,var(--accent) 10%,var(--bg))}
+  .tool.danger{color:var(--warn)}
+  .demo canvas{display:block;width:100%;height:auto;touch-action:none;background:
+    linear-gradient(90deg,transparent 31px,var(--border) 32px,transparent 33px) 0 0/32px 32px,
+    linear-gradient(0deg,transparent 31px,var(--border) 32px,transparent 33px) 0 0/32px 32px}
+  .demo-foot{display:flex;justify-content:space-between;gap:12px;padding:8px 12px;border-top:1px solid var(--border);font-size:12px;color:var(--muted)}
+  section{padding:56px 0;border-top:1px solid var(--border)}
+  h2{font-size:28px;letter-spacing:-.03em;margin:0 0 10px}
+  .sub{color:var(--muted);margin:0 0 28px;max-width:70ch}
+  .grid{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}
+  .card{background:var(--surface);border:1px solid var(--border);border-radius:14px;padding:20px}
+  .card h3{margin:0 0 6px;font-size:16px}
+  .card p{margin:0;color:var(--muted);font-size:14px}
+  .steps{counter-reset:s;display:grid;gap:12px;padding:0;list-style:none}
+  .steps li{counter-increment:s;background:var(--surface);border:1px solid var(--border);border-radius:12px;padding:16px 18px 16px 52px;position:relative}
+  .steps li::before{content:counter(s);position:absolute;left:16px;top:16px;width:24px;height:24px;border-radius:50%;background:var(--accent);color:#fff;font-size:12px;display:grid;place-items:center;font-weight:700}
+  details{background:var(--surface);border:1px solid var(--border);border-radius:12px;padding:16px 18px;margin:10px 0}
+  summary{cursor:pointer;font-weight:650}
+  details p{margin:10px 0 0;color:var(--muted)}
+  .note{font-size:13px;color:var(--muted);margin-top:18px}
+  footer{border-top:1px solid var(--border);padding:28px 0;color:var(--muted);font-size:13px}
+  @media (max-width:820px){.hero{grid-template-columns:1fr}.grid{grid-template-columns:1fr}main{padding-top:40px}.nav nav{display:none}}
+</style>
+</head>
+<body>
+<header>
+  <div class="wrap nav">
+    <a class="brand" href="/"><span class="mark">F</span> FigCraft Guide</a>
+    <nav aria-label="Sections">
+      <a href="#what">What it is</a>
+      <a href="#demo">Demo</a>
+      <a href="#how">How it works</a>
+      <a href="#faq">FAQ</a>
+    </nav>
+  </div>
+</header>
+
+<main class="wrap">
+  <section class="hero" style="border:0;padding-top:0">
+    <div>
+      <div class="eyebrow">Open-source design tool</div>
+      <h1>Design interfaces in the browser. No install. No account.</h1>
+      <p class="lede">FigCraft is an open-source Figma alternative for UI design and prototyping. This page explains what it does and gives you a working canvas demo — draw a frame, add shapes, move them, export JSON.</p>
+      <div class="cta">
+        <a class="btn primary" href="#demo">Open the demo</a>
+        <a class="btn ghost" href="https://github.com/storytold/figcraft" rel="noopener">View the source</a>
+      </div>
+      <div class="facts">
+        <div><strong>0</strong>signup required</div>
+        <div><strong>JSON</strong>design export</div>
+        <div><strong>Open</strong>source project</div>
+      </div>
+    </div>
+    <div class="demo" id="demo">
+      <div class="demo-bar" role="toolbar" aria-label="Canvas tools">
+        <button class="tool" data-tool="select" aria-pressed="true">Select</button>
+        <button class="tool" data-tool="frame" aria-pressed="false">Frame</button>
+        <button class="tool" data-tool="rect" aria-pressed="false">Rectangle</button>
+        <button class="tool" data-tool="text" aria-pressed="false">Text</button>
+        <button class="tool" id="color" title="Change fill color">Color</button>
+        <button class="tool danger" id="clear">Clear</button>
+      </div>
+      <canvas id="canvas" width="720" height="460" aria-label="Interactive design canvas"></canvas>
+      <div class="demo-foot"><span id="hint">Pick a tool, then click the canvas. Drag a shape to move it.</span><button class="tool" id="export">Export JSON</button></div>
+    </div>
+  </section>
+
+  <section id="what">
+    <h2>What FigCraft is</h2>
+    <p class="sub">FigCraft is a clean-room, open-source take on interface design and prototyping: frames, shapes, text and a canvas you can run locally or in the browser. Its source is on GitHub, so you can inspect it, self-host it, or learn from the implementation.</p>
+    <div class="grid">
+      <div class="card"><h3>For quick UI sketches</h3><p>Lay out a screen with frames, rectangles and labels without opening a heavy desktop app.</p></div>
+      <div class="card"><h3>For learning</h3><p>The code is open. Read how a design canvas handles selection, dragging and layers.</p></div>
+      <div class="card"><h3>For self-hosting</h3><p>Run it yourself when you do not want client files in a third-party workspace.</p></div>
+    </div>
+    <p class="note">This is an independent guide and demo, not the official FigCraft site. The demo below is a small canvas built for this page; the real project is linked above.</p>
+  </section>
+
+  <section id="how">
+    <h2>How the browser demo works</h2>
+    <p class="sub">Three actions are enough to judge whether a design tool fits your hands: create, arrange, export.</p>
+    <ol class="steps">
+      <li><strong>Create.</strong> Choose Frame, Rectangle or Text, then click the canvas. A frame is a screen; a rectangle is a block; text is a label.</li>
+      <li><strong>Arrange.</strong> Switch to Select and drag any shape. The selected shape gets a blue outline and its position is kept in the layer list.</li>
+      <li><strong>Export.</strong> Press Export JSON to copy the layer tree. Use it as a handoff file or a starting point for code generation.</li>
+    </ol>
+  </section>
+
+  <section id="faq">
+    <h2>FAQ</h2>
+    <details open><summary>Is FigCraft free?</summary><p>The project is open source; check the repository licence before you use it commercially. This guide and demo are free and need no account.</p></details>
+    <details><summary>Do I need to install anything?</summary><p>No. The demo runs in this page. The full FigCraft project may offer a hosted or local build; see its repository for the current options.</p></details>
+    <details><summary>How is it different from Figma?</summary><p>Figma is a hosted collaborative product. FigCraft is an open-source alternative you can inspect and self-host. For a solo sketch or a self-hosted workflow, that difference matters; for real-time team collaboration, check the project's current feature set.</p></details>
+    <details><summary>Can I use the exported JSON in another tool?</summary><p>The export is a plain layer list (type, x, y, width, height, text, colour). It is intentionally simple so you can transform it with a script.</p></details>
+  </section>
+</main>
+
+<footer><div class="wrap">FigCraft Guide · independent page · <a href="https://github.com/storytold/figcraft" rel="noopener">source repository</a> · <a href="/sitemap.xml">sitemap</a></div></footer>
+
+<script type="application/ld+json">
+{
+  "@context":"https://schema.org",
+  "@graph":[
+    {"@type":"WebSite","name":"FigCraft Guide","url":"https://figcraft.rerivo.com/"},
+    {"@type":"FAQPage","mainEntity":[
+      {"@type":"Question","name":"Is FigCraft free?","acceptedAnswer":{"@type":"Answer","text":"The project is open source; check the repository licence before commercial use. This guide and demo are free and need no account."}},
+      {"@type":"Question","name":"Do I need to install anything?","acceptedAnswer":{"@type":"Answer","text":"No. The demo runs in the page. The full project may offer hosted or local builds; see its repository."}},
+      {"@type":"Question","name":"How is it different from Figma?","acceptedAnswer":{"@type":"Answer","text":"Figma is a hosted collaborative product. FigCraft is an open-source alternative you can inspect and self-host."}}
+    ]}
+  ]
+}
+</script>
+
+<script>
+(() => {
+  const canvas = document.getElementById('canvas');
+  const ctx = canvas.getContext('2d');
+  const hint = document.getElementById('hint');
+  const state = { tool: 'select', color: '#2563eb', layers: [], selected: null, drag: null, seq: 1 };
+  const palette = ['#2563eb', '#7c3aed', '#0f7b4f', '#b45309', '#db2777', '#0891b2'];
+
+  function resize() {
+    const ratio = window.devicePixelRatio || 1;
+    const rect = canvas.getBoundingClientRect();
+    canvas.width = Math.round(rect.width * ratio);
+    canvas.height = Math.round(rect.height * ratio);
+    ctx.setTransform(ratio, 0, 0, ratio, 0, 0);
+    draw();
+  }
+  function draw() {
+    const w = canvas.width / (window.devicePixelRatio || 1);
+    const h = canvas.height / (window.devicePixelRatio || 1);
+    ctx.clearRect(0, 0, w, h);
+    for (const l of state.layers) {
+      ctx.save();
+      if (l.type === 'frame') {
+        ctx.fillStyle = 'rgba(37,99,235,.05)';
+        ctx.fillRect(l.x, l.y, l.w, l.h);
+        ctx.strokeStyle = '#2563eb'; ctx.setLineDash([6, 4]); ctx.strokeRect(l.x, l.y, l.w, l.h); ctx.setLineDash([]);
+        ctx.fillStyle = '#2563eb'; ctx.font = '12px ui-sans-serif'; ctx.fillText(l.name, l.x + 6, l.y + 16);
+      } else if (l.type === 'rect') {
+        ctx.fillStyle = l.color; ctx.globalAlpha = .9; ctx.fillRect(l.x, l.y, l.w, l.h); ctx.globalAlpha = 1;
+      } else {
+        ctx.fillStyle = l.color; ctx.font = '600 18px ui-sans-serif';
+        ctx.fillText(l.text, l.x, l.y + 18);
+      }
+      if (state.selected === l) { ctx.strokeStyle = '#111'; ctx.lineWidth = 1.5; ctx.strokeRect(l.x - 2, l.y - 2, l.w + 4, l.h + 4); }
+      ctx.restore();
+    }
+  }
+  function pos(e) {
+    const r = canvas.getBoundingClientRect();
+    return { x: e.clientX - r.left, y: e.clientY - r.top };
+  }
+  function hit(p) {
+    for (let i = state.layers.length - 1; i >= 0; i--) {
+      const l = state.layers[i];
+      if (p.x >= l.x && p.x <= l.x + l.w && p.y >= l.y && p.y <= l.y + l.h) return l;
+    }
+    return null;
+  }
+  canvas.addEventListener('pointerdown', (e) => {
+    const p = pos(e);
+    if (state.tool === 'select') {
+      const l = hit(p);
+      state.selected = l;
+      if (l) state.drag = { l, dx: p.x - l.x, dy: p.y - l.y };
+    } else if (state.tool === 'text') {
+      const text = prompt('Label text:', 'Button') || 'Button';
+      state.layers.push({ id: state.seq++, type: 'text', name: text, text, x: p.x, y: p.y, w: Math.max(60, text.length * 10), h: 26, color: state.color });
+      state.selected = state.layers[state.layers.length - 1];
+    } else if (state.tool === 'frame') {
+      state.layers.push({ id: state.seq++, type: 'frame', name: 'Frame ' + state.seq, x: p.x - 120, y: p.y - 80, w: 240, h: 160, color: '#2563eb' });
+      state.selected = state.layers[state.layers.length - 1];
+    } else {
+      state.layers.push({ id: state.seq++, type: 'rect', name: 'Rectangle', x: p.x - 50, y: p.y - 30, w: 100, h: 60, color: state.color });
+      state.selected = state.layers[state.layers.length - 1];
+    }
+    draw();
+  });
+  canvas.addEventListener('pointermove', (e) => {
+    if (!state.drag) return;
+    const p = pos(e); const d = state.drag;
+    d.l.x = Math.max(0, p.x - d.dx); d.l.y = Math.max(0, p.y - d.dy); draw();
+  });
+  canvas.addEventListener('pointerup', () => { state.drag = null; });
+  canvas.addEventListener('pointercancel', () => { state.drag = null; });
+  document.querySelectorAll('[data-tool]').forEach(b => b.addEventListener('click', () => {
+    state.tool = b.dataset.tool;
+    document.querySelectorAll('[data-tool]').forEach(x => x.setAttribute('aria-pressed', String(x === b)));
+    hint.textContent = state.tool === 'select' ? 'Drag a shape to move it.' : 'Click the canvas to add a ' + state.tool + '.';
+  }));
+  document.getElementById('color').addEventListener('click', () => {
+    state.color = palette[(palette.indexOf(state.color) + 1) % palette.length];
+    document.getElementById('color').style.color = state.color;
+  });
+  document.getElementById('clear').addEventListener('click', () => { state.layers = []; state.selected = null; draw(); });
+  document.getElementById('export').addEventListener('click', async () => {
+    const json = JSON.stringify({ page: 'figcraft-demo', layers: state.layers }, null, 2);
+    try { await navigator.clipboard.writeText(json); hint.textContent = 'Layer JSON copied to the clipboard.'; }
+    catch { hint.textContent = json.slice(0, 120) + '…'; }
+  });
+  window.addEventListener('resize', resize);
+  resize();
+})();
+</script>
+</body>
+</html>

@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://figcraft.rerivo.com/sitemap.xml

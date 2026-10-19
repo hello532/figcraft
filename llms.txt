@@ -1,0 +1,11 @@
+# FigCraft Guide
+
+> An independent guide and browser demo for FigCraft, an open-source Figma alternative for UI design and prototyping.
+
+## Pages
+
+- [FigCraft Guide](https://figcraft.rerivo.com/): what FigCraft is, a no-signup canvas demo, how frames/shapes/export work, and an FAQ comparing it with Figma.
+
+## Source project
+
+- [storytold/figcraft](https://github.com/storytold/figcraft): the open-source project this page is about.
