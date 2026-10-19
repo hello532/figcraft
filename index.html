@@ -3,11 +3,11 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>FigCraft Guide — Open-Source Figma Alternative (Browser Demo)</title>
-<meta name="description" content="What FigCraft is, how the open-source Figma alternative works, and a no-signup browser demo: draw frames, arrange layers, export JSON. Independent guide.">
+<title>FigCraft — Open-Source Figma Alternative in Rust (Guide + Demo)</title>
+<meta name="description" content="FigCraft is an open-source Figma alternative written in pure Rust: auto layout, components, vector networks, prototypes, Dev Mode, offline files. Guide, honest alpha status, install steps and a no-signup canvas demo.">
 <link rel="canonical" href="https://figcraft.rerivo.com/">
-<meta property="og:title" content="FigCraft Guide — Open-Source Figma Alternative">
-<meta property="og:description" content="A no-signup browser demo and plain-English guide to FigCraft, the open-source UI design tool.">
+<meta property="og:title" content="FigCraft — Open-Source Figma Alternative in Rust">
+<meta property="og:description" content="What FigCraft does, where it stands against Figma, how to install it, and a no-signup browser demo. Independent guide.">
 <meta property="og:type" content="website">
 <meta property="og:url" content="https://figcraft.rerivo.com/">
 <meta name="twitter:card" content="summary_large_image">
@@ -65,6 +65,14 @@
   .steps{counter-reset:s;display:grid;gap:12px;padding:0;list-style:none}
   .steps li{counter-increment:s;background:var(--surface);border:1px solid var(--border);border-radius:12px;padding:16px 18px 16px 52px;position:relative}
   .steps li::before{content:counter(s);position:absolute;left:16px;top:16px;width:24px;height:24px;border-radius:50%;background:var(--accent);color:#fff;font-size:12px;display:grid;place-items:center;font-weight:700}
+  .cmp{width:100%;border-collapse:collapse;background:var(--surface);border:1px solid var(--border);border-radius:12px;overflow:hidden;font-size:14px}
+  .cmp th,.cmp td{padding:12px 14px;text-align:left;border-bottom:1px solid var(--border);vertical-align:top}
+  .cmp thead th{background:color-mix(in srgb,var(--accent) 7%,var(--surface));font-size:13px;letter-spacing:.02em}
+  .cmp tr:last-child td{border-bottom:0}
+  .cmp td:first-child{color:var(--muted);white-space:nowrap}
+  .cmp strong{color:var(--fg)}
+  pre{background:var(--surface);border:1px solid var(--border);border-radius:12px;padding:16px;overflow:auto;font-size:13px;line-height:1.55}
+  code{font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;font-size:.92em}
   details{background:var(--surface);border:1px solid var(--border);border-radius:12px;padding:16px 18px;margin:10px 0}
   summary{cursor:pointer;font-weight:650}
   details p{margin:10px 0 0;color:var(--muted)}
@@ -79,8 +87,9 @@
     <a class="brand" href="/"><span class="mark">F</span> FigCraft Guide</a>
     <nav aria-label="Sections">
       <a href="#what">What it is</a>
+      <a href="#compare">vs Figma</a>
+      <a href="#get-started">Install</a>
       <a href="#demo">Demo</a>
-      <a href="#how">How it works</a>
       <a href="#faq">FAQ</a>
     </nav>
   </div>
@@ -89,17 +98,19 @@
 <main class="wrap">
   <section class="hero" style="border:0;padding-top:0">
     <div>
-      <div class="eyebrow">Open-source design tool</div>
-      <h1>Design interfaces in the browser. No install. No account.</h1>
-      <p class="lede">FigCraft is an open-source Figma alternative for UI design and prototyping. This page explains what it does and gives you a working canvas demo — draw a frame, add shapes, move them, export JSON.</p>
+      <div class="eyebrow">Open-source · native · early alpha</div>
+      <h1>A Figma alternative written in pure Rust.</h1>
+      <p class="lede">FigCraft is an open-source interface design and prototyping app: frames, auto layout, components and variants, vector networks, prototypes and Dev Mode. It runs as a native app on macOS, Windows, Linux and FreeBSD, and compiles to WebAssembly for the browser. No account, no telemetry, files stay on your disk.</p>
       <div class="cta">
-        <a class="btn primary" href="#demo">Open the demo</a>
-        <a class="btn ghost" href="https://github.com/storytold/figcraft" rel="noopener">View the source</a>
+        <a class="btn primary" href="#get-started">Get FigCraft</a>
+        <a class="btn ghost" href="#demo">Try the canvas demo</a>
+        <a class="btn ghost" href="https://github.com/storytold/figcraft" rel="noopener">Source</a>
       </div>
       <div class="facts">
-        <div><strong>0</strong>signup required</div>
-        <div><strong>JSON</strong>design export</div>
-        <div><strong>Open</strong>source project</div>
+        <div><strong>Rust</strong>native engine</div>
+        <div><strong>Offline</strong>no account</div>
+        <div><strong>MIT / Apache-2.0</strong>open source</div>
+        <div><strong>~49%</strong>alpha parity</div>
       </div>
     </div>
     <div class="demo" id="demo">
@@ -117,14 +128,54 @@
   </section>
 
   <section id="what">
-    <h2>What FigCraft is</h2>
-    <p class="sub">FigCraft is a clean-room, open-source take on interface design and prototyping: frames, shapes, text and a canvas you can run locally or in the browser. Its source is on GitHub, so you can inspect it, self-host it, or learn from the implementation.</p>
+    <h2>What FigCraft actually is</h2>
+    <p class="sub">FigCraft is a clean-room, open-source design tool built around a Rust engine. The same command layer drives the desktop UI, a CLI, a JSON control channel and an MCP server — which is why an agent can do anything a person can click. It is not a thin web wrapper: the document model, renderer and layout engine are native code.</p>
     <div class="grid">
-      <div class="card"><h3>For quick UI sketches</h3><p>Lay out a screen with frames, rectangles and labels without opening a heavy desktop app.</p></div>
-      <div class="card"><h3>For learning</h3><p>The code is open. Read how a design canvas handles selection, dragging and layers.</p></div>
-      <div class="card"><h3>For self-hosting</h3><p>Run it yourself when you do not want client files in a third-party workspace.</p></div>
+      <div class="card"><h3>Native, not Electron</h3><p>A Rust engine with a persistent document model. Edits touch only what changed, so a node in a 20,000-node file stays fast. The same engine compiles to WebAssembly for the browser build.</p></div>
+      <div class="card"><h3>Layouts that build themselves</h3><p>Auto layout in both directions, wrap and grid tracks, Hug / Fill / Fixed sizing, constraints, padding and gaps, with on-canvas drag handles and keyboard flow control.</p></div>
+      <div class="card"><h3>Components that scale</h3><p>Main components, instances with overrides, component sets and variants, properties, swap and detach, an Assets panel, local styles and variables with modes and aliases.</p></div>
+      <div class="card"><h3>Real vector networks</h3><p>Pen and Pencil, vector edit mode, boolean groups whose operands stay editable, variable-width strokes, shape builder, gradients, masks, blurs, noise and glass effects.</p></div>
+      <div class="card"><h3>Prototype and hand off</h3><p>Connections, triggers, transitions and flows; presentation view; Inspect with measurements and annotations; ready-for-dev status; CSS, HTML, React, Leptos, SwiftUI and Compose output.</p></div>
+      <div class="card"><h3>Offline and yours</h3><p>Files are plain <code>.figcraft</code> archives on your disk. No account and no telemetry; nothing leaves the machine unless you share. SVG, PNG, JPG, WebP and PDF export; <code>.fig</code> opens best effort.</p></div>
     </div>
-    <p class="note">This is an independent guide and demo, not the official FigCraft site. The demo below is a small canvas built for this page; the real project is linked above.</p>
+    <p class="note"><strong>Honest status:</strong> FigCraft calls itself early alpha — about 49% of the way to replacing proprietary tools for real work, by its own estimate. The editor works end to end, but expect rough edges, best-effort <code>.fig</code> import, and only a preview of multiplayer. Check the <a href="https://github.com/storytold/figcraft/blob/main/ROADMAP.md" rel="noopener">roadmap</a> before trusting it with a team project.</p>
+    <p class="note">This is an independent guide, not the official FigCraft site. The demo below is a small canvas built for this page; the real application is linked above.</p>
+  </section>
+
+  <section id="compare">
+    <h2>FigCraft vs Figma, without the marketing</h2>
+    <p class="sub">They solve the same job — designing interfaces — with different tradeoffs. FigCraft wins on ownership, offline work and hackability; Figma wins on maturity, real-time collaboration and ecosystem.</p>
+    <table class="cmp">
+      <thead><tr><th></th><th>FigCraft</th><th>Figma</th></tr></thead>
+      <tbody>
+        <tr><td>License</td><td><strong>MIT OR Apache-2.0</strong> (open source)</td><td>Proprietary</td></tr>
+        <tr><td>Where it runs</td><td>Native macOS, Windows, Linux, FreeBSD; browser build via WebAssembly</td><td>Browser and desktop apps</td></tr>
+        <tr><td>Account</td><td><strong>None</strong>; works offline, no telemetry</td><td>Account and cloud workspace</td></tr>
+        <tr><td>Files</td><td><code>.figcraft</code> archives on your disk; <code>.fig</code> import best effort</td><td>Cloud documents and <code>.fig</code></td></tr>
+        <tr><td>Real-time collaboration</td><td>Preview: live sessions from the app or a self-hosted server, no accounts yet</td><td><strong>Mature</strong>, with teams and permissions</td></tr>
+        <tr><td>Dev Mode / code output</td><td>Inspect, annotations, ready-for-dev, React/SwiftUI/Compose/CSS/HTML output</td><td>Dev Mode, paid seats</td></tr>
+        <tr><td>Maturity</td><td>Early alpha, about 49% parity by the project's own estimate</td><td><strong>Mature</strong>, used by large teams</td></tr>
+        <tr><td>Price</td><td><strong>Free</strong></td><td>Free tier; paid seats for teams and Dev Mode</td></tr>
+      </tbody>
+    </table>
+    <p class="note">“Better” depends on the job. For a solo designer who wants a local file and an inspectable engine, FigCraft is interesting now. For a team that needs multiplayer and a mature plugin ecosystem today, Figma is still the safer choice.</p>
+  </section>
+
+  <section id="get-started">
+    <h2>How to run FigCraft</h2>
+    <p class="sub">Prebuilt installers for macOS, Windows, Linux, FreeBSD and the web are attached to each <a href="https://github.com/storytold/figcraft/releases" rel="noopener">GitHub release</a>. To build from source you need a Rust toolchain:</p>
+    <pre><code>git clone https://github.com/storytold/figcraft
+cd figcraft
+
+# fonts used by the UI and the Text tool
+git clone https://github.com/storytold/craft-fonts ../craft-fonts
+
+# desktop app
+cargo run --release -p figcraft
+
+# collaboration server (optional)
+cargo run --release -p figcraft-server</code></pre>
+    <p class="note">Browser build: install <a href="https://trunkrs.dev/" rel="noopener">trunk</a> and run <code>cargo xtask wasm</code>. FigCraft is early alpha; keep a copy of anything you open and expect some rough edges.</p>
   </section>
 
   <section id="how">
@@ -139,10 +190,12 @@
 
   <section id="faq">
     <h2>FAQ</h2>
-    <details open><summary>Is FigCraft free?</summary><p>The project is open source; check the repository licence before you use it commercially. This guide and demo are free and need no account.</p></details>
-    <details><summary>Do I need to install anything?</summary><p>No. The demo runs in this page. The full FigCraft project may offer a hosted or local build; see its repository for the current options.</p></details>
-    <details><summary>How is it different from Figma?</summary><p>Figma is a hosted collaborative product. FigCraft is an open-source alternative you can inspect and self-host. For a solo sketch or a self-hosted workflow, that difference matters; for real-time team collaboration, check the project's current feature set.</p></details>
-    <details><summary>Can I use the exported JSON in another tool?</summary><p>The export is a plain layer list (type, x, y, width, height, text, colour). It is intentionally simple so you can transform it with a script.</p></details>
+    <details open><summary>Is FigCraft really free?</summary><p>Yes. The source is licensed MIT OR Apache-2.0 and the installers are free. You pay with your own time: it is early alpha and you run it yourself (or use the community server preview). This guide and demo are also free.</p></details>
+    <details><summary>Do I need to install anything?</summary><p>For the real FigCraft app, yes — download an installer or build it with Cargo. The canvas demo on this page needs no install and no account; it is an independent teaching demo, not the full editor.</p></details>
+    <details><summary>How is it different from Figma?</summary><p>Figma is a mature hosted product with real-time team collaboration. FigCraft is open source, offline-first and built in Rust; its multiplayer is a preview and its feature coverage is about 49% by the project's own estimate. See the comparison table above for the full tradeoff.</p></details>
+    <details><summary>Does FigCraft open Figma <code>.fig</code> files?</summary><p>Only best effort. The project says <code>.fig</code> import is not reliable yet; keep the original Figma file and expect fixes to be needed. Native files are <code>.figcraft</code> archives.</p></details>
+    <details><summary>Can I use the exported JSON in another tool?</summary><p>The demo's export is a plain layer list (type, x, y, width, height, text, colour), intentionally simple so you can transform it with a script. It is not FigCraft's native file format.</p></details>
+    <details><summary>Is multiplayer ready for a team?</summary><p>Not yet. Live sessions are a preview: no accounts, teams or cloud, and the public server is not end-to-end encrypted. For confidential work, self-host the server or use local-network sharing on a network you trust.</p></details>
   </section>
 </main>
 
@@ -153,10 +206,16 @@
   "@context":"https://schema.org",
   "@graph":[
     {"@type":"WebSite","name":"FigCraft Guide","url":"https://figcraft.rerivo.com/"},
+    {"@type":"SoftwareApplication","name":"FigCraft","applicationCategory":"DesignApplication",
+     "operatingSystem":"macOS, Windows, Linux, FreeBSD, Web",
+     "offers":{"@type":"Offer","price":"0","priceCurrency":"USD"},
+     "license":"MIT OR Apache-2.0","url":"https://github.com/storytold/figcraft"},
     {"@type":"FAQPage","mainEntity":[
-      {"@type":"Question","name":"Is FigCraft free?","acceptedAnswer":{"@type":"Answer","text":"The project is open source; check the repository licence before commercial use. This guide and demo are free and need no account."}},
-      {"@type":"Question","name":"Do I need to install anything?","acceptedAnswer":{"@type":"Answer","text":"No. The demo runs in the page. The full project may offer hosted or local builds; see its repository."}},
-      {"@type":"Question","name":"How is it different from Figma?","acceptedAnswer":{"@type":"Answer","text":"Figma is a hosted collaborative product. FigCraft is an open-source alternative you can inspect and self-host."}}
+      {"@type":"Question","name":"Is FigCraft really free?","acceptedAnswer":{"@type":"Answer","text":"Yes. The source is licensed MIT OR Apache-2.0 and the installers are free. It is early alpha and you run it yourself or use the community server preview."}},
+      {"@type":"Question","name":"Do I need to install anything?","acceptedAnswer":{"@type":"Answer","text":"For the real FigCraft app, yes: download an installer or build it with Cargo. The canvas demo on this page needs no install and no account."}},
+      {"@type":"Question","name":"How is it different from Figma?","acceptedAnswer":{"@type":"Answer","text":"Figma is a mature hosted product with real-time team collaboration. FigCraft is open source, offline-first and built in Rust; its multiplayer is a preview and its feature coverage is about 49% by its own estimate."}},
+      {"@type":"Question","name":"Does FigCraft open Figma .fig files?","acceptedAnswer":{"@type":"Answer","text":"Only best effort. Native files are .figcraft archives; .fig import is not reliable yet."}},
+      {"@type":"Question","name":"Is multiplayer ready for a team?","acceptedAnswer":{"@type":"Answer","text":"Not yet. Live sessions are a preview with no accounts, teams or cloud, and the public server is not end-to-end encrypted."}}
     ]}
   ]
 }
