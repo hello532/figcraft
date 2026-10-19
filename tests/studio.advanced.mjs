@@ -63,6 +63,16 @@ ws.onopen = async () => {
     const orderAfter = await ev(`JSON.stringify([...document.querySelectorAll('.layer .lname')].map(x=>x.textContent))`);
     check('layer drag reorders', orderBefore !== orderAfter, `${orderBefore} -> ${orderAfter}`);
 
+    // Icon library
+    await reset();
+    const iconCount = await ev(`document.querySelectorAll('#icon-grid [data-icon]').length`);
+    check('60+ icons available', iconCount >= 60, String(iconCount));
+    await ev(`document.querySelector('[data-icon="ios-phone"]').click()`); await wait(150);
+    check('iOS icon inserts a layer', await ev(`document.querySelectorAll('.layer').length===1 && document.querySelector('#props').innerText.includes('Phone')`));
+    await ev(`(()=>{window.__svg='';HTMLAnchorElement.prototype.click=function(){if(this.download&&this.download.endsWith('.svg'))fetch(this.href).then(r=>r.text()).then(t=>window.__svg=t)};document.querySelector('#export-svg').click();return 1})()`);
+    await wait(400);
+    check('SVG includes icon gradient', await ev(`(window.__svg||'').includes('linearGradient') && (window.__svg||'').includes('<path')`));
+
     // Shortcuts dialog
     await ev(`document.body.dispatchEvent(new KeyboardEvent('keydown',{key:'?',bubbles:true}));1`); await wait(100);
     check('? opens shortcuts', await ev(`document.querySelector('#shortcuts').hidden===false`));

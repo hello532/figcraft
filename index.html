@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>FigCraft — Open-Source Figma Alternative in Rust (Guide, Issues, Studio)</title>
-<meta name="description" content="FigCraft is an open-source Figma alternative written in pure Rust: auto layout, components, vector networks, prototypes, Dev Mode, offline files. Guide with known GitHub issues, install steps, FAQ and a customizable browser canvas studio.">
+<meta name="description" content="FigCraft is an open-source Figma alternative written in pure Rust: auto layout, components, vector networks, prototypes, Dev Mode, offline files. Guide with known GitHub issues, install steps, FAQ and a customizable browser studio with 69 line and iOS-style icons.">
 <meta name="robots" content="index,follow,max-image-preview:large">
 <meta name="author" content="FigCraft Guide">
 <meta name="theme-color" content="#2563eb">
@@ -119,6 +119,7 @@
   .studio-body{display:grid;grid-template-columns:54px minmax(0,1fr) 288px;min-height:540px;min-width:0;max-width:100%}
   .toolrail{display:flex;flex-direction:column;align-items:center;gap:6px;padding:10px 6px;border-right:1px solid var(--border);background:color-mix(in srgb,var(--surface) 90%,var(--bg))}
   .toolrail button{width:38px;height:38px;border-radius:9px;border:1px solid transparent;background:transparent;color:var(--muted);font-size:16px;cursor:pointer;display:grid;place-items:center}
+  .toolrail svg{width:18px;height:18px;fill:none;stroke:currentColor;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round}
   .toolrail button:hover{background:var(--bg);color:var(--fg)}
   .toolrail button[aria-pressed="true"]{background:color-mix(in srgb,var(--accent) 12%,var(--surface));border-color:color-mix(in srgb,var(--accent) 40%,var(--border));color:var(--accent)}
   .rail-sep{width:26px;height:1px;background:var(--border);margin:6px 0}
@@ -131,9 +132,9 @@
   #canvas{display:block;touch-action:none;cursor:crosshair}
   #canvas.alpha{background-color:#f6f6f3;background-image:linear-gradient(45deg,#e9e9e6 25%,transparent 25%,transparent 75%,#e9e9e6 75%),linear-gradient(45deg,#e9e9e6 25%,transparent 25%,transparent 75%,#e9e9e6 75%);background-size:16px 16px;background-position:0 0,8px 8px}
   .text-editor{position:absolute;z-index:8;margin:0;padding:0 2px;border:1px solid var(--accent);border-radius:2px;background:var(--surface);outline:none;resize:none;overflow:hidden;font-family:ui-sans-serif,system-ui,sans-serif;font-weight:600;line-height:1.2;box-sizing:border-box}
-  .inspector{border-left:1px solid var(--border);display:flex;flex-direction:column;min-width:0;background:var(--surface)}
-  .panel{border-bottom:1px solid var(--border);padding:12px 14px;min-height:0;overflow-y:auto;overflow-x:hidden}
-  .panel:last-child{border-bottom:0;flex:1}
+  .inspector{border-left:1px solid var(--border);display:flex;flex-direction:column;min-width:0;background:var(--surface);overflow-y:auto}
+  .panel{border-bottom:1px solid var(--border);padding:12px 14px;min-height:0;overflow-x:hidden;flex:0 0 auto}
+  .panel:last-child{border-bottom:0}
   .panel-head{display:flex;align-items:center;justify-content:space-between;gap:8px;margin-bottom:8px}
   .panel-head h3{margin:0;font-size:12px;text-transform:uppercase;letter-spacing:.08em;color:var(--muted)}
   .panel-head span{font-size:11px;color:var(--muted)}
@@ -147,6 +148,16 @@
   .layer.dragging{opacity:.4}
   .layer.drag-over{outline:1px dashed var(--accent);outline-offset:-1px}
   .empty{margin:4px 0 8px;color:var(--muted);font-size:12px;line-height:1.45}
+  .icon-search{width:100%;padding:7px 9px;border:1px solid var(--border);border-radius:7px;background:var(--surface);color:var(--fg);font-size:12px;margin-bottom:8px}
+  .icon-cats{display:flex;gap:4px;flex-wrap:wrap;margin-bottom:8px}
+  .icon-cats button{border:1px solid var(--border);background:var(--bg);color:var(--muted);border-radius:999px;padding:3px 8px;font-size:11px;cursor:pointer}
+  .icon-cats button[aria-pressed="true"]{border-color:var(--accent);color:var(--accent);background:color-mix(in srgb,var(--accent) 9%,var(--surface))}
+  .icon-grid{display:grid;grid-template-columns:repeat(6,minmax(0,1fr));gap:4px;max-height:240px;overflow:auto;padding-right:2px}
+  .icon-btn{aspect-ratio:1;border:1px solid var(--border);border-radius:9px;background:var(--surface);color:var(--fg);display:grid;place-items:center;cursor:pointer;padding:0;min-width:0}
+  .icon-btn:hover{border-color:var(--accent);color:var(--accent)}
+  .icon-btn svg{width:20px;height:20px;fill:none;stroke:currentColor;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round}
+  .icon-btn.tile{color:#fff;border:0;border-radius:11px;box-shadow:inset 0 1px 0 rgba(255,255,255,.28)}
+  .icon-btn.tile svg{width:19px;height:19px}
   .props{display:flex;flex-direction:column;gap:10px;min-width:0;overflow-x:hidden}
   .prop-grid{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:8px;min-width:0}
   .prop-grid label{display:flex;flex-direction:column;gap:4px;font-size:11px;color:var(--muted);min-width:0;overflow:hidden}
@@ -164,6 +175,10 @@
   .studio-foot .tool{border:1px solid var(--border);background:var(--surface);color:var(--fg);border-radius:7px;padding:5px 9px;font-size:12px;cursor:pointer}
   .studio-foot .tool:hover{border-color:var(--accent);color:var(--accent)}
   .studio-foot .tool:disabled{opacity:.45;cursor:not-allowed}
+  .icon-drawer{position:fixed;inset:0;z-index:95;background:rgba(0,0,0,.45);display:grid;place-items:center;padding:20px}
+  .icon-drawer[hidden]{display:none}
+  .icon-drawer-card{background:var(--surface);border:1px solid var(--border);border-radius:16px;box-shadow:var(--shadow);width:min(760px,94vw);max-height:80vh;overflow:auto;padding:18px}
+  .icon-drawer-card .icon-grid{grid-template-columns:repeat(10,minmax(0,1fr));max-height:none}
   .shortcuts{position:fixed;inset:0;z-index:100;background:rgba(0,0,0,.45);display:grid;place-items:center;padding:20px}
   .shortcuts[hidden]{display:none}
   .shortcuts-card{background:var(--surface);border:1px solid var(--border);border-radius:16px;box-shadow:var(--shadow);max-width:520px;width:100%;padding:22px;max-height:80vh;overflow:auto}
@@ -179,6 +194,8 @@
     .toolrail{flex-direction:row;border-right:0;border-bottom:1px solid var(--border);overflow:auto}
     .inspector{border-left:0;border-top:1px solid var(--border);display:grid;grid-template-columns:1fr 1fr}
     .panel{max-height:260px}
+    .icon-grid{grid-template-columns:repeat(7,minmax(0,1fr))}
+    .icon-drawer-card .icon-grid{grid-template-columns:repeat(6,minmax(0,1fr))}
     .viewport{min-height:360px;padding:18px}
     .nav nav{display:none}
     .studio-head{align-items:flex-start}
@@ -285,13 +302,14 @@
 
       <div class="studio-body">
         <div class="toolrail" role="toolbar" aria-label="Tools">
-          <button data-tool="select" aria-pressed="true" title="Select (V)">↖</button>
-          <button data-tool="frame" aria-pressed="false" title="Frame (F)">▭</button>
-          <button data-tool="rect" aria-pressed="false" title="Rectangle (R)">■</button>
-          <button data-tool="text" aria-pressed="false" title="Text (T)">T</button>
+          <button data-tool="select" aria-pressed="true" title="Select (V)" aria-label="Select"><svg viewBox="0 0 24 24"><path d="M4 3l7 18 2.5-7.5L21 11z"/></svg></button>
+          <button data-tool="frame" aria-pressed="false" title="Frame (F)" aria-label="Frame"><svg viewBox="0 0 24 24"><path d="M4 4h16v16H4zM4 9h16M9 4v16"/></svg></button>
+          <button data-tool="rect" aria-pressed="false" title="Rectangle (R)" aria-label="Rectangle"><svg viewBox="0 0 24 24"><rect x="4" y="5" width="16" height="14" rx="2"/></svg></button>
+          <button data-tool="text" aria-pressed="false" title="Text (T)" aria-label="Text"><svg viewBox="0 0 24 24"><path d="M5 5h14M12 5v14M8 19h8"/></svg></button>
+          <button id="icons-btn" title="Icon library" aria-label="Icon library"><svg viewBox="0 0 24 24"><path d="M12 3l1.8 5.2L19 10l-5.2 1.8L12 17l-1.8-5.2L5 10l5.2-1.8zM19 15l.8 2.2L22 18l-2.2.8L19 21l-.8-2.2L16 18l2.2-.8z"/></svg></button>
           <span class="rail-sep"></span>
-          <button id="duplicate" title="Duplicate (Ctrl/Cmd+D)">⧉</button>
-          <button id="delete" title="Delete (Del)">⌫</button>
+          <button id="duplicate" title="Duplicate (Ctrl/Cmd+D)" aria-label="Duplicate"><svg viewBox="0 0 24 24"><rect x="8" y="8" width="12" height="12" rx="2"/><path d="M16 8V6a2 2 0 0 0-2-2H6a2 2 0 0 0-2 2v8a2 2 0 0 0 2 2h2"/></svg></button>
+          <button id="delete" title="Delete (Del)" aria-label="Delete"><svg viewBox="0 0 24 24"><path d="M4 7h16M9 7V4h6v3M6 7l1 14h10l1-14M10 11v6M14 11v6"/></svg></button>
         </div>
 
         <div class="viewport" id="viewport">
@@ -327,6 +345,19 @@
       </div>
     </div>
   </section>
+
+  <div class="icon-drawer" id="icon-drawer" hidden>
+    <div class="icon-drawer-card" role="dialog" aria-modal="true" aria-label="Icon library">
+      <div class="panel-head">
+        <h3>Icons</h3><span id="icon-count"></span>
+        <button class="shortcuts-close" id="icon-close" aria-label="Close">×</button>
+      </div>
+      <input id="icon-search" class="icon-search" type="search" placeholder="Search 60+ icons…" aria-label="Search icons">
+      <div class="icon-cats" id="icon-cats"></div>
+      <div class="icon-grid" id="icon-grid"></div>
+      <p class="note">Line icons use the current Fill colour. iOS glass tiles use a fixed palette and scale to the layer bounds.</p>
+    </div>
+  </div>
 
   <div class="shortcuts" id="shortcuts" hidden>
     <div class="shortcuts-card" role="dialog" aria-modal="true" aria-label="Keyboard shortcuts">
@@ -451,7 +482,7 @@ cargo run --release -p figcraft-server</code></pre>
     <h2>How the browser studio works</h2>
     <p class="sub">Three actions are enough to judge whether a design tool fits your hands: create, arrange, export. The studio keeps its state in localStorage, so a refresh does not lose your work.</p>
     <ol class="steps">
-      <li><strong>Create.</strong> Pick Frame, Rectangle or Text, then click the canvas. A frame is a screen; a rectangle is a block; text opens an inline editor. The canvas can be resized, recoloured, made transparent and re-gridded from the top bar.</li>
+      <li><strong>Create.</strong> Pick Frame, Rectangle or Text, then click the canvas. A frame is a screen; a rectangle is a block; text opens an inline editor. The sparkle button opens 69 line icons and iOS-style glass tiles. The canvas can be resized, recoloured, made transparent and re-gridded from the top bar.</li>
       <li><strong>Arrange.</strong> Drag a layer, or drag one of its eight handles to resize. Snapping aligns to the grid, canvas edges and other layers; hold Alt to disable it and Shift to keep the aspect ratio. Pan with Space+drag; zoom around the pointer with Cmd/Ctrl+wheel.</li>
       <li><strong>Export.</strong> Export PNG at 1×/2×/3×, SVG, or a JSON layer tree. Undo/redo covers every edit; copy/paste, duplicate, layer drag-reorder and autosave make it feel like a real editor.</li>
     </ol>
@@ -488,7 +519,8 @@ cargo run --release -p figcraft-server</code></pre>
     <details><summary>Why is the UI small on a 1440p monitor?</summary><p>This is tracked in <a href="https://github.com/storytold/figcraft/issues/540" rel="noopener">#540</a>; an interface-size preference is in progress (<a href="https://github.com/storytold/figcraft/issues/818" rel="noopener">#818</a>). Until it ships, OS display scaling is the workaround.</p></details>
     <details><summary>Can I customize the studio canvas?</summary><p>Yes. Choose a size preset or type a custom width and height (100–2400 px), set any background colour, switch to a transparent canvas, toggle the grid and change its spacing, and use Fit or 50–200% zoom. Cmd/Ctrl+wheel zooms around the pointer.</p></details>
     <details><summary>Does the studio have keyboard shortcuts?</summary><p>Yes: V/F/R/T for tools, Delete to remove, Cmd/Ctrl+Z to undo (Shift for redo), Cmd/Ctrl+D to duplicate, Cmd/Ctrl+C/V to copy and paste, arrows to nudge 1 px (Shift 10 px), Space+drag to pan, and <strong>?</strong> for the full dialog.</p></details>
-    <details><summary>Can I export SVG?</summary><p>Yes. The footer exports PNG at 1×/2×/3×, SVG, or JSON. The SVG keeps frames, rectangles, text, radii, colours and opacity; the JSON includes the board settings and every layer.</p></details>
+    <details><summary>Can I export SVG?</summary><p>Yes. The footer exports PNG at 1×/2×/3×, SVG, or JSON. The SVG keeps frames, rectangles, text, icons, radii, colours and opacity; the JSON includes the board settings and every layer.</p></details>
+    <details><summary>Does the studio include an icon library?</summary><p>Yes. The sparkle button in the tool rail opens 69 original icons: 50 line icons for UI, media and files, plus 19 iOS-style glass tiles such as Phone, Messages, Safari, Camera, Photos, Mail, Calendar, Clock, Weather, Maps, Music, Settings, Wallet, Notes, Reminders, Health, Files, App Store and Face ID. Search or filter by category; click one to add it to the canvas.</p></details>
   </section>
 </main>
 
@@ -509,7 +541,7 @@ cargo run --release -p figcraft-server</code></pre>
      "browserRequirements":"Requires JavaScript and a modern browser",
      "isAccessibleForFree":true,
      "offers":{"@type":"Offer","price":"0","priceCurrency":"USD"},
-     "featureList":["custom canvas size","background and transparency","grid and zoom","layers","resize and move","grid and alignment snapping","inline text editing","copy and paste","undo and redo","PNG, SVG and JSON export"]},
+     "featureList":["custom canvas size","background and transparency","grid and zoom","layers","resize and move","grid and alignment snapping","inline text editing","69-icon library with iOS glass tiles","copy and paste","undo and redo","PNG, SVG and JSON export"]},
     {"@type":"HowTo","name":"How to use the FigCraft browser studio",
      "description":"Create, arrange and export a design in the independent FigCraft browser studio.",
      "totalTime":"PT5M",
@@ -547,7 +579,8 @@ cargo run --release -p figcraft-server</code></pre>
       {"@type":"Question","name":"Is multiplayer ready for a team?","acceptedAnswer":{"@type":"Answer","text":"Not yet. Live sessions are a preview with no accounts, teams or cloud, and the public server is not end-to-end encrypted."}},
       {"@type":"Question","name":"Can I customize the studio canvas?","acceptedAnswer":{"@type":"Answer","text":"Yes. Choose a size preset or a custom width and height, set the background, use a transparent canvas, toggle the grid and set its spacing, and use Fit or 50 to 200 percent zoom."}},
       {"@type":"Question","name":"Does the studio have keyboard shortcuts?","acceptedAnswer":{"@type":"Answer","text":"Yes: V, F, R and T for tools; Delete to remove; Cmd/Ctrl+Z to undo; Cmd/Ctrl+D to duplicate; Cmd/Ctrl+C and V to copy and paste; arrows to nudge; Space+drag to pan; Cmd/Ctrl+wheel to zoom; question mark for the dialog."}},
-      {"@type":"Question","name":"Can I export SVG?","acceptedAnswer":{"@type":"Answer","text":"Yes. Export PNG at 1x, 2x or 3x, SVG, or JSON. The SVG keeps frames, rectangles, text, radii, colours and opacity; JSON includes the board settings and every layer."}}
+      {"@type":"Question","name":"Can I export SVG?","acceptedAnswer":{"@type":"Answer","text":"Yes. Export PNG at 1x, 2x or 3x, SVG, or JSON. The SVG keeps frames, rectangles, text, icons, radii, colours and opacity; JSON includes the board settings and every layer."}},
+      {"@type":"Question","name":"Does the studio include an icon library?","acceptedAnswer":{"@type":"Answer","text":"Yes. The sparkle button opens 69 original icons: 50 line icons and 19 iOS-style glass tiles, including Phone, Messages, Safari, Camera, Photos, Mail, Calendar, Weather, Maps, Music, Settings, Wallet, Notes, Reminders, Health, Files, App Store and Face ID."}}
     ]}
   ]
 }
@@ -566,6 +599,85 @@ cargo run --release -p figcraft-server</code></pre>
   const hint = $('#hint');
   const DEFAULT = { w: 720, h: 460, bg: '#ffffff', alpha: false, grid: true, gridSize: 32 };
   const COLORS = ['#2563eb', '#7c3aed', '#0f7b4f', '#b45309', '#db2777', '#0891b2', '#111827'];
+  const LINE_ICONS = [
+    ['cursor', 'Select', 'ui', 'M4 3l7 18 2.5-7.5L21 11z'],
+    ['frame', 'Frame', 'ui', 'M4 4h16v16H4zM4 9h16M9 4v16'],
+    ['square', 'Square', 'ui', 'M4 4h16v16H4z'],
+    ['circle', 'Circle', 'ui', 'M12 3a9 9 0 1 0 0 18 9 9 0 0 0 0-18z'],
+    ['triangle', 'Triangle', 'ui', 'M12 4l9 16H3z'],
+    ['star', 'Star', 'ui', 'M12 3l2.8 5.7 6.2.9-4.5 4.4 1.1 6.2L12 17.3 6.4 20.2l1.1-6.2L3 9.6l6.2-.9z'],
+    ['heart', 'Heart', 'ui', 'M20.8 5.6a5 5 0 0 0-7.1 0L12 7.3l-1.7-1.7a5 5 0 0 0-7.1 7.1L12 21l8.8-8.3a5 5 0 0 0 0-7.1z'],
+    ['check', 'Check', 'ui', 'M4 12.5l5 5L20 6.5'],
+    ['plus', 'Plus', 'ui', 'M12 5v14M5 12h14'],
+    ['minus', 'Minus', 'ui', 'M5 12h14'],
+    ['search', 'Search', 'ui', 'M10.5 4a6.5 6.5 0 1 0 0 13 6.5 6.5 0 0 0 0-13zM16 16l4.5 4.5'],
+    ['home', 'Home', 'ui', 'M3 11l9-8 9 8M5 10v10h5v-6h4v6h5V10'],
+    ['user', 'User', 'ui', 'M12 12a4 4 0 1 0 0-8 4 4 0 0 0 0 8zM4 21a8 8 0 0 1 16 0'],
+    ['settings', 'Settings', 'ui', 'M12 8.5a3.5 3.5 0 1 0 0 7 3.5 3.5 0 0 0 0-7zM12 2v3M12 19v3M2 12h3M19 12h3M4.9 4.9l2.1 2.1M17 17l2.1 2.1M19.1 4.9L17 7M7 17l-2.1 2.1'],
+    ['bell', 'Bell', 'ui', 'M18 16H6l1.5-2V9a4.5 4.5 0 0 1 9 0v5zM10 20a2 2 0 0 0 4 0'],
+    ['trash', 'Trash', 'ui', 'M4 7h16M9 7V4h6v3M6 7l1 14h10l1-14M10 11v6M14 11v6'],
+    ['download', 'Download', 'ui', 'M12 3v12M7 10l5 5 5-5M4 20h16'],
+    ['upload', 'Upload', 'ui', 'M12 21V9M7 14l5-5 5 5M4 4h16'],
+    ['link', 'Link', 'ui', 'M10 14a4 4 0 0 0 5.7 0l3-3a4 4 0 0 0-5.7-5.7l-1.5 1.5M14 10a4 4 0 0 0-5.7 0l-3 3a4 4 0 0 0 5.7 5.7l1.5-1.5'],
+    ['image', 'Image', 'media', 'M4 5h16v14H4zM4 15l4-4 3 3 3-3 6 6M9 9a1.5 1.5 0 1 0 0-3 1.5 1.5 0 0 0 0 3z'],
+    ['video', 'Video', 'media', 'M4 6h11v12H4zM15 10l5-3v10l-5-3'],
+    ['mic', 'Microphone', 'media', 'M12 3a3 3 0 0 0-3 3v6a3 3 0 0 0 6 0V6a3 3 0 0 0-3-3zM5 11a7 7 0 0 0 14 0M12 18v3'],
+    ['play', 'Play', 'media', 'M8 5l11 7-11 7z'],
+    ['pause', 'Pause', 'media', 'M8 5v14M16 5v14'],
+    ['sun', 'Sun', 'ui', 'M12 8a4 4 0 1 0 0 8 4 4 0 0 0 0-8zM12 2v2M12 20v2M2 12h2M20 12h2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M19.1 4.9l-1.4 1.4M6.3 17.7l-1.4 1.4'],
+    ['moon', 'Moon', 'ui', 'M20 15a8 8 0 1 1-11-11 6.5 6.5 0 0 0 11 11z'],
+    ['cloud', 'Cloud', 'ui', 'M7 18a4 4 0 0 1 0-8 5.5 5.5 0 0 1 10.5 1A3.5 3.5 0 0 1 17 18z'],
+    ['lock', 'Lock', 'ui', 'M6 11h12v10H6zM9 11V8a3 3 0 0 1 6 0v3'],
+    ['mail', 'Mail', 'ui', 'M3 6h18v12H3zM3 7l9 6 9-6'],
+    ['calendar', 'Calendar', 'ui', 'M4 6h16v14H4zM8 3v5M16 3v5M4 10h16'],
+    ['clock', 'Clock', 'ui', 'M12 3a9 9 0 1 0 0 18 9 9 0 0 0 0-18zM12 7v5l3 2'],
+    ['pin', 'Pin', 'ui', 'M12 21s7-7 7-12a7 7 0 1 0-14 0c0 5 7 12 7 12zM12 11a2 2 0 1 0 0-4 2 2 0 0 0 0 4z'],
+    ['tag', 'Tag', 'ui', 'M3 12V4h8l10 10-8 8zM8 8h.01'],
+    ['folder', 'Folder', 'files', 'M3 6h7l2 3h9v11H3z'],
+    ['file', 'File', 'files', 'M6 3h8l4 4v14H6zM14 3v4h4'],
+    ['code', 'Code', 'files', 'M8 8l-4 4 4 4M16 8l4 4-4 4M13 5l-2 14'],
+    ['terminal', 'Terminal', 'files', 'M4 4h16v16H4zM7 9l3 3-3 3M12 15h5'],
+    ['database', 'Database', 'files', 'M12 3c4.4 0 8 1.3 8 3s-3.6 3-8 3-8-1.3-8-3 3.6-3 8-3zM4 6v12c0 1.7 3.6 3 8 3s8-1.3 8-3V6M4 12c0 1.7 3.6 3 8 3s8-1.3 8-3'],
+    ['server', 'Server', 'files', 'M4 4h16v6H4zM4 14h16v6H4zM7 7h.01M7 17h.01'],
+    ['wifi', 'Wi-Fi', 'ui', 'M2 8a16 16 0 0 1 20 0M5 12a11 11 0 0 1 14 0M8 16a6 6 0 0 1 8 0M12 20h.01'],
+    ['battery', 'Battery', 'ui', 'M3 7h16v10H3zM21 10v4M6 10v4M10 10v4'],
+    ['bluetooth', 'Bluetooth', 'ui', 'M7 7l10 10-5 4V3l5 4L7 17'],
+    ['arrow-right', 'Arrow right', 'ui', 'M4 12h16M14 6l6 6-6 6'],
+    ['arrow-up-right', 'Arrow up right', 'ui', 'M6 18L18 6M9 6h9v9'],
+    ['chevron-down', 'Chevron down', 'ui', 'M6 9l6 6 6-6'],
+    ['grid', 'Grid', 'ui', 'M4 4h7v7H4zM13 4h7v7h-7zM4 13h7v7H4zM13 13h7v7h-7z'],
+    ['layers', 'Layers', 'ui', 'M12 3l9 5-9 5-9-5zM3 12l9 5 9-5M3 16l9 5 9-5'],
+    ['eye', 'Eye', 'ui', 'M2 12s3.5-6 10-6 10 6 10 6-3.5 6-10 6S2 12 2 12zM12 15a3 3 0 1 0 0-6 3 3 0 0 0 0 6z'],
+    ['sparkles', 'Sparkles', 'ui', 'M12 3l1.8 5.2L19 10l-5.2 1.8L12 17l-1.8-5.2L5 10l5.2-1.8zM19 15l.8 2.2L22 18l-2.2.8L19 21l-.8-2.2L16 18l2.2-.8z'],
+    ['command', 'Command', 'ui', 'M9 6a3 3 0 1 0-3 3h12a3 3 0 1 0-3-3v12a3 3 0 1 0 3-3H6a3 3 0 1 0 3 3z'],
+  ];
+  const IOS_ICONS = [
+    ['ios-phone', 'Phone', 'ios', 'M6 3h4l2 5-3 2a12 12 0 0 0 5 5l2-3 5 2v4a2 2 0 0 1-2 2A16 16 0 0 1 4 5a2 2 0 0 1 2-2z', ['#34c759', '#30d158']],
+    ['ios-messages', 'Messages', 'ios', 'M4 5h16v11H9l-5 4z', ['#34c759', '#30d158']],
+    ['ios-safari', 'Safari', 'ios', 'M12 3a9 9 0 1 0 0 18 9 9 0 0 0 0-18zM16 8l-2.5 5.5L8 16l2.5-5.5z', ['#0a84ff', '#64d2ff']],
+    ['ios-camera', 'Camera', 'ios', 'M3 8h4l2-3h6l2 3h4v11H3zM12 16a3.5 3.5 0 1 0 0-7 3.5 3.5 0 0 0 0 7z', ['#8e8e93', '#3a3a3c']],
+    ['ios-photos', 'Photos', 'ios', 'M4 5h16v14H4zM8 11a1.5 1.5 0 1 0 0-3 1.5 1.5 0 0 0 0 3zM4 16l5-5 4 4 3-3 4 4', ['#ff9f0a', '#ff375f']],
+    ['ios-mail', 'Mail', 'ios', 'M3 6h18v12H3zM3 7l9 6 9-6', ['#0a84ff', '#5ac8fa']],
+    ['ios-calendar', 'Calendar', 'ios', 'M4 6h16v14H4zM8 3v5M16 3v5M4 10h16', ['#ff3b30', '#ff6961']],
+    ['ios-clock', 'Clock', 'ios', 'M12 3a9 9 0 1 0 0 18 9 9 0 0 0 0-18zM12 7v5l3 2', ['#1c1c1e', '#3a3a3c']],
+    ['ios-weather', 'Weather', 'ios', 'M12 8a4 4 0 1 0 0 8 4 4 0 0 0 0-8zM12 2v2M12 20v2M2 12h2M20 12h2M7 17a4 4 0 0 1 0-8 5.5 5.5 0 0 1 10.5 1A3.5 3.5 0 0 1 17 17z', ['#0a84ff', '#64d2ff']],
+    ['ios-maps', 'Maps', 'ios', 'M9 4L3 6v14l6-2 6 2 6-2V4l-6 2zM9 4v14M15 6v14', ['#30d158', '#0a84ff']],
+    ['ios-music', 'Music', 'ios', 'M9 18V6l10-2v12M9 18a2 2 0 1 1-4 0 2 2 0 0 1 4 0zM19 16a2 2 0 1 1-4 0 2 2 0 0 1 4 0z', ['#ff2d55', '#ff6482']],
+    ['ios-settings', 'Settings', 'ios', 'M12 8.5a3.5 3.5 0 1 0 0 7 3.5 3.5 0 0 0 0-7zM12 2v3M12 19v3M2 12h3M19 12h3M4.9 4.9l2.1 2.1M17 17l2.1 2.1M19.1 4.9L17 7M7 17l-2.1 2.1', ['#8e8e93', '#636366']],
+    ['ios-wallet', 'Wallet', 'ios', 'M3 7h18v12H3zM3 10h18M16 14h3', ['#1c1c1e', '#48484a']],
+    ['ios-notes', 'Notes', 'ios', 'M6 3h9l5 5v13H6zM15 3v5h5M9 12h8M9 16h6', ['#ffd60a', '#ff9f0a']],
+    ['ios-reminders', 'Reminders', 'ios', 'M4 6h4v4H4zM10 8h10M4 14h4v4H4zM10 16h10', ['#ff9f0a', '#ffd60a']],
+    ['ios-health', 'Health', 'ios', 'M20.8 5.6a5 5 0 0 0-7.1 0L12 7.3l-1.7-1.7a5 5 0 0 0-7.1 7.1L12 21l8.8-8.3a5 5 0 0 0 0-7.1zM6 12h4l2-3 2 6 2-3h2', ['#ff375f', '#ff6961']],
+    ['ios-files', 'Files', 'ios', 'M3 6h7l2 3h9v11H3z', ['#0a84ff', '#5ac8fa']],
+    ['ios-appstore', 'App Store', 'ios', 'M12 3l9 16H3zM8 15h8', ['#0a84ff', '#64d2ff']],
+    ['ios-faceid', 'Face ID', 'ios', 'M4 8V4h4M16 4h4v4M20 16v4h-4M8 20H4v-4M9 10h.01M15 10h.01M9 15c2 1.5 4 1.5 6 0', ['#0a84ff', '#5ac8fa']],
+  ];
+  const ICONS = [
+    ...LINE_ICONS.map(([id, name, cat, path]) => ({ id, name, cat, path, tile: null })),
+    ...IOS_ICONS.map(([id, name, cat, path, tile]) => ({ id, name, cat, path, tile })),
+  ];
+  const ICON_MAP = Object.fromEntries(ICONS.map((icon) => [icon.id, icon]));
+  for (const icon of ICONS) icon.p = new Path2D(icon.path);
   const state = {
     board: { ...DEFAULT },
     zoom: 1,
@@ -684,16 +796,50 @@ cargo run --release -p figcraft-server</code></pre>
     for (let y = g; y < state.board.h; y += g) { ctx.beginPath(); ctx.moveTo(0, y); ctx.lineTo(state.board.w, y); ctx.stroke(); }
     ctx.restore();
   }
+  function roundRectOn(g, x, y, w, h, radius) {
+    const r = Math.min(radius || 0, w / 2, h / 2);
+    g.beginPath();
+    if (!r) { g.rect(x, y, w, h); return; }
+    g.moveTo(x + r, y);
+    g.arcTo(x + w, y, x + w, y + h, r);
+    g.arcTo(x + w, y + h, x, y + h, r);
+    g.arcTo(x, y + h, x, y, r);
+    g.arcTo(x, y, x + w, y, r);
+    g.closePath();
+  }
   function roundRect(l) {
-    const r = Math.min(l.radius || 0, l.w / 2, l.h / 2);
-    ctx.beginPath();
-    if (!r) { ctx.rect(l.x, l.y, l.w, l.h); return; }
-    ctx.moveTo(l.x + r, l.y);
-    ctx.arcTo(l.x + l.w, l.y, l.x + l.w, l.y + l.h, r);
-    ctx.arcTo(l.x + l.w, l.y + l.h, l.x, l.y + l.h, r);
-    ctx.arcTo(l.x, l.y + l.h, l.x, l.y, r);
-    ctx.arcTo(l.x, l.y, l.x + l.w, l.y, r);
-    ctx.closePath();
+    roundRectOn(ctx, l.x, l.y, l.w, l.h, l.radius || 0);
+  }
+  function drawIconOn(g, l) {
+    const def = ICON_MAP[l.icon];
+    if (!def) return;
+    const s = Math.min(l.w, l.h) / 24;
+    const ox = l.x + (l.w - 24 * s) / 2;
+    const oy = l.y + (l.h - 24 * s) / 2;
+    g.save();
+    if (def.tile) {
+      const grad = g.createLinearGradient(l.x, l.y, l.x + l.w, l.y + l.h);
+      grad.addColorStop(0, def.tile[0]);
+      grad.addColorStop(1, def.tile[1]);
+      g.fillStyle = grad;
+      roundRectOn(g, l.x, l.y, l.w, l.h, Math.min(l.w, l.h) * 0.23);
+      g.fill();
+      g.strokeStyle = 'rgba(255,255,255,.30)';
+      g.lineWidth = Math.max(1, Math.min(l.w, l.h) * 0.012);
+      roundRectOn(g, l.x + 1, l.y + 1, l.w - 2, l.h - 2, Math.min(l.w, l.h) * 0.21);
+      g.stroke();
+      g.translate(ox, oy);
+      g.scale(s, s);
+      g.strokeStyle = '#ffffff';
+      g.lineWidth = 1.9;
+    } else {
+      g.translate(ox, oy);
+      g.scale(s, s);
+      g.strokeStyle = l.color || '#111827';
+      g.lineWidth = 2;
+    }
+    g.stroke(def.p);
+    g.restore();
   }
   let raf = 0;
   function draw() {
@@ -727,6 +873,8 @@ cargo run --release -p figcraft-server</code></pre>
         ctx.fillStyle = l.color;
         roundRect(l);
         ctx.fill();
+      } else if (l.type === 'icon') {
+        drawIconOn(ctx, l);
       } else {
         ctx.fillStyle = l.color;
         ctx.font = `600 ${l.fontSize || 20}px ui-sans-serif`;
@@ -1015,7 +1163,7 @@ cargo run --release -p figcraft-server</code></pre>
       layersEl.innerHTML = '<p class="empty">No layers yet. Pick a tool and click the canvas.</p>';
     } else {
       layersEl.innerHTML = state.layers.slice().reverse().map((l) => {
-        const icon = l.type === 'frame' ? '▭' : l.type === 'text' ? 'T' : '■';
+        const icon = l.type === 'frame' ? '▭' : l.type === 'text' ? 'T' : l.type === 'icon' ? '✦' : '■';
         return `<button class="layer" data-id="${l.id}" draggable="true" aria-pressed="${state.selected && state.selected.id === l.id}">
           <span class="ltype">${icon}</span><span class="lname">${escapeHtml(l.name)}</span>
           <span class="leye" data-eye="${l.id}" title="Hide or show">${l.hidden ? '◌' : '●'}</span>
@@ -1037,20 +1185,24 @@ cargo run --release -p figcraft-server</code></pre>
       propsEl.innerHTML = '<p class="empty">Select a layer to edit its position, size and fill.</p>';
       return;
     }
+    const iconDef = l.type === 'icon' ? ICON_MAP[l.icon] : null;
     const textField = l.type === 'text'
       ? `<label class="wide">Text <input data-prop="text" type="text" value="${escapeAttr(l.text || '')}"></label>
          <label>Font size <input data-prop="fontSize" type="number" min="8" max="96" step="1" value="${l.fontSize || 20}"></label>` : '';
     const radiusField = l.type === 'rect'
       ? `<label>Radius <input data-prop="radius" type="number" min="0" max="200" step="1" value="${l.radius || 0}"></label>` : '';
+    const fillField = iconDef && iconDef.tile ? '' : `<label>Fill <span class="color-field"><input data-prop="color" type="color" value="${l.color || '#2563eb'}"><input data-prop="colorHex" type="text" value="${(l.color || '#2563eb').toUpperCase()}" maxlength="7" spellcheck="false" aria-label="Fill hex colour"></span></label>`;
+    const iconNote = iconDef ? `<p class="empty">Icon: <strong>${escapeHtml(iconDef.name)}</strong> · ${iconDef.tile ? 'iOS glass tile · fixed palette' : 'line · Fill controls the stroke'}</p>` : '';
     propsEl.innerHTML = `<div class="prop-grid">
       <label>X <input data-prop="x" type="number" step="1" value="${Math.round(l.x)}"></label>
       <label>Y <input data-prop="y" type="number" step="1" value="${Math.round(l.y)}"></label>
       <label>W <input data-prop="w" type="number" min="8" step="1" value="${Math.round(l.w)}"></label>
       <label>H <input data-prop="h" type="number" min="8" step="1" value="${Math.round(l.h)}"></label>
-      <label>Fill <span class="color-field"><input data-prop="color" type="color" value="${l.color || '#2563eb'}"><input data-prop="colorHex" type="text" value="${(l.color || '#2563eb').toUpperCase()}" maxlength="7" spellcheck="false" aria-label="Fill hex colour"></span></label>
+      ${fillField}
       ${radiusField}
       <label>Opacity <input data-prop="opacity" type="range" min="0.05" max="1" step="0.05" value="${l.opacity == null ? 1 : l.opacity}"></label>
       ${textField}
+      ${iconNote}
       <div class="prop-row wide">
         <button data-action="front">Bring forward</button>
         <button data-action="back">Send back</button>
@@ -1059,6 +1211,59 @@ cargo run --release -p figcraft-server</code></pre>
       </div>
     </div>`;
   }
+  let iconCat = 'all';
+  let iconQuery = '';
+  const ICON_CATS = [['all', 'All'], ['ui', 'UI'], ['ios', 'iOS'], ['media', 'Media'], ['files', 'Files']];
+  function renderIconCats() {
+    const el = $('#icon-cats');
+    el.innerHTML = ICON_CATS.map(([id, name]) => `<button data-cat="${id}" aria-pressed="${iconCat === id}">${name}</button>`).join('');
+  }
+  function renderIconGrid() {
+    const q = iconQuery.trim().toLowerCase();
+    const list = ICONS.filter((icon) => (iconCat === 'all' || icon.cat === iconCat) && (!q || icon.name.toLowerCase().includes(q) || icon.id.includes(q)));
+    $('#icon-grid').innerHTML = list.map((icon) => {
+      const style = icon.tile ? ` style="background:linear-gradient(135deg,${icon.tile[0]},${icon.tile[1]})"` : '';
+      return `<button class="icon-btn${icon.tile ? ' tile' : ''}" data-icon="${icon.id}" title="${escapeAttr(icon.name)}" aria-label="${escapeAttr(icon.name)}"${style}><svg viewBox="0 0 24 24"><path d="${icon.path}"/></svg></button>`;
+    }).join('');
+    $('#icon-count').textContent = String(list.length);
+  }
+  function addIcon(def) {
+    if (!def) return;
+    snapshot();
+    const size = def.tile ? 96 : 64;
+    const l = { id: state.seq++, type: 'icon', icon: def.id, name: def.name, x: (state.board.w - size) / 2, y: (state.board.h - size) / 2, w: size, h: size, color: state.color, opacity: 1, radius: 0, hidden: false };
+    state.layers.push(l);
+    state.selected = l;
+    draw(); syncPanels(); save();
+    hint.textContent = `${def.name} added. Drag to place it.`;
+  }
+  $('#icon-cats').addEventListener('click', (e) => {
+    const b = e.target.closest('[data-cat]');
+    if (!b) return;
+    iconCat = b.dataset.cat;
+    renderIconCats(); renderIconGrid();
+  });
+  $('#icon-search').addEventListener('input', (e) => { iconQuery = e.target.value; renderIconGrid(); });
+  $('#icon-search').addEventListener('keydown', (e) => {
+    if (e.key === 'Escape') { e.preventDefault(); $('#icon-drawer').hidden = true; }
+    if (e.key === 'Enter') {
+      const first = $('#icon-grid [data-icon]');
+      if (first) addIcon(ICON_MAP[first.dataset.icon]);
+    }
+  });
+  $('#icon-grid').addEventListener('click', (e) => {
+    const b = e.target.closest('[data-icon]');
+    if (b) addIcon(ICON_MAP[b.dataset.icon]);
+  });
+  $('#icons-btn').addEventListener('click', () => {
+    $('#icon-drawer').hidden = false;
+    $('#icon-search').focus();
+  });
+  $('#icon-close').addEventListener('click', () => { $('#icon-drawer').hidden = true; });
+  $('#icon-drawer').addEventListener('click', (e) => { if (e.target === $('#icon-drawer')) $('#icon-drawer').hidden = true; });
+  renderIconCats();
+  renderIconGrid();
+
   layersEl.addEventListener('click', (e) => {
     const eye = e.target.closest('[data-eye]');
     if (eye) {
@@ -1253,6 +1458,8 @@ cargo run --release -p figcraft-server</code></pre>
         g.arcTo(l.x + l.w, l.y + l.h, l.x, l.y + l.h, r);
         g.arcTo(l.x, l.y + l.h, l.x, l.y, r);
         g.arcTo(l.x, l.y, l.x + l.w, l.y, r); g.closePath(); g.fill();
+      } else if (l.type === 'icon') {
+        drawIconOn(g, l);
       } else {
         g.fillStyle = l.color; g.font = `600 ${l.fontSize || 20}px ui-sans-serif`;
         g.textBaseline = 'top'; g.fillText(l.text || 'Text', l.x, l.y);
@@ -1278,6 +1485,18 @@ cargo run --release -p figcraft-server</code></pre>
         parts.push(`<g opacity="${opacity}"><rect x="${l.x}" y="${l.y}" width="${l.w}" height="${l.h}" fill="rgba(37,99,235,.04)" stroke="#2563eb" stroke-dasharray="6 4"/><text x="${l.x + 6}" y="${l.y + 15}" fill="#2563eb" font-family="ui-sans-serif, system-ui, sans-serif" font-size="12">${esc(l.name)}</text></g>`);
       } else if (l.type === 'rect') {
         parts.push(`<rect x="${l.x}" y="${l.y}" width="${l.w}" height="${l.h}" rx="${Math.min(l.radius || 0, l.w / 2, l.h / 2)}" fill="${esc(l.color)}" opacity="${opacity}"/>`);
+      } else if (l.type === 'icon') {
+        const def = ICON_MAP[l.icon];
+        if (!def) continue;
+        const s = Math.min(l.w, l.h) / 24;
+        const ox = l.x + (l.w - 24 * s) / 2;
+        const oy = l.y + (l.h - 24 * s) / 2;
+        if (def.tile) {
+          const gid = `g${l.id}`;
+          parts.push(`<g opacity="${opacity}"><defs><linearGradient id="${gid}" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="${def.tile[0]}"/><stop offset="1" stop-color="${def.tile[1]}"/></linearGradient></defs><rect x="${l.x}" y="${l.y}" width="${l.w}" height="${l.h}" rx="${Math.min(l.w, l.h) * 0.23}" fill="url(#${gid})"/><g transform="translate(${ox} ${oy}) scale(${s})" fill="none" stroke="#fff" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="${esc(def.path)}"/></g></g>`);
+        } else {
+          parts.push(`<g opacity="${opacity}" transform="translate(${ox} ${oy}) scale(${s})" fill="none" stroke="${esc(l.color)}" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="${esc(def.path)}"/></g>`);
+        }
       } else {
         parts.push(`<text x="${l.x}" y="${l.y}" fill="${esc(l.color)}" opacity="${opacity}" font-family="ui-sans-serif, system-ui, sans-serif" font-size="${l.fontSize || 20}" font-weight="600" dominant-baseline="hanging">${esc(l.text || 'Text')}</text>`);
       }
@@ -1358,6 +1577,7 @@ cargo run --release -p figcraft-server</code></pre>
     if (e.key === '?') { e.preventDefault(); showShortcuts(); return; }
     if (e.key === 'Escape') {
       if (!$('#shortcuts').hidden) hideShortcuts();
+      else if (!$('#icon-drawer').hidden) $('#icon-drawer').hidden = true;
       else { state.selected = null; draw(); syncPanels(); }
       return;
     }
