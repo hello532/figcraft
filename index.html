@@ -9,10 +9,15 @@
 <meta name="author" content="FigCraft Guide">
 <meta name="theme-color" content="#2563eb">
 <link rel="canonical" href="https://figcraft.rerivo.com/">
+<link rel="alternate" type="text/plain" href="https://figcraft.rerivo.com/llms.txt" title="LLMs.txt">
+<link rel="alternate" type="text/plain" href="https://figcraft.rerivo.com/llms-full.txt" title="LLMs full guide">
 <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='16' fill='%232563eb'/%3E%3Ctext x='32' y='45' font-family='Arial,sans-serif' font-size='38' font-weight='700' fill='white' text-anchor='middle'%3EF%3C/text%3E%3C/svg%3E">
 <meta property="og:title" content="FigCraft — Open-Source Figma Alternative in Rust">
 <meta property="og:description" content="What FigCraft does, where it stands against Figma, the known GitHub issues, how to install it, and a customizable browser canvas studio.">
 <meta property="og:type" content="website">
+<meta property="og:locale" content="en_US">
+<meta property="article:published_time" content="2026-10-19">
+<meta property="article:modified_time" content="2026-10-19">
 <meta property="og:url" content="https://figcraft.rerivo.com/">
 <meta property="og:image" content="https://figcraft.rerivo.com/og.png">
 <meta property="og:image:width" content="1200">
@@ -122,6 +127,8 @@
   .author-box strong{font-size:14px}
   .author-box p{margin:3px 0 5px;color:var(--muted);font-size:13px;max-width:75ch}
   .author-box small{color:var(--muted);font-size:11px}
+  .cite-box{display:flex;align-items:center;justify-content:space-between;gap:16px;flex-wrap:wrap;background:var(--surface);border:1px solid var(--border);border-radius:12px;padding:16px 18px;margin-top:16px}
+  .cite-box p{margin:4px 0 0;color:var(--muted);font-size:13px;font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace}
   .intent-grid{grid-template-columns:repeat(3,1fr)}
   .intent-list{list-style:none;padding:0;margin:10px 0 0;display:flex;flex-wrap:wrap;gap:6px}
   .intent-list a{display:inline-block;border:1px solid var(--border);background:var(--bg);color:var(--muted);border-radius:999px;padding:3px 9px;font-size:12px;line-height:1.5}
@@ -285,6 +292,7 @@
     <span>On this page</span>
     <a href="#demo">Studio</a>
     <a href="#what">What it is</a>
+    <a href="#facts">In short</a>
     <a href="#compare">vs Figma</a>
     <a href="#alternatives">Alternatives</a>
     <a href="#search-intent">Search intent</a>
@@ -479,6 +487,23 @@
     </div>
     <p class="note"><strong>Honest status:</strong> FigCraft calls itself early alpha — about 49% of the way to replacing proprietary tools for real work, by its own estimate. The editor works end to end, but expect rough edges, best-effort <code>.fig</code> import, and only a preview of multiplayer. Check the <a href="https://github.com/storytold/figcraft/blob/main/ROADMAP.md" rel="noopener">roadmap</a> before trusting it with a team project.</p>
     <p class="note">This is an independent guide, not the official FigCraft site. The studio above is a small canvas built for this page; the real application is linked above.</p>
+  </section>
+
+  <section id="facts">
+    <h2>FigCraft in short</h2>
+    <p class="sub">The facts an AI answer or a human skimming the page needs first. Every claim links to the repository, release, docs or issue tracker.</p>
+    <div class="grid">
+      <div class="card"><h3>What is FigCraft?</h3><p>An open-source interface design and prototyping app built in Rust, with frames, auto layout, components, vector networks, prototypes and Dev Mode. It runs natively on macOS, Windows, Linux and FreeBSD, and compiles to WebAssembly for the web.</p></div>
+      <div class="card"><h3>Is it free?</h3><p>Yes. Licensed MIT OR Apache-2.0, with no account, telemetry or subscription. The project is early alpha and self-run; the <a href="#get-started">install steps</a> cover desktop and web builds.</p></div>
+      <div class="card"><h3>Does it work offline?</h3><p>Yes. Files are plain <code>.figcraft</code> archives on your disk; nothing leaves the machine unless you share. SVG, PNG, JPG, WebP and PDF export are supported, and <code>.fig</code> import is best effort.</p></div>
+      <div class="card"><h3>How mature is it?</h3><p>v0.7.0 (2026-10-18), early alpha, about 49% parity by the project's own estimate. The editor works end to end, but expect rough edges and only a preview of multiplayer.</p></div>
+      <div class="card"><h3>How does it compare?</h3><p>FigCraft is native, offline-first and inspectable; Figma is the mature cloud incumbent; Penpot is web-first and self-hostable; Graphite targets vector/procedural work. See the <a href="#compare">comparison</a> and <a href="#alternatives">alternatives</a>.</p></div>
+      <div class="card"><h3>What is it best for?</h3><p>Solo designers and developers who want local files, a Rust engine and a command layer for scripting or AI agents. For a mature team cloud workflow today, Figma or Penpot is the safer choice.</p></div>
+    </div>
+    <div class="cite-box">
+      <div><strong>Cite this page</strong><p>FigCraft Guide, “FigCraft: a Figma alternative written in pure Rust,” updated 2026-10-19, https://figcraft.rerivo.com/.</p></div>
+      <button class="btn ghost" id="copy-cite">Copy citation</button>
+    </div>
   </section>
 
   <section id="who">
@@ -702,7 +727,8 @@ cargo run --release -p figcraft-server</code></pre>
 {
   "@context":"https://schema.org",
   "@graph":[
-    {"@type":"WebSite","name":"FigCraft Guide","url":"https://figcraft.rerivo.com/"},
+    {"@type":"WebSite","name":"FigCraft Guide","url":"https://figcraft.rerivo.com/","inLanguage":"en"},
+    {"@type":"Organization","name":"FigCraft Guide","url":"https://figcraft.rerivo.com/","logo":{"@type":"ImageObject","url":"https://figcraft.rerivo.com/og.png","width":1200,"height":630}},
     {"@type":"SoftwareApplication","name":"FigCraft","applicationCategory":"DesignApplication",
      "operatingSystem":"macOS, Windows, Linux, FreeBSD, Web",
      "softwareVersion":"0.7.0",
@@ -725,8 +751,11 @@ cargo run --release -p figcraft-server</code></pre>
     {"@type":"Article","headline":"FigCraft: an open-source Figma alternative written in pure Rust",
      "description":"A guide to FigCraft: what it does, how it compares with Figma, the known GitHub issues, install steps and a customizable browser studio.",
      "datePublished":"2026-10-19","dateModified":"2026-10-19",
-     "author":{"@type":"Organization","name":"FigCraft Guide"},
-     "publisher":{"@type":"Organization","name":"FigCraft Guide"},
+     "author":{"@type":"Organization","name":"FigCraft Guide","url":"https://figcraft.rerivo.com/"},
+     "publisher":{"@type":"Organization","name":"FigCraft Guide","url":"https://figcraft.rerivo.com/","logo":{"@type":"ImageObject","url":"https://figcraft.rerivo.com/og.png","width":1200,"height":630}},
+     "image":{"@type":"ImageObject","url":"https://figcraft.rerivo.com/og.png","width":1200,"height":630},
+     "about":[{"@type":"SoftwareApplication","name":"FigCraft"},{"@type":"SoftwareApplication","name":"Figma"},{"@type":"SoftwareApplication","name":"Penpot"}],
+     "mentions":[{"@type":"SoftwareApplication","name":"Graphite"},{"@type":"SoftwareApplication","name":"Plasmic"}],
      "mainEntityOfPage":{"@type":"WebPage","@id":"https://figcraft.rerivo.com/"}},
     {"@type":"BreadcrumbList","itemListElement":[
       {"@type":"ListItem","position":1,"name":"Home","item":"https://figcraft.rerivo.com/"},
@@ -758,6 +787,9 @@ cargo run --release -p figcraft-server</code></pre>
       {"@type":"Question","name":"Is there a Figma alternative for Linux?","acceptedAnswer":{"@type":"Answer","text":"Yes. FigCraft ships native builds for Linux and FreeBSD as well as macOS and Windows, plus a WebAssembly browser build. Penpot and Graphite are browser-based alternatives."}},
       {"@type":"Question","name":"Is there an open-source Figma alternative with MCP?","acceptedAnswer":{"@type":"Answer","text":"FigCraft exposes an MCP server, a CLI and a JSON control channel over the same 400+ commands as the UI, so an agent can create nodes, bind variables, render and export."}},
       {"@type":"Question","name":"Can I use FigCraft online without installing it?","acceptedAnswer":{"@type":"Answer","text":"The project ships a WebAssembly browser build; the studio on this page is an independent canvas demo, not the official hosted editor. Use the project's current web build for the real app."}},
+      {"@type":"Question","name":"Can I use the exported JSON in another tool?","acceptedAnswer":{"@type":"Answer","text":"The studio's JSON export contains the canvas settings and every layer (type, position, size, colour, radius, opacity, text and font size). It is intentionally simple and is not FigCraft's native .figcraft format."}},
+      {"@type":"Question","name":"Why does FigCraft crash on macOS 27 or M1?","acceptedAnswer":{"@type":"Answer","text":"There is an open launch crash report on macOS 27.0.1 with an uncaught NSException in _NSTouchBarFinderObservation, tracked as GitHub issue 781. Use the latest release and attach the crash log to the issue."}},
+      {"@type":"Question","name":"Why is the FigCraft UI small on a 1440p monitor?","acceptedAnswer":{"@type":"Answer","text":"The interface can feel small on high-DPI 1440p screens, tracked as GitHub issue 540. An interface-size preference is in progress (issue 818); OS display scaling is the current workaround."}},
       {"@type":"Question","name":"Does FigCraft have an iPad or iPhone app?","acceptedAnswer":{"@type":"Answer","text":"No dedicated iOS app is listed. Official platforms are macOS, Windows, Linux, FreeBSD and the web; on iPad or iPhone, try the browser build."}}
     ]}
   ]
@@ -789,6 +821,12 @@ cargo run --release -p figcraft-server</code></pre>
     mobile.hidden = true;
     navToggle.setAttribute('aria-expanded', 'false');
   }));
+  const cite = document.getElementById('copy-cite');
+  if (cite) cite.addEventListener('click', async () => {
+    const text = 'FigCraft Guide, “FigCraft: a Figma alternative written in pure Rust,” updated 2026-10-19, https://figcraft.rerivo.com/.';
+    try { await navigator.clipboard.writeText(text); cite.textContent = 'Copied'; setTimeout(() => { cite.textContent = 'Copy citation'; }, 1600); }
+    catch (_) { cite.textContent = 'Select the text above'; }
+  });
   const links = [...document.querySelectorAll('.jump a')];
   const byId = new Map(links.map((a) => [a.getAttribute('href').slice(1), a]));
   const observer = new IntersectionObserver((entries) => {

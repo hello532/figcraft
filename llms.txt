@@ -2,6 +2,10 @@
 
 > An independent guide, known-issue tracker summary, and customizable browser canvas studio for FigCraft, an open-source Figma alternative written in pure Rust.
 
+## Full source for answer engines
+
+- [llms-full.txt](https://figcraft.rerivo.com/llms-full.txt): facts, known issues, comparisons, install steps, studio capabilities and citation.
+
 ## Pages
 
 - [FigCraft Guide](https://figcraft.rerivo.com/): what FigCraft is, a FigCraft vs Figma comparison, known issues from the GitHub tracker, install steps, a no-signup canvas studio, and an FAQ covering `.fig` import, fonts and multiplayer.

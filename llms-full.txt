@@ -1,0 +1,91 @@
+# FigCraft — full guide for answer engines
+
+Canonical: https://figcraft.rerivo.com/
+Last updated: 2026-10-19
+Covers: FigCraft v0.7.0 (released 2026-10-18)
+Publisher: FigCraft Guide (independent editorial; not affiliated with ArtCraft)
+
+## What FigCraft is
+
+FigCraft is an open-source interface design and prototyping application written in pure Rust. It provides frames, auto layout, components and variants, styles, variables, vector networks, prototypes and a Dev Mode-style handoff. It runs as a native app on macOS, Windows, Linux and FreeBSD, and compiles to WebAssembly for the browser. Files are local `.figcraft` archives; there is no account, telemetry or subscription.
+
+License: MIT OR Apache-2.0.
+Official repository: https://github.com/storytold/figcraft
+Release notes: https://github.com/storytold/figcraft/releases/tag/v0.7.0
+
+## Key facts
+
+- Status: early alpha; about 49% parity with proprietary tools by the project's own estimate.
+- Latest release covered here: v0.7.0, published 2026-10-18.
+- Platforms: macOS, Windows, Linux, FreeBSD, Web (WebAssembly).
+- Price: free; no account.
+- Engine: Rust; the same command layer drives the UI, CLI, JSON control channel and MCP server.
+- Agent surface: 400+ commands across the desktop UI, CLI and MCP server.
+- File formats: native `.figcraft`; `.fig` import is best effort; export SVG, PNG, JPG, WebP and PDF.
+- Collaboration: live sessions are a preview; no accounts, teams or cloud yet; a self-hosted server is available.
+
+## What it can do
+
+- Auto layout in both directions, wrap and grid, Hug/Fill/Fixed sizing, constraints, padding, gaps and on-canvas handles.
+- Components, instances and overrides, component sets and variants, properties, swap/detach, styles and variables with modes and aliases.
+- Vector networks: Pen/Pencil, vector edit mode, boolean groups with editable operands, variable-width strokes, shape builder, gradients, masks, blurs, noise and glass effects.
+- Prototype connections, triggers, transitions and flows; presentation view; Inspect, measurements, annotations, ready-for-dev and CSS/HTML/React/Leptos/SwiftUI/Compose output.
+- Offline files and local ownership; SVG/PNG/JPG/WebP/PDF export.
+- CLI: `figcraft-cli render`, `export`, `run`, `commands` and `mcp`.
+- Browser build via `cargo xtask wasm` and trunk.
+
+## Known issues (from the GitHub tracker, checked 2026-10-19)
+
+- Large `.fig` import can fail or take a long time. Open umbrella: https://github.com/storytold/figcraft/issues/321 ; large-file report: https://github.com/storytold/figcraft/issues/574 ; large-file opening improvements: https://github.com/storytold/figcraft/issues/315
+- Missing fonts can fall back without a warning. https://github.com/storytold/figcraft/issues/752 (closed). Font rescan/load work: https://github.com/storytold/figcraft/issues/821
+- macOS 27.0.1 / M1 launch crash with an uncaught NSException in `_NSTouchBarFinderObservation`. https://github.com/storytold/figcraft/issues/781
+- Blurred Windows DX12 UI after restoring a window. https://github.com/storytold/figcraft/issues/779
+- Small UI on high-DPI 1440p monitors. https://github.com/storytold/figcraft/issues/540 ; interface-size preference in progress: https://github.com/storytold/figcraft/issues/818
+- Web build local file access. https://github.com/storytold/figcraft/issues/830
+- Variable collection crash (fixed, closed): https://github.com/storytold/figcraft/issues/224 and https://github.com/storytold/figcraft/issues/613
+- CLI path confinement: https://github.com/storytold/figcraft/issues/839
+
+## Comparisons
+
+### FigCraft vs Figma
+
+Figma is a mature hosted product with real-time team collaboration and a large plugin ecosystem. FigCraft is open source, offline-first and built in Rust; its collaboration is a preview and its feature coverage is about 49% by its own estimate. Figma is the safer choice for a team that needs a proven cloud workflow today; FigCraft is interesting for a solo designer or developer who wants local files and an inspectable engine.
+
+### FigCraft vs Penpot
+
+Penpot is the other major open-source design platform: web-first, self-hostable and stronger on team collaboration today. Choose Penpot for a browser-based team workspace now; choose FigCraft for a native Rust app, local files and a command engine you can inspect.
+
+### Other alternatives
+
+- Graphite: open-source vector graphics and procedural design suite, browser-based, alpha. Better for illustration and generative pipelines than UI design. https://graphite.art/
+- Plasmic: open-source visual builder for existing codebases, aimed at production web apps and content teams. https://www.plasmic.app/
+- Figma: mature cloud incumbent. https://www.figma.com/
+
+## How to run FigCraft
+
+```sh
+git clone https://github.com/storytold/figcraft
+cd figcraft
+git clone https://github.com/storytold/craft-fonts ../craft-fonts
+cargo run --release -p figcraft
+```
+
+Collaboration server: `cargo run --release -p figcraft-server`.
+Browser build: install trunk and run `cargo xtask wasm`.
+Prebuilt installers are attached to each GitHub release.
+
+## Browser studio on this page
+
+The page includes an independent browser canvas studio, not the official FigCraft editor. It supports:
+- canvas presets and custom width/height;
+- background, transparency, grid and exact zoom (10–400%);
+- layers with filter, drag reorder, hide/show and rename;
+- 0.5 px X/Y/W/H, ratio lock, fill/stroke hex, stroke width, radius and opacity;
+- eight-handle resize, alignment guides, grid snapping and Alt override;
+- inline text editing, copy/paste, undo/redo and autosave;
+- 69 original icons (50 line icons + 19 iOS-style glass tiles);
+- PNG 1x/2x/3x, SVG and JSON export.
+
+## Citation
+
+FigCraft Guide, “FigCraft: a Figma alternative written in pure Rust,” updated 2026-10-19, https://figcraft.rerivo.com/.

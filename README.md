@@ -19,6 +19,14 @@ text/font), copy/paste, undo/redo, autosave, and PNG/SVG/JSON export.
 - Local note: this machine resolves `*.rerivo.com` through a proxy to 198.18.x
   virtual IPs, so a local `curl` may not show the same path as an external client.
 
+## SEO / GEO
+
+- `robots.txt` explicitly allows GPTBot, ChatGPT-User, OAI-SearchBot, ClaudeBot, Claude-Web, PerplexityBot, Google-Extended, Applebot-Extended and CCBot.
+- `llms.txt` is the short source map; `llms-full.txt` is the full answer-engine source with facts, issues, comparisons, install steps and citation.
+- Structured data: WebSite, Organization, SoftwareApplication, WebApplication, Article, BreadcrumbList, two HowTo blocks and a 20-question FAQPage.
+- The page includes a visible Key facts section, a citation box and a Google-autocomplete search-intent hub.
+- `404.html` is a branded fallback; `robots.txt` points to the sitemap; the IndexNow key file is at the repository root for Bing/Yandex submission.
+
 ## Tests
 
 The studio has a 10-round browser test harness (170 checks) that exercises presets,
