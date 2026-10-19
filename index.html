@@ -116,6 +116,18 @@
   .canvas-controls select{padding:6px 8px;border:1px solid var(--border);border-radius:7px;background:var(--surface);color:var(--fg)}
   .canvas-controls input[type=color]{width:34px;height:28px;padding:0;border:1px solid var(--border);border-radius:7px;background:var(--surface);cursor:pointer;box-shadow:inset 0 0 0 1px rgba(0,0,0,.08)}
   .canvas-controls input[type=checkbox]{accent-color:var(--accent)}
+  .tool-options{display:flex;align-items:center;gap:10px;padding:7px 12px;border-bottom:1px solid var(--border);background:color-mix(in srgb,var(--surface) 94%,var(--bg));min-height:44px;overflow-x:auto}
+  .tool-options-label{font-size:11px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--muted);white-space:nowrap}
+  .tool-options-body{display:flex;align-items:center;gap:6px;flex-wrap:nowrap}
+  .tool-options button{border:1px solid var(--border);background:var(--surface);color:var(--fg);border-radius:7px;padding:5px 8px;font-size:12px;cursor:pointer;white-space:nowrap;display:inline-flex;align-items:center;gap:5px}
+  .tool-options button:hover{border-color:var(--accent);color:var(--accent)}
+  .tool-options button svg{width:14px;height:14px;fill:none;stroke:currentColor;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round}
+  .tool-options label{display:flex;align-items:center;gap:4px;font-size:11px;color:var(--muted);white-space:nowrap}
+  .tool-options input[type=number]{width:62px;padding:4px 6px;border:1px solid var(--border);border-radius:6px;background:var(--surface);color:var(--fg);font-size:12px}
+  .tool-options input[type=color]{width:30px;height:26px;padding:1px;border:1px solid var(--border);border-radius:6px;background:var(--surface);cursor:pointer}
+  .tool-options input[type=checkbox]{accent-color:var(--accent)}
+  .tool-options .sep{width:1px;height:20px;background:var(--border);flex:0 0 auto}
+  .hud{position:absolute;right:12px;bottom:12px;z-index:4;pointer-events:none;background:color-mix(in srgb,var(--surface) 92%,transparent);border:1px solid var(--border);border-radius:7px;padding:4px 8px;font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;font-size:11px;color:var(--muted);white-space:nowrap;backdrop-filter:blur(6px)}
   .studio-body{display:grid;grid-template-columns:54px minmax(0,1fr) 288px;min-height:540px;min-width:0;max-width:100%}
   .toolrail{display:flex;flex-direction:column;align-items:center;gap:6px;padding:10px 6px;border-right:1px solid var(--border);background:color-mix(in srgb,var(--surface) 90%,var(--bg))}
   .toolrail button{width:38px;height:38px;border-radius:9px;border:1px solid transparent;background:transparent;color:var(--muted);font-size:16px;cursor:pointer;display:grid;place-items:center}
@@ -297,7 +309,13 @@
               <option value="custom" disabled>Custom</option>
             </select>
           </label>
+          <label>Fine <input id="zoom-value" type="number" min="10" max="400" step="5" value="100" aria-label="Zoom percentage"> %</label>
         </div>
+      </div>
+
+      <div class="tool-options" id="tool-options">
+        <span class="tool-options-label" id="tool-label">Select</span>
+        <div class="tool-options-body" id="tool-options-body"></div>
       </div>
 
       <div class="studio-body">
@@ -316,6 +334,7 @@
           <div class="board-wrap" id="board-wrap">
             <canvas id="canvas" width="720" height="460" aria-label="Customizable design canvas"></canvas>
           </div>
+          <div class="hud" id="hud" aria-live="off"></div>
         </div>
 
         <aside class="inspector">
@@ -483,7 +502,7 @@ cargo run --release -p figcraft-server</code></pre>
     <p class="sub">Three actions are enough to judge whether a design tool fits your hands: create, arrange, export. The studio keeps its state in localStorage, so a refresh does not lose your work.</p>
     <ol class="steps">
       <li><strong>Create.</strong> Pick Frame, Rectangle or Text, then click the canvas. A frame is a screen; a rectangle is a block; text opens an inline editor. The sparkle button opens 69 line icons and iOS-style glass tiles. The canvas can be resized, recoloured, made transparent and re-gridded from the top bar.</li>
-      <li><strong>Arrange.</strong> Drag a layer, or drag one of its eight handles to resize. Snapping aligns to the grid, canvas edges and other layers; hold Alt to disable it and Shift to keep the aspect ratio. Pan with Space+drag; zoom around the pointer with Cmd/Ctrl+wheel.</li>
+      <li><strong>Arrange.</strong> Drag a layer, or drag one of its eight handles to resize. The tool-options bar aligns left/centre/right/top/middle/bottom, centres on the canvas, and offers radius or icon-size presets, Snap and Lock ratio. The inspector accepts 0.5 px X/Y/W/H, exact fill/stroke hex and stroke width; the HUD shows live dimensions and pointer coordinates. Pan with Space+drag; zoom with Cmd/Ctrl+wheel or any exact percentage from 10–400%.</li>
       <li><strong>Export.</strong> Export PNG at 1×/2×/3×, SVG, or a JSON layer tree. Undo/redo covers every edit; copy/paste, duplicate, layer drag-reorder and autosave make it feel like a real editor.</li>
     </ol>
     <details>
@@ -521,6 +540,7 @@ cargo run --release -p figcraft-server</code></pre>
     <details><summary>Does the studio have keyboard shortcuts?</summary><p>Yes: V/F/R/T for tools, Delete to remove, Cmd/Ctrl+Z to undo (Shift for redo), Cmd/Ctrl+D to duplicate, Cmd/Ctrl+C/V to copy and paste, arrows to nudge 1 px (Shift 10 px), Space+drag to pan, and <strong>?</strong> for the full dialog.</p></details>
     <details><summary>Can I export SVG?</summary><p>Yes. The footer exports PNG at 1×/2×/3×, SVG, or JSON. The SVG keeps frames, rectangles, text, icons, radii, colours and opacity; the JSON includes the board settings and every layer.</p></details>
     <details><summary>Does the studio include an icon library?</summary><p>Yes. The sparkle button in the tool rail opens 69 original icons: 50 line icons for UI, media and files, plus 19 iOS-style glass tiles such as Phone, Messages, Safari, Camera, Photos, Mail, Calendar, Clock, Weather, Maps, Music, Settings, Wallet, Notes, Reminders, Health, Files, App Store and Face ID. Search or filter by category; click one to add it to the canvas.</p></details>
+    <details><summary>Does it have precise alignment and numeric controls?</summary><p>Yes. The tool-options bar aligns a layer left, centre, right, top, middle or bottom, or centres it on the canvas. The inspector accepts 0.5 px steps for X, Y, W and H, supports a ratio lock, exact fill/stroke hex values, stroke width, radius and opacity. The HUD shows rounded X/Y/W/H, aspect ratio and the live pointer position; the zoom field accepts any percentage from 10% to 400%.</p></details>
   </section>
 </main>
 
@@ -541,7 +561,7 @@ cargo run --release -p figcraft-server</code></pre>
      "browserRequirements":"Requires JavaScript and a modern browser",
      "isAccessibleForFree":true,
      "offers":{"@type":"Offer","price":"0","priceCurrency":"USD"},
-     "featureList":["custom canvas size","background and transparency","grid and zoom","layers","resize and move","grid and alignment snapping","inline text editing","69-icon library with iOS glass tiles","copy and paste","undo and redo","PNG, SVG and JSON export"]},
+     "featureList":["custom canvas size","background and transparency","grid and zoom","layers","resize and move","grid and alignment snapping","alignment and centre controls","0.5 px numeric position and size","ratio lock","fill and stroke controls","69-icon library with iOS glass tiles","inline text editing","copy and paste","undo and redo","PNG, SVG and JSON export"]},
     {"@type":"HowTo","name":"How to use the FigCraft browser studio",
      "description":"Create, arrange and export a design in the independent FigCraft browser studio.",
      "totalTime":"PT5M",
@@ -580,7 +600,8 @@ cargo run --release -p figcraft-server</code></pre>
       {"@type":"Question","name":"Can I customize the studio canvas?","acceptedAnswer":{"@type":"Answer","text":"Yes. Choose a size preset or a custom width and height, set the background, use a transparent canvas, toggle the grid and set its spacing, and use Fit or 50 to 200 percent zoom."}},
       {"@type":"Question","name":"Does the studio have keyboard shortcuts?","acceptedAnswer":{"@type":"Answer","text":"Yes: V, F, R and T for tools; Delete to remove; Cmd/Ctrl+Z to undo; Cmd/Ctrl+D to duplicate; Cmd/Ctrl+C and V to copy and paste; arrows to nudge; Space+drag to pan; Cmd/Ctrl+wheel to zoom; question mark for the dialog."}},
       {"@type":"Question","name":"Can I export SVG?","acceptedAnswer":{"@type":"Answer","text":"Yes. Export PNG at 1x, 2x or 3x, SVG, or JSON. The SVG keeps frames, rectangles, text, icons, radii, colours and opacity; JSON includes the board settings and every layer."}},
-      {"@type":"Question","name":"Does the studio include an icon library?","acceptedAnswer":{"@type":"Answer","text":"Yes. The sparkle button opens 69 original icons: 50 line icons and 19 iOS-style glass tiles, including Phone, Messages, Safari, Camera, Photos, Mail, Calendar, Weather, Maps, Music, Settings, Wallet, Notes, Reminders, Health, Files, App Store and Face ID."}}
+      {"@type":"Question","name":"Does the studio include an icon library?","acceptedAnswer":{"@type":"Answer","text":"Yes. The sparkle button opens 69 original icons: 50 line icons and 19 iOS-style glass tiles, including Phone, Messages, Safari, Camera, Photos, Mail, Calendar, Weather, Maps, Music, Settings, Wallet, Notes, Reminders, Health, Files, App Store and Face ID."}},
+      {"@type":"Question","name":"Does it have precise alignment and numeric controls?","acceptedAnswer":{"@type":"Answer","text":"Yes. The tool-options bar aligns a layer left, centre, right, top, middle or bottom, or centres it on the canvas. The inspector accepts 0.5 px steps for X, Y, W and H, a ratio lock, exact fill and stroke hex values, stroke width, radius and opacity. The HUD shows X, Y, W, H, aspect ratio and the live pointer position; zoom accepts 10 to 400 percent."}}
     ]}
   ]
 }
@@ -691,6 +712,9 @@ cargo run --release -p figcraft-server</code></pre>
     editing: null,
     pan: null,
     clipboard: null,
+    snap: true,
+    lockRatio: false,
+    pointer: { x: 0, y: 0 },
     seq: 1,
     history: [],
     future: [],
@@ -751,6 +775,23 @@ cargo run --release -p figcraft-server</code></pre>
     draw(); syncPanels(); save(); refreshHistory();
   };
 
+  const round1 = (v) => Math.round(v * 10) / 10;
+  function syncZoomInput() {
+    const input = $('#zoom-value');
+    if (input) input.value = Math.round(state.zoom * 100);
+  }
+  function updateHUD() {
+    const l = state.selected;
+    const p = state.pointer;
+    const parts = [];
+    if (l) {
+      parts.push(`${l.type === 'icon' && ICON_MAP[l.icon] ? ICON_MAP[l.icon].name : l.name}`);
+      parts.push(`x ${round1(l.x)}`, `y ${round1(l.y)}`, `w ${round1(l.w)}`, `h ${round1(l.h)}`);
+      if (l.h) parts.push(`${(l.w / l.h).toFixed(2)}:1`);
+    }
+    if (p) parts.push(`→ ${round1(p.x)}, ${round1(p.y)}`);
+    $('#hud').textContent = parts.join(' · ') || 'Hover the canvas';
+  }
   function boardScale() { return dpr() * state.zoom; }
   function resizeCanvas() {
     const s = boardScale();
@@ -761,6 +802,7 @@ cargo run --release -p figcraft-server</code></pre>
     wrap.style.width = canvas.style.width;
     wrap.style.height = canvas.style.height;
     ctx.setTransform(s, 0, 0, s, 0, 0);
+    syncZoomInput();
     draw();
   }
   function fitZoom() {
@@ -772,9 +814,11 @@ cargo run --release -p figcraft-server</code></pre>
     resizeCanvas();
   }
   function setZoom(value) {
+    if (value === 'custom') return;
     state.fit = value === 'fit';
     if (state.fit) return fitZoom();
-    state.zoom = Number(value) || 1;
+    state.zoom = Math.min(4, Math.max(0.1, Number(value) || 1));
+    $('#zoom').value = [...$('#zoom').options].some((o) => o.value === String(state.zoom)) ? String(state.zoom) : 'custom';
     resizeCanvas();
   }
 
@@ -873,6 +917,12 @@ cargo run --release -p figcraft-server</code></pre>
         ctx.fillStyle = l.color;
         roundRect(l);
         ctx.fill();
+        if ((l.strokeWidth || 0) > 0) {
+          ctx.strokeStyle = l.stroke || '#111827';
+          ctx.lineWidth = l.strokeWidth;
+          roundRect(l);
+          ctx.stroke();
+        }
       } else if (l.type === 'icon') {
         drawIconOn(ctx, l);
       } else {
@@ -988,7 +1038,7 @@ cargo run --release -p figcraft-server</code></pre>
       l = { id, type, name: 'Frame ' + id, x: p.x - 140, y: p.y - 90, w: 280, h: 180, color: '#2563eb', opacity: 1, radius: 0, hidden: false };
     } else {
       snapshot();
-      l = { id, type: 'rect', name: 'Rectangle ' + id, x: p.x - 60, y: p.y - 36, w: 120, h: 72, color: state.color, opacity: 1, radius: 10, hidden: false };
+      l = { id, type: 'rect', name: 'Rectangle ' + id, x: p.x - 60, y: p.y - 36, w: 120, h: 72, color: state.color, stroke: '#111827', strokeWidth: 0, opacity: 1, radius: 10, hidden: false };
     }
     state.layers.push(l);
     state.selected = l;
@@ -1020,16 +1070,18 @@ cargo run --release -p figcraft-server</code></pre>
     draw(); syncPanels();
   });
   canvas.addEventListener('pointermove', (e) => {
+    state.pointer = pointer(e);
+    updateHUD();
     const d = state.drag;
     if (!d) return;
-    const p = pointer(e);
+    const p = state.pointer;
     const dx = p.x - d.start.x, dy = p.y - d.start.y;
     const l = state.selected;
     if (!l) return;
     if (d.mode === 'move') {
       const rawX = Math.max(-l.w, Math.min(state.board.w, d.rect.x + dx));
       const rawY = Math.max(-l.h, Math.min(state.board.h, d.rect.y + dy));
-      const snapped = e.altKey ? { x: rawX, y: rawY, guides: [] } : snapMove(l, rawX, rawY);
+      const snapped = e.altKey || !state.snap ? { x: rawX, y: rawY, guides: [] } : snapMove(l, rawX, rawY);
       l.x = snapped.x;
       l.y = snapped.y;
       state.guides = snapped.guides;
@@ -1040,14 +1092,14 @@ cargo run --release -p figcraft-server</code></pre>
       if (h.includes('s')) hh = Math.max(12, r.h + dy);
       if (h.includes('w')) { const nw = Math.max(12, r.w - dx); x = r.x + (r.w - nw); w = nw; }
       if (h.includes('n')) { const nh = Math.max(12, r.h - dy); y = r.y + (r.h - nh); hh = nh; }
-      if (!e.altKey && !e.shiftKey && state.board.grid && !state.board.alpha) {
+      if (state.snap && !e.altKey && !e.shiftKey && !state.lockRatio && state.board.grid && !state.board.alpha) {
         const st = snapStep();
         w = Math.max(12, Math.round(w / st) * st);
         hh = Math.max(12, Math.round(hh / st) * st);
         if (h.includes('w')) x = r.x + r.w - w;
         if (h.includes('n')) y = r.y + r.h - hh;
       }
-      if (e.shiftKey && h.length === 2 && r.w && r.h) {
+      if ((e.shiftKey || state.lockRatio) && h.length === 2 && r.w && r.h) {
         const ratio = r.w / r.h;
         if (Math.abs(dx) >= Math.abs(dy)) hh = w / ratio; else w = hh * ratio;
         if (h.includes('w')) x = r.x + r.w - w;
@@ -1056,11 +1108,12 @@ cargo run --release -p figcraft-server</code></pre>
       Object.assign(l, { x, y, w, h: hh });
       state.guides = [];
     }
-    draw(); syncPropValues(l);
+    draw(); syncPropValues(l); updateHUD();
   });
   const endDrag = () => { if (state.drag) { state.drag = null; state.guides = []; draw(); save(); syncProps(); } };
   canvas.addEventListener('pointerup', endDrag);
   canvas.addEventListener('pointercancel', endDrag);
+  canvas.addEventListener('pointerleave', () => { state.pointer = null; updateHUD(); });
 
   viewport.addEventListener('pointerdown', (e) => {
     if (!(spaceDown || e.button === 1)) return;
@@ -1171,14 +1224,96 @@ cargo run --release -p figcraft-server</code></pre>
       }).join('');
     }
     syncProps();
+    updateHUD();
+    renderToolOptions();
   }
   function syncPropValues(l) {
     if (!l) return;
     for (const key of ['x', 'y', 'w', 'h']) {
       const input = propsEl.querySelector(`[data-prop="${key}"]`);
-      if (input) input.value = Math.round(l[key]);
+      if (input) input.value = round1(l[key]);
     }
   }
+  const ALIGN_BUTTONS = [
+    ['left', 'Align left', 'M4 4v16M8 7h10M8 12h6M8 17h10'],
+    ['centerX', 'Center horizontally', 'M12 4v16M6 7h12M8 12h8M6 17h12'],
+    ['right', 'Align right', 'M20 4v16M6 7h10M10 12h6M6 17h10'],
+    ['top', 'Align top', 'M4 4h16M7 8v10M12 8v6M17 8v10'],
+    ['middleY', 'Center vertically', 'M4 12h16M7 6v12M12 8v8M17 6v12'],
+    ['bottom', 'Align bottom', 'M4 20h16M7 6v10M12 10v6M17 6v10'],
+  ];
+  function renderToolOptions() {
+    const body = $('#tool-options-body');
+    const label = $('#tool-label');
+    const l = state.selected;
+    const toolNames = { select: 'Select', frame: 'Frame', rect: 'Rectangle', text: 'Text' };
+    label.textContent = l ? 'Selection' : toolNames[state.tool] || 'Select';
+    const parts = [];
+    if (l) {
+      parts.push('<div style="display:flex;gap:3px">' + ALIGN_BUTTONS.map(([mode, title, path]) =>
+        `<button data-align="${mode}" title="${title}" aria-label="${title}"><svg viewBox="0 0 24 24"><path d="${path}"/></svg></button>`).join('') + '</div>');
+      parts.push('<span class="sep"></span>');
+      parts.push('<button data-opt="center" title="Center on canvas">Center</button>');
+      if (l.type === 'rect') {
+        parts.push('<span class="sep"></span>');
+        parts.push('<span style="font-size:11px;color:var(--muted)">Radius</span>');
+        for (const r of [0, 4, 8, 16, 24]) parts.push(`<button data-radius="${r}" title="Radius ${r}">${r}</button>`);
+      }
+      if (l.type === 'text') {
+        parts.push('<span class="sep"></span>');
+        parts.push(`<label>Font <input id="opt-font" type="number" min="8" max="120" step="1" value="${l.fontSize || 20}"></label>`);
+      }
+      if (l.type === 'icon') {
+        parts.push('<span class="sep"></span>');
+        parts.push('<span style="font-size:11px;color:var(--muted)">Size</span>');
+        for (const s of [24, 32, 48, 64, 96]) parts.push(`<button data-size="${s}" title="${s}px">${s}</button>`);
+      }
+      parts.push('<span class="sep"></span>');
+      parts.push(`<label><input id="opt-snap" type="checkbox" ${state.snap ? 'checked' : ''}> Snap</label>`);
+      parts.push(`<label><input id="opt-ratio" type="checkbox" ${state.lockRatio ? 'checked' : ''}> Lock ratio</label>`);
+      parts.push('<span class="sep"></span>');
+      parts.push('<button data-opt="duplicate" title="Duplicate">Duplicate</button>');
+      parts.push('<button data-opt="delete" title="Delete">Delete</button>');
+    } else {
+      parts.push('<span style="font-size:12px;color:var(--muted)">Pick a tool, then click the canvas. Select a layer for alignment and precision controls.</span>');
+      parts.push('<span class="sep"></span>');
+      parts.push(`<label><input id="opt-snap" type="checkbox" ${state.snap ? 'checked' : ''}> Snap</label>`);
+    }
+    body.innerHTML = parts.join('');
+  }
+  function alignSelection(mode) {
+    const l = state.selected;
+    if (!l) return;
+    snapshot();
+    if (mode === 'left') l.x = 0;
+    if (mode === 'right') l.x = state.board.w - l.w;
+    if (mode === 'centerX') l.x = (state.board.w - l.w) / 2;
+    if (mode === 'top') l.y = 0;
+    if (mode === 'bottom') l.y = state.board.h - l.h;
+    if (mode === 'middleY') l.y = (state.board.h - l.h) / 2;
+    if (mode === 'center') { l.x = (state.board.w - l.w) / 2; l.y = (state.board.h - l.h) / 2; }
+    draw(); syncPanels(); save();
+  }
+  $('#tool-options-body').addEventListener('click', (e) => {
+    const b = e.target.closest('button');
+    if (!b) return;
+    if (b.dataset.align) return alignSelection(b.dataset.align);
+    const l = state.selected;
+    if (!l) return;
+    if (b.dataset.radius != null) { snapshot(); l.radius = Number(b.dataset.radius); draw(); syncPanels(); save(); return; }
+    if (b.dataset.size) { snapshot(); l.w = l.h = Number(b.dataset.size); draw(); syncPanels(); save(); return; }
+    if (b.dataset.opt === 'center') return alignSelection('center');
+    if (b.dataset.opt === 'duplicate') return duplicateSelected();
+    if (b.dataset.opt === 'delete') return removeSelected();
+  });
+  $('#tool-options-body').addEventListener('change', (e) => {
+    if (e.target.id === 'opt-snap') { state.snap = e.target.checked; }
+    if (e.target.id === 'opt-ratio') { state.lockRatio = e.target.checked; }
+    if (e.target.id === 'opt-font' && state.selected) {
+      state.selected.fontSize = Math.max(8, Number(e.target.value) || 20);
+      draw(); save(); syncPanels();
+    }
+  });
   function syncProps() {
     const l = state.selected;
     if (!l) {
@@ -1192,13 +1327,16 @@ cargo run --release -p figcraft-server</code></pre>
     const radiusField = l.type === 'rect'
       ? `<label>Radius <input data-prop="radius" type="number" min="0" max="200" step="1" value="${l.radius || 0}"></label>` : '';
     const fillField = iconDef && iconDef.tile ? '' : `<label>Fill <span class="color-field"><input data-prop="color" type="color" value="${l.color || '#2563eb'}"><input data-prop="colorHex" type="text" value="${(l.color || '#2563eb').toUpperCase()}" maxlength="7" spellcheck="false" aria-label="Fill hex colour"></span></label>`;
+    const strokeField = l.type === 'rect' ? `<label>Stroke <span class="color-field"><input data-prop="stroke" type="color" value="${l.stroke || '#111827'}"><input data-prop="strokeHex" type="text" value="${(l.stroke || '#111827').toUpperCase()}" maxlength="7" spellcheck="false" aria-label="Stroke hex colour"></span></label>
+      <label>Stroke px <input data-prop="strokeWidth" type="number" min="0" max="32" step="0.5" value="${l.strokeWidth || 0}"></label>` : '';
     const iconNote = iconDef ? `<p class="empty">Icon: <strong>${escapeHtml(iconDef.name)}</strong> · ${iconDef.tile ? 'iOS glass tile · fixed palette' : 'line · Fill controls the stroke'}</p>` : '';
     propsEl.innerHTML = `<div class="prop-grid">
-      <label>X <input data-prop="x" type="number" step="1" value="${Math.round(l.x)}"></label>
-      <label>Y <input data-prop="y" type="number" step="1" value="${Math.round(l.y)}"></label>
-      <label>W <input data-prop="w" type="number" min="8" step="1" value="${Math.round(l.w)}"></label>
-      <label>H <input data-prop="h" type="number" min="8" step="1" value="${Math.round(l.h)}"></label>
+      <label>X <input data-prop="x" type="number" step="0.5" value="${round1(l.x)}"></label>
+      <label>Y <input data-prop="y" type="number" step="0.5" value="${round1(l.y)}"></label>
+      <label>W <input data-prop="w" type="number" min="8" step="0.5" value="${round1(l.w)}"></label>
+      <label>H <input data-prop="h" type="number" min="8" step="0.5" value="${round1(l.h)}"></label>
       ${fillField}
+      ${strokeField}
       ${radiusField}
       <label>Opacity <input data-prop="opacity" type="range" min="0.05" max="1" step="0.05" value="${l.opacity == null ? 1 : l.opacity}"></label>
       ${textField}
@@ -1321,8 +1459,30 @@ cargo run --release -p figcraft-server</code></pre>
     if (!key) return;
     const v = e.target.value;
     if (key === 'x' || key === 'y') l[key] = Number(v) || 0;
-    else if (key === 'w' || key === 'h') l[key] = Math.max(8, Number(v) || 8);
+    else if (key === 'w' || key === 'h') {
+      const ratio = l.w && l.h ? l.w / l.h : null;
+      l[key] = Math.max(8, Number(v) || 8);
+      if (state.lockRatio && ratio) {
+        if (key === 'w') l.h = Math.max(8, l.w / ratio);
+        else l.w = Math.max(8, l.h * ratio);
+      }
+      syncPropValues(l);
+    }
     else if (key === 'opacity') l.opacity = Number(v);
+    else if (key === 'strokeWidth') l.strokeWidth = Math.max(0, Number(v) || 0);
+    else if (key === 'strokeHex') {
+      if (/^#[0-9a-f]{6}$/i.test(v)) {
+        l.stroke = v.toLowerCase();
+        const picker = propsEl.querySelector('[data-prop="stroke"]');
+        if (picker) picker.value = l.stroke;
+        draw(); updateHUD();
+      }
+      return;
+    } else if (key === 'stroke') {
+      l.stroke = v;
+      const hex = propsEl.querySelector('[data-prop="strokeHex"]');
+      if (hex) hex.value = v.toUpperCase();
+    }
     else if (key === 'fontSize') l.fontSize = Number(v) || 20;
     else if (key === 'radius') l.radius = Math.max(0, Number(v) || 0);
     else if (key === 'text') { l.text = v; l.name = v.slice(0, 24); }
@@ -1331,7 +1491,7 @@ cargo run --release -p figcraft-server</code></pre>
         l.color = v.toLowerCase();
         const picker = propsEl.querySelector('[data-prop="color"]');
         if (picker) picker.value = l.color;
-        draw();
+        draw(); updateHUD();
       }
       return;
     } else if (key === 'color') {
@@ -1339,7 +1499,7 @@ cargo run --release -p figcraft-server</code></pre>
       const hex = propsEl.querySelector('[data-prop="colorHex"]');
       if (hex) hex.value = v.toUpperCase();
     }
-    draw();
+    draw(); updateHUD();
   });
   propsEl.addEventListener('change', (e) => {
     if (!e.target.dataset.prop) return;
@@ -1381,6 +1541,7 @@ cargo run --release -p figcraft-server</code></pre>
     document.querySelectorAll('[data-tool]').forEach((x) => x.setAttribute('aria-pressed', String(x === b)));
     canvas.style.cursor = state.tool === 'select' ? 'default' : 'crosshair';
     hint.textContent = state.tool === 'select' ? 'Drag a layer to move it, or a handle to resize.' : 'Click the canvas to add a ' + state.tool + '.';
+    renderToolOptions();
   }));
   $('#duplicate').addEventListener('click', duplicateSelected);
   $('#delete').addEventListener('click', removeSelected);
@@ -1458,6 +1619,7 @@ cargo run --release -p figcraft-server</code></pre>
         g.arcTo(l.x + l.w, l.y + l.h, l.x, l.y + l.h, r);
         g.arcTo(l.x, l.y + l.h, l.x, l.y, r);
         g.arcTo(l.x, l.y, l.x + l.w, l.y, r); g.closePath(); g.fill();
+        if ((l.strokeWidth || 0) > 0) { g.strokeStyle = l.stroke || '#111827'; g.lineWidth = l.strokeWidth; g.stroke(); }
       } else if (l.type === 'icon') {
         drawIconOn(g, l);
       } else {
@@ -1484,7 +1646,8 @@ cargo run --release -p figcraft-server</code></pre>
       if (l.type === 'frame') {
         parts.push(`<g opacity="${opacity}"><rect x="${l.x}" y="${l.y}" width="${l.w}" height="${l.h}" fill="rgba(37,99,235,.04)" stroke="#2563eb" stroke-dasharray="6 4"/><text x="${l.x + 6}" y="${l.y + 15}" fill="#2563eb" font-family="ui-sans-serif, system-ui, sans-serif" font-size="12">${esc(l.name)}</text></g>`);
       } else if (l.type === 'rect') {
-        parts.push(`<rect x="${l.x}" y="${l.y}" width="${l.w}" height="${l.h}" rx="${Math.min(l.radius || 0, l.w / 2, l.h / 2)}" fill="${esc(l.color)}" opacity="${opacity}"/>`);
+        const stroke = (l.strokeWidth || 0) > 0 ? ` stroke="${esc(l.stroke || '#111827')}" stroke-width="${l.strokeWidth}"` : '';
+        parts.push(`<rect x="${l.x}" y="${l.y}" width="${l.w}" height="${l.h}" rx="${Math.min(l.radius || 0, l.w / 2, l.h / 2)}" fill="${esc(l.color)}"${stroke} opacity="${opacity}"/>`);
       } else if (l.type === 'icon') {
         const def = ICON_MAP[l.icon];
         if (!def) continue;
@@ -1544,6 +1707,11 @@ cargo run --release -p figcraft-server</code></pre>
   $('#grid-on').addEventListener('change', (e) => { state.board.grid = e.target.checked; draw(); save(); });
   $('#grid-size').addEventListener('change', (e) => { state.board.gridSize = Math.max(4, Math.min(200, Number(e.target.value) || 32)); draw(); save(); });
   $('#zoom').addEventListener('change', (e) => setZoom(e.target.value));
+  $('#zoom-value').addEventListener('change', (e) => {
+    const pct = Math.min(400, Math.max(10, Number(e.target.value) || 100));
+    e.target.value = pct;
+    setZoom(pct / 100);
+  });
 
   function pasteClipboard() {
     if (!state.clipboard) return;

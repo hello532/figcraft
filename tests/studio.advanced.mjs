@@ -49,6 +49,21 @@ ws.onopen = async () => {
     p1 = await props();
     check('Shift keeps aspect ratio', Math.abs(p1.w / p1.h - p0.w / p0.h) < 0.02, JSON.stringify([p0, p1]));
 
+    // Tool options: align, ratio lock, stroke
+    await reset(); await addRect();
+    await ev(`document.querySelector('[data-align="left"]').click()`);
+    let aligned = await props();
+    check('align left', aligned.x === 0, JSON.stringify(aligned));
+    await ev(`document.querySelector('[data-opt="center"]').click()`);
+    aligned = await props();
+    check('center on canvas', aligned.x === (720 - aligned.w) / 2, JSON.stringify(aligned));
+    await ev(`(()=>{const r=document.querySelector('#opt-ratio');r.checked=true;r.dispatchEvent(new Event('change',{bubbles:true}));const w=document.querySelector('#props input[data-prop="w"]');w.value='240';w.dispatchEvent(new Event('input',{bubbles:true}));return 1})()`);
+    const ratioProps = await props();
+    check('ratio lock keeps 120:72', Math.abs(ratioProps.h - 144) < 0.6, JSON.stringify(ratioProps));
+    await ev(`(()=>{const sw=document.querySelector('#props input[data-prop="strokeWidth"]');sw.value='4';sw.dispatchEvent(new Event('input',{bubbles:true}));const sh=document.querySelector('#props input[data-prop="strokeHex"]');sh.value='#FF0000';sh.dispatchEvent(new Event('input',{bubbles:true}));window.__svg='';HTMLAnchorElement.prototype.click=function(){if(this.download&&this.download.endsWith('.svg'))fetch(this.href).then(r=>r.text()).then(t=>window.__svg=t)};document.querySelector('#export-svg').click();return 1})()`);
+    await wait(400);
+    check('stroke exported to SVG', await ev(`(window.__svg||'').includes('stroke="#ff0000"')`));
+
     // Copy/paste
     await reset(); await addRect();
     await ev(`document.body.dispatchEvent(new KeyboardEvent('keydown',{key:'c',metaKey:true,bubbles:true}));document.body.dispatchEvent(new KeyboardEvent('keydown',{key:'v',metaKey:true,bubbles:true}));1`);
