@@ -1,7 +1,12 @@
-# figcraft.rerivo.com · D0
+# figcraft.rerivo.com · D0 + browser studio
 
-Single-page D0 for the radar term `figcraft` (2026-10-19). No login, no payment.
-The demo canvas is self-contained; the page is static and has no build step.
+Single-page guide and independent browser studio for the radar term `figcraft`
+(2026-10-19). No login, no payment. Static HTML/CSS/JS, no build step.
+
+The studio includes canvas presets and custom sizes, background/transparency,
+grid and alignment snapping, Fit/zoom/pan, eight-handle resize, inline text
+editing, layers with drag-reorder, properties (X/Y/W/H/fill/hex/radius/opacity/
+text/font), copy/paste, undo/redo, autosave, and PNG/SVG/JSON export.
 
 ## Status (2026-10-19)
 
@@ -25,6 +30,7 @@ python3 -m http.server 8799 --bind 127.0.0.1
 # open http://127.0.0.1:8799/ in the Chromium instance with --remote-debugging-port=9333
 node tests/studio.test.mjs      # 10 rounds, 170 checks
 node tests/studio.edge.mjs      # 8 resize handles, keyboard, rename, custom board
+node tests/studio.advanced.mjs  # 13 checks: inline text, snap/Alt, aspect, copy/paste, drag reorder, SVG, wheel zoom, save
 ```
 
 Environment: `CDP=http://127.0.0.1:9333`, `STUDIO_URL=http://127.0.0.1:8799/`,

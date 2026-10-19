@@ -107,6 +107,9 @@
   .file strong{color:var(--fg)}
   .file .dot{width:8px;height:8px;border-radius:50%;background:var(--ok)}
   .file-sub{font-size:11px;text-transform:uppercase;letter-spacing:.06em}
+  .save-state{font-size:11px;color:var(--muted);border-left:1px solid var(--border);padding-left:8px}
+  .scale-label{display:flex;align-items:center;gap:4px;color:var(--muted);font-size:12px}
+  .scale-label select{border:1px solid var(--border);background:var(--surface);color:var(--fg);border-radius:6px;padding:3px 5px;font-size:12px}
   .canvas-controls{display:flex;align-items:center;gap:8px;flex-wrap:wrap;font-size:12px;color:var(--muted)}
   .canvas-controls label{display:flex;align-items:center;gap:6px;white-space:nowrap}
   .canvas-controls input[type=number]{width:66px;padding:6px 8px;border:1px solid var(--border);border-radius:7px;background:var(--surface);color:var(--fg)}
@@ -119,11 +122,15 @@
   .toolrail button:hover{background:var(--bg);color:var(--fg)}
   .toolrail button[aria-pressed="true"]{background:color-mix(in srgb,var(--accent) 12%,var(--surface));border-color:color-mix(in srgb,var(--accent) 40%,var(--border));color:var(--accent)}
   .rail-sep{width:26px;height:1px;background:var(--border);margin:6px 0}
+  .viewport.pannable{cursor:grab}
+  .viewport.panning{cursor:grabbing}
   .viewport{position:relative;overflow:auto;padding:28px;display:grid;place-items:center;min-width:0;max-width:100%;background:
     radial-gradient(circle at 1px 1px,color-mix(in srgb,var(--fg) 9%,transparent) 1px,transparent 0) 0 0/18px 18px,
     color-mix(in srgb,var(--bg) 75%,var(--surface))}
   .board-wrap{position:relative;flex:0 0 auto;box-shadow:0 2px 6px rgba(0,0,0,.08),0 18px 40px rgba(0,0,0,.10);background:#fff}
   #canvas{display:block;touch-action:none;cursor:crosshair}
+  #canvas.alpha{background-color:#f6f6f3;background-image:linear-gradient(45deg,#e9e9e6 25%,transparent 25%,transparent 75%,#e9e9e6 75%),linear-gradient(45deg,#e9e9e6 25%,transparent 25%,transparent 75%,#e9e9e6 75%);background-size:16px 16px;background-position:0 0,8px 8px}
+  .text-editor{position:absolute;z-index:8;margin:0;padding:0 2px;border:1px solid var(--accent);border-radius:2px;background:var(--surface);outline:none;resize:none;overflow:hidden;font-family:ui-sans-serif,system-ui,sans-serif;font-weight:600;line-height:1.2;box-sizing:border-box}
   .inspector{border-left:1px solid var(--border);display:flex;flex-direction:column;min-width:0;background:var(--surface)}
   .panel{border-bottom:1px solid var(--border);padding:12px 14px;min-height:0;overflow-y:auto;overflow-x:hidden}
   .panel:last-child{border-bottom:0;flex:1}
@@ -137,6 +144,8 @@
   .layer .ltype{width:18px;text-align:center;color:var(--muted);flex:0 0 auto}
   .layer .lname{flex:1;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
   .layer .leye{border:0;background:transparent;color:var(--muted);cursor:pointer;padding:2px 4px;font-size:13px}
+  .layer.dragging{opacity:.4}
+  .layer.drag-over{outline:1px dashed var(--accent);outline-offset:-1px}
   .empty{margin:4px 0 8px;color:var(--muted);font-size:12px;line-height:1.45}
   .props{display:flex;flex-direction:column;gap:10px;min-width:0;overflow-x:hidden}
   .prop-grid{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:8px;min-width:0}
@@ -144,6 +153,9 @@
   .prop-grid label.wide{grid-column:1/-1}
   .prop-grid input,.prop-grid select{width:100%;padding:6px 8px;border:1px solid var(--border);border-radius:7px;background:var(--surface);color:var(--fg);font-size:12px}
   .prop-grid input[type=range]{padding:0;accent-color:var(--accent)}
+  .color-field{display:flex;align-items:center;gap:6px;min-width:0}
+  .color-field input[type=color]{width:40px;height:30px;padding:2px;flex:0 0 auto}
+  .color-field input[data-prop=colorHex]{flex:1;min-width:0;font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;text-transform:uppercase}
   .prop-row{display:flex;gap:6px;flex-wrap:wrap}
   .prop-row button{flex:1;padding:6px 8px;border:1px solid var(--border);border-radius:7px;background:var(--bg);color:var(--fg);font-size:12px;cursor:pointer}
   .prop-row button:hover{border-color:var(--accent);color:var(--accent)}
@@ -152,6 +164,14 @@
   .studio-foot .tool{border:1px solid var(--border);background:var(--surface);color:var(--fg);border-radius:7px;padding:5px 9px;font-size:12px;cursor:pointer}
   .studio-foot .tool:hover{border-color:var(--accent);color:var(--accent)}
   .studio-foot .tool:disabled{opacity:.45;cursor:not-allowed}
+  .shortcuts{position:fixed;inset:0;z-index:100;background:rgba(0,0,0,.45);display:grid;place-items:center;padding:20px}
+  .shortcuts[hidden]{display:none}
+  .shortcuts-card{background:var(--surface);border:1px solid var(--border);border-radius:16px;box-shadow:var(--shadow);max-width:520px;width:100%;padding:22px;max-height:80vh;overflow:auto}
+  .shortcuts-card h3{margin:0 0 12px;font-size:18px}
+  .shortcuts-card dl{display:grid;grid-template-columns:auto 1fr;gap:8px 16px;margin:0;font-size:13px}
+  .shortcuts-card dt{font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;color:var(--accent);white-space:nowrap}
+  .shortcuts-card dd{margin:0;color:var(--muted)}
+  .shortcuts-close{float:right;border:0;background:transparent;color:var(--muted);font-size:20px;cursor:pointer;line-height:1}
   @media (max-width:900px){
     .hero{grid-template-columns:1fr}
     .grid{grid-template-columns:1fr}
@@ -229,7 +249,7 @@
 
     <div class="studio" id="studio">
       <div class="studio-top">
-        <div class="file"><span class="dot"></span><strong>Untitled</strong><span class="file-sub">local · demo</span></div>
+        <div class="file"><span class="dot"></span><strong>Untitled</strong><span class="file-sub">local · demo</span><span class="save-state" id="save-state" aria-live="polite">saved</span></div>
         <div class="canvas-controls">
           <label>Canvas
             <select id="preset">
@@ -257,6 +277,7 @@
               <option value="1.25">125%</option>
               <option value="1.5">150%</option>
               <option value="2">200%</option>
+              <option value="custom" disabled>Custom</option>
             </select>
           </label>
         </div>
@@ -296,11 +317,37 @@
         <div class="foot-actions">
           <button class="tool" id="undo">Undo</button>
           <button class="tool" id="redo">Redo</button>
+          <label class="scale-label">PNG
+            <select id="export-scale"><option value="1">1×</option><option value="2" selected>2×</option><option value="3">3×</option></select>
+          </label>
+          <button class="tool" id="export-svg">Export SVG</button>
           <button class="tool" id="export-json">Export JSON</button>
+          <button class="tool" id="shortcuts-btn" title="Keyboard shortcuts (?)">?</button>
         </div>
       </div>
     </div>
   </section>
+
+  <div class="shortcuts" id="shortcuts" hidden>
+    <div class="shortcuts-card" role="dialog" aria-modal="true" aria-label="Keyboard shortcuts">
+      <button class="shortcuts-close" id="shortcuts-close" aria-label="Close">×</button>
+      <h3>Keyboard shortcuts</h3>
+      <dl>
+        <dt>V / F / R / T</dt><dd>Select · Frame · Rectangle · Text</dd>
+        <dt>Drag</dt><dd>Move a layer; drag a handle to resize</dd>
+        <dt>Alt + drag</dt><dd>Disable grid and guide snapping</dd>
+        <dt>Shift + drag</dt><dd>Keep the aspect ratio while resizing</dd>
+        <dt>⌘/Ctrl + Z</dt><dd>Undo; add Shift for redo</dd>
+        <dt>⌘/Ctrl + D</dt><dd>Duplicate the selected layer</dd>
+        <dt>⌘/Ctrl + C / V</dt><dd>Copy and paste a layer</dd>
+        <dt>Delete</dt><dd>Delete the selected layer</dd>
+        <dt>Arrows</dt><dd>Nudge 1 px; Shift for 10 px</dd>
+        <dt>Space + drag</dt><dd>Pan the canvas</dd>
+        <dt>⌘/Ctrl + wheel</dt><dd>Zoom around the pointer</dd>
+        <dt>?</dt><dd>This dialog</dd>
+      </dl>
+    </div>
+  </div>
 
   <section id="what">
     <h2>What FigCraft actually is</h2>
@@ -404,10 +451,14 @@ cargo run --release -p figcraft-server</code></pre>
     <h2>How the browser studio works</h2>
     <p class="sub">Three actions are enough to judge whether a design tool fits your hands: create, arrange, export. The studio keeps its state in localStorage, so a refresh does not lose your work.</p>
     <ol class="steps">
-      <li><strong>Create.</strong> Pick Frame, Rectangle or Text, then click the canvas. A frame is a screen; a rectangle is a block; text is a label. The canvas can be resized, recoloured and re-gridded from the top bar.</li>
-      <li><strong>Arrange.</strong> Switch to Select and drag a layer, or drag one of its eight handles to resize. The inspector edits X, Y, W, H, fill, radius, opacity, text and font size; layers can be hidden, renamed or deleted.</li>
-      <li><strong>Export.</strong> Export a PNG at 2× or a JSON layer tree. Undo and redo cover every edit; the reset button returns to a clean 720 × 460 canvas.</li>
+      <li><strong>Create.</strong> Pick Frame, Rectangle or Text, then click the canvas. A frame is a screen; a rectangle is a block; text opens an inline editor. The canvas can be resized, recoloured, made transparent and re-gridded from the top bar.</li>
+      <li><strong>Arrange.</strong> Drag a layer, or drag one of its eight handles to resize. Snapping aligns to the grid, canvas edges and other layers; hold Alt to disable it and Shift to keep the aspect ratio. Pan with Space+drag; zoom around the pointer with Cmd/Ctrl+wheel.</li>
+      <li><strong>Export.</strong> Export PNG at 1×/2×/3×, SVG, or a JSON layer tree. Undo/redo covers every edit; copy/paste, duplicate, layer drag-reorder and autosave make it feel like a real editor.</li>
     </ol>
+    <details>
+      <summary>Keyboard shortcuts</summary>
+      <p><strong>V / F / R / T</strong> select, frame, rectangle, text · <strong>Delete</strong> remove · <strong>Cmd/Ctrl+Z</strong> undo, add Shift for redo · <strong>Cmd/Ctrl+D</strong> duplicate · <strong>Cmd/Ctrl+C / V</strong> copy and paste · <strong>Arrows</strong> nudge 1 px, Shift for 10 px · <strong>Space+drag</strong> pan · <strong>Cmd/Ctrl+wheel</strong> zoom · <strong>?</strong> open the shortcut dialog.</p>
+    </details>
   </section>
 
   <section id="guides">
@@ -435,6 +486,9 @@ cargo run --release -p figcraft-server</code></pre>
     <details><summary>Why is my text in the wrong font?</summary><p>If a font is missing, FigCraft can fall back without a warning (<a href="https://github.com/storytold/figcraft/issues/752" rel="noopener">#752</a>, closed). Clone <code>craft-fonts</code> next to the repository and rebuild; font rescan/load work is tracked in <a href="https://github.com/storytold/figcraft/issues/821" rel="noopener">#821</a>.</p></details>
     <details><summary>Why does FigCraft crash on macOS 27 / M1?</summary><p>There is an open launch crash report on macOS 27.0.1 with an uncaught <code>NSException</code> in <code>_NSTouchBarFinderObservation</code> (<a href="https://github.com/storytold/figcraft/issues/781" rel="noopener">#781</a>). Use the latest release, attach the crash log to the issue, and do not assume every Mac is affected.</p></details>
     <details><summary>Why is the UI small on a 1440p monitor?</summary><p>This is tracked in <a href="https://github.com/storytold/figcraft/issues/540" rel="noopener">#540</a>; an interface-size preference is in progress (<a href="https://github.com/storytold/figcraft/issues/818" rel="noopener">#818</a>). Until it ships, OS display scaling is the workaround.</p></details>
+    <details><summary>Can I customize the studio canvas?</summary><p>Yes. Choose a size preset or type a custom width and height (100–2400 px), set any background colour, switch to a transparent canvas, toggle the grid and change its spacing, and use Fit or 50–200% zoom. Cmd/Ctrl+wheel zooms around the pointer.</p></details>
+    <details><summary>Does the studio have keyboard shortcuts?</summary><p>Yes: V/F/R/T for tools, Delete to remove, Cmd/Ctrl+Z to undo (Shift for redo), Cmd/Ctrl+D to duplicate, Cmd/Ctrl+C/V to copy and paste, arrows to nudge 1 px (Shift 10 px), Space+drag to pan, and <strong>?</strong> for the full dialog.</p></details>
+    <details><summary>Can I export SVG?</summary><p>Yes. The footer exports PNG at 1×/2×/3×, SVG, or JSON. The SVG keeps frames, rectangles, text, radii, colours and opacity; the JSON includes the board settings and every layer.</p></details>
   </section>
 </main>
 
@@ -455,7 +509,15 @@ cargo run --release -p figcraft-server</code></pre>
      "browserRequirements":"Requires JavaScript and a modern browser",
      "isAccessibleForFree":true,
      "offers":{"@type":"Offer","price":"0","priceCurrency":"USD"},
-     "featureList":["custom canvas size","background and transparency","grid and zoom","layers","resize and move","undo and redo","PNG and JSON export"]},
+     "featureList":["custom canvas size","background and transparency","grid and zoom","layers","resize and move","grid and alignment snapping","inline text editing","copy and paste","undo and redo","PNG, SVG and JSON export"]},
+    {"@type":"HowTo","name":"How to use the FigCraft browser studio",
+     "description":"Create, arrange and export a design in the independent FigCraft browser studio.",
+     "totalTime":"PT5M",
+     "step":[
+       {"@type":"HowToStep","position":1,"name":"Set the canvas","text":"Choose a size preset or enter custom width and height, then set the background, transparency and grid."},
+       {"@type":"HowToStep","position":2,"name":"Create and arrange","text":"Pick Frame, Rectangle or Text and click the canvas. Drag layers, resize with the eight handles, and edit position, size, fill and text in the inspector."},
+       {"@type":"HowToStep","position":3,"name":"Export","text":"Export PNG at 1x, 2x or 3x, SVG, or JSON. The design is saved in localStorage automatically."}
+     ]},
     {"@type":"Article","headline":"FigCraft: an open-source Figma alternative written in pure Rust",
      "description":"A guide to FigCraft: what it does, how it compares with Figma, the known GitHub issues, install steps and a customizable browser studio.",
      "datePublished":"2026-10-19","dateModified":"2026-10-19",
@@ -482,7 +544,10 @@ cargo run --release -p figcraft-server</code></pre>
       {"@type":"Question","name":"Does FigCraft open Figma .fig files?","acceptedAnswer":{"@type":"Answer","text":"Only best effort. Native files are .figcraft archives; large .fig imports are a known issue tracked in the GitHub repository."}},
       {"@type":"Question","name":"Why does a large .fig import fail?","acceptedAnswer":{"@type":"Answer","text":"Large Figma files are a known import issue. Keep the original, try a smaller page or a fresh export, and check GitHub issues 574 and 321 for the current status."}},
       {"@type":"Question","name":"Why is my text in the wrong font?","acceptedAnswer":{"@type":"Answer","text":"A missing font can fall back without a warning. Clone craft-fonts next to the repository and rebuild; font rescan support is tracked in issue 821."}},
-      {"@type":"Question","name":"Is multiplayer ready for a team?","acceptedAnswer":{"@type":"Answer","text":"Not yet. Live sessions are a preview with no accounts, teams or cloud, and the public server is not end-to-end encrypted."}}
+      {"@type":"Question","name":"Is multiplayer ready for a team?","acceptedAnswer":{"@type":"Answer","text":"Not yet. Live sessions are a preview with no accounts, teams or cloud, and the public server is not end-to-end encrypted."}},
+      {"@type":"Question","name":"Can I customize the studio canvas?","acceptedAnswer":{"@type":"Answer","text":"Yes. Choose a size preset or a custom width and height, set the background, use a transparent canvas, toggle the grid and set its spacing, and use Fit or 50 to 200 percent zoom."}},
+      {"@type":"Question","name":"Does the studio have keyboard shortcuts?","acceptedAnswer":{"@type":"Answer","text":"Yes: V, F, R and T for tools; Delete to remove; Cmd/Ctrl+Z to undo; Cmd/Ctrl+D to duplicate; Cmd/Ctrl+C and V to copy and paste; arrows to nudge; Space+drag to pan; Cmd/Ctrl+wheel to zoom; question mark for the dialog."}},
+      {"@type":"Question","name":"Can I export SVG?","acceptedAnswer":{"@type":"Answer","text":"Yes. Export PNG at 1x, 2x or 3x, SVG, or JSON. The SVG keeps frames, rectangles, text, radii, colours and opacity; JSON includes the board settings and every layer."}}
     ]}
   ]
 }
@@ -510,17 +575,33 @@ cargo run --release -p figcraft-server</code></pre>
     layers: [],
     selected: null,
     drag: null,
+    guides: [],
+    editing: null,
+    pan: null,
+    clipboard: null,
     seq: 1,
     history: [],
     future: [],
   };
   const dpr = () => Math.max(1, Math.min(3, window.devicePixelRatio || 1));
   const clone = (v) => JSON.parse(JSON.stringify(v));
-  const save = () => {
+  let saveTimer = 0;
+  const saveNow = () => {
+    clearTimeout(saveTimer);
+    saveTimer = 0;
     try {
-      localStorage.setItem('figcraft-studio-v2', JSON.stringify({ board: state.board, layers: state.layers, seq: state.seq }));
-    } catch (_) {}
+      localStorage.setItem('figcraft-studio-v2', JSON.stringify({ board: state.board, layers: state.layers, seq: state.seq, v: 3 }));
+      $('#save-state').textContent = 'saved';
+    } catch (_) {
+      $('#save-state').textContent = 'not saved';
+    }
   };
+  const save = () => {
+    $('#save-state').textContent = 'saving…';
+    clearTimeout(saveTimer);
+    saveTimer = setTimeout(saveNow, 250);
+  };
+  window.addEventListener('beforeunload', saveNow);
   const load = () => {
     try {
       const raw = localStorage.getItem('figcraft-studio-v2');
@@ -614,20 +695,21 @@ cargo run --release -p figcraft-server</code></pre>
     ctx.arcTo(l.x, l.y, l.x + l.w, l.y, r);
     ctx.closePath();
   }
+  let raf = 0;
   function draw() {
+    if (raf) return;
+    raf = requestAnimationFrame(() => { raf = 0; render(); });
+  }
+  function render() {
+    canvas.classList.toggle('alpha', !!state.board.alpha);
     ctx.clearRect(0, 0, state.board.w, state.board.h);
-    if (state.board.alpha) {
-      for (let y = 0; y < state.board.h; y += 16) for (let x = 0; x < state.board.w; x += 16) {
-        ctx.fillStyle = ((x / 16 + y / 16) % 2) ? '#e9e9e6' : '#f6f6f3';
-        ctx.fillRect(x, y, 16, 16);
-      }
-    } else {
+    if (!state.board.alpha) {
       ctx.fillStyle = state.board.bg;
       ctx.fillRect(0, 0, state.board.w, state.board.h);
     }
     drawGrid();
     for (const l of state.layers) {
-      if (l.hidden) continue;
+      if (l.hidden || state.editing === l.id) continue;
       ctx.save();
       ctx.globalAlpha = l.opacity == null ? 1 : l.opacity;
       if (l.type === 'frame') {
@@ -652,6 +734,18 @@ cargo run --release -p figcraft-server</code></pre>
         ctx.fillText(l.text || 'Text', l.x, l.y);
         l.w = Math.max(20, ctx.measureText(l.text || 'Text').width);
         l.h = l.fontSize || 20;
+      }
+      ctx.restore();
+    }
+    if (state.guides.length) {
+      ctx.save();
+      ctx.strokeStyle = '#db2777';
+      ctx.lineWidth = 1 / state.zoom;
+      for (const g of state.guides) {
+        ctx.beginPath();
+        if (g.axis === 'x') { ctx.moveTo(g.pos, 0); ctx.lineTo(g.pos, state.board.h); }
+        else { ctx.moveTo(0, g.pos); ctx.lineTo(state.board.w, g.pos); }
+        ctx.stroke();
       }
       ctx.restore();
     }
@@ -704,15 +798,43 @@ cargo run --release -p figcraft-server</code></pre>
     const r = canvas.getBoundingClientRect();
     return { x: (e.clientX - r.left) / state.zoom, y: (e.clientY - r.top) / state.zoom };
   }
+  function snapStep() {
+    return state.board.grid && !state.board.alpha ? Math.max(1, Math.round((state.board.gridSize || 32) / 4)) : 1;
+  }
+  function alignAxis(pos, size, targets, threshold) {
+    const edges = [pos, pos + size / 2, pos + size];
+    for (const t of targets) {
+      for (let i = 0; i < edges.length; i++) {
+        if (Math.abs(edges[i] - t) <= threshold) return { pos: pos + (t - edges[i]), at: t };
+      }
+    }
+    return null;
+  }
+  function snapMove(l, x, y) {
+    const step = snapStep();
+    let nx = Math.round(x / step) * step;
+    let ny = Math.round(y / step) * step;
+    const threshold = 6 / state.zoom;
+    const xs = [0, state.board.w / 2, state.board.w];
+    const ys = [0, state.board.h / 2, state.board.h];
+    for (const o of state.layers) {
+      if (o === l || o.hidden) continue;
+      xs.push(o.x, o.x + o.w / 2, o.x + o.w);
+      ys.push(o.y, o.y + o.h / 2, o.y + o.h);
+    }
+    const gx = alignAxis(nx, l.w, xs, threshold);
+    const gy = alignAxis(ny, l.h, ys, threshold);
+    const guides = [];
+    if (gx) { nx = gx.pos; guides.push({ axis: 'x', pos: gx.at }); }
+    if (gy) { ny = gy.pos; guides.push({ axis: 'y', pos: gy.at }); }
+    return { x: nx, y: ny, guides };
+  }
   function addLayer(type, p) {
     const id = state.seq++;
     let l;
     if (type === 'text') {
-      const answer = prompt('Text', 'Button');
-      if (answer == null) return;
-      const text = answer.trim() || 'Text';
       snapshot();
-      l = { id, type, name: text.slice(0, 24), text, x: p.x, y: p.y, w: Math.max(40, text.length * 10), h: 24, color: darkBoard() ? '#ffffff' : '#111827', fontSize: 20, opacity: 1, radius: 0, hidden: false };
+      l = { id, type, name: 'Text', text: 'Text', x: p.x, y: p.y, w: 64, h: 24, color: darkBoard() ? '#ffffff' : '#111827', fontSize: 20, opacity: 1, radius: 0, hidden: false };
     } else if (type === 'frame') {
       snapshot();
       l = { id, type, name: 'Frame ' + id, x: p.x - 140, y: p.y - 90, w: 280, h: 180, color: '#2563eb', opacity: 1, radius: 0, hidden: false };
@@ -724,8 +846,15 @@ cargo run --release -p figcraft-server</code></pre>
     state.selected = l;
     document.querySelector('[data-tool="select"]').click();
     draw(); syncPanels(); save();
+    if (type === 'text') startTextEdit(l);
   }
+  let spaceDown = false;
+  let studioHover = false;
+  $('#studio').addEventListener('pointerenter', () => { studioHover = true; });
+  $('#studio').addEventListener('pointerleave', () => { studioHover = false; });
   canvas.addEventListener('pointerdown', (e) => {
+    if (spaceDown || e.button === 1) return;
+    if (textEditor) textEditor.finish(false);
     const p = pointer(e);
     if (state.tool !== 'select') { addLayer(state.tool, p); return; }
     const handle = hitHandle(p);
@@ -750,8 +879,12 @@ cargo run --release -p figcraft-server</code></pre>
     const l = state.selected;
     if (!l) return;
     if (d.mode === 'move') {
-      l.x = Math.max(-l.w, Math.min(state.board.w, d.rect.x + dx));
-      l.y = Math.max(-l.h, Math.min(state.board.h, d.rect.y + dy));
+      const rawX = Math.max(-l.w, Math.min(state.board.w, d.rect.x + dx));
+      const rawY = Math.max(-l.h, Math.min(state.board.h, d.rect.y + dy));
+      const snapped = e.altKey ? { x: rawX, y: rawY, guides: [] } : snapMove(l, rawX, rawY);
+      l.x = snapped.x;
+      l.y = snapped.y;
+      state.guides = snapped.guides;
     } else {
       const h = d.handle, r = d.rect;
       let x = r.x, y = r.y, w = r.w, hh = r.h;
@@ -759,24 +892,120 @@ cargo run --release -p figcraft-server</code></pre>
       if (h.includes('s')) hh = Math.max(12, r.h + dy);
       if (h.includes('w')) { const nw = Math.max(12, r.w - dx); x = r.x + (r.w - nw); w = nw; }
       if (h.includes('n')) { const nh = Math.max(12, r.h - dy); y = r.y + (r.h - nh); hh = nh; }
+      if (!e.altKey && !e.shiftKey && state.board.grid && !state.board.alpha) {
+        const st = snapStep();
+        w = Math.max(12, Math.round(w / st) * st);
+        hh = Math.max(12, Math.round(hh / st) * st);
+        if (h.includes('w')) x = r.x + r.w - w;
+        if (h.includes('n')) y = r.y + r.h - hh;
+      }
+      if (e.shiftKey && h.length === 2 && r.w && r.h) {
+        const ratio = r.w / r.h;
+        if (Math.abs(dx) >= Math.abs(dy)) hh = w / ratio; else w = hh * ratio;
+        if (h.includes('w')) x = r.x + r.w - w;
+        if (h.includes('n')) y = r.y + r.h - hh;
+      }
       Object.assign(l, { x, y, w, h: hh });
+      state.guides = [];
     }
-    draw(); syncProps();
+    draw(); syncPropValues(l);
   });
-  const endDrag = () => { if (state.drag) { state.drag = null; save(); } };
+  const endDrag = () => { if (state.drag) { state.drag = null; state.guides = []; draw(); save(); syncProps(); } };
   canvas.addEventListener('pointerup', endDrag);
   canvas.addEventListener('pointercancel', endDrag);
+
+  viewport.addEventListener('pointerdown', (e) => {
+    if (!(spaceDown || e.button === 1)) return;
+    e.preventDefault();
+    state.pan = { x: e.clientX, y: e.clientY, left: viewport.scrollLeft, top: viewport.scrollTop };
+    viewport.setPointerCapture(e.pointerId);
+    viewport.classList.add('panning');
+  });
+  viewport.addEventListener('pointermove', (e) => {
+    if (!state.pan) return;
+    viewport.scrollLeft = state.pan.left - (e.clientX - state.pan.x);
+    viewport.scrollTop = state.pan.top - (e.clientY - state.pan.y);
+  });
+  const endPan = () => { state.pan = null; viewport.classList.remove('panning'); };
+  viewport.addEventListener('pointerup', endPan);
+  viewport.addEventListener('pointercancel', endPan);
+  viewport.addEventListener('wheel', (e) => {
+    if (!(e.ctrlKey || e.metaKey)) return;
+    e.preventDefault();
+    const old = state.zoom;
+    const next = Math.min(4, Math.max(0.1, old * (e.deltaY < 0 ? 1.1 : 0.9)));
+    const rect = viewport.getBoundingClientRect();
+    const px = (e.clientX - rect.left + viewport.scrollLeft) / old;
+    const py = (e.clientY - rect.top + viewport.scrollTop) / old;
+    state.zoom = next;
+    state.fit = false;
+    $('#zoom').value = 'custom';
+    resizeCanvas();
+    viewport.scrollLeft = px * next - (e.clientX - rect.left);
+    viewport.scrollTop = py * next - (e.clientY - rect.top);
+  }, { passive: false });
   canvas.addEventListener('dblclick', (e) => {
     const l = hit(pointer(e));
     if (!l || l.type !== 'text') return;
-    const text = prompt('Edit text', l.text || '');
-    if (text == null) return;
-    snapshot();
-    l.text = text; l.name = text.slice(0, 24); l.w = Math.max(20, text.length * 10);
-    draw(); syncPanels(); save();
+    startTextEdit(l);
   });
 
+  let textEditor = null;
+  function measureText(text, fontSize) {
+    ctx.save();
+    ctx.font = `600 ${fontSize}px ui-sans-serif`;
+    const width = ctx.measureText(text).width;
+    ctx.restore();
+    return width;
+  }
+  function startTextEdit(l) {
+    if (!l || l.type !== 'text') return;
+    if (textEditor) textEditor.finish(false);
+    snapshot();
+    state.selected = l;
+    state.editing = l.id;
+    draw(); syncProps();
+    const ta = document.createElement('textarea');
+    ta.className = 'text-editor';
+    ta.value = l.text || '';
+    ta.setAttribute('aria-label', 'Edit text layer');
+    const z = state.zoom;
+    ta.style.left = l.x * z + 'px';
+    ta.style.top = l.y * z + 'px';
+    ta.style.width = Math.max(80, l.w) * z + 'px';
+    ta.style.height = Math.max(28, l.h) * z + 'px';
+    ta.style.fontSize = (l.fontSize || 20) * z + 'px';
+    ta.style.color = l.color || 'var(--fg)';
+    wrap.appendChild(ta);
+    const finish = (cancel) => {
+      if (!textEditor || textEditor.ta !== ta) return;
+      textEditor = null;
+      ta.remove();
+      if (!cancel) {
+        const text = ta.value.replace(/\s+$/, '').trim() || 'Text';
+        l.text = text;
+        l.name = text.slice(0, 24);
+        l.w = Math.max(20, measureText(text, l.fontSize || 20));
+        l.h = l.fontSize || 20;
+      }
+      state.editing = null;
+      draw(); syncPanels(); save();
+    };
+    textEditor = { ta, l, finish };
+    ta.focus();
+    ta.select();
+    ta.addEventListener('blur', () => finish(false));
+    ta.addEventListener('input', () => {
+      ta.style.width = Math.max(80, ta.scrollWidth) + 'px';
+      ta.style.height = Math.max(28, ta.scrollHeight) + 'px';
+    });
+    ta.addEventListener('keydown', (ev) => {
+      if (ev.key === 'Enter' && !ev.shiftKey) { ev.preventDefault(); finish(false); }
+      else if (ev.key === 'Escape') { ev.preventDefault(); finish(true); }
+    });
+  }
   function selectLayer(id) {
+    if (textEditor) textEditor.finish(false);
     state.selected = state.layers.find((l) => String(l.id) === String(id)) || null;
     draw(); syncPanels();
   }
@@ -787,13 +1016,20 @@ cargo run --release -p figcraft-server</code></pre>
     } else {
       layersEl.innerHTML = state.layers.slice().reverse().map((l) => {
         const icon = l.type === 'frame' ? '▭' : l.type === 'text' ? 'T' : '■';
-        return `<button class="layer" data-id="${l.id}" aria-pressed="${state.selected && state.selected.id === l.id}">
+        return `<button class="layer" data-id="${l.id}" draggable="true" aria-pressed="${state.selected && state.selected.id === l.id}">
           <span class="ltype">${icon}</span><span class="lname">${escapeHtml(l.name)}</span>
           <span class="leye" data-eye="${l.id}" title="Hide or show">${l.hidden ? '◌' : '●'}</span>
         </button>`;
       }).join('');
     }
     syncProps();
+  }
+  function syncPropValues(l) {
+    if (!l) return;
+    for (const key of ['x', 'y', 'w', 'h']) {
+      const input = propsEl.querySelector(`[data-prop="${key}"]`);
+      if (input) input.value = Math.round(l[key]);
+    }
   }
   function syncProps() {
     const l = state.selected;
@@ -811,7 +1047,7 @@ cargo run --release -p figcraft-server</code></pre>
       <label>Y <input data-prop="y" type="number" step="1" value="${Math.round(l.y)}"></label>
       <label>W <input data-prop="w" type="number" min="8" step="1" value="${Math.round(l.w)}"></label>
       <label>H <input data-prop="h" type="number" min="8" step="1" value="${Math.round(l.h)}"></label>
-      <label>Fill <input data-prop="color" type="color" value="${l.color || '#2563eb'}"></label>
+      <label>Fill <span class="color-field"><input data-prop="color" type="color" value="${l.color || '#2563eb'}"><input data-prop="colorHex" type="text" value="${(l.color || '#2563eb').toUpperCase()}" maxlength="7" spellcheck="false" aria-label="Fill hex colour"></span></label>
       ${radiusField}
       <label>Opacity <input data-prop="opacity" type="range" min="0.05" max="1" step="0.05" value="${l.opacity == null ? 1 : l.opacity}"></label>
       ${textField}
@@ -842,6 +1078,37 @@ cargo run --release -p figcraft-server</code></pre>
     if (name == null) return;
     snapshot(); l.name = name.slice(0, 40); draw(); syncPanels(); save();
   });
+  let draggedId = null;
+  layersEl.addEventListener('dragstart', (e) => {
+    const row = e.target.closest('[data-id]');
+    if (!row || e.target.closest('[data-eye]')) { e.preventDefault(); return; }
+    draggedId = row.dataset.id;
+    row.classList.add('dragging');
+    if (e.dataTransfer) e.dataTransfer.effectAllowed = 'move';
+  });
+  layersEl.addEventListener('dragend', () => {
+    draggedId = null;
+    layersEl.querySelectorAll('.layer').forEach((row) => row.classList.remove('dragging', 'drag-over'));
+  });
+  layersEl.addEventListener('dragover', (e) => {
+    if (!draggedId) return;
+    e.preventDefault();
+    const row = e.target.closest('[data-id]');
+    layersEl.querySelectorAll('.layer').forEach((x) => x.classList.toggle('drag-over', x === row && x.dataset.id !== draggedId));
+  });
+  layersEl.addEventListener('drop', (e) => {
+    if (!draggedId) return;
+    e.preventDefault();
+    const row = e.target.closest('[data-id]');
+    if (!row || row.dataset.id === draggedId) return;
+    const from = state.layers.findIndex((l) => String(l.id) === draggedId);
+    if (from < 0) return;
+    snapshot();
+    const [item] = state.layers.splice(from, 1);
+    const at = state.layers.findIndex((l) => String(l.id) === row.dataset.id);
+    state.layers.splice(at < 0 ? state.layers.length : at, 0, item);
+    draw(); syncPanels(); save();
+  });
   propsEl.addEventListener('input', (e) => {
     const l = state.selected;
     if (!l) return;
@@ -854,7 +1121,19 @@ cargo run --release -p figcraft-server</code></pre>
     else if (key === 'fontSize') l.fontSize = Number(v) || 20;
     else if (key === 'radius') l.radius = Math.max(0, Number(v) || 0);
     else if (key === 'text') { l.text = v; l.name = v.slice(0, 24); }
-    else l.color = v;
+    else if (key === 'colorHex') {
+      if (/^#[0-9a-f]{6}$/i.test(v)) {
+        l.color = v.toLowerCase();
+        const picker = propsEl.querySelector('[data-prop="color"]');
+        if (picker) picker.value = l.color;
+        draw();
+      }
+      return;
+    } else if (key === 'color') {
+      l.color = v;
+      const hex = propsEl.querySelector('[data-prop="colorHex"]');
+      if (hex) hex.value = v.toUpperCase();
+    }
     draw();
   });
   propsEl.addEventListener('change', (e) => {
@@ -943,7 +1222,7 @@ cargo run --release -p figcraft-server</code></pre>
     }
   });
   $('#export-png').addEventListener('click', () => {
-    const scale = 2;
+    const scale = Number($('#export-scale').value) || 2;
     const c = document.createElement('canvas');
     c.width = state.board.w * scale;
     c.height = state.board.h * scale;
@@ -988,6 +1267,25 @@ cargo run --release -p figcraft-server</code></pre>
     }, 'image/png');
   });
 
+  $('#export-svg').addEventListener('click', () => {
+    const esc = (s) => String(s).replace(/[&<>"']/g, (c) => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]));
+    const parts = [];
+    if (!state.board.alpha) parts.push(`<rect width="${state.board.w}" height="${state.board.h}" fill="${esc(state.board.bg)}"/>`);
+    for (const l of state.layers) {
+      if (l.hidden) continue;
+      const opacity = l.opacity == null ? 1 : l.opacity;
+      if (l.type === 'frame') {
+        parts.push(`<g opacity="${opacity}"><rect x="${l.x}" y="${l.y}" width="${l.w}" height="${l.h}" fill="rgba(37,99,235,.04)" stroke="#2563eb" stroke-dasharray="6 4"/><text x="${l.x + 6}" y="${l.y + 15}" fill="#2563eb" font-family="ui-sans-serif, system-ui, sans-serif" font-size="12">${esc(l.name)}</text></g>`);
+      } else if (l.type === 'rect') {
+        parts.push(`<rect x="${l.x}" y="${l.y}" width="${l.w}" height="${l.h}" rx="${Math.min(l.radius || 0, l.w / 2, l.h / 2)}" fill="${esc(l.color)}" opacity="${opacity}"/>`);
+      } else {
+        parts.push(`<text x="${l.x}" y="${l.y}" fill="${esc(l.color)}" opacity="${opacity}" font-family="ui-sans-serif, system-ui, sans-serif" font-size="${l.fontSize || 20}" font-weight="600" dominant-baseline="hanging">${esc(l.text || 'Text')}</text>`);
+      }
+    }
+    const svg = `<svg xmlns="http://www.w3.org/2000/svg" width="${state.board.w}" height="${state.board.h}" viewBox="0 0 ${state.board.w} ${state.board.h}">${parts.join('')}</svg>`;
+    download('figcraft-studio.svg', svg, 'image/svg+xml');
+    hint.textContent = 'SVG downloaded.';
+  });
   function download(name, text, type) {
     const blob = new Blob([text], { type });
     const url = URL.createObjectURL(blob);
@@ -1028,12 +1326,54 @@ cargo run --release -p figcraft-server</code></pre>
   $('#grid-size').addEventListener('change', (e) => { state.board.gridSize = Math.max(4, Math.min(200, Number(e.target.value) || 32)); draw(); save(); });
   $('#zoom').addEventListener('change', (e) => setZoom(e.target.value));
 
+  function pasteClipboard() {
+    if (!state.clipboard) return;
+    snapshot();
+    const copy = clone(state.clipboard);
+    copy.id = state.seq++;
+    copy.x += 16;
+    copy.y += 16;
+    copy.name += ' copy';
+    state.layers.push(copy);
+    state.selected = copy;
+    draw(); syncPanels(); save();
+  }
+  function showShortcuts() {
+    $('#shortcuts').hidden = false;
+    $('#shortcuts-close').focus();
+  }
+  function hideShortcuts() {
+    $('#shortcuts').hidden = true;
+  }
+  $('#shortcuts-btn').addEventListener('click', showShortcuts);
+  $('#shortcuts-close').addEventListener('click', hideShortcuts);
+  $('#shortcuts').addEventListener('click', (e) => { if (e.target === $('#shortcuts')) hideShortcuts(); });
+  document.addEventListener('keyup', (e) => {
+    if (e.code === 'Space') { spaceDown = false; viewport.classList.remove('pannable'); }
+  });
   document.addEventListener('keydown', (e) => {
     const tag = (e.target.tagName || '').toLowerCase();
     if (tag === 'input' || tag === 'select' || tag === 'textarea') return;
     const meta = e.metaKey || e.ctrlKey;
+    if (e.key === '?') { e.preventDefault(); showShortcuts(); return; }
+    if (e.key === 'Escape') {
+      if (!$('#shortcuts').hidden) hideShortcuts();
+      else { state.selected = null; draw(); syncPanels(); }
+      return;
+    }
+    if (e.code === 'Space' && !meta && studioHover) {
+      e.preventDefault();
+      spaceDown = true;
+      viewport.classList.add('pannable');
+      return;
+    }
     if (meta && e.key.toLowerCase() === 'z') { e.preventDefault(); e.shiftKey ? redo() : undo(); return; }
     if (meta && e.key.toLowerCase() === 'd') { e.preventDefault(); duplicateSelected(); return; }
+    if (meta && e.key.toLowerCase() === 'c') {
+      if (state.selected) { state.clipboard = clone(state.selected); hint.textContent = 'Layer copied. Paste with Cmd/Ctrl+V.'; }
+      return;
+    }
+    if (meta && e.key.toLowerCase() === 'v') { e.preventDefault(); pasteClipboard(); return; }
     if (e.key === 'Delete' || e.key === 'Backspace') { e.preventDefault(); removeSelected(); return; }
     const map = { v: 'select', f: 'frame', r: 'rect', t: 'text' };
     if (!meta && map[e.key.toLowerCase()]) {
