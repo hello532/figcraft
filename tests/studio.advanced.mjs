@@ -49,6 +49,14 @@ ws.onopen = async () => {
     p1 = await props();
     check('Shift keeps aspect ratio', Math.abs(p1.w / p1.h - p0.w / p0.h) < 0.02, JSON.stringify([p0, p1]));
 
+    // Layer filter + zoom to selection
+    await reset(); await addRect(160, 120); await addRect(340, 250);
+    await ev(`(()=>{const q=document.querySelector('#layer-search');q.value='Rectangle 2';q.dispatchEvent(new Event('input',{bubbles:true}));return 1})()`);
+    check('layer filter narrows list', await ev(`document.querySelectorAll('.layer').length===1 && document.querySelector('#layer-count').textContent==='1/2'`));
+    await ev(`(()=>{const q=document.querySelector('#layer-search');q.value='';q.dispatchEvent(new Event('input',{bubbles:true}));return 1})()`);
+    await ev(`document.querySelector('[data-opt="zoomSelection"]').click()`); await wait(200);
+    check('zoom to selection', await ev(`document.querySelector('#zoom').value==='custom'`));
+
     // Tool options: align, ratio lock, stroke
     await reset(); await addRect();
     await ev(`document.querySelector('[data-align="left"]').click()`);
@@ -87,6 +95,13 @@ ws.onopen = async () => {
     await ev(`(()=>{window.__svg='';HTMLAnchorElement.prototype.click=function(){if(this.download&&this.download.endsWith('.svg'))fetch(this.href).then(r=>r.text()).then(t=>window.__svg=t)};document.querySelector('#export-svg').click();return 1})()`);
     await wait(400);
     check('SVG includes icon gradient', await ev(`(window.__svg||'').includes('linearGradient') && (window.__svg||'').includes('<path')`));
+
+    // Page chrome: jump links + theme toggle
+    check('jump nav present', await ev(`document.querySelectorAll('#jump a').length>=7`));
+    const beforeTheme = await ev(`document.documentElement.dataset.theme || 'auto'`);
+    await ev(`document.querySelector('#theme-toggle').click()`); await wait(100);
+    const afterTheme = await ev(`document.documentElement.dataset.theme`);
+    check('theme toggle switches', afterTheme && afterTheme !== beforeTheme, `${beforeTheme} -> ${afterTheme}`);
 
     // Shortcuts dialog
     await ev(`document.body.dispatchEvent(new KeyboardEvent('keydown',{key:'?',bubbles:true}));1`); await wait(100);

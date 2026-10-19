@@ -30,7 +30,7 @@ python3 -m http.server 8799 --bind 127.0.0.1
 # open http://127.0.0.1:8799/ in the Chromium instance with --remote-debugging-port=9333
 node tests/studio.test.mjs      # 10 rounds, 170 checks
 node tests/studio.edge.mjs      # 8 resize handles, keyboard, rename, custom board
-node tests/studio.advanced.mjs  # 20 checks: inline text, snap/Alt, aspect, copy/paste, drag reorder, icons, align/ratio/stroke, SVG, wheel zoom, save
+node tests/studio.advanced.mjs  # 24 checks: inline text, snap/Alt, aspect, copy/paste, drag reorder, icons, align/ratio/stroke, layer filter, zoom-to, theme, SVG, save
 ```
 
 Environment: `CDP=http://127.0.0.1:9333`, `STUDIO_URL=http://127.0.0.1:8799/`,
