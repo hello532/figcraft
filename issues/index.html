@@ -51,6 +51,7 @@
   .nav{display:flex;align-items:center;justify-content:space-between;gap:16px;height:60px}
   .brand{display:flex;align-items:center;gap:10px;font-weight:700;letter-spacing:-.02em}
   .mark{width:26px;height:26px;border-radius:8px;background:linear-gradient(135deg,var(--accent),#8b5cf6);display:grid;place-items:center;color:#fff;font-size:13px}
+  .mark-img{width:28px;height:28px;border-radius:8px;display:block;flex:0 0 auto}
   .nav nav{display:flex;gap:18px;font-size:14px}
   .nav nav a{color:var(--muted)}
   .nav nav a:hover{color:var(--fg)}
@@ -258,12 +259,13 @@
 <a class="skip" href="#main">Skip to content</a>
 <header>
   <div class="wrap nav">
-    <a class="brand" href="/"><span class="mark">F</span> FigCraft Guide</a>
+    <a class="brand" href="/"><img class="mark-img" src="/assets/mark.svg" width="28" height="28" alt="" decoding="async"> FigCraft Guide</a>
     <nav aria-label="Sections">
       <a href="/#what">What it is</a>
-      <a href="/#compare">vs Figma</a>
-      <a href="/#issues">Issues</a>
-      <a href="/#get-started">Install</a>
+      <a href="/vs-figma/">vs Figma</a>
+      <a href="/issues/">Issues</a>
+      <a href="/install/">Install</a>
+      <a href="/alternatives/">Alternatives</a>
       <a href="/#demo">Studio</a>
       <a href="/#faq">FAQ</a>
       <a class="nav-cta" href="/#demo">Open studio</a>
