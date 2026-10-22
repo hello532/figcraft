@@ -4,14 +4,14 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>FigCraft Known Issues: GitHub Tracker, 2026 | FigCraft</title>
-<meta name="description" content="Known FigCraft issues from the GitHub tracker: .fig import failures, fonts, crashes, multiplayer preview. What is broken, what is fixed in 0.7.0, what to do.">
+<meta name="description" content="Known FigCraft issues from the GitHub tracker: .fig import failures, fonts, crashes, multiplayer preview. What is broken, what is fixed in 0.9.0, what to do.">
 <meta name="robots" content="index,follow,max-image-preview:large">
 <meta name="author" content="FigCraft Guide">
 <meta name="theme-color" content="#2563eb">
 <link rel="canonical" href="https://figcraft.rerivo.com/issues/">
 <link rel="alternate" type="text/plain" href="https://figcraft.rerivo.com/llms.txt" title="LLMs.txt">
 <meta property="og:title" content="FigCraft Known Issues: GitHub Tracker, 2026 | FigCraft">
-<meta property="og:description" content="Known FigCraft issues from the GitHub tracker: .fig import failures, fonts, crashes, multiplayer preview. What is broken, what is fixed in 0.7.0, what to do.">
+<meta property="og:description" content="Known FigCraft issues from the GitHub tracker: .fig import failures, fonts, crashes, multiplayer preview. What is broken, what is fixed in 0.9.0, what to do.">
 <meta property="og:type" content="article">
 <meta property="og:locale" content="en_US">
 <meta property="og:url" content="https://figcraft.rerivo.com/issues/">
@@ -20,11 +20,11 @@
 <meta property="og:image:height" content="630">
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:title" content="FigCraft Known Issues: GitHub Tracker, 2026 | FigCraft">
-<meta name="twitter:description" content="Known FigCraft issues from the GitHub tracker: .fig import failures, fonts, crashes, multiplayer preview. What is broken, what is fixed in 0.7.0, what to do.">
+<meta name="twitter:description" content="Known FigCraft issues from the GitHub tracker: .fig import failures, fonts, crashes, multiplayer preview. What is broken, what is fixed in 0.9.0, what to do.">
 <meta name="twitter:image" content="https://figcraft.rerivo.com/og.png">
 <script type="application/ld+json">
 {"@context":"https://schema.org","@graph":[
- {"@type":"WebPage","@id":"https://figcraft.rerivo.com/issues/#page","url":"https://figcraft.rerivo.com/issues/","name":"FigCraft Known Issues: GitHub Tracker, 2026 | FigCraft","description":"Known FigCraft issues from the GitHub tracker: .fig import failures, fonts, crashes, multiplayer preview. What is broken, what is fixed in 0.7.0, what to do.","isPartOf":{"@id":"https://figcraft.rerivo.com/#website"},"inLanguage":"en"},
+ {"@type":"WebPage","@id":"https://figcraft.rerivo.com/issues/#page","url":"https://figcraft.rerivo.com/issues/","name":"FigCraft Known Issues: GitHub Tracker, 2026 | FigCraft","description":"Known FigCraft issues from the GitHub tracker: .fig import failures, fonts, crashes, multiplayer preview. What is broken, what is fixed in 0.9.0, what to do.","isPartOf":{"@id":"https://figcraft.rerivo.com/#website"},"inLanguage":"en"},
  {"@type":"BreadcrumbList","itemListElement":[
    {"@type":"ListItem","position":1,"name":"FigCraft Guide","item":"https://figcraft.rerivo.com/"},
    {"@type":"ListItem","position":2,"name":"Known issues","item":"https://figcraft.rerivo.com/issues/"}]}
@@ -314,18 +314,21 @@
     </div>
     <p class="note">A closed issue is not a guarantee that every build has the fix: check the release date against the issue’s close date. The most useful bug report includes the OS, build, exact steps and a sample file that can be shared.</p>
   </section><section>
-    <h2>What's new in FigCraft 0.7.0</h2>
-    <p class="sub">Released 2026-10-18. These are user-facing fixes from the <a href="https://github.com/storytold/figcraft/releases/tag/v0.7.0" rel="noopener">v0.7.0 release</a> — the kind of polish that matters more than a feature-count headline.</p>
-    <ul class="steps">
-      <li><strong>System theme from the first frame.</strong> The window follows the OS theme immediately instead of flashing the wrong theme (<a href="https://github.com/storytold/figcraft/pull/262" rel="noopener">#262</a>).</li>
-      <li><strong>Slice export preview shows the page under it.</strong> You can see what a slice will capture before exporting (<a href="https://github.com/storytold/figcraft/pull/265" rel="noopener">#265</a>).</li>
-      <li><strong>Double-clicking a page no longer closes the app.</strong> A small interaction bug with a large blast radius (<a href="https://github.com/storytold/figcraft/pull/271" rel="noopener">#271</a>).</li>
-      <li><strong>Gradient icons show their gradient.</strong> The type icons now preview the paint instead of a flat glyph (<a href="https://github.com/storytold/figcraft/pull/275" rel="noopener">#275</a>).</li>
-      <li><strong>Alignment is disabled when it cannot apply.</strong> No more dead buttons for a selection that cannot be aligned (<a href="https://github.com/storytold/figcraft/pull/276" rel="noopener">#276</a>).</li>
-      <li><strong>Community batch: 22 reviewed fixes.</strong> A large batch of small correctness and UI fixes from contributors (<a href="https://github.com/storytold/figcraft/pull/507" rel="noopener">#507</a>).</li>
-    </ul>
-    <p class="note">If you are on an older build, update before reporting one of the issues above. Check the release date against the issue’s close date.</p>
-  </section>
+  <h2>What's new in FigCraft 0.9.0</h2>
+  <p>Released 2026-10-21. Mostly correctness work — parsing, export fidelity and a handful of UI annoyances.
+  The full list is on the <a href="https://github.com/storytold/figcraft/releases/tag/v0.9.0" rel="noopener">v0.9.0 release</a>.</p>
+  <ul>
+    <li><strong>Components and variants from the context menu</strong> — combine layers as variants, add a variant to a lone component (<a href="https://github.com/storytold/figcraft/pull/903" rel="noopener">#903</a>).</li>
+    <li><strong>A document dropped on the canvas opens as a new file</strong>, instead of replacing what you have (<a href="https://github.com/storytold/figcraft/issues/916" rel="noopener">#916</a>).</li>
+    <li><strong>Saved documents show their filename</strong>, so you can see which file you are editing (<a href="https://github.com/storytold/figcraft/pull/935" rel="noopener">#935</a>).</li>
+    <li><strong>SVG export keeps Title Case in place</strong> across mixed-style text runs (<a href="https://github.com/storytold/figcraft/pull/958" rel="noopener">#958</a>).</li>
+    <li><strong>Open subpaths stay open</strong> when reversing subpaths, instead of being closed on you.</li>
+    <li><strong>The pages list keeps the current page in view</strong> instead of scrolling away (<a href="https://github.com/storytold/figcraft/pull/930" rel="noopener">#930</a>).</li>
+    <li><strong>Switching tools dismisses a comment draft</strong>, so no stray comment is left behind (<a href="https://github.com/storytold/figcraft/pull/939" rel="noopener">#939</a>).</li>
+  </ul>
+  <p class="note">FreeBSD <strong>aarch64</strong> is dropped as of v0.9.0 — it could not be built within the 5-hour CI limit.
+  FreeBSD x86_64 and every other platform still ship.</p>
+</section>
 <section>
   <h2>Related pages</h2>
   <ul>

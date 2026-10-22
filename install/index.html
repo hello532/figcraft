@@ -314,18 +314,12 @@ cargo run --release -p figcraft
 cargo run --release -p figcraft-server</code></pre>
     <p class="note">Browser build: install <a href="https://trunkrs.dev/" rel="noopener">trunk</a> and run <code>cargo xtask wasm</code>. FigCraft is early alpha; keep a copy of anything you open and expect some rough edges.</p>
   </section><section>
-    <h2>How the browser studio works</h2>
-    <p class="sub">Three actions are enough to judge whether a design tool fits your hands: create, arrange, export. The studio keeps its state in localStorage, so a refresh does not lose your work.</p>
-    <ol class="steps">
-      <li><strong>Create.</strong> Pick Frame, Rectangle or Text, then click the canvas. A frame is a screen; a rectangle is a block; text opens an inline editor. The sparkle button opens 69 line icons and iOS-style glass tiles. The canvas can be resized, recoloured, made transparent and re-gridded from the top bar.</li>
-      <li><strong>Arrange.</strong> Drag a layer, or drag one of its eight handles to resize. The tool-options bar aligns left/centre/right/top/middle/bottom, centres on the canvas, and offers radius or icon-size presets, Snap and Lock ratio. The inspector accepts 0.5 px X/Y/W/H, exact fill/stroke hex and stroke width; the HUD shows live dimensions and pointer coordinates. Pan with Space+drag; zoom with Cmd/Ctrl+wheel or any exact percentage from 10–400%.</li>
-      <li><strong>Export.</strong> Export PNG at 1×/2×/3×, SVG, or a JSON layer tree. Undo/redo covers every edit; copy/paste, duplicate, layer drag-reorder and autosave make it feel like a real editor.</li>
-    </ol>
-    <details>
-      <summary>Keyboard shortcuts</summary>
-      <p><strong>V / F / R / T</strong> select, frame, rectangle, text · <strong>Delete</strong> remove · <strong>Cmd/Ctrl+Z</strong> undo, add Shift for redo · <strong>Cmd/Ctrl+D</strong> duplicate · <strong>Cmd/Ctrl+C / V</strong> copy and paste · <strong>Arrows</strong> nudge 1 px, Shift for 10 px · <strong>Space+drag</strong> pan · <strong>Cmd/Ctrl+wheel</strong> zoom · <strong>?</strong> open the shortcut dialog.</p>
-    </details>
-  </section><section>
+  <h2>Using FigCraft once it runs</h2>
+  <p>The browser build needs no install at all — open the studio on the <a href="/#demo">main page</a> and
+  draw. For how the editor itself behaves (frames, handles, the icon drawer, keyboard shortcuts), see
+  <a href="/#how">how the studio works</a> on the main guide rather than repeating it here.</p>
+</section>
+<section>
     <h2>FigCraft guides and source</h2>
     <p class="sub">The project moves fast; these are the primary sources to read after this page.</p>
     <div class="grid">
