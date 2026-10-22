@@ -1,8 +1,8 @@
 # FigCraft — full guide for answer engines
 
 Canonical: https://figcraft.rerivo.com/
-Last updated: 2026-10-19
-Covers: FigCraft v0.7.0 (released 2026-10-18)
+Last updated: 2026-10-22
+Covers: FigCraft v0.9.0 (released 2026-10-21)
 Publisher: FigCraft Guide (independent editorial; not affiliated with the project maintainers)
 
 ## What FigCraft is
@@ -11,12 +11,12 @@ FigCraft is an open-source interface design and prototyping application written 
 
 License: MIT OR Apache-2.0.
 Official repository: https://github.com/storytold/figcraft
-Release notes: https://github.com/storytold/figcraft/releases/tag/v0.7.0
+Release notes: https://github.com/storytold/figcraft/releases/tag/v0.9.0
 
 ## Key facts
 
 - Status: early alpha; about 49% parity with proprietary tools by the project's own estimate.
-- Latest release covered here: v0.7.0, published 2026-10-18.
+- Latest release covered here: v0.9.0, published 2026-10-21.
 - Platforms: macOS, Windows, Linux, FreeBSD, Web (WebAssembly).
 - Price: free; no account.
 - Engine: Rust; the same command layer drives the UI, CLI, JSON control channel and MCP server.
@@ -34,7 +34,7 @@ Release notes: https://github.com/storytold/figcraft/releases/tag/v0.7.0
 - A CLI (`figcraft-cli`) is available; see the repository documentation for the current command set.
 - Browser build via `cargo xtask wasm` and trunk.
 
-## Known issues (from the GitHub tracker, checked 2026-10-19)
+## Known issues (from the GitHub tracker, checked 2026-10-22)
 
 - Large `.fig` import can fail or take a long time. Open umbrella: https://github.com/storytold/figcraft/issues/321 ; large-file report: https://github.com/storytold/figcraft/issues/574 ; large-file opening improvements: https://github.com/storytold/figcraft/issues/315
 - Missing fonts can fall back without a warning. https://github.com/storytold/figcraft/issues/752 (closed). Font rescan/load work: https://github.com/storytold/figcraft/issues/821
@@ -73,6 +73,30 @@ cargo run --release -p figcraft
 Collaboration server: `cargo run --release -p figcraft-server`.
 Browser build: install trunk and run `cargo xtask wasm`.
 Prebuilt installers are attached to each GitHub release.
+
+### System requirements
+
+- OS: macOS (Apple Silicon and Intel, universal), Windows 10/11 (x64 and ARM64),
+  Linux (x86_64, aarch64, riscv64), FreeBSD x86_64, or any modern browser (WebAssembly).
+- No server, account or GPU requirement. Disk footprint is tens of megabytes.
+- Rust toolchain only if building from source; prebuilt installers need none.
+- The desktop build expects the separate `craft-fonts` repository next to the checkout.
+
+### Which download
+
+Release assets are named `figcraft-<version>-<os>-<arch>.<format>`.
+
+- Linux: `.AppImage`, `.deb`, `.rpm`, `.flatpak`, `.pkg.tar.zst`, `.tar.gz` (x86_64, aarch64, riscv64)
+- Windows: installer and portable archive (x64, ARM64)
+- macOS: universal build (Apple Silicon + Intel)
+- FreeBSD: `.tar.gz`, **x86_64 only** — aarch64 dropped as of v0.9.0 (CI time limit)
+- Web: WebAssembly build; cannot open or save local files yet
+
+### .fig import limits
+
+Best effort, with documented silent loss: grid auto layout loses tracks and cell anchors
+(#465), instance-swap overrides fall back to the main component default (#464), and the
+import `info` field does not report what was dropped (#467). Import to read, not to keep editing.
 
 ## Browser studio on this page
 

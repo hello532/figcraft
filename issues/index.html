@@ -23,12 +23,7 @@
 <meta name="twitter:description" content="Known FigCraft issues from the GitHub tracker: .fig import failures, fonts, crashes, multiplayer preview. What is broken, what is fixed in 0.9.0, what to do.">
 <meta name="twitter:image" content="https://figcraft.rerivo.com/og.png">
 <script type="application/ld+json">
-{"@context":"https://schema.org","@graph":[
- {"@type":"WebPage","@id":"https://figcraft.rerivo.com/issues/#page","url":"https://figcraft.rerivo.com/issues/","name":"FigCraft Known Issues: GitHub Tracker, 2026 | FigCraft","description":"Known FigCraft issues from the GitHub tracker: .fig import failures, fonts, crashes, multiplayer preview. What is broken, what is fixed in 0.9.0, what to do.","isPartOf":{"@id":"https://figcraft.rerivo.com/#website"},"inLanguage":"en"},
- {"@type":"BreadcrumbList","itemListElement":[
-   {"@type":"ListItem","position":1,"name":"FigCraft Guide","item":"https://figcraft.rerivo.com/"},
-   {"@type":"ListItem","position":2,"name":"Known issues","item":"https://figcraft.rerivo.com/issues/"}]}
- ]}
+{"@context":"https://schema.org","@graph":[{"@type":"WebPage","@id":"https://figcraft.rerivo.com/issues/#page","url":"https://figcraft.rerivo.com/issues/","name":"FigCraft Known Issues: GitHub Tracker, 2026 | FigCraft","description":"Known FigCraft issues from the GitHub tracker: .fig import failures, fonts, crashes, multiplayer preview. What is broken, what is fixed in 0.9.0, what to do.","isPartOf":{"@id":"https://figcraft.rerivo.com/#website"},"inLanguage":"en"},{"@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"FigCraft Guide","item":"https://figcraft.rerivo.com/"},{"@type":"ListItem","position":2,"name":"Known issues","item":"https://figcraft.rerivo.com/issues/"}]},{"@type":"FAQPage","mainEntity":[{"@type":"Question","name":"Why does a large .fig file fail to import in FigCraft?","acceptedAnswer":{"@type":"Answer","text":"Large .fig imports can fail or take a long time. The tracker has an open umbrella for this (#321) and a specific report for large files (#574); opening large .fig files was improved in #315. Keep the original file and try a smaller page or a fresh export."}},{"@type":"Question","name":"Why does FigCraft crash on macOS 27 or Apple Silicon?","acceptedAnswer":{"@type":"Answer","text":"There is an open crash on launch on macOS 27.0.1 with an uncaught NSException in NSTouchBarFinderObservation (#781). Try the latest release first and report your build; do not assume every Mac is affected."}},{"@type":"Question","name":"Why does FigCraft show the wrong font?","acceptedAnswer":{"@type":"Answer","text":"Text in a font you do not have installed renders in another font without a warning (#752, closed). Install the craft-fonts repository next to the app; font rescan and load work is tracked in #821."}},{"@type":"Question","name":"Does FigCraft lose data when importing a .fig file?","acceptedAnswer":{"@type":"Answer","text":"Yes, silently in three documented cases: grid auto layout loses its tracks and cell anchors (#465), instance-swap overrides fall back to the main component default (#464), and the import info field does not list what was skipped (#467)."}},{"@type":"Question","name":"Is FigCraft's multiplayer ready for a team?","acceptedAnswer":{"@type":"Answer","text":"No. Live sessions are a preview: no accounts, no teams, no cloud, and the public server is not end-to-end encrypted. Self-host the server or use local-network sharing for confidential work."}}]}]}
 </script>
 <style>
   :root{
@@ -328,6 +323,16 @@
   </ul>
   <p class="note">FreeBSD <strong>aarch64</strong> is dropped as of v0.9.0 — it could not be built within the 5-hour CI limit.
   FreeBSD x86_64 and every other platform still ship.</p>
+</section>
+<section>
+  <h2>Frequently asked about FigCraft issues</h2>
+  <div class="faq">
+    <details><summary>Why does a large .fig file fail to import in FigCraft?</summary><p>Large .fig imports can fail or take a long time. The tracker has an open umbrella for this (<a href="https://github.com/storytold/figcraft/issues/321" rel="noopener">#321</a>) and a specific report for large files (<a href="https://github.com/storytold/figcraft/issues/574" rel="noopener">#574</a>); opening large .fig files was improved in #315. Keep the original file and try a smaller page or a fresh export.</p></details>
+    <details><summary>Why does FigCraft crash on macOS 27 or Apple Silicon?</summary><p>There is an open crash on launch on macOS 27.0.1 with an uncaught NSException in NSTouchBarFinderObservation (<a href="https://github.com/storytold/figcraft/issues/781" rel="noopener">#781</a>). Try the latest release first and report your build; do not assume every Mac is affected.</p></details>
+    <details><summary>Why does FigCraft show the wrong font?</summary><p>Text in a font you do not have installed renders in another font without a warning (#752, closed). Install the craft-fonts repository next to the app; font rescan and load work is tracked in #821.</p></details>
+    <details><summary>Does FigCraft lose data when importing a .fig file?</summary><p>Yes, silently in three documented cases: grid auto layout loses its tracks and cell anchors (<a href="https://github.com/storytold/figcraft/issues/465" rel="noopener">#465</a>), instance-swap overrides fall back to the main component default (<a href="https://github.com/storytold/figcraft/issues/464" rel="noopener">#464</a>), and the import info field does not list what was skipped (<a href="https://github.com/storytold/figcraft/issues/467" rel="noopener">#467</a>).</p></details>
+    <details><summary>Is FigCraft's multiplayer ready for a team?</summary><p>No. Live sessions are a preview: no accounts, no teams, no cloud, and the public server is not end-to-end encrypted. Self-host the server or use local-network sharing for confidential work.</p></details>
+  </div>
 </section>
 <section>
   <h2>Related pages</h2>

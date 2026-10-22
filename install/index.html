@@ -3,15 +3,15 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>How to Install FigCraft on macOS, Windows, Linux</title>
-<meta name="description" content="Install FigCraft from prebuilt builds or build it from source with a Rust toolchain. macOS, Windows, Linux, FreeBSD and the browser build, step by step.">
+<title>Install FigCraft: Linux, macOS, Windows Guide</title>
+<meta name="description" content="Install FigCraft on Linux (AppImage, .deb, .rpm, flatpak), macOS, Windows or FreeBSD. System requirements, which download to pick, and building from source.">
 <meta name="robots" content="index,follow,max-image-preview:large">
 <meta name="author" content="FigCraft Guide">
 <meta name="theme-color" content="#2563eb">
 <link rel="canonical" href="https://figcraft.rerivo.com/install/">
 <link rel="alternate" type="text/plain" href="https://figcraft.rerivo.com/llms.txt" title="LLMs.txt">
 <meta property="og:title" content="How to Install FigCraft on macOS, Windows, Linux">
-<meta property="og:description" content="Install FigCraft from prebuilt builds or build it from source with a Rust toolchain. macOS, Windows, Linux, FreeBSD and the browser build, step by step.">
+<meta property="og:description" content="Install FigCraft on Linux (AppImage, .deb, .rpm, flatpak), macOS, Windows or FreeBSD. System requirements, which download to pick, and building from source.">
 <meta property="og:type" content="article">
 <meta property="og:locale" content="en_US">
 <meta property="og:url" content="https://figcraft.rerivo.com/install/">
@@ -20,15 +20,10 @@
 <meta property="og:image:height" content="630">
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:title" content="How to Install FigCraft on macOS, Windows, Linux">
-<meta name="twitter:description" content="Install FigCraft from prebuilt builds or build it from source with a Rust toolchain. macOS, Windows, Linux, FreeBSD and the browser build, step by step.">
+<meta name="twitter:description" content="Install FigCraft on Linux (AppImage, .deb, .rpm, flatpak), macOS, Windows or FreeBSD. System requirements, which download to pick, and building from source.">
 <meta name="twitter:image" content="https://figcraft.rerivo.com/og.png">
 <script type="application/ld+json">
-{"@context":"https://schema.org","@graph":[
- {"@type":"WebPage","@id":"https://figcraft.rerivo.com/install/#page","url":"https://figcraft.rerivo.com/install/","name":"How to Install FigCraft on macOS, Windows, Linux","description":"Install FigCraft from prebuilt builds or build it from source with a Rust toolchain. macOS, Windows, Linux, FreeBSD and the browser build, step by step.","isPartOf":{"@id":"https://figcraft.rerivo.com/#website"},"inLanguage":"en"},
- {"@type":"BreadcrumbList","itemListElement":[
-   {"@type":"ListItem","position":1,"name":"FigCraft Guide","item":"https://figcraft.rerivo.com/"},
-   {"@type":"ListItem","position":2,"name":"Install","item":"https://figcraft.rerivo.com/install/"}]}
- ]}
+{"@context":"https://schema.org","@graph":[{"@type":"WebPage","@id":"https://figcraft.rerivo.com/install/#page","url":"https://figcraft.rerivo.com/install/","name":"How to Install FigCraft on macOS, Windows, Linux","description":"Install FigCraft from prebuilt builds or build it from source with a Rust toolchain. macOS, Windows, Linux, FreeBSD and the browser build, step by step.","isPartOf":{"@id":"https://figcraft.rerivo.com/#website"},"inLanguage":"en"},{"@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"FigCraft Guide","item":"https://figcraft.rerivo.com/"},{"@type":"ListItem","position":2,"name":"Install","item":"https://figcraft.rerivo.com/install/"}]},{"@type":"FAQPage","mainEntity":[{"@type":"Question","name":"What are FigCraft's system requirements?","acceptedAnswer":{"@type":"Answer","text":"macOS (Apple Silicon and Intel, universal build), Windows 10/11 (x64 and ARM64), Linux (x86_64, aarch64 or riscv64), FreeBSD x86_64, or any modern browser via the WebAssembly build. No server, account or GPU is required, and the download is in the tens of megabytes. A Rust toolchain is needed only when building from source."}},{"@type":"Question","name":"Is there a FigCraft AppImage for Linux?","acceptedAnswer":{"@type":"Answer","text":"Yes. Each release attaches figcraft-<version>-linux-<arch>.AppImage alongside .deb, .rpm, .flatpak, .pkg.tar.zst and .tar.gz builds. The AppImage is a single file: chmod +x it and run it, with no system-wide install step."}},{"@type":"Question","name":"Does FigCraft support FreeBSD?","acceptedAnswer":{"@type":"Answer","text":"FreeBSD x86_64 is supported and ships as a .tar.gz in each release. FreeBSD aarch64 was dropped as of v0.9.0 because it could not be built within the 5-hour CI limit."}},{"@type":"Question","name":"Do I need Rust to install FigCraft?","acceptedAnswer":{"@type":"Answer","text":"No. Prebuilt installers for every platform are attached to each GitHub release. A Rust toolchain and the separate craft-fonts repository are only required when building the desktop app from source."}},{"@type":"Question","name":"Does the browser build need an install?","acceptedAnswer":{"@type":"Answer","text":"No install at all — open the studio and the editor runs in WebAssembly. The browser build cannot open or save local files yet, so it is for trying the editor rather than real work."}}]}]}
 </script>
 <style>
   :root{
@@ -299,6 +294,53 @@
   <p style="font-size:18px;color:var(--muted);max-width:70ch">Prebuilt installers for every platform, or build from source with Rust. Plus how the browser build differs — it runs the same editor in WebAssembly.</p>
 </section>
 <section>
+  <h2>What are the system requirements for FigCraft?</h2>
+  <p>FigCraft ships as a native desktop binary, so the requirements are modest — there is no server,
+  no account and no GPU-heavy cloud renderer. In practice:</p>
+  <ul>
+    <li><strong>OS:</strong> macOS (Apple Silicon and Intel, universal build), Windows 10/11 (x64 and ARM64),
+    Linux (x86_64, aarch64 and riscv64), FreeBSD x86_64, or any modern browser via the WebAssembly build.</li>
+    <li><strong>Disk:</strong> the release archives are in the tens of megabytes; the browser build downloads
+    the editor once and then serves it from cache.</li>
+    <li><strong>Rust toolchain:</strong> only needed if you build from source. Prebuilt installers do not need it.</li>
+    <li><strong>Fonts:</strong> the desktop build expects the separate <code>craft-fonts</code> repository next to
+    the checkout. Missing fonts fall back silently — see <a href="/issues/">known issues</a>.</li>
+  </ul>
+  <p class="note">FigCraft is early alpha. Keep a copy of any file you open, and check the
+  <a href="https://github.com/storytold/figcraft/releases" rel="noopener">release notes</a> before a new build.</p>
+</section>
+
+<section>
+  <h2>Which download should I pick?</h2>
+  <p>Every release attaches a matrix of builds. Match your OS first, then your package format, then the
+  architecture — the release assets are named <code>figcraft-&lt;version&gt;-&lt;os&gt;-&lt;arch&gt;.&lt;format&gt;</code>,
+  so the filename tells you everything.</p>
+  <div style="overflow-x:auto">
+  <table class="cmp">
+    <thead><tr><th>Platform</th><th>Formats in each release</th><th>Notes</th></tr></thead>
+    <tbody>
+      <tr><td>Linux</td><td><code>.AppImage</code>, <code>.deb</code>, <code>.rpm</code>, <code>.flatpak</code>, <code>.pkg.tar.zst</code>, <code>.tar.gz</code></td><td>Widest choice: pick AppImage for a single file, .deb/.rpm for a distro package, flatpak or the Arch package if you already use those.</td></tr>
+      <tr><td>Windows</td><td>installer and portable archive</td><td>x64 is the common build; ARM64 builds exist for Windows on ARM.</td></tr>
+      <tr><td>macOS</td><td>universal build</td><td>One download covers Apple Silicon and Intel.</td></tr>
+      <tr><td>FreeBSD</td><td><code>.tar.gz</code></td><td>FreeBSD <strong>x86_64 only</strong> as of v0.9.0 — aarch64 was dropped because it could not build within the CI time limit.</td></tr>
+      <tr><td>Web</td><td>WebAssembly build</td><td>No install. Cannot open or save local files yet; see <a href="/issues/">known issues</a>.</td></tr>
+    </tbody>
+  </table>
+  </div>
+</section>
+
+<section>
+  <h2>How do I install FigCraft on Linux?</h2>
+  <p>The shortest path on Linux is the AppImage: download the file, make it executable, run it.
+  <code>chmod +x figcraft-0.9.0-linux-x86_64.AppImage &amp;&amp; ./figcraft-0.9.0-linux-x86_64.AppImage</code>.
+  There is no system-wide install step and no dependency resolution.</p>
+  <p>If you prefer a package manager, use the <code>.deb</code> on Debian/Ubuntu, the <code>.rpm</code> on
+  Fedora/RHEL, the <code>.pkg.tar.zst</code> on Arch, or the <code>.flatpak</code> if you already run Flatpak.
+  All of them come from the same <a href="https://github.com/storytold/figcraft/releases" rel="noopener">release page</a>,
+  built by the same CI run, so behaviour is identical.</p>
+</section>
+
+<section>
     <h2>How to run FigCraft</h2>
     <p class="sub">Prebuilt installers for macOS, Windows, Linux, FreeBSD and the web are attached to each <a href="https://github.com/storytold/figcraft/releases" rel="noopener">GitHub release</a>. To build from source you need a Rust toolchain:</p>
     <pre><code>git clone https://github.com/storytold/figcraft
@@ -331,6 +373,16 @@ cargo run --release -p figcraft-server</code></pre>
       <div class="card"><h3>Community</h3><p>The project links a <a href="https://discord.gg/artcraft" rel="noopener">Discord</a> for early builds, bug reports and feature requests.</p></div>
     </div>
   </section>
+<section>
+  <h2>Frequently asked about installing FigCraft</h2>
+  <div class="faq">
+    <details><summary>What are FigCraft's system requirements?</summary><p>macOS (Apple Silicon and Intel, universal build), Windows 10/11 (x64 and ARM64), Linux (x86_64, aarch64 or riscv64), FreeBSD x86_64, or any modern browser via the WebAssembly build. No server, account or GPU is required, and the download is in the tens of megabytes. A Rust toolchain is needed only when building from source.</p></details>
+    <details><summary>Is there a FigCraft AppImage for Linux?</summary><p>Yes. Each release attaches figcraft-&lt;version&gt;-linux-&lt;arch&gt;.AppImage alongside .deb, .rpm, .flatpak, .pkg.tar.zst and .tar.gz builds. The AppImage is a single file: chmod +x it and run it, with no system-wide install step.</p></details>
+    <details><summary>Does FigCraft support FreeBSD?</summary><p>FreeBSD x86_64 is supported and ships as a .tar.gz in each release. FreeBSD aarch64 was dropped as of v0.9.0 because it could not be built within the 5-hour CI limit.</p></details>
+    <details><summary>Do I need Rust to install FigCraft?</summary><p>No. Prebuilt installers for every platform are attached to each GitHub release. A Rust toolchain and the separate craft-fonts repository are only required when building the desktop app from source.</p></details>
+    <details><summary>Does the browser build need an install?</summary><p>No install at all — open the studio and the editor runs in WebAssembly. The browser build cannot open or save local files yet, so it is for trying the editor rather than real work.</p></details>
+  </div>
+</section>
 <section>
   <h2>Related pages</h2>
   <ul>

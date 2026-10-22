@@ -9,9 +9,9 @@
 ## Pages
 
 - [FigCraft Guide](https://figcraft.rerivo.com/): what FigCraft is, a FigCraft vs Figma comparison, known issues from the GitHub tracker, install steps, a no-signup canvas studio, and an FAQ covering `.fig` import, fonts and multiplayer.
-- [Known issues](https://figcraft.rerivo.com/issues/): large `.fig` imports, missing font fallback, macOS 27/M1 launch crash, Windows DX12 blur, 1440p UI scale, web file access and CLI path roots, with links to the source issues.
-- [Install](https://figcraft.rerivo.com/install/): prebuilt builds for macOS, Windows, Linux and FreeBSD, or build the desktop app from source with Cargo and `craft-fonts`.
-- [FigCraft vs Figma](https://figcraft.rerivo.com/vs-figma/): license, platform, account, file format, collaboration, Dev Mode, maturity and price compared side by side.
+- [Known issues](https://figcraft.rerivo.com/issues/): large `.fig` imports and the grid-auto-layout data loss, instance-swap overrides, missing font fallback, macOS 27/M1 launch crash, Windows DX12 blur, 1440p UI scale, web file access and CLI path roots, with links to the source issues.
+- [Install](https://figcraft.rerivo.com/install/): system requirements, which download to pick (Linux AppImage/.deb/.rpm/flatpak/.pkg.tar.zst, Windows, macOS universal, FreeBSD x86_64, Web), or build from source with Cargo and `craft-fonts`.
+- [FigCraft vs Figma](https://figcraft.rerivo.com/vs-figma/): license, platform, account, file format, collaboration, Dev Mode, maturity and price compared side by side, plus what a `.fig` import actually loses and which team should pick which.
 - [FigCraft alternatives](https://figcraft.rerivo.com/alternatives/): Penpot, Plasmic and Figma, and which open-source option fits which team.
 - [Studio](https://figcraft.rerivo.com/#demo): a browser canvas with size presets, custom width/height, background, transparency, grid, zoom, layers, properties, undo/redo and PNG/JSON export.
 

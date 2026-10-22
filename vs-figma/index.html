@@ -23,12 +23,7 @@
 <meta name="twitter:description" content="FigCraft vs Figma without the marketing: what FigCraft does at ~49% parity, where Figma still wins, file import limits, collaboration and cost.">
 <meta name="twitter:image" content="https://figcraft.rerivo.com/og.png">
 <script type="application/ld+json">
-{"@context":"https://schema.org","@graph":[
- {"@type":"WebPage","@id":"https://figcraft.rerivo.com/vs-figma/#page","url":"https://figcraft.rerivo.com/vs-figma/","name":"FigCraft vs Figma: Honest Comparison (2026) | FigCraft Guide","description":"FigCraft vs Figma without the marketing: what FigCraft does at ~49% parity, where Figma still wins, file import limits, collaboration and cost.","isPartOf":{"@id":"https://figcraft.rerivo.com/#website"},"inLanguage":"en"},
- {"@type":"BreadcrumbList","itemListElement":[
-   {"@type":"ListItem","position":1,"name":"FigCraft Guide","item":"https://figcraft.rerivo.com/"},
-   {"@type":"ListItem","position":2,"name":"vs Figma","item":"https://figcraft.rerivo.com/vs-figma/"}]}
- ]}
+{"@context":"https://schema.org","@graph":[{"@type":"WebPage","@id":"https://figcraft.rerivo.com/vs-figma/#page","url":"https://figcraft.rerivo.com/vs-figma/","name":"FigCraft vs Figma: Honest Comparison (2026) | FigCraft Guide","description":"FigCraft vs Figma without the marketing: what FigCraft does at ~49% parity, where Figma still wins, file import limits, collaboration and cost.","isPartOf":{"@id":"https://figcraft.rerivo.com/#website"},"inLanguage":"en"},{"@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"FigCraft Guide","item":"https://figcraft.rerivo.com/"},{"@type":"ListItem","position":2,"name":"vs Figma","item":"https://figcraft.rerivo.com/vs-figma/"}]},{"@type":"FAQPage","mainEntity":[{"@type":"Question","name":"Can FigCraft open Figma .fig files?","acceptedAnswer":{"@type":"Answer","text":".fig import is best effort and loses data silently. Grid auto layout imports with empty column and row tracks so children collapse after the first re-layout (#465), instance-swap overrides fall back to the main component default (#464), and the import info field does not report what was dropped (#467). Import a .fig to read a design, not to keep editing it."}},{"@type":"Question","name":"Is FigCraft a drop-in replacement for Figma?","acceptedAnswer":{"@type":"Answer","text":"No. By the project's own estimate FigCraft is at roughly 49% parity and still early alpha. It wins on ownership, offline work and hackability; Figma wins on maturity, real-time collaboration and plugin ecosystem."}},{"@type":"Question","name":"Does FigCraft support real-time collaboration?","acceptedAnswer":{"@type":"Answer","text":"Only as a preview. FigCraft has live sessions from the app or a self-hosted server, but no accounts or team permissions yet. Figma's multiplayer, permissions and review flows are mature and have no equivalent in FigCraft."}},{"@type":"Question","name":"Can I use Figma plugins in FigCraft?","acceptedAnswer":{"@type":"Answer","text":"No. FigCraft has no Figma plugin compatibility. It exposes a CLI, an MCP server and a control protocol instead, so automation is scripted rather than installed from a plugin marketplace."}},{"@type":"Question","name":"Which is better for a team, FigCraft or Figma?","acceptedAnswer":{"@type":"Answer","text":"For a team that co-edits in real time and relies on plugins, Figma. For a solo designer who wants local files, no account and an inspectable engine, FigCraft. Side-by-side use is the realistic pattern rather than replacing one with the other."}}]}]}
 </script>
 <style>
   :root{
@@ -320,10 +315,73 @@
     <p class="note"><strong>Penpot</strong> is the other major open-source design platform: web-first, self-hostable, and stronger on team collaboration today. Choose Penpot when you need a browser-based team workspace now; choose FigCraft when you want a native Rust app, local files and a command engine you can inspect. <a href="https://penpot.app/" rel="noopener">penpot.app</a></p>
   </section>
 <section>
+  <h2>Can FigCraft open a Figma .fig file?</h2>
+  <p><strong>Partly, and with silent data loss.</strong> FigCraft imports <code>.fig</code> files on a best-effort
+  basis: the document renders, but features it cannot represent are dropped rather than converted. Three losses are
+  documented in the public tracker, all still open as of v0.9.0:</p>
+  <ul>
+    <li><strong>Grid auto layout loses its structure.</strong> Frames import with empty column and row tracks and every
+    child at <code>gridColumn: null</code>. The layout looks right until the first edit triggers a re-layout, then all
+    children collapse into one cell (<a href="https://github.com/storytold/figcraft/issues/465" rel="noopener">#465</a>).</li>
+    <li><strong>Instance-swap overrides fall back to the default.</strong> A button instance whose icon was swapped
+    comes back showing the main component&rsquo;s default icon, without a warning (<a href="https://github.com/storytold/figcraft/issues/464" rel="noopener">#464</a>).</li>
+    <li><strong>Dropped data is not reported.</strong> The import <code>info</code> field is the only place loss is
+    visible, and it does not list what was skipped (<a href="https://github.com/storytold/figcraft/issues/467" rel="noopener">#467</a>).</li>
+  </ul>
+  <p class="note">Practical rule: import a <code>.fig</code> to <em>read</em> and <em>reference</em> a design, not to
+  keep editing it. Always keep the original file. Large imports can fail outright — see
+  <a href="/issues/">known issues</a>.</p>
+</section>
+
+<section>
+  <h2>How much work is it to move from Figma?</h2>
+  <p>Move only if your team can live without real-time multiplayer for now. What carries over and what does not:</p>
+  <ul>
+    <li><strong>Files.</strong> <code>.fig</code> import is best effort (above). If a file matters, rebuild rather than
+    re-import — auto layout and component overrides are where the loss shows up first.</li>
+    <li><strong>Plugins.</strong> No Figma plugin compatibility. FigCraft exposes a CLI, an MCP server and a control
+    protocol instead, so automation is scripted rather than purchased.</li>
+    <li><strong>Collaboration.</strong> FigCraft has live sessions as a preview, with a self-hosted server and no
+    accounts yet. Figma&rsquo;s teams, permissions and review flows have no equivalent.</li>
+    <li><strong>Handoff.</strong> Dev Mode and code output exist (React, SwiftUI, Compose, CSS, HTML), so handoff is
+    the least painful part to move.</li>
+  </ul>
+  <p class="note">The realistic pattern is side-by-side, not replacement: keep Figma for anything a team has to
+  co-edit this quarter, and use FigCraft for local, offline or scripted work that has to be inspectable.</p>
+</section>
+
+<section>
+  <h2>Which should I pick for a given team?</h2>
+  <div class="table-wrap">
+  <table class="cmp">
+    <thead><tr><th>Situation</th><th>Pick</th><th>Why</th></tr></thead>
+    <tbody>
+      <tr><td>Solo designer, local files, wants to inspect the engine</td><td><strong>FigCraft</strong></td><td>Native binary, files on disk, no account, MIT/Apache-2.0 source you can read.</td></tr>
+      <tr><td>Team that co-edits in real time</td><td><strong>Figma</strong></td><td>Multiplayer, permissions and review are mature. FigCraft&rsquo;s sessions are a preview.</td></tr>
+      <tr><td>Needs plugin ecosystem today</td><td><strong>Figma</strong></td><td>No Figma plugin compatibility; FigCraft scripts via CLI/MCP instead.</td></tr>
+      <tr><td>Air-gapped or compliance-bound</td><td><strong>FigCraft</strong></td><td>No telemetry, no cloud requirement; self-host the collaboration server.</td></tr>
+      <tr><td>Wants browser-based team workspace, self-hosted</td><td><a href="/alternatives/"><strong>Penpot</strong></a></td><td>Web-first and self-hostable with stronger team features today.</td></tr>
+      <tr><td>Handoff and code output are the main job</td><td><strong>Either</strong></td><td>Both ship Dev Mode-style output; FigCraft&rsquo;s is free, Figma&rsquo;s is a paid seat.</td></tr>
+    </tbody>
+  </table>
+  </div>
+</section>
+
+<section>
   <h2>FigCraft in short</h2>
   <p>The one-screen fact sheet — what it is, licence, platforms, price and current maturity — is on the
   <a href="/#facts">main guide</a>, together with <a href="/#who">who it is for</a>. This page only covers the
   comparison itself so the two do not compete for the same query.</p>
+</section>
+<section>
+  <h2>Frequently asked about FigCraft vs Figma</h2>
+  <div class="faq">
+    <details><summary>Can FigCraft open Figma .fig files?</summary><p>.fig import is best effort and loses data silently. Grid auto layout imports with empty column and row tracks so children collapse after the first re-layout (<a href="https://github.com/storytold/figcraft/issues/465" rel="noopener">#465</a>), instance-swap overrides fall back to the main component default (<a href="https://github.com/storytold/figcraft/issues/464" rel="noopener">#464</a>), and the import info field does not report what was dropped (<a href="https://github.com/storytold/figcraft/issues/467" rel="noopener">#467</a>). Import a .fig to read a design, not to keep editing it.</p></details>
+    <details><summary>Is FigCraft a drop-in replacement for Figma?</summary><p>No. By the project's own estimate FigCraft is at roughly 49% parity and still early alpha. It wins on ownership, offline work and hackability; Figma wins on maturity, real-time collaboration and plugin ecosystem.</p></details>
+    <details><summary>Does FigCraft support real-time collaboration?</summary><p>Only as a preview. FigCraft has live sessions from the app or a self-hosted server, but no accounts or team permissions yet. Figma's multiplayer, permissions and review flows are mature and have no equivalent in FigCraft.</p></details>
+    <details><summary>Can I use Figma plugins in FigCraft?</summary><p>No. FigCraft has no Figma plugin compatibility. It exposes a CLI, an MCP server and a control protocol instead, so automation is scripted rather than installed from a plugin marketplace.</p></details>
+    <details><summary>Which is better for a team, FigCraft or Figma?</summary><p>For a team that co-edits in real time and relies on plugins, Figma. For a solo designer who wants local files, no account and an inspectable engine, FigCraft. Side-by-side use is the realistic pattern rather than replacing one with the other.</p></details>
+  </div>
 </section>
 <section>
   <h2>Related pages</h2>
