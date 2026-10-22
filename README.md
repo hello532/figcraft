@@ -45,6 +45,55 @@ Environment: `CDP=http://127.0.0.1:9333`, `STUDIO_URL=http://127.0.0.1:8799/`,
 `ROUNDS=10`. The transparent PNG export was also checked pixel-by-pixel: the
 exported 2× image has alpha 0 at the top-left, as expected for a transparent board.
 
+Structural checks need no browser: tag balance, one `<h1>` per page, SERP length
+limits, every internal link resolving, and every structured-data answer being
+present in the rendered body.
+
+```bash
+node tests/seo.check.mjs            # structure, schema visibility, links, assets
+```
+
+## Version sync
+
+Upstream ships several releases a week and the guide cites a specific release in
+about 30 places. Two kinds of reference, handled differently:
+
+| Kind | Example | Who updates it |
+|---|---|---|
+| Factual | `Latest release: v0.9.0 · 2026-10-21`, the AppImage filename, `softwareVersion`, artifact count | the script, from the GitHub release API |
+| Editorial | `What's new in FigCraft 0.9.0`, `fixed in 0.9.0`, `dropped as of v0.9.0` | a human, because the prose underneath must be rewritten too |
+
+Bumping an editorial slot without rewriting the prose under it publishes a
+confident falsehood — a "What's new in v0.10.0" heading over a 0.9.0 changelog —
+so the script injects the first kind and *reports* the second.
+
+```bash
+python3 tools/sync_version.py            # dry run
+python3 tools/sync_version.py --check    # exit 1 if stale (CI)
+python3 tools/sync_version.py --apply    # rewrite the factual slots
+```
+
+Artifact counts are derived, never hardcoded: v0.9.0 has 29 build artifacts plus
+`SHA256SUMS.txt`, v0.8.0 has 30, v0.7.0 has 27. `--check` also fails when a
+factual slot names a release the project never published, which is how a
+half-finished sync gets caught.
+
+Every rule declares how many times its pattern must match, so editing the HTML in
+a way that breaks a pattern fails loudly instead of silently leaving a stale
+number on the page.
+
+```bash
+node tests/version.sync.test.mjs     # 45 checks, stubs the release feed, no network
+```
+
+`.github/workflows/version-sync.yml` runs `--check` on every push and daily. On a
+schedule it also rewrites the factual slots and opens a PR with the editorial
+items as an explicit checklist.
+
+Two facts rot for reasons the API cannot answer, and are printed as warnings:
+the **parity percentage** (the project's own estimate, moves independently of
+any release) and the **release cadence**. Both need a human on a schedule.
+
 ## Verify
 
 ```bash

@@ -17,6 +17,7 @@
  *   6. JSON-LD parses and declares the expected @types per page.
  */
 import { readFileSync, existsSync, readdirSync, statSync } from 'node:fs';
+import { execSync } from 'node:child_process';
 import { join, dirname, resolve } from 'node:path';
 import { fileURLToPath } from 'node:url';
 
@@ -183,6 +184,31 @@ console.log('\nassets');
 for (const asset of ['assets/favicon.svg', 'assets/mark.svg', 'assets/logo.svg', 'og.png', 'llms.txt', 'llms-full.txt', 'robots.txt', 'sitemap.xml', 'CNAME', '.nojekyll']) {
   if (existsSync(join(ROOT, asset))) pass('/', asset);
   else fail('/', `missing ${asset}`);
+}
+
+// --- 7. the version sync reports no drift ------------------------------
+console.log('\nversion sync');
+{
+  // The factual version slots must agree with what the project actually
+  // published. Offline by design: a flaky network must never fail a content
+  // test, so the sync script is invoked and a network error is treated as
+  // "not verified" rather than "broken".
+  const run = () => {
+    try {
+      const out = execSync('python3 tools/sync_version.py --check', { cwd: ROOT, encoding: 'utf8' });
+      return { code: 0, out };
+    } catch (e) {
+      return { code: e.status ?? 1, out: `${e.stdout || ''}${e.stderr || ''}` };
+    }
+  };
+  const { code, out } = run();
+  if (/could not reach the GitHub API/.test(out)) {
+    pass('version sync', 'skipped: GitHub API unreachable (no network)');
+  } else if (code === 0) {
+    pass('version sync', 'factual version slots match the latest release');
+  } else {
+    fail('version sync', `stale version slots. Run: python3 tools/sync_version.py\n${out}`);
+  }
 }
 
 console.log(`\n${failures === 0 ? 'PASS' : 'FAIL'} - ${failures} failure(s)`);

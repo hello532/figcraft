@@ -1,0 +1,82 @@
+name: version sync
+
+# The guide cites a specific FigCraft release in about 30 places. The upstream
+# project ships several releases a week, so a hand-maintained number goes stale
+# within days and nobody notices until a reader does.
+#
+# Two separate jobs, because the two classes of version reference need different
+# treatment:
+#
+#   check - fails when the factual slots no longer match the latest release.
+#           Runs on every push and on a schedule.
+#   apply - rewrites the factual slots and opens a PR. It deliberately does NOT
+#           touch the editorial slots ("What's new in FigCraft X", "fixed in X",
+#           "dropped as of X"): bumping those without rewriting the prose under
+#           them would publish a false statement, so they are left as a visible
+#           review item for a human.
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+  schedule:
+    # Daily at 06:17 UTC. Odd minute to avoid the top-of-hour GitHub rush.
+    - cron: '17 6 * * *'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  check:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.x'
+
+      - name: Verify the version slots against the latest release
+        run: python3 tools/sync_version.py --check
+
+  apply:
+    # Only on the schedule and manual runs: a scheduled PR is useful, a PR on
+    # every push is noise.
+    if: github.event_name == 'schedule' || github.event_name == 'workflow_dispatch'
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+      pull-requests: write
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.x'
+
+      - name: Rewrite the factual version slots
+        run: python3 tools/sync_version.py --apply
+
+      - name: Open a PR if anything changed
+        uses: peter-evans/create-pull-request@v6
+        with:
+          branch: version-sync
+          delete-branch: true
+          title: 'chore: sync version slots with the latest FigCraft release'
+          commit-message: 'chore: sync version slots with the latest FigCraft release'
+          labels: automated
+          body: |
+            The factual version slots no longer matched the latest FigCraft
+            release and have been corrected automatically.
+
+            **This PR is deliberately incomplete.** The editorial slots still
+            name the previous version, and only a human can update them:
+
+            - [ ] rewrite "What's new in FigCraft X" against the new release notes
+            - [ ] re-check "fixed in X" and "dropped as of X" against the tracker
+            - [ ] bump "Covers FigCraft vX" and `llms-full.txt` once the prose is true
+
+            Merging the factual half early is safe; it stops the page naming a
+            release that no longer exists. Leaving the prose half to a human
+            stops the page making claims it cannot support.
