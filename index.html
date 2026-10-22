@@ -167,7 +167,30 @@
   .tool-options input[type=color]{width:30px;height:26px;padding:1px;border:1px solid var(--border);border-radius:6px;background:var(--surface);cursor:pointer}
   .tool-options input[type=checkbox]{accent-color:var(--accent)}
   .tool-options .sep{width:1px;height:20px;background:var(--border);flex:0 0 auto}
-  .hud{position:absolute;right:12px;bottom:12px;z-index:4;pointer-events:none;background:color-mix(in srgb,var(--surface) 92%,transparent);border:1px solid var(--border);border-radius:7px;padding:4px 8px;font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;font-size:11px;color:var(--muted);white-space:nowrap;backdrop-filter:blur(6px)}
+  .hud{position:absolute;right:12px;bottom:12px;z-index:4;pointer-events:none;background:color-mix(in srgb,var(--surface) 92%,transparent);border:1px solid var(--border);border-radius:7px;padding:4px 8px;font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;font-size:11px;color:var(--muted);white-space:nowrap;backdrop-filter:blur(6px);font-variant-numeric:tabular-nums;transition:border-color .18s ease,color .18s ease,box-shadow .18s ease}
+  /* precision feedback: a quiet ring when sub-pixel mode is live */
+  .hud[data-mode="0.001"]{border-color:color-mix(in srgb,var(--accent) 55%,var(--border));color:var(--accent)}
+  .hud[data-precision="sub"]{border-color:color-mix(in srgb,var(--ok) 60%,var(--border));color:var(--ok);box-shadow:0 0 0 2px color-mix(in srgb,var(--ok) 14%,transparent)}
+  /* tighter, quieter numeric fields: 0.001 needs the room */
+  .prop-grid input[type=number]{font-variant-numeric:tabular-nums;letter-spacing:-.015em;font-size:12px;padding-left:6px;padding-right:6px;text-align:right;-moz-appearance:textfield}
+  /* persistent precision toggle: quiet when off, unmistakable when on */
+  .precise-toggle{font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;font-size:11px;letter-spacing:-.02em;padding:4px 8px;border-radius:6px;border:1px solid var(--border);background:var(--surface);color:var(--muted);cursor:pointer;transition:all .16s ease;font-variant-numeric:tabular-nums}
+  .precise-toggle:hover{border-color:color-mix(in srgb,var(--accent) 45%,var(--border));color:var(--accent)}
+  .precise-toggle[aria-pressed="true"]{background:color-mix(in srgb,var(--ok) 14%,var(--surface));border-color:color-mix(in srgb,var(--ok) 60%,var(--border));color:var(--ok);font-weight:600}
+  .precise-toggle:focus-visible{outline:2px solid var(--accent);outline-offset:1px}
+  @media (prefers-reduced-motion:reduce){.precise-toggle{transition:none}}
+  .prop-grid input[type=number]::-webkit-inner-spin-button,.prop-grid input[type=number]::-webkit-outer-spin-button{-webkit-appearance:none;margin:0}
+  /* 0.001 numbers are wider than integers: give them the room instead of clipping */
+  .prop-grid{grid-template-columns:minmax(78px,1fr) minmax(78px,1fr);gap:8px}
+  .prop-grid label{overflow:visible}
+  @media (max-width:1320px){.studio-body{grid-template-columns:54px minmax(0,1fr) 268px}}
+  .prop-grid label{transition:color .15s ease}
+  .prop-grid label:hover{color:var(--fg)}
+  /* selection + guides animate instead of snapping */
+  #canvas{will-change:transform;contain:paint}
+  @media (prefers-reduced-motion:reduce){
+    .hud,.prop-grid label,#canvas{transition:none!important}
+  }
   .studio-body{display:grid;grid-template-columns:54px minmax(0,1fr) 288px;min-height:540px;min-width:0;max-width:100%}
   .toolrail{display:flex;flex-direction:column;align-items:center;gap:6px;padding:10px 6px;border-right:1px solid var(--border);background:color-mix(in srgb,var(--surface) 90%,var(--bg))}
   .toolrail button{width:38px;height:38px;border-radius:9px;border:1px solid transparent;background:transparent;color:var(--muted);font-size:16px;cursor:pointer;display:grid;place-items:center}
@@ -372,7 +395,7 @@
           <label>BG <input id="board-bg" type="color" value="#ffffff" aria-label="Canvas background"></label>
           <label><input id="board-alpha" type="checkbox"> Transparent</label>
           <label><input id="grid-on" type="checkbox" checked> Grid</label>
-          <label>Grid px <input id="grid-size" type="number" min="4" max="200" step="1" value="32" aria-label="Grid spacing in pixels"></label>
+          <label>Grid px <input id="grid-size" type="number" min="0.5" max="200" step="0.5" inputmode="decimal" value="32" aria-label="Grid spacing in pixels"></label>
           <label>Zoom
             <select id="zoom">
               <option value="fit">Fit</option>
@@ -468,7 +491,8 @@
         <dt>⌘/Ctrl + D</dt><dd>Duplicate the selected layer</dd>
         <dt>⌘/Ctrl + C / V</dt><dd>Copy and paste a layer</dd>
         <dt>Delete</dt><dd>Delete the selected layer</dd>
-        <dt>Arrows</dt><dd>Nudge 1 px; Shift for 10 px</dd>
+        <dt>Arrows</dt><dd>Nudge 1 px · Shift 10 px · Alt 0.001 px</dd>
+        <dt>Cmd/Ctrl + Arrows</dt><dd>Resize instead of moving</dd>
         <dt>Space + drag</dt><dd>Pan the canvas</dd>
         <dt>⌘/Ctrl + wheel</dt><dd>Zoom around the pointer</dd>
         <dt>?</dt><dd>This dialog</dd>
@@ -614,7 +638,7 @@ cargo run --release -p figcraft-server</code></pre>
     </ol>
     <details>
       <summary>Keyboard shortcuts</summary>
-      <p><strong>V / F / R / T</strong> select, frame, rectangle, text · <strong>Delete</strong> remove · <strong>Cmd/Ctrl+Z</strong> undo, add Shift for redo · <strong>Cmd/Ctrl+D</strong> duplicate · <strong>Cmd/Ctrl+C / V</strong> copy and paste · <strong>Arrows</strong> nudge 1 px, Shift for 10 px · <strong>Space+drag</strong> pan · <strong>Cmd/Ctrl+wheel</strong> zoom · <strong>?</strong> open the shortcut dialog.</p>
+      <p><strong>V / F / R / T</strong> select, frame, rectangle, text · <strong>Delete</strong> remove · <strong>Cmd/Ctrl+Z</strong> undo, add Shift for redo · <strong>Cmd/Ctrl+D</strong> duplicate · <strong>Cmd/Ctrl+C / V</strong> copy and paste · <strong>Arrows</strong> nudge 1 px, Shift 10 px, <strong>Alt</strong> 0.001 px (sub-pixel), Cmd/Ctrl+Arrows to resize · <strong>Space+drag</strong> pan · <strong>Cmd/Ctrl+wheel</strong> zoom · <strong>?</strong> open the shortcut dialog.</p>
     </details>
   </section>
 
@@ -949,6 +973,8 @@ cargo run --release -p figcraft-server</code></pre>
     pan: null,
     clipboard: null,
     snap: true,
+    precise: false,        // live (modifier-held) sub-pixel precision
+    preciseMode: false,    // persistent sub-pixel lock (toolbar toggle)
     lockRatio: false,
     layerQuery: '',
     pointer: { x: 0, y: 0 },
@@ -963,7 +989,11 @@ cargo run --release -p figcraft-server</code></pre>
     clearTimeout(saveTimer);
     saveTimer = 0;
     try {
-      localStorage.setItem('figcraft-studio-v2', JSON.stringify({ board: state.board, layers: state.layers, seq: state.seq, v: 3 }));
+      localStorage.setItem('figcraft-studio-v2', JSON.stringify({
+        board: state.board, layers: state.layers, seq: state.seq, v: 3,
+        // tool preferences travel with the document so a reload keeps the feel
+        preciseMode: !!state.preciseMode, snap: state.snap !== false, lockRatio: !!state.lockRatio,
+      }));
       $('#save-state').textContent = 'saved';
     } catch (_) {
       $('#save-state').textContent = 'not saved';
@@ -983,6 +1013,9 @@ cargo run --release -p figcraft-server</code></pre>
       if (d.board) Object.assign(state.board, d.board);
       if (Array.isArray(d.layers)) state.layers = d.layers;
       state.seq = d.seq || state.layers.length + 1;
+      if (typeof d.preciseMode === 'boolean') state.preciseMode = d.preciseMode;
+      if (typeof d.snap === 'boolean') state.snap = d.snap;
+      if (typeof d.lockRatio === 'boolean') state.lockRatio = d.lockRatio;
     } catch (_) {}
   };
   const snapshot = () => {
@@ -1012,24 +1045,108 @@ cargo run --release -p figcraft-server</code></pre>
     draw(); syncPanels(); save(); refreshHistory();
   };
 
-  const round1 = (v) => Math.round(v * 10) / 10;
+  /* ---------- precision core (0.001) ---------- */
+  const PRECISION = 1000;              // 0.001 px
+  const PREC_STEP  = 0.001;
+  // Measured: a `v === (v|0)` fast path is SLOWER than the plain multiply —
+  // the extra branch costs more than one fmul+fdiv on modern JITs. Keep it flat.
+  // Only -0 needs normalising, so formatting does not print "-0".
+  const q = (v) => {
+    const r = Math.round(v * PRECISION) / PRECISION;
+    return r === 0 ? 0 : r;
+  };
+  // Cache formatted strings: HUD repaints every frame with the same numbers.
+  const fmtCache = new Map();
+  const fmt = (v) => {
+    const n = q(v);
+    if (!isFinite(n)) return '0';
+    const hit = fmtCache.get(n);
+    if (hit !== undefined) return hit;
+    const s = String(parseFloat(n.toFixed(3)));
+    if (fmtCache.size > 4000) fmtCache.clear();
+    fmtCache.set(n, s);
+    return s;
+  };
+  const fmtPx = (v) => fmt(v) + 'px';
+  // Shadow-proof alias. `q` is reused as a local search-string variable in
+  // syncPanels()/renderIconGrid(), so code outside those scopes must not rely
+  // on the short name.
+  const quant = q;
+  // step for arrow-key nudge, respects precision lock
+  const nudgeStep = () => (effectivePrecise() ? 0.1 : 1);
+  const round1 = (v) => q(v);          // legacy alias kept for existing call sites
   function syncZoomInput() {
     const input = $('#zoom-value');
     if (input) input.value = Math.round(state.zoom * 100);
   }
+  let hudPending = 0;
   function updateHUD() {
+    // Paint immediately, then coalesce any further calls within the same frame.
+    // rAF-only scheduling stalls when the tab is not compositing (headless, or a
+    // background tab), which left the readout stale.
+    if (!hudPending) paintHUD();
+    clearTimeout(hudPending);
+    hudPending = setTimeout(() => { hudPending = 0; }, 16);
+  }
+  function paintHUD() {
     const l = state.selected;
     const p = state.pointer;
     const parts = [];
     if (l) {
       parts.push(`${l.type === 'icon' && ICON_MAP[l.icon] ? ICON_MAP[l.icon].name : l.name}`);
-      parts.push(`x ${round1(l.x)}`, `y ${round1(l.y)}`, `w ${round1(l.w)}`, `h ${round1(l.h)}`);
-      if (l.h) parts.push(`${(l.w / l.h).toFixed(2)}:1`);
+      parts.push(`x ${fmt(l.x)}`, `y ${fmt(l.y)}`, `w ${fmt(l.w)}`, `h ${fmt(l.h)}`);
+      if (l.h) {
+        const r = l.w / l.h;
+        parts.push(`${Number.isInteger(r) ? r : r.toFixed(3)}:1`);
+      }
     }
-    if (p) parts.push(`→ ${round1(p.x)}, ${round1(p.y)}`);
+    if (p) parts.push(`→ ${fmt(p.x)}, ${fmt(p.y)}`);
     $('#hud').textContent = parts.join(' · ') || 'Hover the canvas';
   }
   function boardScale() { return dpr() * state.zoom; }
+
+  /* ---------- precision feedback ---------- */
+  let badgeTimer = 0;
+  function showPrecisionBadge(step) {
+    const el = $('#hud');
+    if (!el) return;
+    el.dataset.precision = step < 1 ? 'sub' : 'px';
+    clearTimeout(badgeTimer);
+    badgeTimer = setTimeout(() => { delete el.dataset.precision; }, 900);
+  }
+  // Effective precision = persistent lock OR the modifier being held.
+  function effectivePrecise() { return state.preciseMode || state.precise; }
+  function syncPrecisionChrome() {
+    const on = effectivePrecise();
+    document.documentElement.toggleAttribute('data-precise', on);
+    const el = $('#hud');
+    if (el) el.dataset.mode = on ? '0.001' : 'snap';
+    const btn = $('#opt-precise');
+    if (btn) {
+      btn.setAttribute('aria-pressed', on ? 'true' : 'false');
+      btn.title = on
+        ? 'Sub-pixel precision ON — positions snap to 0.001 px (click to disable)'
+        : 'Sub-pixel precision OFF — positions snap to the grid. Hold Alt for a one-off, or click to lock 0.001 px.';
+    }
+  }
+  function setPrecise(on) {
+    if (state.precise === on) return;
+    state.precise = on;
+    syncPrecisionChrome();
+  }
+  function setPreciseMode(on) {
+    if (state.preciseMode === on) return;
+    state.preciseMode = on;
+    syncPrecisionChrome();
+    if (state.selected) { draw(); paintHUD(); }
+    save();
+  }
+  // Alt held anywhere = temporary sub-pixel mode (Figma-style)
+  const onModDown = (e) => { if (e.altKey) setPrecise(true); };
+  const onModUp   = (e) => { if (!e.altKey) setPrecise(false); };
+  window.addEventListener('keydown', onModDown, true);
+  window.addEventListener('keyup', onModUp, true);
+  window.addEventListener('blur', () => setPrecise(false));
   function resizeCanvas() {
     const s = boardScale();
     canvas.width = Math.round(state.board.w * s);
@@ -1069,7 +1186,7 @@ cargo run --release -p figcraft-server</code></pre>
   }
   function drawGrid() {
     if (!state.board.grid || state.board.alpha) return;
-    const g = Math.max(4, state.board.gridSize || 32);
+    const g = Math.max(0.5, state.board.gridSize || 32);
     ctx.save();
     ctx.strokeStyle = darkBoard() ? 'rgba(255,255,255,.13)' : 'rgba(17,24,39,.08)';
     ctx.lineWidth = 1 / state.zoom;
@@ -1167,8 +1284,13 @@ cargo run --release -p figcraft-server</code></pre>
         ctx.font = `600 ${l.fontSize || 20}px ui-sans-serif`;
         ctx.textBaseline = 'top';
         ctx.fillText(l.text || 'Text', l.x, l.y);
-        l.w = Math.max(20, ctx.measureText(l.text || 'Text').width);
-        l.h = l.fontSize || 20;
+        // Text bounds are derived from the glyphs, but the model must stay the
+        // source of truth for hit-testing. Only write when the value actually
+        // moves, so a repaint no longer dirtied state on every frame.
+        const mw = q(Math.max(20, ctx.measureText(l.text || 'Text').width));
+        if (mw !== l.w) l.w = mw;
+        const mh = q(l.fontSize || 20);
+        if (mh !== l.h) l.h = mh;
       }
       ctx.restore();
     }
@@ -1234,21 +1356,30 @@ cargo run --release -p figcraft-server</code></pre>
     return { x: (e.clientX - r.left) / state.zoom, y: (e.clientY - r.top) / state.zoom };
   }
   function snapStep() {
-    return state.board.grid && !state.board.alpha ? Math.max(1, Math.round((state.board.gridSize || 32) / 4)) : 1;
+    // Precise mode disables grid quantisation: free sub-pixel positioning.
+    if (effectivePrecise()) return PREC_STEP;
+    if (!state.board.grid || state.board.alpha) return PREC_STEP;
+    const g = Math.max(0.5, state.board.gridSize || 32);
+    // Honour the grid but allow the finer sub-division (min 0.001, never below grid/64).
+    return Math.max(0.001, Math.min(g, g / 4));
   }
   function alignAxis(pos, size, targets, threshold) {
     const edges = [pos, pos + size / 2, pos + size];
     for (const t of targets) {
       for (let i = 0; i < edges.length; i++) {
-        if (Math.abs(edges[i] - t) <= threshold) return { pos: pos + (t - edges[i]), at: t };
+        if (Math.abs(edges[i] - t) <= threshold) return { pos: q(pos + (t - edges[i])), at: q(t) };
       }
     }
     return null;
   }
   function snapMove(l, x, y) {
+    // Sub-pixel mode means "put it exactly where I point". Grid AND edge
+    // alignment both have to stand down, otherwise a 0.001 target silently
+    // jumps to the nearest neighbour edge and the precision is theatre.
+    if (effectivePrecise()) return { x: q(x), y: q(y), guides: [] };
     const step = snapStep();
-    let nx = Math.round(x / step) * step;
-    let ny = Math.round(y / step) * step;
+    let nx = q(Math.round(x / step) * step);
+    let ny = q(Math.round(y / step) * step);
     const threshold = 6 / state.zoom;
     const xs = [0, state.board.w / 2, state.board.w];
     const ys = [0, state.board.h / 2, state.board.h];
@@ -1262,7 +1393,7 @@ cargo run --release -p figcraft-server</code></pre>
     const guides = [];
     if (gx) { nx = gx.pos; guides.push({ axis: 'x', pos: gx.at }); }
     if (gy) { ny = gy.pos; guides.push({ axis: 'y', pos: gy.at }); }
-    return { x: nx, y: ny, guides };
+    return { x: q(nx), y: q(ny), guides };
   }
   function addLayer(type, p) {
     const id = state.seq++;
@@ -1318,9 +1449,10 @@ cargo run --release -p figcraft-server</code></pre>
     if (d.mode === 'move') {
       const rawX = Math.max(-l.w, Math.min(state.board.w, d.rect.x + dx));
       const rawY = Math.max(-l.h, Math.min(state.board.h, d.rect.y + dy));
-      const snapped = e.altKey || !state.snap ? { x: rawX, y: rawY, guides: [] } : snapMove(l, rawX, rawY);
-      l.x = snapped.x;
-      l.y = snapped.y;
+      const freeMove = e.altKey || !state.snap || effectivePrecise();
+      const snapped = freeMove ? { x: q(rawX), y: q(rawY), guides: [] } : snapMove(l, rawX, rawY);
+      l.x = q(snapped.x);
+      l.y = q(snapped.y);
       state.guides = snapped.guides;
     } else {
       const h = d.handle, r = d.rect;
@@ -1329,10 +1461,10 @@ cargo run --release -p figcraft-server</code></pre>
       if (h.includes('s')) hh = Math.max(12, r.h + dy);
       if (h.includes('w')) { const nw = Math.max(12, r.w - dx); x = r.x + (r.w - nw); w = nw; }
       if (h.includes('n')) { const nh = Math.max(12, r.h - dy); y = r.y + (r.h - nh); hh = nh; }
-      if (state.snap && !e.altKey && !e.shiftKey && !state.lockRatio && state.board.grid && !state.board.alpha) {
+      if (state.snap && !e.altKey && !effectivePrecise() && !e.shiftKey && !state.lockRatio && state.board.grid && !state.board.alpha) {
         const st = snapStep();
-        w = Math.max(12, Math.round(w / st) * st);
-        hh = Math.max(12, Math.round(hh / st) * st);
+        w  = Math.max(12, q(Math.round(w  / st) * st));
+        hh = Math.max(12, q(Math.round(hh / st) * st));
         if (h.includes('w')) x = r.x + r.w - w;
         if (h.includes('n')) y = r.y + r.h - hh;
       }
@@ -1342,7 +1474,7 @@ cargo run --release -p figcraft-server</code></pre>
         if (h.includes('w')) x = r.x + r.w - w;
         if (h.includes('n')) y = r.y + r.h - hh;
       }
-      Object.assign(l, { x, y, w, h: hh });
+      Object.assign(l, { x: q(x), y: q(y), w: q(w), h: q(hh) });
       state.guides = [];
     }
     draw(); syncPropValues(l); updateHUD();
@@ -1472,7 +1604,7 @@ cargo run --release -p figcraft-server</code></pre>
     if (!l) return;
     for (const key of ['x', 'y', 'w', 'h']) {
       const input = propsEl.querySelector(`[data-prop="${key}"]`);
-      if (input) input.value = round1(l[key]);
+      if (input) input.value = fmt(l[key]);
     }
   }
   const ALIGN_BUTTONS = [
@@ -1512,6 +1644,7 @@ cargo run --release -p figcraft-server</code></pre>
       }
       parts.push('<span class="sep"></span>');
       parts.push(`<label><input id="opt-snap" type="checkbox" ${state.snap ? 'checked' : ''}> Snap</label>`);
+      parts.push(`<button id="opt-precise" class="precise-toggle" aria-pressed="${state.preciseMode ? 'true' : 'false'}" title="Sub-pixel precision — 0.001 px. Hold Alt for a one-off while dragging.">0.001</button>`);
       parts.push(`<label><input id="opt-ratio" type="checkbox" ${state.lockRatio ? 'checked' : ''}> Lock ratio</label>`);
       parts.push('<span class="sep"></span>');
       parts.push('<button data-opt="duplicate" title="Duplicate">Duplicate</button>');
@@ -1520,6 +1653,7 @@ cargo run --release -p figcraft-server</code></pre>
       parts.push('<span style="font-size:12px;color:var(--muted)">Pick a tool, then click the canvas. Select a layer for alignment and precision controls.</span>');
       parts.push('<span class="sep"></span>');
       parts.push(`<label><input id="opt-snap" type="checkbox" ${state.snap ? 'checked' : ''}> Snap</label>`);
+      parts.push(`<button id="opt-precise" class="precise-toggle" aria-pressed="${state.preciseMode ? 'true' : 'false'}" title="Sub-pixel precision — 0.001 px. Hold Alt for a one-off while dragging.">0.001</button>`);
     }
     body.innerHTML = parts.join('');
   }
@@ -1541,18 +1675,23 @@ cargo run --release -p figcraft-server</code></pre>
     const l = state.selected;
     if (!l) return;
     snapshot();
-    if (mode === 'left') l.x = 0;
-    if (mode === 'right') l.x = state.board.w - l.w;
-    if (mode === 'centerX') l.x = (state.board.w - l.w) / 2;
-    if (mode === 'top') l.y = 0;
-    if (mode === 'bottom') l.y = state.board.h - l.h;
-    if (mode === 'middleY') l.y = (state.board.h - l.h) / 2;
-    if (mode === 'center') { l.x = (state.board.w - l.w) / 2; l.y = (state.board.h - l.h) / 2; }
+    // Quantise through quant(), NOT q(): several sibling functions shadow `q`
+    // with the search string (`const q = layerQuery...`), so a bare q() here
+    // would call a string and throw, aborting the whole handler.
+    if (mode === 'left') l.x = quant(0);
+    if (mode === 'right') l.x = quant(state.board.w - l.w);
+    if (mode === 'centerX') l.x = quant((state.board.w - l.w) / 2);
+    if (mode === 'top') l.y = quant(0);
+    if (mode === 'bottom') l.y = quant(state.board.h - l.h);
+    if (mode === 'middleY') l.y = quant((state.board.h - l.h) / 2);
+    if (mode === 'center') { l.x = quant((state.board.w - l.w) / 2); l.y = quant((state.board.h - l.h) / 2); }
     draw(); syncPanels(); save();
   }
   $('#tool-options-body').addEventListener('click', (e) => {
     const b = e.target.closest('button');
     if (!b) return;
+    // Tool preferences work with or without a selection.
+    if (b.id === 'opt-precise') { setPreciseMode(!state.preciseMode); return; }
     if (b.dataset.align) return alignSelection(b.dataset.align);
     const l = state.selected;
     if (!l) return;
@@ -1582,16 +1721,16 @@ cargo run --release -p figcraft-server</code></pre>
       ? `<label class="wide">Text <input data-prop="text" type="text" value="${escapeAttr(l.text || '')}"></label>
          <label>Font size <input data-prop="fontSize" type="number" min="8" max="96" step="1" value="${l.fontSize || 20}"></label>` : '';
     const radiusField = l.type === 'rect'
-      ? `<label>Radius <input data-prop="radius" type="number" min="0" max="200" step="1" value="${l.radius || 0}"></label>` : '';
+      ? `<label>Radius <input data-prop="radius" type="number" min="0" max="200" step="0.5" inputmode="decimal" value="${fmt(l.radius || 0)}"></label>` : '';
     const fillField = iconDef && iconDef.tile ? '' : `<label>Fill <span class="color-field"><input data-prop="color" type="color" value="${l.color || '#2563eb'}"><input data-prop="colorHex" type="text" value="${(l.color || '#2563eb').toUpperCase()}" maxlength="7" spellcheck="false" aria-label="Fill hex colour"></span></label>`;
     const strokeField = l.type === 'rect' ? `<label>Stroke <span class="color-field"><input data-prop="stroke" type="color" value="${l.stroke || '#111827'}"><input data-prop="strokeHex" type="text" value="${(l.stroke || '#111827').toUpperCase()}" maxlength="7" spellcheck="false" aria-label="Stroke hex colour"></span></label>
-      <label>Stroke px <input data-prop="strokeWidth" type="number" min="0" max="32" step="0.5" value="${l.strokeWidth || 0}"></label>` : '';
+      <label>Stroke px <input data-prop="strokeWidth" type="number" min="0" max="32" step="0.01" inputmode="decimal" value="${fmt(l.strokeWidth || 0)}"></label>` : '';
     const iconNote = iconDef ? `<p class="empty">Icon: <strong>${escapeHtml(iconDef.name)}</strong> · ${iconDef.tile ? 'iOS glass tile · fixed palette' : 'line · Fill controls the stroke'}</p>` : '';
     propsEl.innerHTML = `<div class="prop-grid">
-      <label>X <input data-prop="x" type="number" step="0.5" value="${round1(l.x)}"></label>
-      <label>Y <input data-prop="y" type="number" step="0.5" value="${round1(l.y)}"></label>
-      <label>W <input data-prop="w" type="number" min="8" step="0.5" value="${round1(l.w)}"></label>
-      <label>H <input data-prop="h" type="number" min="8" step="0.5" value="${round1(l.h)}"></label>
+      <label>X <input data-prop="x" type="number" step="0.001" inputmode="decimal" value="${fmt(l.x)}"></label>
+      <label>Y <input data-prop="y" type="number" step="0.001" inputmode="decimal" value="${fmt(l.y)}"></label>
+      <label>W <input data-prop="w" type="number" min="1" step="0.001" inputmode="decimal" value="${fmt(l.w)}"></label>
+      <label>H <input data-prop="h" type="number" min="1" step="0.001" inputmode="decimal" value="${fmt(l.h)}"></label>
       ${fillField}
       ${strokeField}
       ${radiusField}
@@ -1716,18 +1855,19 @@ cargo run --release -p figcraft-server</code></pre>
     const key = e.target.dataset.prop;
     if (!key) return;
     const v = e.target.value;
-    if (key === 'x' || key === 'y') l[key] = Number(v) || 0;
+    if (key === 'x' || key === 'y') l[key] = q(Number(v) || 0);
     else if (key === 'w' || key === 'h') {
       const ratio = l.w && l.h ? l.w / l.h : null;
-      l[key] = Math.max(8, Number(v) || 8);
+      l[key] = q(Math.max(1, Number(v) || 1));
       if (state.lockRatio && ratio) {
-        if (key === 'w') l.h = Math.max(8, l.w / ratio);
-        else l.w = Math.max(8, l.h * ratio);
+        if (key === 'w') l.h = q(Math.max(1, l.w / ratio));
+        else l.w = q(Math.max(1, l.h * ratio));
       }
       syncPropValues(l);
     }
-    else if (key === 'opacity') l.opacity = Number(v);
-    else if (key === 'strokeWidth') l.strokeWidth = Math.max(0, Number(v) || 0);
+    else if (key === 'opacity') l.opacity = Math.min(1, Math.max(0, Number(v)));
+    else if (key === 'strokeWidth') l.strokeWidth = q(Math.max(0, Number(v) || 0));
+    else if (key === 'radius') l.radius = q(Math.max(0, Number(v) || 0));
     else if (key === 'strokeHex') {
       if (/^#[0-9a-f]{6}$/i.test(v)) {
         l.stroke = v.toLowerCase();
@@ -1757,7 +1897,7 @@ cargo run --release -p figcraft-server</code></pre>
       const hex = propsEl.querySelector('[data-prop="colorHex"]');
       if (hex) hex.value = v.toUpperCase();
     }
-    draw(); updateHUD();
+    draw(); paintHUD();
   });
   propsEl.addEventListener('change', (e) => {
     if (!e.target.dataset.prop) return;
@@ -1814,7 +1954,15 @@ cargo run --release -p figcraft-server</code></pre>
     state.future = [];
     state.zoom = 1;
     state.fit = false;
+    // "Reset canvas" resets the tools too. Leaving sub-pixel mode armed after a
+    // reset silently defeats grid snapping, which reads as a broken snap toggle.
+    state.preciseMode = false;
+    state.precise = false;
+    state.snap = true;
+    state.lockRatio = false;
+    state.tool = 'select';
     $('#zoom').value = '1';
+    syncPrecisionChrome();
     syncBoardInputs();
     if (state.board.w > viewport.clientWidth - 56) fitZoom(); else resizeCanvas();
     syncPanels();
@@ -1859,7 +2007,7 @@ cargo run --release -p figcraft-server</code></pre>
     g.strokeStyle = darkBoard() ? 'rgba(255,255,255,.13)' : 'rgba(17,24,39,.08)';
     g.lineWidth = 1;
     if (state.board.grid && !state.board.alpha) {
-      const gs = Math.max(4, state.board.gridSize || 32);
+      const gs = Math.max(0.5, state.board.gridSize || 32);
       for (let x = gs; x < state.board.w; x += gs) { g.beginPath(); g.moveTo(x, 0); g.lineTo(x, state.board.h); g.stroke(); }
       for (let y = gs; y < state.board.h; y += gs) { g.beginPath(); g.moveTo(0, y); g.lineTo(state.board.w, y); g.stroke(); }
     }
@@ -1963,7 +2111,7 @@ cargo run --release -p figcraft-server</code></pre>
   $('#board-bg').addEventListener('input', (e) => { state.board.bg = e.target.value; state.board.alpha = false; $('#board-alpha').checked = false; draw(); save(); });
   $('#board-alpha').addEventListener('change', (e) => { state.board.alpha = e.target.checked; $('#grid-on').disabled = state.board.alpha; draw(); save(); });
   $('#grid-on').addEventListener('change', (e) => { state.board.grid = e.target.checked; draw(); save(); });
-  $('#grid-size').addEventListener('change', (e) => { state.board.gridSize = Math.max(4, Math.min(200, Number(e.target.value) || 32)); draw(); save(); });
+  $('#grid-size').addEventListener('change', (e) => { state.board.gridSize = q(Math.max(0.5, Math.min(200, Number(e.target.value) || 32))) || 32; draw(); save(); });
   $('#zoom').addEventListener('change', (e) => setZoom(e.target.value));
   $('#zoom-value').addEventListener('change', (e) => {
     const pct = Math.min(400, Math.max(10, Number(e.target.value) || 100));
@@ -1996,6 +2144,7 @@ cargo run --release -p figcraft-server</code></pre>
   document.addEventListener('keyup', (e) => {
     if (e.code === 'Space') { spaceDown = false; viewport.classList.remove('pannable'); }
   });
+  let nudgeTimer = 0;
   document.addEventListener('keydown', (e) => {
     const tag = (e.target.tagName || '').toLowerCase();
     if (tag === 'input' || tag === 'select' || tag === 'textarea') return;
@@ -2028,20 +2177,34 @@ cargo run --release -p figcraft-server</code></pre>
       return;
     }
     if (!state.selected) return;
-    const step = e.shiftKey ? 10 : 1;
+    // Three-tier nudge: Alt = 0.001 (sub-pixel), Shift = 10, default = 1
+    const step = e.altKey ? 0.001 : e.shiftKey ? 10 : 1;
     if (['ArrowLeft', 'ArrowRight', 'ArrowUp', 'ArrowDown'].includes(e.key)) {
       e.preventDefault();
-      snapshot();
-      if (e.key === 'ArrowLeft') state.selected.x -= step;
-      if (e.key === 'ArrowRight') state.selected.x += step;
-      if (e.key === 'ArrowUp') state.selected.y -= step;
-      if (e.key === 'ArrowDown') state.selected.y += step;
-      draw(); syncProps(); save();
+      const l = state.selected;
+      const dx = e.key === 'ArrowLeft' ? -step : e.key === 'ArrowRight' ? step : 0;
+      const dy = e.key === 'ArrowUp'   ? -step : e.key === 'ArrowDown'  ? step : 0;
+      // A lone arrow-key repeat should collapse into one undo step.
+      if (!nudgeTimer) snapshot();
+      clearTimeout(nudgeTimer);
+      nudgeTimer = setTimeout(() => { nudgeTimer = 0; }, 700);
+
+      if (e.metaKey || e.ctrlKey) {
+        // resize instead of move
+        if (dx) l.w = q(Math.max(1, l.w + dx));
+        if (dy) l.h = q(Math.max(1, l.h + dy));
+      } else {
+        if (dx) l.x = q(l.x + dx);
+        if (dy) l.y = q(l.y + dy);
+      }
+      draw(); syncPropValues(l); paintHUD(); save();
+      showPrecisionBadge(step);
     }
   });
 
   window.addEventListener('resize', () => { if (state.fit) fitZoom(); });
   load();
+  syncPrecisionChrome();
   if (!state.selected && state.layers.length) state.selected = state.layers[0];
   syncBoardInputs();
   syncPanels();
