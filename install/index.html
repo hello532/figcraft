@@ -22,9 +22,7 @@
 <meta name="twitter:title" content="How to Install FigCraft on macOS, Windows, Linux">
 <meta name="twitter:description" content="Install FigCraft on Linux (AppImage, .deb, .rpm, flatpak), macOS, Windows or FreeBSD. System requirements, which download to pick, and building from source.">
 <meta name="twitter:image" content="https://figcraft.rerivo.com/og.png">
-<script type="application/ld+json">
-{"@context":"https://schema.org","@graph":[{"@type":"WebPage","@id":"https://figcraft.rerivo.com/install/#page","url":"https://figcraft.rerivo.com/install/","name":"How to Install FigCraft on macOS, Windows, Linux","description":"Install FigCraft from prebuilt builds or build it from source with a Rust toolchain. macOS, Windows, Linux, FreeBSD and the browser build, step by step.","isPartOf":{"@id":"https://figcraft.rerivo.com/#website"},"inLanguage":"en"},{"@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"FigCraft Guide","item":"https://figcraft.rerivo.com/"},{"@type":"ListItem","position":2,"name":"Install","item":"https://figcraft.rerivo.com/install/"}]},{"@type":"FAQPage","mainEntity":[{"@type":"Question","name":"What are FigCraft's system requirements?","acceptedAnswer":{"@type":"Answer","text":"macOS (Apple Silicon and Intel, universal build), Windows 10/11 (x64 and ARM64), Linux (x86_64, aarch64 or riscv64), FreeBSD x86_64, or any modern browser via the WebAssembly build. No server, account or GPU is required, and the download is in the tens of megabytes. A Rust toolchain is needed only when building from source."}},{"@type":"Question","name":"Is there a FigCraft AppImage for Linux?","acceptedAnswer":{"@type":"Answer","text":"Yes. Each release attaches figcraft-<version>-linux-<arch>.AppImage alongside .deb, .rpm, .flatpak, .pkg.tar.zst and .tar.gz builds. The AppImage is a single file: chmod +x it and run it, with no system-wide install step."}},{"@type":"Question","name":"Does FigCraft support FreeBSD?","acceptedAnswer":{"@type":"Answer","text":"FreeBSD x86_64 is supported and ships as a .tar.gz in each release. FreeBSD aarch64 was dropped as of v0.9.0 because it could not be built within the 5-hour CI limit."}},{"@type":"Question","name":"Do I need Rust to install FigCraft?","acceptedAnswer":{"@type":"Answer","text":"No. Prebuilt installers for every platform are attached to each GitHub release. A Rust toolchain and the separate craft-fonts repository are only required when building the desktop app from source."}},{"@type":"Question","name":"Does the browser build need an install?","acceptedAnswer":{"@type":"Answer","text":"No install at all — open the studio and the editor runs in WebAssembly. The browser build cannot open or save local files yet, so it is for trying the editor rather than real work."}}]}]}
-</script>
+<script type="application/ld+json">{"@context":"https://schema.org","@graph":[{"@type":"WebPage","@id":"https://figcraft.rerivo.com/install/#page","url":"https://figcraft.rerivo.com/install/","name":"How to Install FigCraft on macOS, Windows, Linux","description":"Install FigCraft from prebuilt builds or build it from source with a Rust toolchain. macOS, Windows, Linux, FreeBSD and the browser build, step by step.","isPartOf":{"@id":"https://figcraft.rerivo.com/#website"},"inLanguage":"en"},{"@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"FigCraft Guide","item":"https://figcraft.rerivo.com/"},{"@type":"ListItem","position":2,"name":"Install","item":"https://figcraft.rerivo.com/install/"}]},{"@type":"FAQPage","mainEntity":[{"@type":"Question","name":"What are FigCraft's system requirements?","acceptedAnswer":{"@type":"Answer","text":"macOS (Apple Silicon and Intel, universal build), Windows 10/11 (x64 and ARM64), Linux (x86_64, aarch64 or riscv64), FreeBSD x86_64, or any modern browser via the WebAssembly build. No server, account or GPU is required, and the download is in the tens of megabytes. A Rust toolchain is needed only when building from source."}},{"@type":"Question","name":"Is there a FigCraft AppImage for Linux?","acceptedAnswer":{"@type":"Answer","text":"Yes. Each release attaches figcraft-<version>-linux-<arch>.AppImage alongside .deb, .rpm, .flatpak, .pkg.tar.zst and .tar.gz builds. The AppImage is a single file: chmod +x it and run it, with no system-wide install step."}},{"@type":"Question","name":"Does FigCraft support FreeBSD?","acceptedAnswer":{"@type":"Answer","text":"FreeBSD x86_64 is supported and ships as a .tar.gz in each release. FreeBSD aarch64 was dropped as of v0.9.0 because it could not be built within the 5-hour CI limit."}},{"@type":"Question","name":"Do I need Rust to install FigCraft?","acceptedAnswer":{"@type":"Answer","text":"No. Prebuilt installers for every platform are attached to each GitHub release. A Rust toolchain and the separate craft-fonts repository are only required when building the desktop app from source."}},{"@type":"Question","name":"Does the browser build need an install?","acceptedAnswer":{"@type":"Answer","text":"No install at all — open the studio and the editor runs in WebAssembly. The browser build cannot open or save local files yet, so it is for trying the editor rather than real work."}},{"@type":"Question","name":"Does FigCraft have an MCP server?","acceptedAnswer":{"@type":"Answer","text":"Yes. FigCraft ships a Model Context Protocol server so an AI agent can create and edit layers, run menu commands, inspect the document as JSON and render it as PNG, over newline-delimited JSON-RPC 2.0 on stdio. Start it headless with figcraft-cli mcp, or attach to a running app with figcraft-cli mcp --attach <port> so you can watch the edits live. The control channel listens on 127.0.0.1 only."}}]}]}</script>
 <style>
   :root{
     --bg:#f7f7f5; --surface:#fff; --fg:#161616; --muted:#5f6368; --border:#e4e4df;
@@ -362,7 +360,31 @@ cargo run --release -p figcraft-server</code></pre>
   <a href="/#how">how the studio works</a> on the main guide rather than repeating it here.</p>
 </section>
 <section>
-    <h2>FigCraft guides and source</h2>
+  <h2>Does FigCraft have an MCP server?</h2>
+  <p>Yes. FigCraft ships a Model Context Protocol server so an AI agent can design with it: create and edit
+  layers, run any menu command, inspect the result as JSON, and look at it as a PNG. It speaks
+  newline-delimited JSON-RPC 2.0 over stdio.</p>
+  <p>There are two ways to start it, and the difference matters:</p>
+  <div style="overflow-x:auto">
+  <table class="cmp">
+    <thead><tr><th>Command</th><th>Backend</th><th>Use when</th></tr></thead>
+    <tbody>
+      <tr><td><code>figcraft-cli mcp</code></td><td><strong>Headless</strong> — an in-process engine session with one untitled document, no window, CPU renderer</td><td>Scripted or batch work; nothing appears on screen.</td></tr>
+      <tr><td><code>figcraft-cli mcp --attach &lt;port&gt;</code></td><td><strong>Attached</strong> — drives a running FigCraft app over its control channel (<code>figcraft --control &lt;port&gt;</code>)</td><td>You want to watch every change happen live.</td></tr>
+    </tbody>
+  </table>
+  </div>
+  <p>The control channel only listens on 127.0.0.1. Attached calls are never replayed automatically after a
+  transport failure — the app may already have applied the request before the reply was lost — so inspect the
+  document before retrying an edit. File access can be confined with
+  <code>--automation-read-root</code> and <code>--automation-write-root</code>.</p>
+  <p class="note">MCP support is young and has open reports (<a href="https://github.com/storytold/figcraft/issues/927" rel="noopener">#927</a>,
+  <a href="https://github.com/storytold/figcraft/issues/967" rel="noopener">#967</a>). The reference is
+  <a href="https://github.com/storytold/figcraft/blob/main/docs/mcp.md" rel="noopener">docs/mcp.md</a>.</p>
+</section>
+
+<section>
+  <h2>How the browser studio works</h2>urce</h2>
     <p class="sub">The project moves fast; these are the primary sources to read after this page.</p>
     <div class="grid">
       <div class="card"><h3>Build & install</h3><p>The <a href="https://github.com/storytold/figcraft#get-started" rel="noopener">README</a> has desktop, server and WebAssembly build steps, plus the <code>craft-fonts</code> requirement.</p></div>
@@ -376,6 +398,7 @@ cargo run --release -p figcraft-server</code></pre>
 <section>
   <h2>Frequently asked about installing FigCraft</h2>
   <div class="faq">
+    <details><summary>Does FigCraft have an MCP server?</summary><p>Yes. FigCraft ships a Model Context Protocol server so an AI agent can create and edit layers, run menu commands, inspect the document as JSON and render it as PNG, over newline-delimited JSON-RPC 2.0 on stdio. Start it headless with figcraft-cli mcp, or attach to a running app with figcraft-cli mcp --attach &lt;port&gt; so you can watch the edits live. The control channel listens on 127.0.0.1 only.</p></details>
     <details><summary>What are FigCraft's system requirements?</summary><p>macOS (Apple Silicon and Intel, universal build), Windows 10/11 (x64 and ARM64), Linux (x86_64, aarch64 or riscv64), FreeBSD x86_64, or any modern browser via the WebAssembly build. No server, account or GPU is required, and the download is in the tens of megabytes. A Rust toolchain is needed only when building from source.</p></details>
     <details><summary>Is there a FigCraft AppImage for Linux?</summary><p>Yes. Each release attaches figcraft-&lt;version&gt;-linux-&lt;arch&gt;.AppImage alongside .deb, .rpm, .flatpak, .pkg.tar.zst and .tar.gz builds. The AppImage is a single file: chmod +x it and run it, with no system-wide install step.</p></details>
     <details><summary>Does FigCraft support FreeBSD?</summary><p>FreeBSD x86_64 is supported and ships as a .tar.gz in each release. FreeBSD aarch64 was dropped as of v0.9.0 because it could not be built within the 5-hour CI limit.</p></details>
