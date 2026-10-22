@@ -3,8 +3,8 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>FigCraft Guides: Import, Export, CLI and Offline Work</title>
-<meta name="description" content="Eight task-level FigCraft guides and a glossary: opening .fig files, SVG export, offline files, keyboard shortcuts, MCP, CLI automation, Linux and Figma migration.">
+<title>FigCraft Guides: Import, Export, MCP, CLI and Linux</title>
+<meta name="description" content="One page for the parts of FigCraft that break: opening .fig files, SVG export, offline files, shortcuts, MCP, CLI automation, Linux packages and Figma migration.">
 <meta name="robots" content="index,follow,max-image-preview:large">
 <meta name="author" content="FigCraft Guide">
 <meta name="theme-color" content="#2563eb">
@@ -14,8 +14,8 @@
 <link rel="icon" type="image/svg+xml" href="/assets/favicon.svg">
 <link rel="stylesheet" href="/assets/site.css">
 <script src="/assets/site.js" defer></script>
-<meta property="og:title" content="FigCraft Guides: Import, Export, CLI and Offline Work">
-<meta property="og:description" content="Eight task-level FigCraft guides and a glossary: opening .fig files, SVG export, offline files, keyboard shortcuts, MCP, CLI automation, Linux and Figma migration.">
+<meta property="og:title" content="FigCraft Guides: Import, Export, MCP, CLI and Linux">
+<meta property="og:description" content="One page for the parts of FigCraft that break: opening .fig files, SVG export, offline files, shortcuts, MCP, CLI automation, Linux packages and Figma migration.">
 <meta property="og:type" content="website">
 <meta property="og:locale" content="en_US">
 <meta property="og:url" content="https://figcraft.rerivo.com/learn/">
@@ -25,10 +25,10 @@
 <meta property="og:image:alt" content="FigCraft — a Figma alternative written in pure Rust">
 <meta property="article:modified_time" content="2026-10-22">
 <meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:title" content="FigCraft Guides: Import, Export, CLI and Offline Work">
-<meta name="twitter:description" content="Eight task-level FigCraft guides and a glossary: opening .fig files, SVG export, offline files, keyboard shortcuts, MCP, CLI automation, Linux and Figma migration.">
+<meta name="twitter:title" content="FigCraft Guides: Import, Export, MCP, CLI and Linux">
+<meta name="twitter:description" content="One page for the parts of FigCraft that break: opening .fig files, SVG export, offline files, shortcuts, MCP, CLI automation, Linux packages and Figma migration.">
 <meta name="twitter:image" content="https://figcraft.rerivo.com/og.png">
-<script type="application/ld+json">{"@context":"https://schema.org","@graph":[{"@type":"WebPage","@id":"https://figcraft.rerivo.com/learn/#page","url":"https://figcraft.rerivo.com/learn/","name":"FigCraft guides for the work that actually breaks","description":"Eight task-level FigCraft guides and a glossary: opening .fig files, SVG export, offline files, keyboard shortcuts, MCP, CLI automation, Linux and Figma migration.","isPartOf":{"@type":"WebSite","name":"FigCraft Guide","url":"https://figcraft.rerivo.com/"},"inLanguage":"en","dateModified":"2026-10-22","datePublished":"2026-10-22"},{"@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Learn","item":"https://figcraft.rerivo.com/learn/"}]},{"@type":"CollectionPage","@id":"https://figcraft.rerivo.com/learn/#collection","name":"FigCraft guides for the work that actually breaks","description":"Eight task-level FigCraft guides and a glossary: opening .fig files, SVG export, offline files, keyboard shortcuts, MCP, CLI automation, Linux and Figma migration.","mainEntity":{"@type":"ItemList","itemListElement":[{"@type":"ListItem","position":1,"name":"Open a .fig file","url":"https://figcraft.rerivo.com/learn/open-fig-file/"},{"@type":"ListItem","position":2,"name":"Export SVG","url":"https://figcraft.rerivo.com/learn/export-svg/"},{"@type":"ListItem","position":3,"name":"Keyboard shortcuts","url":"https://figcraft.rerivo.com/learn/keyboard-shortcuts/"},{"@type":"ListItem","position":4,"name":"Design offline","url":"https://figcraft.rerivo.com/learn/offline-design/"},{"@type":"ListItem","position":5,"name":"The MCP server","url":"https://figcraft.rerivo.com/learn/mcp-server/"},{"@type":"ListItem","position":6,"name":"CLI automation","url":"https://figcraft.rerivo.com/learn/cli-automation/"},{"@type":"ListItem","position":7,"name":"Install on Linux","url":"https://figcraft.rerivo.com/learn/install-linux/"},{"@type":"ListItem","position":8,"name":"Migrate from Figma","url":"https://figcraft.rerivo.com/learn/migrate-from-figma/"},{"@type":"ListItem","position":9,"name":"Glossary","url":"https://figcraft.rerivo.com/glossary/"}]}},{"@type":"FAQPage","@id":"https://figcraft.rerivo.com/learn/#faq","mainEntity":[{"@type":"Question","name":"Is FigCraft ready for a production design team?","acceptedAnswer":{"@type":"Answer","text":"Not as a replacement for a hosted team tool. It is an early alpha at about 49% parity by the project's own estimate, with no accounts, teams or cloud. It is ready for solo interface work on local files, and for developers who want the same command engine in a script and in a UI."}},{"@type":"Question","name":"Which version do these guides cover?","acceptedAnswer":{"@type":"Answer","text":"v0.9.0, released 2026-10-21, on macOS, Windows, Linux, FreeBSD and the WebAssembly build. Commands come from the project's own CLI, MCP and control-protocol documentation for that release."}},{"@type":"Question","name":"Do these guides apply to the browser studio on this site?","acceptedAnswer":{"@type":"Answer","text":"Only where a page says so. The studio at /#demo is an independent canvas, not the FigCraft app: different renderer, different shortcuts, different export set. The pages that touch either one label it."}},{"@type":"Question","name":"Where do I report a bug or check whether mine is known?","acceptedAnswer":{"@type":"Answer","text":"The tracker at github.com/storytold/figcraft/issues. This guide links the issues it can verify, and the curated shortlist is on known issues."}},{"@type":"Question","name":"Is this an official FigCraft site?","acceptedAnswer":{"@type":"Answer","text":"No. It is an independent guide. The project's repository and release notes are the primary sources, and this site links them rather than paraphrasing them away."}}]}]}</script>
+<script type="application/ld+json">{"@context":"https://schema.org","@graph":[{"@type":"WebPage","@id":"https://figcraft.rerivo.com/learn/#page","url":"https://figcraft.rerivo.com/learn/","name":"FigCraft guides for the work that actually breaks","description":"One page for the parts of FigCraft that break: opening .fig files, SVG export, offline files, shortcuts, MCP, CLI automation, Linux packages and Figma migration.","isPartOf":{"@type":"WebSite","name":"FigCraft Guide","url":"https://figcraft.rerivo.com/"},"inLanguage":"en","dateModified":"2026-10-22","datePublished":"2026-10-22"},{"@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Learn","item":"https://figcraft.rerivo.com/learn/"}]},{"@type":"Article","@id":"https://figcraft.rerivo.com/learn/#article","headline":"FigCraft guides for the work that actually breaks","description":"One page for the parts of FigCraft that break: opening .fig files, SVG export, offline files, shortcuts, MCP, CLI automation, Linux packages and Figma migration.","datePublished":"2026-10-22","dateModified":"2026-10-22","author":{"@type":"Organization","name":"FigCraft Guide","url":"https://figcraft.rerivo.com/"},"publisher":{"@type":"Organization","name":"FigCraft Guide","url":"https://figcraft.rerivo.com/"},"mainEntityOfPage":{"@id":"https://figcraft.rerivo.com/learn/#page"},"about":{"@type":"SoftwareApplication","name":"FigCraft","applicationCategory":"DesignApplication","operatingSystem":"macOS, Windows, Linux, FreeBSD, Web","offers":{"@type":"Offer","price":"0","priceCurrency":"USD"}}},{"@type":"DefinedTermSet","@id":"https://figcraft.rerivo.com/learn/#terms","name":"Figma and design-tool glossary","hasDefinedTerm":[{"@type":"DefinedTerm","name":"Auto layout","description":"A frame that places its children by rules — direction, gap, padding, alignment, sizing — not by coordinates, so imports are placed by the layout."},{"@type":"DefinedTerm","name":"Component","description":"A reusable master layer whose edits reach its instances; the engine treats it as ordinary commands."},{"@type":"DefinedTerm","name":"Instance","description":"A copy linked to a component that inherits its properties and can carry overrides — what a swap drops."},{"@type":"DefinedTerm","name":"Variant","description":"One named state of a component, chosen through properties, not by swapping files."},{"@type":"DefinedTerm","name":"Variable","description":"A named value — colour, number, string, boolean — that layers bind to, not a literal."},{"@type":"DefinedTerm","name":"Mode","description":"One value set of a variable collection, such as Light and Dark; the first is default."},{"@type":"DefinedTerm","name":"Alias","description":"A variable whose value is another variable, which is how a token hierarchy carries a change down."},{"@type":"DefinedTerm","name":"Design token","description":"A named design decision — colour, spacing, radius, type step — stored once and referenced everywhere."},{"@type":"DefinedTerm","name":"Constraint","description":"How a free-positioned child moves or resizes when its frame resizes; auto-layout children follow the flow."},{"@type":"DefinedTerm","name":"Inspect","description":"FigCraft's handoff panel: layout, type, fills and effects with style and variable names, plus CSS, HTML, React, Leptos, SwiftUI or Compose."},{"@type":"DefinedTerm","name":"MCP","description":"The Model Context Protocol, which lets an agent call FigCraft's 400+ commands instead of a private API."},{"@type":"DefinedTerm","name":"WASM","description":"WebAssembly, the target that compiles the same Rust engine into a browser tab."},{"@type":"DefinedTerm","name":".figcraft","description":"FigCraft's native document: an archive on disk holding the layer tree, styles, variables and images, with no account or telemetry."},{"@type":"DefinedTerm","name":".fig","description":"Figma's document format, imported best-effort — import a copy, save a .figcraft, keep the original."}]},{"@type":"FAQPage","@id":"https://figcraft.rerivo.com/learn/#faq","mainEntity":[{"@type":"Question","name":"Is FigCraft ready for a production design team?","acceptedAnswer":{"@type":"Answer","text":"Not as a replacement for a hosted team tool. It is an early alpha at about 49% parity by the project's own estimate, with no accounts, teams or cloud. It is ready for solo interface work on local files, and for developers who want the same command engine in a script and in a UI."}},{"@type":"Question","name":"Which version does this page cover?","acceptedAnswer":{"@type":"Answer","text":"v0.10.0, on macOS, Windows, Linux, FreeBSD and the WebAssembly build. Commands come from the project's own CLI, MCP and control-protocol documentation for that release."}},{"@type":"Question","name":"Does any of this apply to the browser studio on this site?","acceptedAnswer":{"@type":"Answer","text":"Only where a topic says so. The studio at /#demo is an independent canvas, not the FigCraft app: different renderer, different shortcuts, different export set, and it cannot read .figcraft."}},{"@type":"Question","name":"Can FigCraft open a Figma .fig file?","acceptedAnswer":{"@type":"Answer","text":"Yes, on a best-effort basis. Large files are a known failure mode (#574), grid auto layout loses tracks (#465), instance-swap overrides fall back to the main component (#464), and the import does not report everything it discards (#467). Keep the original .fig."}},{"@type":"Question","name":"How do I find the real app's keyboard shortcuts?","acceptedAnswer":{"@type":"Answer","text":"Print them from your build: figcraft-cli commands lists every command with its shortcut, and --json with --filter narrows the result. Over MCP, list_commands reports each command's first key for the platform the server runs on."}},{"@type":"Question","name":"Where do I report a bug or check whether mine is known?","acceptedAnswer":{"@type":"Answer","text":"The tracker at github.com/storytold/figcraft/issues. Each topic above links the issues it can verify, and the curated shortlist is on known issues."}}]}]}</script>
 </head>
 <body>
 <a class="skip" href="#main">Skip to content</a>
@@ -47,56 +47,197 @@
   <div class="wrap">
     <div class="hero">
       <ul class="crumbs"><li><span>Learn</span></li></ul>
-      <p class="eyebrow">Learn</p>
+      <p class="eyebrow">Guides</p>
       <h1>FigCraft guides for the work that actually breaks</h1>
-      <p class="lede">Task-level guides for the parts of FigCraft that catch people out: import, export, automation and the move off Figma. Each one says what is checked for v0.9.0 and where the checking stops.</p>
-      <div class="meta-line"><span>Independent guide</span><span>·</span><span>Updated 2026-10-22</span><span>·</span><span>Covers FigCraft v0.9.0</span><span>·</span><span>4 min read</span></div>
+      <p class="lede">FigCraft is an early alpha at roughly 49% parity by the project's own estimate. The useful questions are narrower: will my file open, what does the exporter write, can a script drive this, and what does leaving Figma cost. Eight answers below, each with the commands and the issue that tracks the failure.</p>
+      <div class="meta-line"><span>Independent guide</span><span>·</span><span>Updated 2026-10-22</span><span>·</span><span>Covers FigCraft v0.10.0</span><span>·</span><span>8 min read</span></div>
       <div class="cta"><a class="btn primary" href="/install/">Download FigCraft</a><a class="btn ghost" href="/#demo">Open the studio</a></div>
     </div>
-<section class="prose">
-      <h2>How to use this section</h2>
-      <p>FigCraft is an early alpha at roughly 49% parity with Figma, by the project's own estimate. That number is not the useful question. The useful questions are narrower: will my file open, what does the exporter actually write, can I drive this from a script, and what does it cost to leave Figma. There is one guide per question.</p>
-      <p>Every page is written against v0.9.0, released 2026-10-21. The project moves quickly, so where a behaviour is still in flux the page links the tracking issue instead of promising an outcome.</p>
-    </section>
-    <section>
-      <h2>The eight guides</h2>
+<section id="start">
+      <h2>Start from the symptom</h2>
+      <p class="sub">Find your problem, then jump to its topic.</p>
       <div class="grid">
-        <a class="card" href="/learn/open-fig-file/"><span class="k">Import</span><h3>Open a .fig file</h3><p>Check a .fig before the UI touches it, convert it to .figcraft, and decide what to rebuild.</p></a>
-        <a class="card" href="/learn/export-svg/"><span class="k">Export</span><h3>Export SVG</h3><p>What the real exporter writes, what the demo studio writes, and why they are not the same file.</p></a>
-        <a class="card" href="/learn/keyboard-shortcuts/"><span class="k">Keys</span><h3>Keyboard shortcuts</h3><p>The demo's shortcut list, and how to dump the real app's keymap instead of guessing at it.</p></a>
-        <a class="card" href="/learn/offline-design/"><span class="k">Files</span><h3>Design offline</h3><p>Local .figcraft archives, no account, and the backup duty that comes with that.</p></a>
-        <a class="card" href="/learn/mcp-server/"><span class="k">Agents</span><h3>The MCP server</h3><p>Headless or attached, client configuration, and the file roots that keep an agent in its lane.</p></a>
-        <a class="card" href="/learn/cli-automation/"><span class="k">Automation</span><h3>CLI automation</h3><p>info, export, convert, render, and command scripts that are all-or-nothing.</p></a>
-        <a class="card" href="/learn/install-linux/"><span class="k">Install</span><h3>Install on Linux</h3><p>AppImage, deb, rpm, flatpak, Arch package and tarball, per architecture.</p></a>
-        <a class="card" href="/learn/migrate-from-figma/"><span class="k">Migration</span><h3>Migrate from Figma</h3><p>An honest order of operations, and the four things that usually break.</p></a>
+        <div class="card"><span class="k">Import</span><h3>My .fig file will not open</h3><p>Large files fail or hang: <a href="#topic-open-fig">open a .fig file</a>.</p></div>
+        <div class="card"><span class="k">Export</span><h3>My SVG looks nothing like the canvas</h3><p>Text stays text, fonts come from the viewer: <a href="#topic-export">export SVG</a>.</p></div>
+        <div class="card"><span class="k">Keys</span><h3>The keys from the demo do nothing</h3><p>They were never the app's: <a href="#topic-keys">shortcuts</a>.</p></div>
+        <div class="card"><span class="k">Files</span><h3>There is no cloud copy of my file</h3><p>No account, no history but yours: <a href="#topic-offline">work offline</a>.</p></div>
+        <div class="card"><span class="k">Agents</span><h3>I need an agent to drive the app</h3><p>Headless or attached: <a href="#topic-mcp">the MCP server</a>.</p></div>
+        <div class="card"><span class="k">Automation</span><h3>I have to build 300 screens overnight</h3><p>A script, not a UI session: <a href="#topic-cli">CLI automation</a>.</p></div>
+        <div class="card"><span class="k">Install</span><h3>The AppImage will not start</h3><p>Usually the wrong architecture: <a href="#topic-linux">install on Linux</a>.</p></div>
+        <div class="card"><span class="k">Migration</span><h3>I am moving a real team file off Figma</h3><p>Import gets a document, not a system: <a href="#topic-migrate">migrate from Figma</a>.</p></div>
       </div>
-      <p class="note">Platform installers live on <a href="/install/">install</a>, the bug list on <a href="/issues/">known issues</a>, and the head-to-head on <a href="/vs-figma/">FigCraft vs Figma</a>. If you came for a reference rather than a task, start with the <a href="/glossary/">glossary</a>.</p>
     </section>
-    <section>
-      <h2>Match the guide to the symptom</h2>
-      <ul class="list">
-        <li><strong>A .fig file hangs, or arrives with pieces missing</strong><span>Start with <a href="/learn/open-fig-file/">open a .fig file</a>, then read <a href="https://github.com/storytold/figcraft/issues/574" rel="noopener">#574</a> and the umbrella <a href="https://github.com/storytold/figcraft/issues/321" rel="noopener">#321</a>.</span></li>
-        <li><strong>An exported SVG looks nothing like the canvas</strong><span>Read <a href="/learn/export-svg/">export SVG</a> before blaming the renderer. Text kept as text and fonts the viewer does not have explain most of it.</span></li>
-        <li><strong>The keys you learned on the demo do nothing in the app</strong><span>They were never the app's keys. <a href="/learn/keyboard-shortcuts/">Keyboard shortcuts</a> separates the two lists.</span></li>
-        <li><strong>You need to build 300 screens overnight</strong><span>That is a script, not a UI session. See <a href="/learn/cli-automation/">CLI automation</a> and the <a href="/learn/mcp-server/">MCP server</a>.</span></li>
-        <li><strong>The AppImage will not start, or you are on ARM</strong><span><a href="/learn/install-linux/">Install on Linux</a> has the format matrix, including where the architecture coverage stops.</span></li>
-      </ul>
+    <section id="topics">
+      <h2>The eight topics</h2>
+
+      <details id="topic-open-fig" style="margin:0 0 14px">
+        <summary><strong>My .fig file will not open</strong></summary>
+        <p>Import is best effort: survey the file with the CLI first.</p>
+        <ol class="steps">
+          <li><strong>Freeze the original.</strong><pre><code>cp brand-source.fig brand-source.fig.keep
+shasum -a 256 brand-source.fig.keep   # sha256sum on Linux</code></pre></li>
+          <li><strong>Build the CLI.</strong><pre><code>cargo build --release -p figcraft-cli
+./target/release/figcraft-cli --help</code></pre></li>
+          <li><strong>Survey without a window.</strong> <code>info</code> prints pages, node counts, frames, styles, variables and missing fonts, sending unimported material to stderr as <code>note:</code> lines.<pre><code>./target/release/figcraft-cli info brand-source.fig --json &gt; import-report.json</code></pre></li>
+          <li><strong>Convert a copy, then edit the native file.</strong><pre><code>./target/release/figcraft-cli convert brand-source.fig brand.figcraft</code></pre></li>
+          <li><strong>If it stalls, slice by frame</strong> — export the worst frames from Figma as SVG and convert each alone.<pre><code>./target/release/figcraft-cli convert home.svg home.figcraft</code></pre></li>
+        </ol>
+        <p>What goes wrong: a large file fails or takes very long (<a href="https://github.com/storytold/figcraft/issues/574" rel="noopener">#574</a>, umbrella <a href="https://github.com/storytold/figcraft/issues/321" rel="noopener">#321</a>, with large-file opening improved in <a href="https://github.com/storytold/figcraft/issues/315" rel="noopener">#315</a>); grid auto layout arrives without tracks (<a href="https://github.com/storytold/figcraft/issues/465" rel="noopener">#465</a>); instance-swap overrides fall back to the main default (<a href="https://github.com/storytold/figcraft/issues/464" rel="noopener">#464</a>); and the import does not report all it discarded (<a href="https://github.com/storytold/figcraft/issues/467" rel="noopener">#467</a>).</p>
+        <p class="note">Unverified: how much of any file survives. Coverage is file-dependent; <a href="https://github.com/storytold/figcraft/issues/467" rel="noopener">#467</a> says reports can omit losses.</p>
+      </details>
+
+      <details id="topic-export" style="margin:0 0 14px">
+        <summary><strong>My SVG looks nothing like the canvas</strong></summary>
+        <p>One Rust exporter serves the app and CLI. The studio at <a href="/#demo">/#demo</a> cannot read <code>.figcraft</code> and renders differently; do not diff the two.</p>
+        <ol class="steps">
+          <li><strong>Confirm the target.</strong> <code>--node</code> and <code>--page</code> take a name or id.<pre><code>./target/release/figcraft-cli info app.figcraft</code></pre></li>
+          <li><strong>One layer, one file.</strong><pre><code>./target/release/figcraft-cli export app.figcraft -o hero.svg --node "Hero"</code></pre></li>
+          <li><strong>Every top-level frame.</strong> A directory output has no extension to infer; name the format.<pre><code>mkdir -p exports
+./target/release/figcraft-cli export app.figcraft -o exports/ --format svg</code></pre></li>
+          <li><strong>Rasters from the same source.</strong> PNG, JPG and WebP come from that engine, and <code>--scale</code> (up to 64) applies to rasters only, so the SVG is unchanged.<pre><code>./target/release/figcraft-cli export app.figcraft -o exports/ --scale 2</code></pre></li>
+          <li><strong>Print, or outline text.</strong> PDF keeps frames as separate pages; the automation <code>export</code> takes <code>svgOutlineText</code>, and <code>export.add</code> stores it per layer. Inspect generates CSS, HTML, React, Leptos, SwiftUI and Compose for handoff.<pre><code>./target/release/figcraft-cli export app.figcraft -o screens.pdf --page "Screens"</code></pre></li>
+        </ol>
+        <p>What goes wrong: SVG and PDF export refuse a document with visible descendants more than 256 levels below the exported root, and the old destination stays — check the exit code, not the timestamp; text stays <code>&lt;text&gt;</code> unless outlined, so a viewer lacking the family differs; a missing font is laid out in a fallback first (<a href="https://github.com/storytold/figcraft/issues/752" rel="noopener">#752</a>, rescan and refit under <a href="https://github.com/storytold/figcraft/issues/821" rel="noopener">#821</a>).</p>
+        <p class="note">Unverified: byte-level fidelity across viewers. Syntax was checked against the CLI docs, not real output.</p>
+      </details>
+
+      <details id="topic-keys" style="margin:0 0 14px">
+        <summary><strong>The keys from the demo do nothing</strong></summary>
+        <p>The demo's keys, not the app's: <code>V</code>/<code>F</code>/<code>R</code>/<code>T</code> tools, <code>Delete</code>, <code>Cmd</code>/<code>Ctrl</code>+<code>Z</code> (<code>Shift</code> redo), <code>Cmd</code>/<code>Ctrl</code>+<code>D</code>, <code>Cmd</code>/<code>Ctrl</code>+<code>C</code>/<code>V</code>, arrows 1 px (<code>Shift</code> 10, <code>Alt</code> 0.001), <code>Cmd</code>/<code>Ctrl</code>+arrows resize, <code>Space</code>+drag pan, <code>Cmd</code>/<code>Ctrl</code>+wheel zoom, <code>?</code> dialog.</p>
+        <ol class="steps">
+          <li><strong>Print the real table.</strong> <code>commands</code> lists label, shortcut and undoable marker.<pre><code>./target/release/figcraft-cli commands --filter export</code></pre></li>
+          <li><strong>Make it machine-readable.</strong><pre><code>./target/release/figcraft-cli commands --json &gt; commands.json</code></pre></li>
+          <li><strong>Read the platform binding.</strong> <code>list_commands</code> over MCP reports each command's first key for the server's platform — run it where you work.</li>
+          <li><strong>Check an ambiguous key by its command.</strong> Use as mask is <code>Ctrl+Cmd+M</code> on macOS, <code>Ctrl+Alt+M</code> elsewhere; your build is authoritative.</li>
+          <li><strong>Skip the keymap in automation.</strong> <code>run_command</code> reaches a command by id; <code>key</code> resolves keys as the canvas does.</li>
+        </ol>
+        <p>What goes wrong: a shortcut types a character while a text layer is edited, because text keys win; and labels may be unreadable — the UI is small on 1440p (<a href="https://github.com/storytold/figcraft/issues/540" rel="noopener">#540</a>), addressed by the interface-size preference (<a href="https://github.com/storytold/figcraft/issues/818" rel="noopener">#818</a>).</p>
+        <p class="note">Unverified here: the real app's keymap, not reproduced because it changes between releases and platforms.</p>
+      </details>
+
+      <details id="topic-offline" style="margin:0 0 14px">
+        <summary><strong>There is no cloud copy of my file</strong></summary>
+        <p>A document is a <code>.figcraft</code> archive on disk: no sign-in, no workspace, no server, no telemetry. Local editing is finished; collaboration is a preview.</p>
+        <ol class="steps">
+          <li><strong>Use a native build, not the web build.</strong> WASM is an editor in a tab; the desktop build owns files.<pre><code>chmod +x figcraft-0.10.0-linux-x86_64.AppImage
+./figcraft-0.10.0-linux-x86_64.AppImage</code></pre></li>
+          <li><strong>Work in the native format.</strong><pre><code>./target/release/figcraft-cli convert brand-source.fig brand.figcraft</code></pre></li>
+          <li><strong>Version the file.</strong> A <code>.figcraft</code> is binary, so history is snapshot-based — a commit per milestone is cheapest.<pre><code>git init
+cp ~/Downloads/brand.figcraft .
+git add brand.figcraft</code></pre></li>
+          <li><strong>Keep a copy off the machine.</strong> No cloud means no server-side history.<pre><code>rsync -a --delete ~/work/brand/ /Volumes/Backup/brand/</code></pre></li>
+          <li><strong>Share deliberately, if at all.</strong> Self-host the optional server rather than trust a public one.<pre><code>cargo run --release -p figcraft-server</code></pre></li>
+        </ol>
+        <p>What goes wrong: a launch crash on macOS 27.0.1 with M1 (<a href="https://github.com/storytold/figcraft/issues/781" rel="noopener">#781</a>) is work-stopping because nothing is stored elsewhere; a missing family falls back silently, so one file differs across laptops (<a href="https://github.com/storytold/figcraft/issues/752" rel="noopener">#752</a>); and the public server is not end-to-end encrypted.</p>
+        <p class="note">Unverified: telemetry absence was not packet-inspected; it is the project's stated design. Backup commands are generic shell.</p>
+      </details>
+
+      <details id="topic-mcp" style="margin:0 0 14px">
+        <summary><strong>I need an agent to drive the app</strong></summary>
+        <p>JSON-RPC 2.0 over stdio, exposing the same 400+ commands as the menus. Headless is an in-process session with one untitled document and no window; attached drives a running app.</p>
+        <ol class="steps">
+          <li><strong>Build the CLI</strong> and use its absolute path in client configs; relative paths break when the client starts elsewhere.<pre><code>cargo build --release -p figcraft-cli</code></pre></li>
+          <li><strong>Start it headless</strong> for scripted work.<pre><code>./target/release/figcraft-cli mcp</code></pre></li>
+          <li><strong>Or attach to a running app.</strong> The channel listens on <code>127.0.0.1</code> only; <code>--attach</code> takes <code>host:port</code> too.<pre><code>figcraft --control 7979
+./target/release/figcraft-cli mcp --attach 7979</code></pre></li>
+          <li><strong>Register it with Claude Code.</strong><pre><code>claude mcp add figcraft -- /absolute/path/to/target/release/figcraft-cli mcp</code></pre></li>
+          <li><strong>Confine what it touches.</strong> Both flags repeat, folders must exist, and writes outside the roots are refused.<pre><code>./target/release/figcraft-cli mcp --automation-read-root /work/project --automation-write-root /work/project/out</code></pre></li>
+        </ol>
+        <p>What goes wrong: a line is capped at 32 MiB, and an oversized or unterminated frame returns <code>-32600</code> and closes the session; root flags cannot combine with <code>--attach</code>, so start the app with them; attached calls are never replayed after a transport failure; open reports include <a href="https://github.com/storytold/figcraft/issues/927" rel="noopener">#927</a> and <a href="https://github.com/storytold/figcraft/issues/967" rel="noopener">#967</a>; CI renders need <code>--no-system-fonts</code>.</p>
+        <p class="note">Unverified: which third-party MCP clients work end-to-end. Read results back with <code>inspect_document</code> or <code>screenshot</code>.</p>
+      </details>
+
+      <details id="topic-cli" style="margin:0 0 14px">
+        <summary><strong>I have to build 300 screens overnight</strong></summary>
+        <p>The same engine without a window: usage errors exit 2, failures exit 1, scripts land whole or not at all.</p>
+        <ol class="steps">
+          <li><strong>Inspect first.</strong> <code>--json</code> gives a machine-readable report.<pre><code>./target/release/figcraft-cli info app.figcraft --json &gt; report.json</code></pre></li>
+          <li><strong>Export deterministically.</strong> A directory output gives one file per top-level frame.<pre><code>./target/release/figcraft-cli export app.figcraft -o exports/ --scale 2</code></pre></li>
+          <li><strong>Run a command script</strong> — a JSON array of command/params pairs, where a later step refers to an earlier result with <code>{"$step": n}</code>.<pre><code>./target/release/figcraft-cli run start.json --out dashboard.figcraft</code></pre></li>
+          <li><strong>Confine the run.</strong> Both roots repeat; every file touched must fall inside them.<pre><code>./target/release/figcraft-cli render in/doc.figcraft -o out/ok.png --automation-read-root in --automation-write-root out</code></pre></li>
+          <li><strong>Print the command table, not a guess.</strong><pre><code>./target/release/figcraft-cli commands --filter layout</code></pre></li>
+        </ol>
+        <p>What goes wrong: a failing step prints <code>"ok": false</code> and <code>"rolledBack": true</code>, writes nothing including <code>--out</code>, restores the session and exits 1; a path outside the roots is refused, which is confinement working (<a href="https://github.com/storytold/figcraft/issues/839" rel="noopener">#839</a>); <code>render</code> fits the page to 16384 px; renders differ between machines without <code>--no-system-fonts</code>.</p>
+        <p class="note">Unverified: wall-clock timings. Exit codes, the render cap and rollback come from the CLI docs.</p>
+      </details>
+
+      <details id="topic-linux" style="margin:0 0 14px">
+        <summary><strong>The AppImage will not start</strong></summary>
+        <p>Match architecture first — an aarch64 build will not start on x86_64. Files are <code>figcraft-0.10.0-linux-ARCH.FORMAT</code>.</p>
+        <ol class="steps">
+          <li><strong>Verify the download.</strong><pre><code>sha256sum -c SHA256SUMS.txt --ignore-missing</code></pre></li>
+          <li><strong>AppImage: no install step.</strong> The file is the application, and bundles the CLI.<pre><code>chmod +x figcraft-0.10.0-linux-x86_64.AppImage
+./figcraft-0.10.0-linux-x86_64.AppImage cli info app.figcraft</code></pre></li>
+          <li><strong>Or let the distro own the binary.</strong> x86_64 and aarch64 ship all six formats; riscv64 deb, rpm, tarball only.<pre><code>sudo apt install ./figcraft-0.10.0-linux-x86_64.deb
+sudo dnf install ./figcraft-0.10.0-linux-x86_64.rpm
+sudo pacman -U figcraft-0.10.0-linux-x86_64.pkg.tar.zst
+flatpak install ./figcraft-0.10.0-linux-x86_64.flatpak</code></pre></li>
+          <li><strong>Tarball, also the FreeBSD path.</strong> Check what it unpacks into.<pre><code>tar -xzf figcraft-0.10.0-linux-x86_64.tar.gz</code></pre></li>
+          <li><strong>Source builds need <code>craft-fonts</code> beside the project</strong>, or a missing checkout falls back to another font. The browser build needs trunk and <code>cargo xtask wasm</code>.<pre><code>git clone https://github.com/storytold/figcraft
+cd figcraft
+git clone https://github.com/storytold/craft-fonts ../craft-fonts
+cargo run --release -p figcraft</code></pre></li>
+        </ol>
+        <p>What goes wrong: FreeBSD gets one <code>.tar.gz</code> for x86_64 only, because aarch64 was dropped (first announced in v0.9.0) when it could not build inside the CI job's 5-hour limit; deb, rpm, flatpak and Arch are not documented as bundling the CLI; a tiny interface is a 1440p problem (<a href="https://github.com/storytold/figcraft/issues/540" rel="noopener">#540</a>) fixed by the interface-size preference (<a href="https://github.com/storytold/figcraft/issues/818" rel="noopener">#818</a>); missing families fall back silently (<a href="https://github.com/storytold/figcraft/issues/752" rel="noopener">#752</a>).</p>
+        <p class="note">Unverified: distro runtime dependencies, and whether <code>pacman -U</code> upgrades cleanly. Filenames and the format matrix are checked against v0.10.0.</p>
+      </details>
+
+      <details id="topic-migrate" style="margin:0 0 14px">
+        <summary><strong>I am moving a real team file off Figma</strong></summary>
+        <p>A re-platforming with a known finishing cost, not a switch. Live sessions are a preview with no accounts, teams or cloud; nothing replaces Figma comments, libraries or multiplayer.</p>
+        <ol class="steps">
+          <li><strong>Inventory what you use</strong> — components, variants, variables, modes, fonts. That is the work breakdown.</li>
+          <li><strong>Start with the smallest representative file</strong> and keep the original plus a checksum.<pre><code>cp marketing.fig marketing.fig.keep
+shasum -a 256 marketing.fig.keep   # sha256sum on Linux</code></pre></li>
+          <li><strong>Read the import before opening it.</strong> Missing fonts and repairs surface here, though not every drop.<pre><code>./target/release/figcraft-cli info marketing.fig --json &gt; import.json</code></pre></li>
+          <li><strong>Own a native file immediately.</strong><pre><code>./target/release/figcraft-cli convert marketing.fig marketing.figcraft</code></pre></li>
+          <li><strong>Rebuild in cost order:</strong> variables and modes, then components, then instances, then overrides — installing fonts, or loading them with <code>text.loadFont</code>, first.</li>
+        </ol>
+        <p>What goes wrong: the import never finishes (<a href="https://github.com/storytold/figcraft/issues/574" rel="noopener">#574</a>, umbrella <a href="https://github.com/storytold/figcraft/issues/321" rel="noopener">#321</a>); instance-swap overrides are gone (<a href="https://github.com/storytold/figcraft/issues/464" rel="noopener">#464</a>); grid tracks did not import (<a href="https://github.com/storytold/figcraft/issues/465" rel="noopener">#465</a>); type sits pixels off because a font was substituted (<a href="https://github.com/storytold/figcraft/issues/752" rel="noopener">#752</a>); and teammates cannot comment or co-edit.</p>
+        <p class="note">Unverified: how much of a real file survives, and how long a rebuild takes. Both are file-specific; <a href="https://github.com/storytold/figcraft/issues/467" rel="noopener">#467</a> makes the report a floor.</p>
+      </details>
     </section>
-    <section>
-      <h2>Where the demo studio fits</h2>
-      <div class="disclosure"><strong>The canvas at <a href="/#demo">/#demo</a> is not the FigCraft app.</strong> It is this site's own studio, built to demonstrate a design workflow in the browser. Its shortcuts and its export formats are the studio's own, and every guide below marks the line where the two can be confused.</div>
-      <p>Use the demo for quick mockups, a colour or spacing sanity check, or to see how the interaction model feels. Use FigCraft for anything you intend to keep: only it writes <code>.figcraft</code>, runs the 400+ command engine, and opens <code>.fig</code>.</p>
-      <p>The reference tools are the exception — they measure rather than design, so they work either way: <a href="/tools/screen-sizes/">screen sizes</a>, <a href="/tools/svg-minifier/">SVG minifier</a> and <a href="/tools/contrast-checker/">contrast checker</a>. Ready-made starting files are on <a href="/templates/">templates</a>.</p>
+    <section id="glossary">
+      <h2>Glossary</h2>
+      <p class="sub">Fourteen terms that decide whether an import still works.</p>
+      <div class="grid two">
+        <div class="card"><h3>Auto layout</h3><p>A frame that places its children by rules — direction, gap, padding, alignment, sizing — not by coordinates, so imports are placed by the layout.</p></div>
+        <div class="card"><h3>Component</h3><p>A reusable master layer whose edits reach its instances; the engine treats it as ordinary commands.</p></div>
+        <div class="card"><h3>Instance</h3><p>A copy linked to a component that inherits its properties and can carry overrides — what a swap drops.</p></div>
+        <div class="card"><h3>Variant</h3><p>One named state of a component, chosen through properties, not by swapping files.</p></div>
+        <div class="card"><h3>Variable</h3><p>A named value — colour, number, string, boolean — that layers bind to, not a literal.</p></div>
+        <div class="card"><h3>Mode</h3><p>One value set of a variable collection, such as Light and Dark; the first is default.</p></div>
+        <div class="card"><h3>Alias</h3><p>A variable whose value is another variable, which is how a token hierarchy carries a change down.</p></div>
+        <div class="card"><h3>Design token</h3><p>A named design decision — colour, spacing, radius, type step — stored once and referenced everywhere.</p></div>
+        <div class="card"><h3>Constraint</h3><p>How a free-positioned child moves or resizes when its frame resizes; auto-layout children follow the flow.</p></div>
+        <div class="card"><h3>Inspect</h3><p>FigCraft's handoff panel: layout, type, fills and effects with style and variable names, plus CSS, HTML, React, Leptos, SwiftUI or Compose.</p></div>
+        <div class="card"><h3>MCP</h3><p>The Model Context Protocol, which lets an agent call FigCraft's 400+ commands instead of a private API.</p></div>
+        <div class="card"><h3>WASM</h3><p>WebAssembly, the target that compiles the same Rust engine into a browser tab.</p></div>
+        <div class="card"><h3>.figcraft</h3><p>FigCraft's native document: an archive on disk holding the layer tree, styles, variables and images, with no account or telemetry.</p></div>
+        <div class="card"><h3>.fig</h3><p>Figma's document format, imported best-effort — import a copy, save a <code>.figcraft</code>, keep the original.</p></div>
+      </div>
+    </section>
+    <section id="limits">
+      <h2>What this page does not cover</h2>
+      <p class="note">The real app's keymap is not documented here — print it from your build with <code>figcraft-cli commands</code>, since it changes between releases and differs by platform. Nothing here applies to a build newer than v0.9.0. There are no performance numbers: timings are file-specific and unmeasured, and how much of a given <code>.fig</code> survives is unanswered because the report can omit drops.</p>
     </section>
 
     <section id="faq">
       <h2>Questions this page answers</h2>
       <p class="sub">Straight answers, with the limits stated. Every claim here is checkable against the sources linked above.</p>
       <details><summary>Is FigCraft ready for a production design team?</summary><p>Not as a replacement for a hosted team tool. It is an early alpha at about 49% parity by the project's own estimate, with no accounts, teams or cloud. It is ready for solo interface work on local files, and for developers who want the same command engine in a script and in a UI.</p></details>
-      <details><summary>Which version do these guides cover?</summary><p>v0.9.0, released 2026-10-21, on macOS, Windows, Linux, FreeBSD and the WebAssembly build. Commands come from the project's own CLI, MCP and control-protocol documentation for that release.</p></details>
-      <details><summary>Do these guides apply to the browser studio on this site?</summary><p>Only where a page says so. The studio at /#demo is an independent canvas, not the FigCraft app: different renderer, different shortcuts, different export set. The pages that touch either one label it.</p></details>
-      <details><summary>Where do I report a bug or check whether mine is known?</summary><p>The tracker at github.com/storytold/figcraft/issues. This guide links the issues it can verify, and the curated shortlist is on <a href="/issues/">known issues</a>.</p></details>
-      <details><summary>Is this an official FigCraft site?</summary><p>No. It is an independent guide. The project's repository and release notes are the primary sources, and this site links them rather than paraphrasing them away.</p></details>
+      <details><summary>Which version does this page cover?</summary><p>v0.10.0, on macOS, Windows, Linux, FreeBSD and the WebAssembly build. Commands come from the project's own CLI, MCP and control-protocol documentation for that release.</p></details>
+      <details><summary>Does any of this apply to the browser studio on this site?</summary><p>Only where a topic says so. The studio at /#demo is an independent canvas, not the FigCraft app: different renderer, different shortcuts, different export set, and it cannot read .figcraft.</p></details>
+      <details><summary>Can FigCraft open a Figma .fig file?</summary><p>Yes, on a best-effort basis. Large files are a known failure mode (#574), grid auto layout loses tracks (#465), instance-swap overrides fall back to the main component (#464), and the import does not report everything it discards (#467). Keep the original .fig.</p></details>
+      <details><summary>How do I find the real app's keyboard shortcuts?</summary><p>Print them from your build: figcraft-cli commands lists every command with its shortcut, and --json with --filter narrows the result. Over MCP, list_commands reports each command's first key for the platform the server runs on.</p></details>
+      <details><summary>Where do I report a bug or check whether mine is known?</summary><p>The tracker at github.com/storytold/figcraft/issues. Each topic above links the issues it can verify, and the curated shortlist is on <a href="/issues/">known issues</a>.</p></details>
+    </section>
+    <section class="related" id="related">
+      <h2>Keep going</h2>
+      <div class="grid">
+        <a class="card" href="/templates/"><span class="k">Templates</span><h3>FigCraft templates: eight starters, one menu item</h3><p>The app ships eight starters and they all live behind File ▸ New from template. This is the map: the size each file is drawn at, the frames it is built from, and where it stops being useful.</p></a>
+        <a class="card" href="/tools/"><span class="k">Free tools</span><h3>Five design tools, one page, nothing uploaded</h3><p>Contrast, colour ramp, SVG minifier, viewport sizes and placeholder text — the five checks that sit between a design being drawn and a design being handed off. Each one runs locally in this page and keeps its state in the URL.</p></a>
+      </div>
     </section>
   </div>
 </main>
@@ -104,7 +245,7 @@
   <div class="wrap foot">
     <div>
       <strong>FigCraft Guide</strong> — an independent guide and browser studio. Not affiliated with ArtCraft.
-      <div class="note">Last updated 2026-10-22 · covers FigCraft v0.9.0 · corrections welcome via the source repository.</div>
+      <div class="note">Last updated 2026-10-22 · covers FigCraft v0.10.0 · corrections welcome via the source repository.</div>
     </div>
     <nav aria-label="Footer">
       <a href="/tools/">Tools</a>

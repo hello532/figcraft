@@ -3,136 +3,29 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Figma and Design-Tool Glossary for FigCraft Users</title>
-<meta name="description" content="Twenty-two terms that decide whether a Figma file survives in FigCraft: auto layout, variables and modes, vector networks, design tokens, MCP, WASM, OKLCH and more.">
-<meta name="robots" content="index,follow,max-image-preview:large">
-<meta name="author" content="FigCraft Guide">
-<meta name="theme-color" content="#2563eb">
-<link rel="canonical" href="https://figcraft.rerivo.com/glossary/">
-<link rel="alternate" type="text/plain" href="https://figcraft.rerivo.com/llms.txt" title="LLMs.txt">
-<link rel="alternate" type="text/plain" href="https://figcraft.rerivo.com/llms-full.txt" title="LLMs full guide">
-<link rel="icon" type="image/svg+xml" href="/assets/favicon.svg">
-<link rel="stylesheet" href="/assets/site.css">
-<script src="/assets/site.js" defer></script>
-<meta property="og:title" content="Figma and Design-Tool Glossary for FigCraft Users">
-<meta property="og:description" content="Twenty-two terms that decide whether a Figma file survives in FigCraft: auto layout, variables and modes, vector networks, design tokens, MCP, WASM, OKLCH and more.">
-<meta property="og:type" content="website">
-<meta property="og:locale" content="en_US">
-<meta property="og:url" content="https://figcraft.rerivo.com/glossary/">
-<meta property="og:image" content="https://figcraft.rerivo.com/og.png">
-<meta property="og:image:width" content="1200">
-<meta property="og:image:height" content="630">
-<meta property="og:image:alt" content="FigCraft — a Figma alternative written in pure Rust">
-<meta property="article:modified_time" content="2026-10-22">
-<meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:title" content="Figma and Design-Tool Glossary for FigCraft Users">
-<meta name="twitter:description" content="Twenty-two terms that decide whether a Figma file survives in FigCraft: auto layout, variables and modes, vector networks, design tokens, MCP, WASM, OKLCH and more.">
-<meta name="twitter:image" content="https://figcraft.rerivo.com/og.png">
-<script type="application/ld+json">{"@context":"https://schema.org","@graph":[{"@type":"WebPage","@id":"https://figcraft.rerivo.com/glossary/#page","url":"https://figcraft.rerivo.com/glossary/","name":"Glossary of design-tool terms","description":"Twenty-two terms that decide whether a Figma file survives in FigCraft: auto layout, variables and modes, vector networks, design tokens, MCP, WASM, OKLCH and more.","isPartOf":{"@type":"WebSite","name":"FigCraft Guide","url":"https://figcraft.rerivo.com/"},"inLanguage":"en","dateModified":"2026-10-22","datePublished":"2026-10-22"},{"@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Learn","item":"https://figcraft.rerivo.com/learn/"},{"@type":"ListItem","position":2,"name":"Glossary","item":"https://figcraft.rerivo.com/glossary/"}]},{"@type":"Article","@id":"https://figcraft.rerivo.com/glossary/#article","headline":"Glossary of design-tool terms","description":"Twenty-two terms that decide whether a Figma file survives in FigCraft: auto layout, variables and modes, vector networks, design tokens, MCP, WASM, OKLCH and more.","datePublished":"2026-10-22","dateModified":"2026-10-22","author":{"@type":"Organization","name":"FigCraft Guide","url":"https://figcraft.rerivo.com/"},"publisher":{"@type":"Organization","name":"FigCraft Guide","url":"https://figcraft.rerivo.com/"},"mainEntityOfPage":{"@id":"https://figcraft.rerivo.com/glossary/#page"},"about":{"@type":"SoftwareApplication","name":"FigCraft","applicationCategory":"DesignApplication","operatingSystem":"macOS, Windows, Linux, FreeBSD, Web","offers":{"@type":"Offer","price":"0","priceCurrency":"USD"}}},{"@type":"DefinedTermSet","@id":"https://figcraft.rerivo.com/glossary/#terms","name":"Figma and design-tool glossary","hasDefinedTerm":[{"@type":"DefinedTerm","name":"Auto layout","description":"A frame that positions its children by rules — direction, gap, padding, alignment and Hug/Fill/Fixed sizing — instead of free coordinates. Children of an auto-layout frame are placed by the layout, not by x/y, so it is the first thing to check after an import."},{"@type":"DefinedTerm","name":"Component","description":"A reusable master layer. Editing the component updates its instances; FigCraft supports components, sets, properties and detaching, and the engine treats all of it as ordinary commands."},{"@type":"DefinedTerm","name":"Instance","description":"A copy linked to a component. It inherits the master's properties and can carry overrides of its own. Overrides on swapped instances are a known import casualty, so verify them by hand."},{"@type":"DefinedTerm","name":"Variant","description":"One named state of a component — size, tone, state — selected through properties rather than by swapping files. Variants live inside a component set and are addressed by property values."},{"@type":"DefinedTerm","name":"Component set","description":"The container that groups variants of one component and defines the properties used to switch between them. A set is the unit you publish and the unit a designer picks from."},{"@type":"DefinedTerm","name":"Variable","description":"A named value — colour, number, string, boolean — that layers bind to instead of holding a literal. Change the variable and every bound field follows, which is what makes themes and density switches practical."},{"@type":"DefinedTerm","name":"Mode","description":"One value set of a variable collection, such as Light and Dark or Comfortable and Compact. A layer follows the mode in force; the first mode in a collection is the default."},{"@type":"DefinedTerm","name":"Alias","description":"A variable whose value is another variable rather than a literal. Aliases build the token hierarchy — brand blue to surface to button — so a change at the top propagates without touching the middle."},{"@type":"DefinedTerm","name":"Vector network","description":"A vector shape stored as connected points and segments rather than a fixed path. It allows editing any segment without re-drawing the shape, and it is what makes boolean operations editable afterwards."},{"@type":"DefinedTerm","name":"Boolean group","description":"A group that combines shapes with union, subtract, intersect or exclude while keeping the operands editable. Unlike a flattened path, the inputs stay selectable and the result stays live."},{"@type":"DefinedTerm","name":"Constraint","description":"A rule for how a child moves or resizes when its frame resizes — pin to an edge, centre or scale. Constraints apply to free-positioned children; auto-layout children are governed by the flow instead."},{"@type":"DefinedTerm","name":"Prototype flow","description":"A named starting point plus the connections reachable from it: triggers, actions and transitions. Flows are what the presentation view plays and what a reviewer clicks through."},{"@type":"DefinedTerm","name":"Dev Mode","description":"The developer-facing view of a design: measurements, spacing, annotations and generated code, with a ready-for-dev status per frame. In FigCraft the equivalent surface is Inspect, fed by the same engine."},{"@type":"DefinedTerm","name":"Inspect","description":"FigCraft's handoff panel. It reports layout, typography, fills, strokes and effects with their style and variable names, and generates CSS, HTML, React, Leptos, SwiftUI or Compose for a selection."},{"@type":"DefinedTerm","name":"Design token","description":"A named design decision — colour, spacing, radius, type step — stored once and referenced everywhere. Tokens are a convention; variables are the mechanism FigCraft provides for them."},{"@type":"DefinedTerm","name":"MCP","description":"The Model Context Protocol, a standard way for an AI agent to call tools. FigCraft's MCP server exposes the same 400+ commands as the UI, so an agent can create, edit, inspect and export without a private API."},{"@type":"DefinedTerm","name":"WASM","description":"WebAssembly: the compilation target that lets the Rust engine run in a browser tab. FigCraft's web build is the same editor compiled to WASM, not a reimplementation in JavaScript."},{"@type":"DefinedTerm","name":"DPR","description":"Device pixel ratio: how many physical pixels back one CSS pixel. A 2x export is not a DPR setting but a scale factor applied at export time, which is why a 2x PNG and a zoomed canvas are different things."},{"@type":"DefinedTerm","name":"WCAG contrast","description":"The contrast ratio between text and its background, with 4.5:1 as the usual AA threshold for body text and 3:1 for large text. It is measurable before export, which is the point of a contrast checker."},{"@type":"DefinedTerm","name":"OKLCH","description":"A perceptual colour space with lightness, chroma and hue. Editing in it keeps lightness steps visually even, unlike HSL, where equal lightness numbers look unequal. Useful for generating token ramps."},{"@type":"DefinedTerm","name":".figcraft","description":"FigCraft's native document: an archive stored on disk, holding the document, its styles, variables and images. It is what you own — no account, no server, no telemetry — and the format every script and export reads."},{"@type":"DefinedTerm","name":".fig","description":"Figma's document format. FigCraft imports it on a best-effort basis and large files are a known failure mode, so import a copy, save a .figcraft, and keep the original."}]},{"@type":"FAQPage","@id":"https://figcraft.rerivo.com/glossary/#faq","mainEntity":[{"@type":"Question","name":"What is the difference between a variable and a design token?","acceptedAnswer":{"@type":"Answer","text":"A token is the idea — a named design decision stored once. A variable is the mechanism a tool provides to implement it: a typed, named value that layers bind to, with modes and aliases for theming and hierarchy."}},{"@type":"Question","name":"What is a variant in Figma and FigCraft terms?","acceptedAnswer":{"@type":"Answer","text":"One named state of a component inside a component set, selected through properties rather than by switching files. A component set groups the variants and defines the properties used to pick between them."}},{"@type":"Question","name":"What does .figcraft contain?","acceptedAnswer":{"@type":"Answer","text":"The native document: an archive on disk with the layer tree, styles, variables and images. It needs no account or server, and it is the format the CLI, the control channel and the MCP server read and write."}},{"@type":"Question","name":"What is MCP and why does a design tool have it?","acceptedAnswer":{"@type":"Answer","text":"The Model Context Protocol is a standard interface for AI agents to call tools. FigCraft exposes its existing 400+ command layer through it, so an agent uses the same commands as the menus instead of a separate, reduced API."}},{"@type":"Question","name":"Why do designers care about OKLCH?","acceptedAnswer":{"@type":"Answer","text":"Because it is perceptually even: equal lightness steps look equal, which makes generated colour ramps and dark-mode palettes predictable. HSL does not behave that way, which is why hand-tuned ramps drift."}}]}]}</script>
+<title>Moved — FigCraft Guide</title>
+<meta name="robots" content="noindex,follow">
+<link rel="canonical" href="https://figcraft.rerivo.com/learn/#glossary">
+<meta http-equiv="refresh" content="0; url=/learn/#glossary">
+<style>
+  body{margin:0;min-height:100vh;display:grid;place-items:center;background:#f7f7f5;color:#161616;
+       font-family:ui-sans-serif,system-ui,-apple-system,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;line-height:1.6}
+  @media (prefers-color-scheme:dark){body{background:#0f1115;color:#f3f4f6}a{color:#7aa2ff}}
+  main{max-width:46ch;padding:32px;text-align:center}
+  h1{font-size:20px;letter-spacing:-.02em;margin:0 0 10px}
+  p{color:#5f6368;font-size:14px;margin:0 0 18px}
+  @media (prefers-color-scheme:dark){p{color:#a1a7b3}}
+  a{color:#2563eb;font-weight:650;text-decoration:none}
+  a:hover{text-decoration:underline}
+  code{font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;font-size:.9em}
+</style>
 </head>
 <body>
-<a class="skip" href="#main">Skip to content</a>
-<header>
-  <div class="wrap nav">
-    <a class="brand" href="/"><img class="mark-img" src="/assets/mark.svg" alt="" width="28" height="28">FigCraft Guide</a>
-    <nav aria-label="Primary"><a href="/tools/">Tools</a><a href="/templates/">Templates</a><a href="/alternatives/">Compare</a><a href="/learn/" aria-current="page">Learn</a><a href="https://github.com/storytold/figcraft" rel="noopener">GitHub</a><a class="nav-cta" href="/install/">Download</a></nav>
-    <div class="nav-tools">
-      <button class="nav-icon" type="button" data-theme-toggle aria-label="Toggle theme">☾</button>
-      <button class="nav-icon nav-menu-btn" type="button" data-nav-toggle aria-label="Menu" aria-expanded="false" aria-controls="mobile-nav">≡</button>
-    </div>
-  </div>
-  <div class="mobile-nav" id="mobile-nav"><a href="/tools/">Tools</a><a href="/templates/">Templates</a><a href="/alternatives/">Compare</a><a href="/learn/">Learn</a><a href="https://github.com/storytold/figcraft" rel="noopener">GitHub</a><a class="nav-cta" href="/install/">Download FigCraft</a></div>
-</header>
-<main id="main">
-  <div class="wrap">
-    <div class="hero">
-      <ul class="crumbs"><li><a href="/learn/">Learn</a></li><li><span>Glossary</span></li></ul>
-      <p class="eyebrow">Glossary</p>
-      <h1>Glossary of design-tool terms</h1>
-      <p class="lede">The vocabulary that makes the difference between "it imported" and "it still works" — written for someone moving a real file between tools.</p>
-      <div class="meta-line"><span>Independent guide</span><span>·</span><span>Updated 2026-10-22</span><span>·</span><span>Covers FigCraft v0.9.0</span><span>·</span><span>7 min read</span></div>
-      <div class="cta"><a class="btn primary" href="/install/">Download FigCraft</a><a class="btn ghost" href="/#demo">Open the studio</a></div>
-    </div>
-<section class="prose">
-      <h2>How to read this list</h2>
-      <p>These are definitions in the sense a working designer needs, not dictionary entries: each one says what the thing is and where it bites when a file moves between Figma and FigCraft. Where a term has a specific meaning in FigCraft's own documentation, the definition follows that usage.</p>
-      <p>Two entries near the end — <code>.figcraft</code> and <code>.fig</code> — are the ones to read first if you are mid-migration, because they define what you actually own. The rest run from structure to styling to handoff to the web platform, rather than alphabetically. If you only want the task, the guides on <a href="/learn/open-fig-file/">opening a .fig file</a> and <a href="/learn/migrate-from-figma/">migrating from Figma</a> put these words to work.</p>
-    </section>
-    <section>
-      <h2>The terms</h2>
-      <div class="grid two">
-        <div class="card"><h3>Auto layout</h3><p>A frame that positions its children by rules — direction, gap, padding, alignment, Hug/Fill/Fixed sizing — instead of by free coordinates. It is the first thing to check after an import, because children of an auto-layout frame are placed by the layout, not by x/y.</p></div>
-        <div class="card"><h3>Component</h3><p>A reusable master layer. Editing the component updates its instances; FigCraft supports components, sets, properties and detaching, and the engine treats all of it as ordinary commands.</p></div>
-        <div class="card"><h3>Instance</h3><p>A copy linked to a component. It inherits the master's properties and can carry overrides of its own. Overrides on swapped instances are a known import casualty, so verify them by hand.</p></div>
-        <div class="card"><h3>Variant</h3><p>One named state of a component — size, tone, state — selected through properties rather than by swapping files. Variants live inside a component set and are addressed by property values.</p></div>
-        <div class="card"><h3>Component set</h3><p>The container that groups variants of one component and defines the properties used to switch between them. A set is the unit you publish and the unit a designer picks from.</p></div>
-        <div class="card"><h3>Variable</h3><p>A named value — colour, number, string, boolean — that layers bind to instead of holding a literal. Change the variable and every bound field follows, which is what makes themes and density switches practical.</p></div>
-        <div class="card"><h3>Mode</h3><p>One value set of a variable collection: Light and Dark, or Comfortable and Compact. A layer follows the mode in force; the first mode in a collection is the default.</p></div>
-        <div class="card"><h3>Alias</h3><p>A variable whose value is another variable rather than a literal. Aliases build the token hierarchy — brand blue to surface to button — so a change at the top propagates without touching the middle.</p></div>
-        <div class="card"><h3>Vector network</h3><p>A vector shape stored as connected points and segments rather than a fixed path. It allows editing any segment without re-drawing the shape, and it is what makes boolean operations editable afterwards.</p></div>
-        <div class="card"><h3>Boolean group</h3><p>A group that combines shapes with union, subtract, intersect or exclude, keeping the operands editable. Unlike a flattened path, the inputs stay selectable and the result stays live.</p></div>
-        <div class="card"><h3>Constraint</h3><p>A rule for how a child moves or resizes when its frame resizes — pin to an edge, centre, scale. Constraints apply to free-positioned children; auto-layout children are governed by the flow instead.</p></div>
-        <div class="card"><h3>Prototype flow</h3><p>A named starting point plus the connections reachable from it: triggers, actions and transitions. Flows are what the presentation view plays, and what a reviewer clicks through.</p></div>
-        <div class="card"><h3>Dev Mode</h3><p>The developer-facing view of a design: measurements, spacing, annotations and generated code, with a ready-for-dev status per frame. In FigCraft the equivalent surface is Inspect, fed by the same engine.</p></div>
-        <div class="card"><h3>Inspect</h3><p>FigCraft's handoff panel. It reports layout, typography, fills, strokes and effects with their style and variable names, and generates CSS, HTML, React, Leptos, SwiftUI or Compose for a selection.</p></div>
-        <div class="card"><h3>Design token</h3><p>A named design decision — colour, spacing, radius, type step — stored once and referenced everywhere. Tokens are a convention; variables are the mechanism FigCraft provides for them.</p></div>
-        <div class="card"><h3>MCP</h3><p>The Model Context Protocol, a standard way for an AI agent to call tools. FigCraft's MCP server exposes the same 400+ commands as the UI, so an agent can create, edit, inspect and export without a private API.</p></div>
-        <div class="card"><h3>WASM</h3><p>WebAssembly: the compilation target that lets the Rust engine run in a browser tab. FigCraft's web build is the same editor compiled to WASM, not a reimplementation in JavaScript.</p></div>
-        <div class="card"><h3>DPR</h3><p>Device pixel ratio: how many physical pixels back one CSS pixel. A 2x export is not a DPR setting; it is a scale factor applied at export time, which is why a 2x PNG and a zoomed canvas are different things.</p></div>
-        <div class="card"><h3>WCAG contrast</h3><p>The contrast ratio between text and its background, with 4.5:1 as the usual AA threshold for body text and 3:1 for large text. It is measurable before export, which is the point of a contrast checker.</p></div>
-        <div class="card"><h3>OKLCH</h3><p>A perceptual colour space with lightness, chroma and hue. Editing in it keeps lightness steps visually even, unlike HSL, where equal lightness numbers look unequal. Useful for generating token ramps.</p></div>
-        <div class="card"><h3>.figcraft</h3><p>FigCraft's native document: an archive stored on disk, holding the document, its styles, variables and images. It is what you own — no account, no server, no telemetry — and the format every script and export reads.</p></div>
-        <div class="card"><h3>.fig</h3><p>Figma's document format. FigCraft imports it on a best-effort basis and large files are a known failure mode, so import a copy, save a <code>.figcraft</code>, and keep the original.</p></div>
-      </div>
-      <p class="note">Where a definition is a matter of another product's current behaviour — Figma's, or a browser's — treat it as context rather than a specification. The FigCraft-specific entries follow the project's documentation for v0.9.0.</p>
-    </section>
-    <section>
-      <h2>Words that are easy to mix up</h2>
-      <ul class="list">
-        <li><strong>Variant vs mode</strong><span>A variant is a state of one component, chosen per instance. A mode is a value set of a variable collection, applied across many layers at once.</span></li>
-        <li><strong>Alias vs token</strong><span>A token is the idea; an alias is how one token points at another inside the tool. You can have tokens without aliases, but not a hierarchy without them.</span></li>
-        <li><strong>Component vs instance</strong><span>The component is the source of truth; the instance is a reference to it. Editing an instance's override does not edit the component.</span></li>
-        <li><strong>Constraint vs auto layout</strong><span>Constraints describe how a child reacts to its frame resizing. Auto layout decides where the child sits in the first place; the two do not apply to the same child at the same time.</span></li>
-      </ul>
-      <p>For the measurements these terms imply, the <a href="/tools/screen-sizes/">screen-sizes reference</a> and the <a href="/tools/contrast-checker/">contrast checker</a> run in the browser, and the <a href="/templates/">templates</a> show the structure in practice.</p>
-    </section>
-
-    <section id="faq">
-      <h2>Questions this page answers</h2>
-      <p class="sub">Straight answers, with the limits stated. Every claim here is checkable against the sources linked above.</p>
-      <details><summary>What is the difference between a variable and a design token?</summary><p>A token is the idea — a named design decision stored once. A variable is the mechanism a tool provides to implement it: a typed, named value that layers bind to, with modes and aliases for theming and hierarchy.</p></details>
-      <details><summary>What is a variant in Figma and FigCraft terms?</summary><p>One named state of a component inside a component set, selected through properties rather than by switching files. A component set groups the variants and defines the properties used to pick between them.</p></details>
-      <details><summary>What does .figcraft contain?</summary><p>The native document: an archive on disk with the layer tree, styles, variables and images. It needs no account or server, and it is the format the CLI, the control channel and the MCP server read and write.</p></details>
-      <details><summary>What is MCP and why does a design tool have it?</summary><p>The Model Context Protocol is a standard interface for AI agents to call tools. FigCraft exposes its existing 400+ command layer through it, so an agent uses the same commands as the menus instead of a separate, reduced API.</p></details>
-      <details><summary>Why do designers care about OKLCH?</summary><p>Because it is perceptually even: equal lightness steps look equal, which makes generated colour ramps and dark-mode palettes predictable. HSL does not behave that way, which is why hand-tuned ramps drift.</p></details>
-    </section>
-    <section class="related" id="related">
-      <h2>Keep going</h2>
-      <div class="grid">
-        <a class="card" href="/learn/"><span class="k">Learn</span><h3>FigCraft guides for the work that actually breaks</h3><p>Task-level guides for the parts of FigCraft that catch people out: import, export, automation and the move off Figma. Each one says what is checked for v0.9.0 and where the checking stops.</p></a>
-        <a class="card" href="/learn/open-fig-file/"><span class="k">Guide</span><h3>Opening a .fig file in FigCraft</h3><p>Import is best effort, not a migration guarantee. This is the order of operations that keeps your original file untouched and tells you what survived before you start editing.</p></a>
-        <a class="card" href="/learn/export-svg/"><span class="k">Guide</span><h3>Exporting SVG from FigCraft</h3><p>Two exporters share the word &quot;SVG&quot; here, and only one of them is FigCraft. This page covers the real exporter first, then the demo studio, and keeps them apart.</p></a>
-      </div>
-    </section>
-  </div>
+<main>
+  <h1>This page moved</h1>
+  <p>It is now part of <code>/learn/</code>. Sending you there.</p>
+  <p><a href="/learn/#glossary">Continue to https://figcraft.rerivo.com/learn/#glossary</a></p>
 </main>
-<footer>
-  <div class="wrap foot">
-    <div>
-      <strong>FigCraft Guide</strong> — an independent guide and browser studio. Not affiliated with ArtCraft.
-      <div class="note">Last updated 2026-10-22 · covers FigCraft v0.9.0 · corrections welcome via the source repository.</div>
-    </div>
-    <nav aria-label="Footer">
-      <a href="/tools/">Tools</a>
-      <a href="/templates/">Templates</a>
-      <a href="/pricing/">Pricing</a>
-      <a href="/learn/">Learn</a>
-      <a href="/glossary/">Glossary</a>
-      <a href="/issues/">Known issues</a>
-      <a href="/install/">Install</a>
-      <a href="https://github.com/storytold/figcraft" rel="noopener">Source</a>
-    </nav>
-  </div>
-</footer>
+<script>location.replace("/learn/#glossary");</script>
 </body>
 </html>

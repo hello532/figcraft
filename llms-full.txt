@@ -2,7 +2,7 @@
 
 Canonical: https://figcraft.rerivo.com/
 Last updated: 2026-10-22
-Covers: FigCraft v0.9.0 (released 2026-10-21)
+Covers: FigCraft v0.10.0 (released 2026-10-22)
 Publisher: FigCraft Guide (independent editorial; not affiliated with the project maintainers)
 
 ## What FigCraft is
@@ -11,12 +11,12 @@ FigCraft is an open-source interface design and prototyping application written 
 
 License: MIT OR Apache-2.0.
 Official repository: https://github.com/storytold/figcraft
-Release notes: https://github.com/storytold/figcraft/releases/tag/v0.9.0
+Release notes: https://github.com/storytold/figcraft/releases/tag/v0.10.0
 
 ## Key facts
 
 - Status: early alpha; about 49% parity with proprietary tools by the project's own estimate.
-- Latest release covered here: v0.9.0, published 2026-10-21.
+- Latest release covered here: v0.10.0, published 2026-10-22. It is housekeeping (HTTPS enforcement, pinned Actions, chrono for UTC); the last release with editor changes was v0.9.0.
 - Platforms: macOS, Windows, Linux, FreeBSD, Web (WebAssembly).
 - Price: free; no account.
 - Engine: Rust; the same command layer drives the UI, CLI, JSON control channel and MCP server.

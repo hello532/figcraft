@@ -3,141 +3,29 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Screen Sizes Cheat Sheet — CSS Pixels and Media Queries</title>
-<meta name="description" content="Logical viewport sizes for phones, tablets and laptops, with copyable media queries and one-click handoff to a matching canvas size.">
-<meta name="robots" content="index,follow,max-image-preview:large">
-<meta name="author" content="FigCraft Guide">
-<meta name="theme-color" content="#2563eb">
-<link rel="canonical" href="https://figcraft.rerivo.com/tools/screen-sizes/">
-<link rel="alternate" type="text/plain" href="https://figcraft.rerivo.com/llms.txt" title="LLMs.txt">
-<link rel="alternate" type="text/plain" href="https://figcraft.rerivo.com/llms-full.txt" title="LLMs full guide">
-<link rel="icon" type="image/svg+xml" href="/assets/favicon.svg">
-<link rel="stylesheet" href="/assets/site.css">
-<script src="/assets/site.js" defer></script>
-<script type="module" src="/assets/tools/screen-sizes.js" defer></script>
-<meta property="og:title" content="Screen Sizes Cheat Sheet — CSS Pixels and Media Queries">
-<meta property="og:description" content="Logical viewport sizes for phones, tablets and laptops, with copyable media queries and one-click handoff to a matching canvas size.">
-<meta property="og:type" content="website">
-<meta property="og:locale" content="en_US">
-<meta property="og:url" content="https://figcraft.rerivo.com/tools/screen-sizes/">
-<meta property="og:image" content="https://figcraft.rerivo.com/og.png">
-<meta property="og:image:width" content="1200">
-<meta property="og:image:height" content="630">
-<meta property="og:image:alt" content="FigCraft — a Figma alternative written in pure Rust">
-<meta property="article:modified_time" content="2026-10-22">
-<meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:title" content="Screen Sizes Cheat Sheet — CSS Pixels and Media Queries">
-<meta name="twitter:description" content="Logical viewport sizes for phones, tablets and laptops, with copyable media queries and one-click handoff to a matching canvas size.">
-<meta name="twitter:image" content="https://figcraft.rerivo.com/og.png">
-<script type="application/ld+json">{"@context":"https://schema.org","@graph":[{"@type":"WebPage","@id":"https://figcraft.rerivo.com/tools/screen-sizes/#page","url":"https://figcraft.rerivo.com/tools/screen-sizes/","name":"Screen sizes, in CSS pixels, with the queries attached","description":"Logical viewport sizes for phones, tablets and laptops, with copyable media queries and one-click handoff to a matching canvas size.","isPartOf":{"@type":"WebSite","name":"FigCraft Guide","url":"https://figcraft.rerivo.com/"},"inLanguage":"en","dateModified":"2026-10-22","datePublished":"2026-10-22"},{"@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Tools","item":"https://figcraft.rerivo.com/tools/"},{"@type":"ListItem","position":2,"name":"Screen sizes","item":"https://figcraft.rerivo.com/tools/screen-sizes/"}]},{"@type":"WebApplication","@id":"https://figcraft.rerivo.com/tools/screen-sizes/#app","name":"Screen sizes, in CSS pixels, with the queries attached","url":"https://figcraft.rerivo.com/tools/screen-sizes/","applicationCategory":"DesignApplication","operatingSystem":"Any (browser)","browserRequirements":"Requires JavaScript","isAccessibleForFree":true,"offers":{"@type":"Offer","price":"0","priceCurrency":"USD"},"description":"Reference table of logical viewport sizes with copyable media queries and canvas handoff.","publisher":{"@type":"Organization","name":"FigCraft Guide","url":"https://figcraft.rerivo.com/"}},{"@type":"FAQPage","@id":"https://figcraft.rerivo.com/tools/screen-sizes/#faq","mainEntity":[{"@type":"Question","name":"Why does my iPhone show a different height than this table?","acceptedAnswer":{"@type":"Answer","text":"Because browser chrome is part of the viewport story. Safari reports a shorter visible height with its toolbars showing, which is why dvh and svh exist. The numbers here are the full-screen logical viewport, the size you design an artboard at."}},{"@type":"Question","name":"Should I design at 375, 390 or 393?","acceptedAnswer":{"@type":"Answer","text":"Pick one phone width for your base artboard and let layout adapt below and above it. 390 is the most common modern reference; 375 still covers older and smaller phones. What matters is that the layout survives 320–430 without clipping."}},{"@type":"Question","name":"What does “Open in studio” do?","acceptedAnswer":{"@type":"Answer","text":"It loads this site’s browser canvas demo with the width and height already set, so you can sketch a frame at that size. It is an independent demo, not the real FigCraft editor, and nothing is saved to an account."}},{"@type":"Question","name":"Do I need a separate tablet breakpoint?","acceptedAnswer":{"@type":"Answer","text":"Only if the layout needs one. Many responsive designs jump from a single mobile column to a two-column desktop layout at 768–1024px. Adding a tablet breakpoint that changes nothing is pure maintenance cost."}}]}]}</script>
+<title>Moved — FigCraft Guide</title>
+<meta name="robots" content="noindex,follow">
+<link rel="canonical" href="https://figcraft.rerivo.com/tools/#sizes">
+<meta http-equiv="refresh" content="0; url=/tools/#sizes">
+<style>
+  body{margin:0;min-height:100vh;display:grid;place-items:center;background:#f7f7f5;color:#161616;
+       font-family:ui-sans-serif,system-ui,-apple-system,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;line-height:1.6}
+  @media (prefers-color-scheme:dark){body{background:#0f1115;color:#f3f4f6}a{color:#7aa2ff}}
+  main{max-width:46ch;padding:32px;text-align:center}
+  h1{font-size:20px;letter-spacing:-.02em;margin:0 0 10px}
+  p{color:#5f6368;font-size:14px;margin:0 0 18px}
+  @media (prefers-color-scheme:dark){p{color:#a1a7b3}}
+  a{color:#2563eb;font-weight:650;text-decoration:none}
+  a:hover{text-decoration:underline}
+  code{font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;font-size:.9em}
+</style>
 </head>
 <body>
-<a class="skip" href="#main">Skip to content</a>
-<header>
-  <div class="wrap nav">
-    <a class="brand" href="/"><img class="mark-img" src="/assets/mark.svg" alt="" width="28" height="28">FigCraft Guide</a>
-    <nav aria-label="Primary"><a href="/tools/" aria-current="page">Tools</a><a href="/templates/">Templates</a><a href="/alternatives/">Compare</a><a href="/learn/">Learn</a><a href="https://github.com/storytold/figcraft" rel="noopener">GitHub</a><a class="nav-cta" href="/install/">Download</a></nav>
-    <div class="nav-tools">
-      <button class="nav-icon" type="button" data-theme-toggle aria-label="Toggle theme">☾</button>
-      <button class="nav-icon nav-menu-btn" type="button" data-nav-toggle aria-label="Menu" aria-expanded="false" aria-controls="mobile-nav">≡</button>
-    </div>
-  </div>
-  <div class="mobile-nav" id="mobile-nav"><a href="/tools/">Tools</a><a href="/templates/">Templates</a><a href="/alternatives/">Compare</a><a href="/learn/">Learn</a><a href="https://github.com/storytold/figcraft" rel="noopener">GitHub</a><a class="nav-cta" href="/install/">Download FigCraft</a></div>
-</header>
-<main id="main">
-  <div class="wrap">
-    <div class="hero">
-      <ul class="crumbs"><li><a href="/tools/">Tools</a></li><li><span>Screen sizes</span></li></ul>
-      <p class="eyebrow">Free tool</p>
-      <h1>Screen sizes, in CSS pixels, with the queries attached</h1>
-      <p class="lede">A working sheet of logical viewport sizes and breakpoints. Copy a size, copy the media query, or open the canvas studio at that exact size and start drawing.</p>
-      <div class="meta-line"><span>Independent guide</span><span>·</span><span>Updated 2026-10-22</span><span>·</span><span>Covers FigCraft v0.9.0</span><span>·</span><span>3 min read</span></div>
-      <div class="cta"><a class="btn primary" href="/#demo">Open the studio</a><a class="btn ghost" href="/install/">Download FigCraft</a></div>
-    </div>
-
-      <section id="devices">
-        <div class="tool">
-          <div class="tool-head"><h2>Device viewports</h2><span class="hint">CSS logical pixels · portrait</span></div>
-          <div class="tool-body">
-            <div class="grid two" style="margin-bottom:14px">
-              <div class="field"><label for="ss-filter">Filter</label><input type="search" id="ss-filter" placeholder="iPhone, 390, iPad…"></div>
-              <div class="field"><label for="ss-class">Category</label>
-                <select id="ss-class"><option value="all">All devices</option><option value="phone">Phones</option><option value="tablet">Tablets</option><option value="laptop">Laptops</option><option value="desktop">Desktops</option></select>
-              </div>
-            </div>
-            <div class="table-wrap">
-              <table>
-                <thead><tr><th scope="col">Device</th><th scope="col">Viewport</th><th scope="col">DPR</th><th scope="col">Size</th><th scope="col">Query</th><th scope="col">Canvas</th></tr></thead>
-                <tbody id="ss-rows"></tbody>
-              </table>
-            </div>
-            <p class="note">Portrait values. For landscape, swap width and height. “Open in studio” presets the canvas on this site's demo canvas; it does not open the real FigCraft editor.</p>
-          </div>
-        </div>
-      </section>
-
-      <section id="breakpoints">
-        <h2>Breakpoints to design against</h2>
-        <p class="sub">A breakpoint is where your layout changes, not where a device is. Pick the smallest set that keeps the layout sane, then test at the edges.</p>
-        <ul class="list" id="bp-list"></ul>
-      </section>
-
-      <section id="units">
-        <h2>Logical pixels, physical pixels and the 100vh problem</h2>
-        <div class="prose">
-          <p>A phone with a 1179×2556 panel reports a 393×852 viewport because the browser maps CSS pixels to several device pixels. That is the DPR column above: at DPR 3, one CSS pixel covers a 3×3 block. Design at logical pixels, export raster assets at 2× or 3×.</p>
-          <p>Viewport height is the number that bites. Mobile browser chrome collapses as you scroll, so <code>100vh</code> is larger than what the user sees. The viewport units <code>svh</code> (small), <code>lvh</code> (large) and <code>dvh</code> (dynamic) exist for exactly this; a full-height layout should usually use <code>100svh</code> as the floor and <code>100dvh</code> where resizing is acceptable.</p>
-          <h3>Safe areas</h3>
-          <p>Notches and home indicators are handled with <code>env(safe-area-inset-*)</code> plus <code>viewport-fit=cover</code>. A design that pins content to the bottom edge needs about 34px of clearance on current iPhones; keep that in the spec, not in a comment.</p>
-        </div>
-      </section>
-
-      <section id="limits">
-        <h2>Accuracy and limits</h2>
-        <ul class="list">
-          <li><strong>Not an official spec sheet</strong><span>These are the logical viewports commonly reported for each device class. Vendors do not guarantee a CSS viewport per model, and browser chrome changes the usable height.</span></li>
-          <li><strong>Not a breakpoint strategy</strong><span>Designing one frame per device leads to five layouts nobody maintains. Design the content, then find where it breaks.</span></li>
-          <li><strong>No fold or zoom modelling</strong><span>Users zoom, use large text settings, and rotate. Test at 200% zoom and at 320px width before declaring a layout responsive.</span></li>
-        </ul>
-      </section>
-    
-
-    <section id="faq">
-      <h2>Questions this page answers</h2>
-      <p class="sub">Straight answers, with the limits stated. Every claim here is checkable against the sources linked above.</p>
-      <details><summary>Why does my iPhone show a different height than this table?</summary><p>Because browser chrome is part of the viewport story. Safari reports a shorter visible height with its toolbars showing, which is why dvh and svh exist. The numbers here are the full-screen logical viewport, the size you design an artboard at.</p></details>
-      <details><summary>Should I design at 375, 390 or 393?</summary><p>Pick one phone width for your base artboard and let layout adapt below and above it. 390 is the most common modern reference; 375 still covers older and smaller phones. What matters is that the layout survives 320–430 without clipping.</p></details>
-      <details><summary>What does “Open in studio” do?</summary><p>It loads this site’s browser canvas demo with the width and height already set, so you can sketch a frame at that size. It is an independent demo, not the real FigCraft editor, and nothing is saved to an account.</p></details>
-      <details><summary>Do I need a separate tablet breakpoint?</summary><p>Only if the layout needs one. Many responsive designs jump from a single mobile column to a two-column desktop layout at 768–1024px. Adding a tablet breakpoint that changes nothing is pure maintenance cost.</p></details>
-    </section>
-    <section class="related" id="related">
-      <h2>Keep going</h2>
-      <div class="grid">
-        <a class="card" href="/tools/contrast-checker/"><span class="k">Free tool</span><h3>Contrast checker with a fix, not just a verdict</h3><p>Paste two colours and see the exact WCAG 2.2 ratio, which levels pass, and the closest colour that would pass while keeping the hue and saturation. Everything runs in this page.</p></a>
-        <a class="card" href="/tools/lorem-ipsum/"><span class="k">Free tool</span><h3>Placeholder text sized for the layout it fills</h3><p>Two words break a button; forty words break a card. Generate placeholder copy in the shape your UI actually needs, with the word and character counts shown so you can match a real string budget.</p></a>
-        <a class="card" href="/templates/social-post-sizes/"><span class="k">Template</span><h3>Social post template: four frames, one message</h3><p>Four export sizes in one file: 1080 × 1080, 1080 × 1350, 1080 × 1920 and 1200 × 630. Draw the message once, then resize the stack for each ratio.</p></a>
-        <a class="card" href="/learn/export-svg/"><span class="k">Guide</span><h3>Exporting SVG from FigCraft</h3><p>Two exporters share the word &quot;SVG&quot; here, and only one of them is FigCraft. This page covers the real exporter first, then the demo studio, and keeps them apart.</p></a>
-      </div>
-    </section>
-  </div>
+<main>
+  <h1>This page moved</h1>
+  <p>It is now part of <code>/tools/</code>. Sending you there.</p>
+  <p><a href="/tools/#sizes">Continue to https://figcraft.rerivo.com/tools/#sizes</a></p>
 </main>
-<footer>
-  <div class="wrap foot">
-    <div>
-      <strong>FigCraft Guide</strong> — an independent guide and browser studio. Not affiliated with ArtCraft.
-      <div class="note">Last updated 2026-10-22 · covers FigCraft v0.9.0 · corrections welcome via the source repository.</div>
-    </div>
-    <nav aria-label="Footer">
-      <a href="/tools/">Tools</a>
-      <a href="/templates/">Templates</a>
-      <a href="/pricing/">Pricing</a>
-      <a href="/learn/">Learn</a>
-      <a href="/glossary/">Glossary</a>
-      <a href="/issues/">Known issues</a>
-      <a href="/install/">Install</a>
-      <a href="https://github.com/storytold/figcraft" rel="noopener">Source</a>
-    </nav>
-  </div>
-</footer>
+<script>location.replace("/tools/#sizes");</script>
 </body>
 </html>

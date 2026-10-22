@@ -3,153 +3,29 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>FigCraft Dashboard Template: 1440×900 App Shell, Explained</title>
-<meta name="description" content="The dashboard starter: a 1440×900 shell with a 240 px sidebar, 64 px top bar, four stat cards, a 1136 px data table and chart placeholders.">
-<meta name="robots" content="index,follow,max-image-preview:large">
-<meta name="author" content="FigCraft Guide">
-<meta name="theme-color" content="#2563eb">
-<link rel="canonical" href="https://figcraft.rerivo.com/templates/dashboard/">
-<link rel="alternate" type="text/plain" href="https://figcraft.rerivo.com/llms.txt" title="LLMs.txt">
-<link rel="alternate" type="text/plain" href="https://figcraft.rerivo.com/llms-full.txt" title="LLMs full guide">
-<link rel="icon" type="image/svg+xml" href="/assets/favicon.svg">
-<link rel="stylesheet" href="/assets/site.css">
-<script src="/assets/site.js" defer></script>
-<meta property="og:title" content="FigCraft Dashboard Template: 1440×900 App Shell, Explained">
-<meta property="og:description" content="The dashboard starter: a 1440×900 shell with a 240 px sidebar, 64 px top bar, four stat cards, a 1136 px data table and chart placeholders.">
-<meta property="og:type" content="website">
-<meta property="og:locale" content="en_US">
-<meta property="og:url" content="https://figcraft.rerivo.com/templates/dashboard/">
-<meta property="og:image" content="https://figcraft.rerivo.com/og.png">
-<meta property="og:image:width" content="1200">
-<meta property="og:image:height" content="630">
-<meta property="og:image:alt" content="FigCraft — a Figma alternative written in pure Rust">
-<meta property="article:modified_time" content="2026-10-22">
-<meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:title" content="FigCraft Dashboard Template: 1440×900 App Shell, Explained">
-<meta name="twitter:description" content="The dashboard starter: a 1440×900 shell with a 240 px sidebar, 64 px top bar, four stat cards, a 1136 px data table and chart placeholders.">
-<meta name="twitter:image" content="https://figcraft.rerivo.com/og.png">
-<script type="application/ld+json">{"@context":"https://schema.org","@graph":[{"@type":"WebPage","@id":"https://figcraft.rerivo.com/templates/dashboard/#page","url":"https://figcraft.rerivo.com/templates/dashboard/","name":"Dashboard template: a 1440 × 900 shell you can edit","description":"The dashboard starter: a 1440×900 shell with a 240 px sidebar, 64 px top bar, four stat cards, a 1136 px data table and chart placeholders.","isPartOf":{"@type":"WebSite","name":"FigCraft Guide","url":"https://figcraft.rerivo.com/"},"inLanguage":"en","dateModified":"2026-10-22","datePublished":"2026-10-22"},{"@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Templates","item":"https://figcraft.rerivo.com/templates/"},{"@type":"ListItem","position":2,"name":"Dashboard","item":"https://figcraft.rerivo.com/templates/dashboard/"}]},{"@type":"FAQPage","@id":"https://figcraft.rerivo.com/templates/dashboard/#faq","mainEntity":[{"@type":"Question","name":"Does the dashboard starter use real data?","acceptedAnswer":{"@type":"Answer","text":"No. Every number is text and every chart is a vector shape. There is no data binding, no formula layer and no live feed; the starter is a layout with representative values, and the values exist to show alignment and truncation."}},{"@type":"Question","name":"Why 1440 × 900 and not a full HD frame?","acceptedAnswer":{"@type":"Answer","text":"Because the starter is a laptop-first shell. 1440 × 900 leaves a 240 px sidebar and 1200 px of content, which is the width where a five-column table still reads. The 1280 × 800 frame is there to show what breaks first when the window shrinks."}},{"@type":"Question","name":"Can I add a fifth stat card?","acceptedAnswer":{"@type":"Answer","text":"Yes, but change the grid track count rather than dragging the cards. Four cards at 266 px with 24 px gutters fill 1136 px exactly; a fifth needs either narrower cards or a wrapping second row, and grid tracks keep the gaps equal."}},{"@type":"Question","name":"Does blur or glass work on every platform?","acceptedAnswer":{"@type":"Answer","text":"Not reliably. Blur and glass effects are supported by the engine, but Windows DX12 blur is a known issue, and the project is an early alpha. Test any translucent panel on the platforms your team actually uses before you commit to it in a spec."}}]}]}</script>
+<title>Moved — FigCraft Guide</title>
+<meta name="robots" content="noindex,follow">
+<link rel="canonical" href="https://figcraft.rerivo.com/templates/#starter-dashboard">
+<meta http-equiv="refresh" content="0; url=/templates/#starter-dashboard">
+<style>
+  body{margin:0;min-height:100vh;display:grid;place-items:center;background:#f7f7f5;color:#161616;
+       font-family:ui-sans-serif,system-ui,-apple-system,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;line-height:1.6}
+  @media (prefers-color-scheme:dark){body{background:#0f1115;color:#f3f4f6}a{color:#7aa2ff}}
+  main{max-width:46ch;padding:32px;text-align:center}
+  h1{font-size:20px;letter-spacing:-.02em;margin:0 0 10px}
+  p{color:#5f6368;font-size:14px;margin:0 0 18px}
+  @media (prefers-color-scheme:dark){p{color:#a1a7b3}}
+  a{color:#2563eb;font-weight:650;text-decoration:none}
+  a:hover{text-decoration:underline}
+  code{font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;font-size:.9em}
+</style>
 </head>
 <body>
-<a class="skip" href="#main">Skip to content</a>
-<header>
-  <div class="wrap nav">
-    <a class="brand" href="/"><img class="mark-img" src="/assets/mark.svg" alt="" width="28" height="28">FigCraft Guide</a>
-    <nav aria-label="Primary"><a href="/tools/">Tools</a><a href="/templates/" aria-current="page">Templates</a><a href="/alternatives/">Compare</a><a href="/learn/">Learn</a><a href="https://github.com/storytold/figcraft" rel="noopener">GitHub</a><a class="nav-cta" href="/install/">Download</a></nav>
-    <div class="nav-tools">
-      <button class="nav-icon" type="button" data-theme-toggle aria-label="Toggle theme">☾</button>
-      <button class="nav-icon nav-menu-btn" type="button" data-nav-toggle aria-label="Menu" aria-expanded="false" aria-controls="mobile-nav">≡</button>
-    </div>
-  </div>
-  <div class="mobile-nav" id="mobile-nav"><a href="/tools/">Tools</a><a href="/templates/">Templates</a><a href="/alternatives/">Compare</a><a href="/learn/">Learn</a><a href="https://github.com/storytold/figcraft" rel="noopener">GitHub</a><a class="nav-cta" href="/install/">Download FigCraft</a></div>
-</header>
-<main id="main">
-  <div class="wrap">
-    <div class="hero">
-      <ul class="crumbs"><li><a href="/templates/">Templates</a></li><li><span>Dashboard</span></li></ul>
-      <p class="eyebrow">Template</p>
-      <h1>Dashboard template: a 1440 × 900 shell you can edit</h1>
-      <p class="lede">A <strong>1440 × 900</strong> app shell with a fixed sidebar, a 64 px top bar and a content area that takes what is left. The table and charts are placeholders you replace with your own data.</p>
-      <div class="meta-line"><span>Independent guide</span><span>·</span><span>Updated 2026-10-22</span><span>·</span><span>Covers FigCraft v0.9.0</span><span>·</span><span>4 min read</span></div>
-      <div class="cta"><a class="btn primary" href="/install/">Download FigCraft</a><a class="btn ghost" href="/#demo">Open the studio</a></div>
-    </div>
-<section>
-  <h2>What's in the starter</h2>
-  <p class="disclosure">The project publishes the name of this starter, not its internal pages or frame sizes. What follows is a workable structure for this kind of file — a starting spec to build against — not a transcription of the shipped document. Check it against the build you actually open.</p>
-  <p class="sub">One page, three frames: the overview, a settings screen and a narrower laptop check. The sidebar and top bar are components, so both screens share them.</p>
-  <ul class="list">
-    <li><strong>Sidebar</strong><span>240 px wide, a 56 px logo block and eleven 44 px nav rows, one in selected state, with a 32 px user block pinned to the bottom by a Fill spacer.</span></li>
-    <li><strong>Top bar</strong><span>64 px tall: page title, a 360 px search field, two icon buttons, a 32 px avatar. Icons are 20 px strokes from the icon set.</span></li>
-    <li><strong>Stat row</strong><span>Four 266 px cards on 24 px gutters, each with a label, a 32 px figure and a delta line. The trend arrow is a component variant.</span></li>
-    <li><strong>Data table</strong><span>1136 px wide, a 48 px header row and nine 48 px body rows across five columns; the name column is set to Fill so long labels truncate before the numbers do.</span></li>
-    <li><strong>Chart panel</strong><span>A 1136 × 320 placeholder built from vector shapes: twelve vertical grid lines, a four-line legend and one area shape you can restyle.</span></li>
-    <li><strong>Settings frame</strong><span>The same shell with a 720 px form column: six labelled rows, three toggles and a save bar.</span></li>
-  </ul>
-</section>
-<section>
-  <h2>Canvas spec</h2>
-  <p class="sub">The arithmetic matters here: 1440 minus a 240 px sidebar leaves 1200 px, and 32 px padding on each side leaves 1136 px of content. The height follows the same logic — 900 minus a 64 px top bar is 836 px.</p>
-  <div class="table-wrap"><table>
-    <thead><tr><th>Frame</th><th>Size (px)</th><th>Purpose</th></tr></thead>
-    <tbody>
-      <tr><th>Dashboard / Desktop</th><td>1440 × 900</td><td>Full shell at laptop size, the export frame</td></tr>
-      <tr><th>Shell / Sidebar</th><td>240 × 900</td><td>Logo, eleven nav rows, user block</td></tr>
-      <tr><th>Shell / Top bar</th><td>1200 × 64</td><td>Title, 360 px search, icons, avatar</td></tr>
-      <tr><th>Overview / Content</th><td>1200 × 836</td><td>Content area with 32 px padding</td></tr>
-      <tr><th>Stats / Row</th><td>1136 × 128</td><td>Four 266 px cards, 24 px gutters</td></tr>
-      <tr><th>Table / Data</th><td>1136 × 480</td><td>48 px header, nine 48 px rows</td></tr>
-      <tr><th>Chart / Panel</th><td>1136 × 320</td><td>Axis, legend and area placeholder</td></tr>
-      <tr><th>Settings / Desktop</th><td>1440 × 900</td><td>Same shell, 720 px form column</td></tr>
-      <tr><th>Dashboard / Laptop</th><td>1280 × 800</td><td>64 px rail, 1216 px content, breakpoint check</td></tr>
-    </tbody>
-  </table></div>
-</section>
-<section>
-  <h2>Open it</h2>
-  <ol class="steps">
-    <li><strong>File ▸ New from template</strong> — pick the starter from the list; it opens in the current window as an unnamed file.</li>
-    <li><strong>Choose “Dashboard”</strong> — three frames land on one page, with the sidebar and top bar already turned into components.</li>
-    <li><strong>Save to <code>.figcraft</code></strong> — plain archive on disk, no account. Decide the folder now; dashboards tend to grow into several files.</li>
-    <li><strong>Check fonts and blur</strong> — text needs <code>../craft-fonts</code> beside the source, and any glass or blur panel is worth a second look on Windows, where DX12 blur is a known issue.</li>
-    <li><strong>Duplicate before resizing</strong> — keep 1440 × 900 intact and do your density experiments on the 1280 × 800 copy.</li>
-  </ol>
-</section>
-<section>
-  <h2>Make it yours</h2>
-  <p class="sub">A dashboard is a density problem before it is a color problem. These four levers control density.</p>
-  <div class="grid four">
-    <div class="card"><span class="k">Auto layout</span><h3>Fill the content area</h3><p>Sidebar Fixed 240, content Fill, top bar Fixed 64. The stat row is a grid track row of four, and the table body is a vertical stack of Fill-width rows.</p></div>
-    <div class="card"><span class="k">Variables</span><h3>A density mode</h3><p>Row height lives in a variable with a comfortable (48 px) and compact (36 px) mode. Switch the mode on the page instead of editing ninety rows.</p></div>
-    <div class="card"><span class="k">Components</span><h3>Stat card, row, nav item</h3><p>Each is a component set: the stat card has a trend variant, the nav item has selected and default, the row has a hover state. Variants keep the table honest.</p></div>
-    <div class="card"><span class="k">Handoff</span><h3>Inspect is the deliverable</h3><p>Measurements, annotations and a ready-for-dev mark travel with the frame. Export React, SwiftUI or Compose when an engineer wants a starting point.</p></div>
-  </div>
-</section>
-<section>
-  <h2>What it does not give you</h2>
-  <p class="disclosure">There is no data binding. The table is rectangles and text, the chart is a vector shape, and nothing recalculates when you change a number. That is fine for a design review and useless as a live dashboard — the starter gives you the shell, not the application.</p>
-  <p class="note">Two rendering caveats: glass and blur effects are the least predictable part of an alpha renderer, and blur is a known issue on Windows DX12. Separately, the app's own interface is small on a 1440p display (#540, #818) — if the inspector looks cramped, that is the app chrome, not your file. Check <a href="/issues/">known issues</a> and compare sizes against <a href="/tools/screen-sizes/">screen sizes</a>.</p>
-</section>
-<section>
-  <h2>Check the shell at 1440 × 900</h2>
-  <p class="sub">Open the site canvas at the same size as the starter to compare the shell proportions.</p>
-  <div class="cta" style="margin-top:24px"><a class="btn primary" href="/?w=1440&amp;h=900#demo">Open a 1440 × 900 canvas</a><a class="btn ghost" href="/install/">Get FigCraft</a></div>
-</section>
-
-    <section id="faq">
-      <h2>Questions this page answers</h2>
-      <p class="sub">Straight answers, with the limits stated. Every claim here is checkable against the sources linked above.</p>
-      <details><summary>Does the dashboard starter use real data?</summary><p>No. Every number is text and every chart is a vector shape. There is no data binding, no formula layer and no live feed; the starter is a layout with representative values, and the values exist to show alignment and truncation.</p></details>
-      <details><summary>Why 1440 × 900 and not a full HD frame?</summary><p>Because the starter is a laptop-first shell. 1440 × 900 leaves a 240 px sidebar and 1200 px of content, which is the width where a five-column table still reads. The 1280 × 800 frame is there to show what breaks first when the window shrinks.</p></details>
-      <details><summary>Can I add a fifth stat card?</summary><p>Yes, but change the grid track count rather than dragging the cards. Four cards at 266 px with 24 px gutters fill 1136 px exactly; a fifth needs either narrower cards or a wrapping second row, and grid tracks keep the gaps equal.</p></details>
-      <details><summary>Does blur or glass work on every platform?</summary><p>Not reliably. Blur and glass effects are supported by the engine, but Windows DX12 blur is a known issue, and the project is an early alpha. Test any translucent panel on the platforms your team actually uses before you commit to it in a spec.</p></details>
-    </section>
-    <section class="related" id="related">
-      <h2>Keep going</h2>
-      <div class="grid">
-        <a class="card" href="/templates/"><span class="k">Templates</span><h3>FigCraft templates: eight starters, one menu</h3><p>The app ships eight starters, and they all live behind one menu item. This is the map: what each file contains, the size it is drawn at, and where it stops being useful.</p></a>
-        <a class="card" href="/templates/design-system/"><span class="k">Template</span><h3>Design system template: foundations first, components second</h3><p>Foundations at 1440 × 1080, then components. Local styles and variables with modes carry the tokens; component sets and their variants carry the states.</p></a>
-        <a class="card" href="/templates/mobile-app/"><span class="k">Template</span><h3>Mobile app template: six screens at 390 × 844</h3><p>A phone starter drawn at 390 × 844 with the screens most projects rewrite first. Auto layout does the resizing, so changing a headline does not break the fit.</p></a>
-      </div>
-    </section>
-  </div>
+<main>
+  <h1>This page moved</h1>
+  <p>It is now part of <code>/templates/</code>. Sending you there.</p>
+  <p><a href="/templates/#starter-dashboard">Continue to https://figcraft.rerivo.com/templates/#starter-dashboard</a></p>
 </main>
-<footer>
-  <div class="wrap foot">
-    <div>
-      <strong>FigCraft Guide</strong> — an independent guide and browser studio. Not affiliated with ArtCraft.
-      <div class="note">Last updated 2026-10-22 · covers FigCraft v0.9.0 · corrections welcome via the source repository.</div>
-    </div>
-    <nav aria-label="Footer">
-      <a href="/tools/">Tools</a>
-      <a href="/templates/">Templates</a>
-      <a href="/pricing/">Pricing</a>
-      <a href="/learn/">Learn</a>
-      <a href="/glossary/">Glossary</a>
-      <a href="/issues/">Known issues</a>
-      <a href="/install/">Install</a>
-      <a href="https://github.com/storytold/figcraft" rel="noopener">Source</a>
-    </nav>
-  </div>
-</footer>
+<script>location.replace("/templates/#starter-dashboard");</script>
 </body>
 </html>

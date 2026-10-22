@@ -3,155 +3,29 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>SVG Minifier — Shrink Figma Exports Without Breaking Them</title>
-<meta name="description" content="Cut the XML preamble, metadata, editor namespaces and float noise from design-tool SVG exports. Keeps ids, text and references intact. Runs locally.">
-<meta name="robots" content="index,follow,max-image-preview:large">
-<meta name="author" content="FigCraft Guide">
-<meta name="theme-color" content="#2563eb">
-<link rel="canonical" href="https://figcraft.rerivo.com/tools/svg-minifier/">
-<link rel="alternate" type="text/plain" href="https://figcraft.rerivo.com/llms.txt" title="LLMs.txt">
-<link rel="alternate" type="text/plain" href="https://figcraft.rerivo.com/llms-full.txt" title="LLMs full guide">
-<link rel="icon" type="image/svg+xml" href="/assets/favicon.svg">
-<link rel="stylesheet" href="/assets/site.css">
-<script src="/assets/site.js" defer></script>
-<script type="module" src="/assets/tools/svg-minifier.js" defer></script>
-<meta property="og:title" content="SVG Minifier — Shrink Figma Exports Without Breaking Them">
-<meta property="og:description" content="Cut the XML preamble, metadata, editor namespaces and float noise from design-tool SVG exports. Keeps ids, text and references intact. Runs locally.">
-<meta property="og:type" content="website">
-<meta property="og:locale" content="en_US">
-<meta property="og:url" content="https://figcraft.rerivo.com/tools/svg-minifier/">
-<meta property="og:image" content="https://figcraft.rerivo.com/og.png">
-<meta property="og:image:width" content="1200">
-<meta property="og:image:height" content="630">
-<meta property="og:image:alt" content="FigCraft — a Figma alternative written in pure Rust">
-<meta property="article:modified_time" content="2026-10-22">
-<meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:title" content="SVG Minifier — Shrink Figma Exports Without Breaking Them">
-<meta name="twitter:description" content="Cut the XML preamble, metadata, editor namespaces and float noise from design-tool SVG exports. Keeps ids, text and references intact. Runs locally.">
-<meta name="twitter:image" content="https://figcraft.rerivo.com/og.png">
-<script type="application/ld+json">{"@context":"https://schema.org","@graph":[{"@type":"WebPage","@id":"https://figcraft.rerivo.com/tools/svg-minifier/#page","url":"https://figcraft.rerivo.com/tools/svg-minifier/","name":"SVG minifier that leaves your references alone","description":"Cut the XML preamble, metadata, editor namespaces and float noise from design-tool SVG exports. Keeps ids, text and references intact. Runs locally.","isPartOf":{"@type":"WebSite","name":"FigCraft Guide","url":"https://figcraft.rerivo.com/"},"inLanguage":"en","dateModified":"2026-10-22","datePublished":"2026-10-22"},{"@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Tools","item":"https://figcraft.rerivo.com/tools/"},{"@type":"ListItem","position":2,"name":"SVG minifier","item":"https://figcraft.rerivo.com/tools/svg-minifier/"}]},{"@type":"WebApplication","@id":"https://figcraft.rerivo.com/tools/svg-minifier/#app","name":"SVG minifier that leaves your references alone","url":"https://figcraft.rerivo.com/tools/svg-minifier/","applicationCategory":"DesignApplication","operatingSystem":"Any (browser)","browserRequirements":"Requires JavaScript","isAccessibleForFree":true,"offers":{"@type":"Offer","price":"0","priceCurrency":"USD"},"description":"Browser-based SVG minifier for design-tool exports with a structural validity check and byte report.","publisher":{"@type":"Organization","name":"FigCraft Guide","url":"https://figcraft.rerivo.com/"}},{"@type":"FAQPage","@id":"https://figcraft.rerivo.com/tools/svg-minifier/#faq","mainEntity":[{"@type":"Question","name":"Will this break gradients or masks?","acceptedAnswer":{"@type":"Answer","text":"It should not: ids are preserved, so url(#id) references and keep resolving. The output is re-parsed for tag balance before it is shown. Still render the file once — structural validity is not visual equivalence."}},{"@type":"Question","name":"Why does removing matter?","acceptedAnswer":{"@type":"Answer","text":"An inline SVG uses as its accessible name. Removing it can turn a meaningful icon into an unlabelled graphic for screen readers. Keep titles on icons that carry meaning; drop them on purely decorative shapes."}},{"@type":"Question","name":"How much smaller will my file get?","acceptedAnswer":{"@type":"Answer","text":"It depends on the exporter. Files dominated by float noise and editor metadata shrink the most; hand-written SVG with none of that overhead barely changes. The tool reports exact bytes before and after rather than a promised percentage."}},{"@type":"Question","name":"Does it upload my SVG anywhere?","acceptedAnswer":{"@type":"Answer","text":"No. Parsing, rewriting and the byte report all happen in this page. The Download button writes a local file through a blob URL."}},{"@type":"Question","name":"Can I minify a whole folder?","acceptedAnswer":{"@type":"Answer","text":"Not here — this page handles one file at a time. For a batch, run a dedicated optimiser in a build step so the transformation is reproducible and reviewed."}}]}]}</script>
+<title>Moved — FigCraft Guide</title>
+<meta name="robots" content="noindex,follow">
+<link rel="canonical" href="https://figcraft.rerivo.com/tools/#svg">
+<meta http-equiv="refresh" content="0; url=/tools/#svg">
+<style>
+  body{margin:0;min-height:100vh;display:grid;place-items:center;background:#f7f7f5;color:#161616;
+       font-family:ui-sans-serif,system-ui,-apple-system,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;line-height:1.6}
+  @media (prefers-color-scheme:dark){body{background:#0f1115;color:#f3f4f6}a{color:#7aa2ff}}
+  main{max-width:46ch;padding:32px;text-align:center}
+  h1{font-size:20px;letter-spacing:-.02em;margin:0 0 10px}
+  p{color:#5f6368;font-size:14px;margin:0 0 18px}
+  @media (prefers-color-scheme:dark){p{color:#a1a7b3}}
+  a{color:#2563eb;font-weight:650;text-decoration:none}
+  a:hover{text-decoration:underline}
+  code{font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;font-size:.9em}
+</style>
 </head>
 <body>
-<a class="skip" href="#main">Skip to content</a>
-<header>
-  <div class="wrap nav">
-    <a class="brand" href="/"><img class="mark-img" src="/assets/mark.svg" alt="" width="28" height="28">FigCraft Guide</a>
-    <nav aria-label="Primary"><a href="/tools/" aria-current="page">Tools</a><a href="/templates/">Templates</a><a href="/alternatives/">Compare</a><a href="/learn/">Learn</a><a href="https://github.com/storytold/figcraft" rel="noopener">GitHub</a><a class="nav-cta" href="/install/">Download</a></nav>
-    <div class="nav-tools">
-      <button class="nav-icon" type="button" data-theme-toggle aria-label="Toggle theme">☾</button>
-      <button class="nav-icon nav-menu-btn" type="button" data-nav-toggle aria-label="Menu" aria-expanded="false" aria-controls="mobile-nav">≡</button>
-    </div>
-  </div>
-  <div class="mobile-nav" id="mobile-nav"><a href="/tools/">Tools</a><a href="/templates/">Templates</a><a href="/alternatives/">Compare</a><a href="/learn/">Learn</a><a href="https://github.com/storytold/figcraft" rel="noopener">GitHub</a><a class="nav-cta" href="/install/">Download FigCraft</a></div>
-</header>
-<main id="main">
-  <div class="wrap">
-    <div class="hero">
-      <ul class="crumbs"><li><a href="/tools/">Tools</a></li><li><span>SVG minifier</span></li></ul>
-      <p class="eyebrow">Free tool</p>
-      <h1>SVG minifier that leaves your references alone</h1>
-      <p class="lede">Design tools export SVG with an XML declaration, editor namespaces, metadata blocks and four decimal places. This strips the overhead and reports exactly what it removed — without touching ids, text content or gradient references.</p>
-      <div class="meta-line"><span>Independent guide</span><span>·</span><span>Updated 2026-10-22</span><span>·</span><span>Covers FigCraft v0.9.0</span><span>·</span><span>5 min read</span></div>
-      <div class="cta"><a class="btn primary" href="/#demo">Open the studio</a><a class="btn ghost" href="/install/">Download FigCraft</a></div>
-    </div>
-
-      <section id="minify">
-        <div class="tool">
-          <div class="tool-head"><h2>SVG minifier</h2><span class="hint">local only · output is re-parsed before it is offered</span></div>
-          <div class="tool-body">
-            <div class="tool-grid">
-              <div>
-                <div class="field"><label for="sm-in">Input SVG</label><textarea id="sm-in" rows="14" spellcheck="false" style="font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;font-size:12px"></textarea></div>
-                <div class="field">
-                  <label for="sm-precision">Decimal precision</label>
-                  <select id="sm-precision"><option value="0">0 — integers</option><option value="1">1 decimal</option><option value="2" selected>2 decimals</option><option value="3">3 decimals</option></select>
-                </div>
-                <label class="check"><input type="checkbox" id="sm-meta" checked> Remove metadata, title, desc and editor namespaces</label>
-                <label class="check"><input type="checkbox" id="sm-comments" checked> Remove comments</label>
-                <div class="btn-row" style="margin-top:12px">
-                  <button class="btn primary sm" type="button" id="sm-run">Minify</button>
-                  <button class="btn ghost sm" type="button" id="sm-sample">Load sample</button>
-                  <button class="btn ghost sm" type="button" id="sm-download">Download</button>
-                </div>
-                <p class="status" id="sm-status"></p>
-              </div>
-              <div>
-                <div class="field"><label for="sm-out">Output</label><textarea id="sm-out" rows="14" spellcheck="false" style="font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;font-size:12px"></textarea></div>
-                <div id="sm-stats"></div>
-                <div class="btn-row" style="margin-top:12px"><button class="btn ghost sm" type="button" id="sm-copy">Copy output</button></div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      <section id="what">
-        <h2>What is actually in a design-tool SVG</h2>
-        <p class="sub">Export the same icon from three tools and you get three different files. Most of the difference is not artwork.</p>
-        <div class="table-wrap">
-          <table>
-            <thead><tr><th>Part</th><th>Typical cost</th><th>Safe to remove?</th></tr></thead>
-            <tbody>
-              <tr><th scope="row">XML declaration + DOCTYPE</th><td>~60–120 bytes</td><td>Yes for inline SVG and for <code>&lt;img&gt;</code> use; harmless either way.</td></tr>
-              <tr><th scope="row">Comments</th><td>Variable, can be huge</td><td>Yes, unless you keep licence comments. Check the licence first.</td></tr>
-              <tr><th scope="row"><code>&lt;metadata&gt;</code>, editor namespaces</th><td>200 bytes–5 kB</td><td>Yes. No renderer reads it.</td></tr>
-              <tr><th scope="row"><code>&lt;title&gt;</code> / <code>&lt;desc&gt;</code></th><td>Small</td><td>Only if nothing depends on them — they are the accessible name for an inline SVG.</td></tr>
-              <tr><th scope="row">Float noise (<code>12.000000</code>)</th><td>2–6 bytes per number</td><td>Yes, to the precision you actually render at.</td></tr>
-              <tr><th scope="row"><code>id</code> attributes</th><td>Small</td><td>No. Gradients, masks, clip paths and <code>&lt;use&gt;</code> reference them; removing an id can silently break the file.</td></tr>
-            </tbody>
-          </table>
-        </div>
-        <p class="note">This tool removes the first five and never removes <code>id</code>. Numbers are only rewritten inside tags, so <code>&lt;text&gt;1.2345&lt;/text&gt;</code> stays byte-identical — rounding visible text would be a correctness bug, not an optimisation.</p>
-      </section>
-
-      <section id="limits">
-        <h2>Where a real optimiser still wins</h2>
-        <ul class="list">
-          <li><strong>Path rewriting</strong><span>Dedicated optimisers convert primitives to paths, merge shapes and reduce curve precision with error bounds. This tool does none of that; it only removes overhead and float noise.</span></li>
-          <li><strong>Duplicate definitions</strong><span>Repeated gradients and clip paths are not deduplicated here.</span></li>
-          <li><strong>Responsive cleanup</strong><span><code>width</code>/<code>height</code> versus <code>viewBox</code> is a design decision. The tool leaves both alone rather than guessing.</span></li>
-          <li><strong>Verification</strong><span>The tool re-parses the output for balanced tags and a root <code>&lt;svg&gt;</code> before showing it. That catches structural breakage, not visual regressions — render the file once before shipping.</span></li>
-        </ul>
-        <p class="note">Figma, FigCraft and most editors export with more precision than a screen can show. Two decimals is a sensible default for UI icons; use three for large illustrations and zero only for pixel-aligned shapes.</p>
-      </section>
-    
-
-    <section id="faq">
-      <h2>Questions this page answers</h2>
-      <p class="sub">Straight answers, with the limits stated. Every claim here is checkable against the sources linked above.</p>
-      <details><summary>Will this break gradients or masks?</summary><p>It should not: ids are preserved, so url(#id) references and <use href="#id"> keep resolving. The output is re-parsed for tag balance before it is shown. Still render the file once — structural validity is not visual equivalence.</p></details>
-      <details><summary>Why does removing &lt;title&gt; matter?</summary><p>An inline SVG uses <title> as its accessible name. Removing it can turn a meaningful icon into an unlabelled graphic for screen readers. Keep titles on icons that carry meaning; drop them on purely decorative shapes.</p></details>
-      <details><summary>How much smaller will my file get?</summary><p>It depends on the exporter. Files dominated by float noise and editor metadata shrink the most; hand-written SVG with none of that overhead barely changes. The tool reports exact bytes before and after rather than a promised percentage.</p></details>
-      <details><summary>Does it upload my SVG anywhere?</summary><p>No. Parsing, rewriting and the byte report all happen in this page. The Download button writes a local file through a blob URL.</p></details>
-      <details><summary>Can I minify a whole folder?</summary><p>Not here — this page handles one file at a time. For a batch, run a dedicated optimiser in a build step so the transformation is reproducible and reviewed.</p></details>
-    </section>
-    <section class="related" id="related">
-      <h2>Keep going</h2>
-      <div class="grid">
-        <a class="card" href="/tools/palette-generator/"><span class="k">Free tool</span><h3>Palette generator: one colour in, eleven steps out</h3><p>Give it a brand colour. It holds the hue, walks lightness in even perceptual steps, and gives you a named ramp you can paste into CSS variables, a Tailwind config or FigCraft local styles.</p></a>
-        <a class="card" href="/tools/contrast-checker/"><span class="k">Free tool</span><h3>Contrast checker with a fix, not just a verdict</h3><p>Paste two colours and see the exact WCAG 2.2 ratio, which levels pass, and the closest colour that would pass while keeping the hue and saturation. Everything runs in this page.</p></a>
-        <a class="card" href="/learn/export-svg/"><span class="k">Guide</span><h3>Exporting SVG from FigCraft</h3><p>Two exporters share the word &quot;SVG&quot; here, and only one of them is FigCraft. This page covers the real exporter first, then the demo studio, and keeps them apart.</p></a>
-      </div>
-    </section>
-  </div>
+<main>
+  <h1>This page moved</h1>
+  <p>It is now part of <code>/tools/</code>. Sending you there.</p>
+  <p><a href="/tools/#svg">Continue to https://figcraft.rerivo.com/tools/#svg</a></p>
 </main>
-<footer>
-  <div class="wrap foot">
-    <div>
-      <strong>FigCraft Guide</strong> — an independent guide and browser studio. Not affiliated with ArtCraft.
-      <div class="note">Last updated 2026-10-22 · covers FigCraft v0.9.0 · corrections welcome via the source repository.</div>
-    </div>
-    <nav aria-label="Footer">
-      <a href="/tools/">Tools</a>
-      <a href="/templates/">Templates</a>
-      <a href="/pricing/">Pricing</a>
-      <a href="/learn/">Learn</a>
-      <a href="/glossary/">Glossary</a>
-      <a href="/issues/">Known issues</a>
-      <a href="/install/">Install</a>
-      <a href="https://github.com/storytold/figcraft" rel="noopener">Source</a>
-    </nav>
-  </div>
-</footer>
+<script>location.replace("/tools/#svg");</script>
 </body>
 </html>

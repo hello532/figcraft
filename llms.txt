@@ -17,46 +17,19 @@
 
 ## Tools (run in the browser, no signup)
 
-- [Free design tools that run in the browser](https://figcraft.rerivo.com/tools/): Five browser tools for design work: WCAG contrast checker, OKLCH palette generator, SVG minifier, screen-size sheet and text generator. No signup.
-- [Contrast checker with a fix, not just a verdict](https://figcraft.rerivo.com/tools/contrast-checker/): Check any text/background pair against WCAG 2.2 AA and AAA, and get the nearest passing colour that keeps the hue. Runs locally, no signup.
-- [Palette generator: one colour in, eleven steps out](https://figcraft.rerivo.com/tools/palette-generator/): Turn one base colour into an 11-step 50–950 ramp in OKLCH. Copy CSS variables, Tailwind config, SCSS or JSON. No signup, runs locally.
-- [SVG minifier that leaves your references alone](https://figcraft.rerivo.com/tools/svg-minifier/): Cut the XML preamble, metadata, editor namespaces and float noise from design-tool SVG exports. Keeps ids, text and references intact. Runs locally.
-- [Screen sizes, in CSS pixels, with the queries attached](https://figcraft.rerivo.com/tools/screen-sizes/): Logical viewport sizes for phones, tablets and laptops, with copyable media queries and one-click handoff to a matching canvas size.
-- [Placeholder text sized for the layout it fills](https://figcraft.rerivo.com/tools/lorem-ipsum/): Generate placeholder paragraphs, sentences or words with live word and character counts, sized so a layout is tested with realistic copy lengths.
+- [Five design tools, one page, nothing uploaded](https://figcraft.rerivo.com/tools/): Five browser tools on one page: WCAG 2.2 contrast checker, OKLCH colour ramp, SVG minifier, viewport size sheet and placeholder text. No signup, no upload.
 
 ## Templates
 
-- [FigCraft templates: eight starters, one menu](https://figcraft.rerivo.com/templates/): Eight starters ship with FigCraft, opened from File ▸ New from template: mobile app, landing page, dashboard, design system, wireframes, social posts, slides, icons.
-- [Mobile app template: six screens at 390 × 844](https://figcraft.rerivo.com/templates/mobile-app/): The mobile app starter: six 390×844 screens from launch to settings, an Android frame at 412×915, auto layout lists and a button set with variants.
-- [Landing page template: a 1440 px page, cut into sections](https://figcraft.rerivo.com/templates/landing-page/): The landing page starter: a 1440-wide page split into hero, logos, features, proof, pricing, FAQ and footer, plus a 390-wide mobile frame.
-- [Dashboard template: a 1440 × 900 shell you can edit](https://figcraft.rerivo.com/templates/dashboard/): The dashboard starter: a 1440×900 shell with a 240 px sidebar, 64 px top bar, four stat cards, a 1136 px data table and chart placeholders.
-- [Design system template: foundations first, components second](https://figcraft.rerivo.com/templates/design-system/): The design system starter: 1440×1080 foundation sheets, local styles, variables with light and dark modes, and button and input component sets.
-- [Wireframe kit: three breakpoints, deliberately gray](https://figcraft.rerivo.com/templates/wireframe-kit/): The wireframe kit: grayscale frames at 1440×1024, 834×1112 and 390×844, built from five placeholder components — rectangles, not finished UI.
-- [Social post template: four frames, one message](https://figcraft.rerivo.com/templates/social-post-sizes/): The social post starter: 1080×1080, 1080×1350 portrait, 1080×1920 story and 1200×630 link frames with safe-area guides, exported as PNG or JPG.
-- [Presentation template: seven 16:9 layouts at 1920 × 1080](https://figcraft.rerivo.com/templates/presentation-slides/): The slides starter: seven 1920×1080 layouts wired into a prototype flow, played in presentation view and exported to PDF or PNG. No PPTX.
-- [Icon set template: a 24 px grid, two stroke weights](https://figcraft.rerivo.com/templates/icon-set/): The icon starter: a 24×24 grid with 1.5 px and 2 px stroke variants, 16 and 20 px derivatives, vector networks and per-icon SVG export.
+- [FigCraft templates: eight starters, one menu item](https://figcraft.rerivo.com/templates/): All eight FigCraft starters in one place: mobile app, landing page, dashboard, design system, wireframes, social posts, slides and icons, with frame sizes.
 
 ## Comparisons and pricing
 
 - [What free actually costs: FigCraft, Figma, Penpot and Sketch](https://figcraft.rerivo.com/pricing/): What free gets you from FigCraft, Figma Starter, Penpot Professional and Sketch, plus per-seat arithmetic at 1, 5 and 20 seats on annual billing.
-- [FigCraft vs Penpot: local files or a hosted workspace](https://figcraft.rerivo.com/vs-penpot/): FigCraft keeps files on disk in Rust; Penpot runs a browser workspace you can self-host. Licence, hosting, parity and price compared, checked 2026-10-22.
-- [FigCraft vs Sketch: the Mac original versus a Rust rewrite](https://figcraft.rerivo.com/vs-sketch/): Sketch is the Mac-only tool with a $120 one-time licence; FigCraft is a free Rust app on four platforms. Collaboration, files and price compared.
-- [Free Figma alternatives: three routes, three different bargains](https://figcraft.rerivo.com/free-figma-alternative/): Three genuinely free routes: Figma Starter, Penpot Professional and FigCraft. Who each fits, what free quietly excludes, and when the bill starts.
-- [Open-source Figma alternatives: two licences, two bets](https://figcraft.rerivo.com/open-source-figma-alternative/): MIT/Apache-2.0 versus MPL-2.0, local files versus a self-hosted server, and what each licence lets a company do with design-tool code.
-- [Figma alternatives on Linux: what actually installs](https://figcraft.rerivo.com/figma-alternative-for-linux/): FigCraft ships AppImage, deb, rpm, flatpak, pkg.tar.zst and tar.gz for x86_64, aarch64 and riscv64. Penpot needs only a browser; Graphite is unverified.
 
 ## Guides
 
-- [FigCraft guides for the work that actually breaks](https://figcraft.rerivo.com/learn/): Eight task-level FigCraft guides and a glossary: opening .fig files, SVG export, offline files, keyboard shortcuts, MCP, CLI automation, Linux and Figma migration.
-- [Opening a .fig file in FigCraft](https://figcraft.rerivo.com/learn/open-fig-file/): Open a Figma .fig file in FigCraft: check it with figcraft-cli info, convert to .figcraft, and know which parts of a large or complex file will need rebuilding.
-- [Exporting SVG from FigCraft](https://figcraft.rerivo.com/learn/export-svg/): Export SVG from the FigCraft app or its CLI, and see why the browser demo writes a different file. Covers text, fonts, batch export and the deep-nesting limit.
-- [FigCraft keyboard shortcuts, split honestly](https://figcraft.rerivo.com/learn/keyboard-shortcuts/): The demo studio's shortcuts are documented here, the real FigCraft app's keymap is not. How to tell them apart, and how to dump the app's bindings from the CLI.
-- [Designing offline with FigCraft](https://figcraft.rerivo.com/learn/offline-design/): How FigCraft's offline model works: .figcraft files on disk, no account or telemetry, the optional local collaboration server, and the backup duty you take on.
-- [The FigCraft MCP server](https://figcraft.rerivo.com/learn/mcp-server/): Run figcraft-cli mcp headless or attach it to the running app, configure Claude Code or Claude Desktop, confine file access, and verify what the agent changed.
-- [Automating FigCraft with the CLI](https://figcraft.rerivo.com/learn/cli-automation/): Script FigCraft with figcraft-cli: info, export, convert, render, all-or-nothing command scripts, and the automation roots that confine a run to chosen folders.
-- [Installing FigCraft on Linux](https://figcraft.rerivo.com/learn/install-linux/): Pick the right FigCraft Linux build, run the AppImage with chmod +x, install the deb, rpm, flatpak or Arch package, and know the FreeBSD x86_64-only caveat.
-- [Migrating from Figma to FigCraft](https://figcraft.rerivo.com/learn/migrate-from-figma/): A realistic Figma to FigCraft migration: import the .fig first, rebuild what breaks, and expect font, variable and component-override losses. No team cloud yet.
-- [Glossary of design-tool terms](https://figcraft.rerivo.com/glossary/): Twenty-two terms that decide whether a Figma file survives in FigCraft: auto layout, variables and modes, vector networks, design tokens, MCP, WASM, OKLCH and more.
+- [FigCraft guides for the work that actually breaks](https://figcraft.rerivo.com/learn/): One page for the parts of FigCraft that break: opening .fig files, SVG export, offline files, shortcuts, MCP, CLI automation, Linux packages and Figma migration.
 
 ## Source project
 

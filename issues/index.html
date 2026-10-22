@@ -262,13 +262,12 @@
     <a class="brand" href="/"><img class="mark-img" src="/assets/mark.svg" width="28" height="28" alt="" decoding="async"> FigCraft Guide</a>
     <nav aria-label="Sections">
       <a href="/#what">What it is</a>
-      <a href="/vs-figma/">vs Figma</a>
-      <a href="/issues/">Issues</a>
-      <a href="/install/">Install</a>
-      <a href="/alternatives/">Alternatives</a>
-      <a href="/#demo">Studio</a>
-      <a href="/#faq">FAQ</a>
-      <a class="nav-cta" href="/#demo">Open studio</a>
+      <a href="/tools/">Tools</a>
+      <a href="/templates/">Templates</a>
+      <a href="/learn/">Learn</a>
+      <a href="/pricing/">Pricing</a>
+      <a href="/alternatives/">Compare</a>
+      <a class="nav-cta" href="/install/">Get FigCraft</a>
     </nav>
     <div class="nav-tools">
       <button id="theme-toggle" class="nav-icon" aria-label="Toggle theme" title="Toggle light/dark theme">◐</button>
@@ -278,13 +277,14 @@
   <div class="mobile-nav" id="mobile-nav" hidden>
     <a href="/#what">What it is</a>
     <a href="/#demo">Studio</a>
-    <a href="/#compare">vs Figma</a>
-    <a href="/#search-intent">Search intent</a>
-    <a href="/#issues">Issues</a>
-    <a href="/#get-started">Install</a>
-    <a href="/#guides">Guides</a>
-    <a href="/#faq">FAQ</a>
-    <a class="nav-cta" href="/#demo">Open studio</a>
+    <a href="/tools/">Tools</a>
+    <a href="/templates/">Templates</a>
+    <a href="/learn/">Learn</a>
+    <a href="/pricing/">Pricing</a>
+    <a href="/alternatives/">Compare</a>
+    <a href="/issues/">Known issues</a>
+    <a href="/install/">Install</a>
+    <a class="nav-cta" href="/install/">Get FigCraft</a>
   </div>
 <div class="wrap" style="display:flex;gap:14px;flex-wrap:wrap;font-size:13px;padding:10px 0 0;border-top:1px solid var(--border);margin-top:8px"><a href="/issues/">Known issues</a><a href="/install/">Install</a><a href="/vs-figma/">vs Figma</a><a href="/alternatives/">Alternatives</a></div></header>
 <main class="wrap" id="main">
@@ -311,9 +311,8 @@
     </div>
     <p class="note">A closed issue is not a guarantee that every build has the fix: check the release date against the issue’s close date. The most useful bug report includes the OS, build, exact steps and a sample file that can be shared.</p>
   </section><section>
-  <h2>What's new in FigCraft 0.9.0</h2>
-  <p>Released 2026-10-21. Mostly correctness work — parsing, export fidelity and a handful of UI annoyances.
-  The full list is on the <a href="https://github.com/storytold/figcraft/releases/tag/v0.9.0" rel="noopener">v0.9.0 release</a>.</p>
+  <h2>What's new in FigCraft 0.10.0</h2>
+  <p>Released 2026-10-22. Housekeeping rather than editor changes: HTTPS enforced on curl downloads (<a href="https://github.com/storytold/figcraft/pull/1016" rel="noopener">#1016</a>), Actions pinned to commit SHAs (<a href="https://github.com/storytold/figcraft/pull/1015" rel="noopener">#1015</a>), and hand-rolled UTC conversion replaced with <code>chrono</code> (<a href="https://github.com/storytold/figcraft/pull/975" rel="noopener">#975</a>). No editor behaviour changed, per the <a href="https://github.com/storytold/figcraft/releases/tag/v0.10.0" rel="noopener">v0.10.0 release</a> notes, so the issue statuses on this page still reflect 0.9.0.</p>
   <ul>
     <li><strong>Components and variants from the context menu</strong> — combine layers as variants, add a variant to a lone component (<a href="https://github.com/storytold/figcraft/pull/903" rel="noopener">#903</a>).</li>
     <li><strong>A document dropped on the canvas opens as a new file</strong>, instead of replacing what you have (<a href="https://github.com/storytold/figcraft/issues/916" rel="noopener">#916</a>).</li>

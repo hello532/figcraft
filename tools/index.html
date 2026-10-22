@@ -3,8 +3,8 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Free Design Tools for Figma and FigCraft Workflows</title>
-<meta name="description" content="Five browser tools for design work: WCAG contrast checker, OKLCH palette generator, SVG minifier, screen-size sheet and text generator. No signup.">
+<title>Five Free Design Tools: Contrast, Palette, SVG, Sizes, Text</title>
+<meta name="description" content="Five browser tools on one page: WCAG 2.2 contrast checker, OKLCH colour ramp, SVG minifier, viewport size sheet and placeholder text. No signup, no upload.">
 <meta name="robots" content="index,follow,max-image-preview:large">
 <meta name="author" content="FigCraft Guide">
 <meta name="theme-color" content="#2563eb">
@@ -14,8 +14,14 @@
 <link rel="icon" type="image/svg+xml" href="/assets/favicon.svg">
 <link rel="stylesheet" href="/assets/site.css">
 <script src="/assets/site.js" defer></script>
-<meta property="og:title" content="Free Design Tools for Figma and FigCraft Workflows">
-<meta property="og:description" content="Five browser tools for design work: WCAG contrast checker, OKLCH palette generator, SVG minifier, screen-size sheet and text generator. No signup.">
+<script type="module" src="/assets/tools/tabs.js" defer></script>
+<script type="module" src="/assets/tools/contrast.js" defer></script>
+<script type="module" src="/assets/tools/palette.js" defer></script>
+<script type="module" src="/assets/tools/svg-minifier.js" defer></script>
+<script type="module" src="/assets/tools/screen-sizes.js" defer></script>
+<script type="module" src="/assets/tools/lorem-ipsum.js" defer></script>
+<meta property="og:title" content="Five Free Design Tools: Contrast, Palette, SVG, Sizes, Text">
+<meta property="og:description" content="Five browser tools on one page: WCAG 2.2 contrast checker, OKLCH colour ramp, SVG minifier, viewport size sheet and placeholder text. No signup, no upload.">
 <meta property="og:type" content="website">
 <meta property="og:locale" content="en_US">
 <meta property="og:url" content="https://figcraft.rerivo.com/tools/">
@@ -25,10 +31,10 @@
 <meta property="og:image:alt" content="FigCraft — a Figma alternative written in pure Rust">
 <meta property="article:modified_time" content="2026-10-22">
 <meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:title" content="Free Design Tools for Figma and FigCraft Workflows">
-<meta name="twitter:description" content="Five browser tools for design work: WCAG contrast checker, OKLCH palette generator, SVG minifier, screen-size sheet and text generator. No signup.">
+<meta name="twitter:title" content="Five Free Design Tools: Contrast, Palette, SVG, Sizes, Text">
+<meta name="twitter:description" content="Five browser tools on one page: WCAG 2.2 contrast checker, OKLCH colour ramp, SVG minifier, viewport size sheet and placeholder text. No signup, no upload.">
 <meta name="twitter:image" content="https://figcraft.rerivo.com/og.png">
-<script type="application/ld+json">{"@context":"https://schema.org","@graph":[{"@type":"WebPage","@id":"https://figcraft.rerivo.com/tools/#page","url":"https://figcraft.rerivo.com/tools/","name":"Free design tools that run in the browser","description":"Five browser tools for design work: WCAG contrast checker, OKLCH palette generator, SVG minifier, screen-size sheet and text generator. No signup.","isPartOf":{"@type":"WebSite","name":"FigCraft Guide","url":"https://figcraft.rerivo.com/"},"inLanguage":"en","dateModified":"2026-10-22","datePublished":"2026-10-22"},{"@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Tools","item":"https://figcraft.rerivo.com/tools/"}]},{"@type":"CollectionPage","@id":"https://figcraft.rerivo.com/tools/#collection","name":"Free design tools that run in the browser","description":"Five browser tools for design work: WCAG contrast checker, OKLCH palette generator, SVG minifier, screen-size sheet and text generator. No signup.","mainEntity":{"@type":"ItemList","itemListElement":[{"@type":"ListItem","position":1,"name":"Contrast checker","url":"https://figcraft.rerivo.com/tools/contrast-checker/"},{"@type":"ListItem","position":2,"name":"Palette generator","url":"https://figcraft.rerivo.com/tools/palette-generator/"},{"@type":"ListItem","position":3,"name":"SVG minifier","url":"https://figcraft.rerivo.com/tools/svg-minifier/"},{"@type":"ListItem","position":4,"name":"Screen sizes","url":"https://figcraft.rerivo.com/tools/screen-sizes/"},{"@type":"ListItem","position":5,"name":"Text generator","url":"https://figcraft.rerivo.com/tools/lorem-ipsum/"}]}},{"@type":"FAQPage","@id":"https://figcraft.rerivo.com/tools/#faq","mainEntity":[{"@type":"Question","name":"Do these tools send my colours or SVG files anywhere?","acceptedAnswer":{"@type":"Answer","text":"No. The contrast checker, palette generator, minifier, size sheet and text generator are static JavaScript served from this domain. There is no API call after the page loads, and nothing is written to a server."}},{"@type":"Question","name":"Can I use the output commercially?","acceptedAnswer":{"@type":"Answer","text":"Colour values, SVG markup and placeholder text are not copyrightable in the way code is, and the tools impose no licence on their output. Your own text and artwork remain yours."}},{"@type":"Question","name":"Are these the same tools Figma ships?","acceptedAnswer":{"@type":"Answer","text":"No. They are independent implementations of the same jobs. Figma publishes a colour contrast checker, a colour palette generator and a lorem ipsum generator; this page publishes its own versions with the same inputs and no account requirement."}},{"@type":"Question","name":"Why do the tools put state in the URL?","acceptedAnswer":{"@type":"Answer","text":"So a result is linkable. If you find a failing pair, the URL carries the two colours and the text size, which makes a bug report or a design review comment self-contained."}}]}]}</script>
+<script type="application/ld+json">{"@context":"https://schema.org","@graph":[{"@type":"WebPage","@id":"https://figcraft.rerivo.com/tools/#page","url":"https://figcraft.rerivo.com/tools/","name":"Five design tools, one page, nothing uploaded","description":"Five browser tools on one page: WCAG 2.2 contrast checker, OKLCH colour ramp, SVG minifier, viewport size sheet and placeholder text. No signup, no upload.","isPartOf":{"@type":"WebSite","name":"FigCraft Guide","url":"https://figcraft.rerivo.com/"},"inLanguage":"en","dateModified":"2026-10-22","datePublished":"2026-10-22"},{"@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Tools","item":"https://figcraft.rerivo.com/tools/"}]},{"@type":"WebApplication","@id":"https://figcraft.rerivo.com/tools/#app","name":"Five design tools, one page, nothing uploaded","url":"https://figcraft.rerivo.com/tools/","applicationCategory":"DesignApplication","operatingSystem":"Any (browser)","browserRequirements":"Requires JavaScript","isAccessibleForFree":true,"offers":{"@type":"Offer","price":"0","priceCurrency":"USD"},"description":"Five browser-based design utilities in one page: WCAG 2.2 contrast checker, OKLCH 11-step palette generator, SVG minifier, viewport size reference and placeholder text generator.","publisher":{"@type":"Organization","name":"FigCraft Guide","url":"https://figcraft.rerivo.com/"}},{"@type":"FAQPage","@id":"https://figcraft.rerivo.com/tools/#faq","mainEntity":[{"@type":"Question","name":"Do these tools send my colours, SVG files or text anywhere?","acceptedAnswer":{"@type":"Answer","text":"No. All five are static JavaScript served from this domain, with no API call after the page loads and nothing written to a server. The minifier parses and rewrites in the page; the Download button writes a local file through a blob URL."}},{"@type":"Question","name":"Why are five tools on one page instead of five pages?","acceptedAnswer":{"@type":"Answer","text":"Because they are five small utilities used in the same sitting, and five separate pages meant five sets of near-identical prose around a small form. One page keeps the tools as the main event. Every old address still works: the retired URLs redirect to the matching tab."}},{"@type":"Question","name":"Can I link directly to one tool?","acceptedAnswer":{"@type":"Answer","text":"Yes. The tab is in the hash — /tools/#contrast, /tools/#palette, /tools/#svg, /tools/#sizes, /tools/#text — and arrow keys move between tabs once one has focus. The contrast checker and the palette generator additionally carry their values in the query string, so a link can reproduce an exact pair or ramp."}},{"@type":"Question","name":"Are these the same tools Figma ships?","acceptedAnswer":{"@type":"Answer","text":"No. They are independent implementations of the same jobs. Figma publishes a colour contrast checker, a colour palette generator and a lorem ipsum generator; these are separate versions with the same inputs and no account requirement."}},{"@type":"Question","name":"Can I use the output commercially?","acceptedAnswer":{"@type":"Answer","text":"Colour values, SVG markup and placeholder text are not copyrightable in the way code is, and the tools impose no licence on their output. Your own text and artwork remain yours."}},{"@type":"Question","name":"Do the tools work offline?","acceptedAnswer":{"@type":"Answer","text":"Once the page and its scripts have loaded, yes — nothing further is fetched. A hard reload without a network connection will not work, because the page itself is served from this domain."}}]}]}</script>
 </head>
 <body>
 <a class="skip" href="#main">Skip to content</a>
@@ -47,59 +53,238 @@
   <div class="wrap">
     <div class="hero">
       <ul class="crumbs"><li><span>Tools</span></li></ul>
-      <p class="eyebrow">Tools</p>
-      <h1>Free design tools that run in the browser</h1>
-      <p class="lede">Five small tools built for the boring parts of interface design: checking contrast, building a colour ramp, shrinking an SVG, picking a canvas size, filling a layout with placeholder copy. Every one runs locally in the page.</p>
-      <div class="meta-line"><span>Independent guide</span><span>·</span><span>Updated 2026-10-22</span><span>·</span><span>Covers FigCraft v0.9.0</span><span>·</span><span>3 min read</span></div>
+      <p class="eyebrow">Free tools</p>
+      <h1>Five design tools, one page, nothing uploaded</h1>
+      <p class="lede">Contrast, colour ramp, SVG minifier, viewport sizes and placeholder text — the five checks that sit between a design being drawn and a design being handed off. Each one runs locally in this page and keeps its state in the URL.</p>
+      <div class="meta-line"><span>Independent guide</span><span>·</span><span>Updated 2026-10-22</span><span>·</span><span>Covers FigCraft v0.10.0</span><span>·</span><span>4 min read</span></div>
       <div class="cta"><a class="btn primary" href="/#demo">Open the studio</a><a class="btn ghost" href="/install/">Download FigCraft</a></div>
     </div>
 
-      <section>
+      <section id="tools">
         <h2>Pick a tool</h2>
-        <p class="sub">No account, no upload, no network call after the page loads. Each tool keeps its result in the URL so you can send someone the exact state you are looking at.</p>
-        <div class="grid">
-          <a class="card" href="/tools/contrast-checker/"><span class="k">Accessibility</span><h3>Contrast checker</h3><p>WCAG 2.2 AA and AAA against any two colours, plus the nearest passing colour when a pair fails.</p></a>
-          <a class="card" href="/tools/palette-generator/"><span class="k">Colour</span><h3>Palette generator</h3><p>An 11-step 50–950 ramp from one base colour, in OKLCH, exported as CSS, Tailwind, SCSS or JSON.</p></a>
-          <a class="card" href="/tools/svg-minifier/"><span class="k">Export</span><h3>SVG minifier</h3><p>Strip the XML preamble, metadata and float noise from a design-tool export without breaking references.</p></a>
-          <a class="card" href="/tools/screen-sizes/"><span class="k">Layout</span><h3>Screen sizes</h3><p>Logical viewport sizes for phones, tablets and laptops, with copyable media queries and a studio handoff.</p></a>
-          <a class="card" href="/tools/lorem-ipsum/"><span class="k">Copy</span><h3>Text generator</h3><p>Placeholder paragraphs sized for real UI strings, with word and character counts.</p></a>
-          <a class="card" href="/#demo"><span class="k">Editor</span><h3>The canvas studio</h3><p>A small browser canvas with frames, text, layers and PNG/SVG/JSON export. Not the full editor.</p></a>
+        <p class="sub">Everything below runs in this page: no account, no upload, no network call after the files load. Switch tabs freely — a panel is hidden, not rebuilt, so a half-typed hex or a pasted SVG is still there when you come back.</p>
+
+        <div class="tabs" role="tablist" aria-label="Tools">
+          <button class="tab" type="button" role="tab" id="tab-contrast" aria-controls="panel-contrast" aria-selected="true" data-tab="contrast">Contrast</button>
+          <button class="tab" type="button" role="tab" id="tab-palette" aria-controls="panel-palette" aria-selected="false" data-tab="palette">Palette</button>
+          <button class="tab" type="button" role="tab" id="tab-svg" aria-controls="panel-svg" aria-selected="false" data-tab="svg">SVG</button>
+          <button class="tab" type="button" role="tab" id="tab-sizes" aria-controls="panel-sizes" aria-selected="false" data-tab="sizes">Sizes</button>
+          <button class="tab" type="button" role="tab" id="tab-text" aria-controls="panel-text" aria-selected="false" data-tab="text">Text</button>
+        </div>
+
+        <div class="tab-panel" id="panel-contrast" role="tabpanel" aria-labelledby="tab-contrast" data-panel="contrast">
+          <p>Type or pick two colours and get the WCAG 2.2 ratio, every level threshold as a pass or fail pill, and — when the pair fails — the nearest colour that passes with hue and saturation untouched. Text size and bold are separate settings because AA wants 4.5:1 for body copy and 3:1 for large text, and the tool reports the 3:1 non-text threshold alongside them. It measures two flat colours and nothing else: no gradients, no text over photographs, no colour-blindness simulation, and no APCA.</p>
+          <div class="tool">
+            <div class="tool-head"><h2>Contrast checker</h2><span class="hint">WCAG 2.2 · runs locally · nothing uploaded</span></div>
+            <div class="tool-body tool-grid">
+              <form class="tool-form" autocomplete="off" onsubmit="return false">
+                <div class="field">
+                  <label for="ct-fg">Text colour</label>
+                  <div class="row"><input type="color" id="ct-fg-pick" value="#1a1a1a" aria-label="Pick text colour"><input type="text" id="ct-fg" value="#1A1A1A" spellcheck="false" aria-label="Text colour hex"></div>
+                </div>
+                <div class="field">
+                  <label for="ct-bg">Background colour</label>
+                  <div class="row"><input type="color" id="ct-bg-pick" value="#FFFFFF" aria-label="Pick background colour"><input type="text" id="ct-bg" value="#FFFFFF" spellcheck="false" aria-label="Background colour hex"></div>
+                </div>
+                <div class="field">
+                  <label for="ct-size">Text size</label>
+                  <select id="ct-size">
+                    <option value="body">Body text — under 18pt (24px)</option>
+                    <option value="large">Large text — 18pt+, or 14pt bold</option>
+                  </select>
+                </div>
+                <label class="check"><input type="checkbox" id="ct-bold"> Bold weight (14pt bold counts as large)</label>
+                <div class="btn-row">
+                  <button class="btn ghost sm" type="button" id="ct-swap">Swap colours</button>
+                  <button class="btn ghost sm" type="button" id="ct-share" data-share>Share result</button>
+                </div>
+                <p class="status" id="ct-status" data-copy-status></p>
+              </form>
+              <div class="result" id="ct-out" aria-live="polite"></div>
+            </div>
+          </div>
+          <p class="note">Click a suggested colour to copy its hex. The URL carries the pair and the text size, so a shared link reproduces the exact check.</p>
+        </div>
+
+        <div class="tab-panel" id="panel-palette" role="tabpanel" aria-labelledby="tab-palette" data-panel="palette" hidden>
+          <p>One base colour becomes an eleven-step 50–950 ramp in OKLCH, with the hue held constant and chroma tapered at both ends so the extremes do not turn to mud — the reason a ramp built in HSL produces uneven steps and a grey middle. Name the token, then export as CSS custom properties, a Tailwind theme, SCSS or JSON tokens. It does not choose semantic colours, does not build a dark theme, and does not promise that any pair of steps passes contrast.</p>
+          <div class="tool">
+            <div class="tool-head"><h2>Palette generator</h2><span class="hint">OKLCH · 11 steps · runs locally</span></div>
+            <div class="tool-body tool-grid">
+              <form class="tool-form" autocomplete="off" onsubmit="return false">
+                <div class="field">
+                  <label for="pl-base">Base colour</label>
+                  <div class="row"><input type="color" id="pl-pick" value="#2563EB" aria-label="Pick base colour"><input type="text" id="pl-base" value="#2563EB" spellcheck="false" aria-label="Base colour hex"></div>
+                </div>
+                <div class="field">
+                  <label for="pl-name">Token name</label>
+                  <input type="text" id="pl-name" value="brand" spellcheck="false" aria-label="Token name">
+                </div>
+                <div class="field">
+                  <label for="pl-format">Export format</label>
+                  <select id="pl-format">
+                    <option value="css">CSS custom properties</option>
+                    <option value="tailwind">Tailwind theme</option>
+                    <option value="scss">SCSS variables</option>
+                    <option value="json">JSON tokens</option>
+                  </select>
+                </div>
+                <div class="btn-row">
+                  <button class="btn ghost sm" type="button" id="pl-sample">Try another colour</button>
+                  <button class="btn ghost sm" type="button" id="pl-share" data-share>Share result</button>
+                </div>
+                <p class="status" id="pl-status"></p>
+              </form>
+              <div class="result">
+                <div class="swatches" id="pl-swatches"></div>
+                <pre><code id="pl-code" style="display:block;white-space:pre-wrap"></code></pre>
+              </div>
+            </div>
+          </div>
+          <p class="note">Click a swatch to copy its hex. The URL keeps the base colour and token name; the export format is a local choice.</p>
+        </div>
+
+        <div class="tab-panel" id="panel-svg" role="tabpanel" aria-labelledby="tab-svg" data-panel="svg" hidden>
+          <p>Paste a design-tool export and the minifier removes the XML declaration, comments, metadata, editor namespaces and float noise, then reports the bytes before and after rather than a promised percentage. Numbers inside text elements are left byte-identical — rounding visible copy would be a correctness bug, not an optimisation — and id attributes are never removed, because gradients, masks, clip paths and use references point at them. It does not rewrite paths, merge shapes or deduplicate definitions, so a dedicated optimiser still wins on artwork.</p>
+          <div class="tool">
+            <div class="tool-head"><h2>SVG minifier</h2><span class="hint">local only · output is re-parsed before it is offered</span></div>
+            <div class="tool-body">
+              <div class="tool-grid">
+                <div>
+                  <div class="field"><label for="sm-in">Input SVG</label><textarea id="sm-in" rows="14" spellcheck="false" style="font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;font-size:12px"></textarea></div>
+                  <div class="field">
+                    <label for="sm-precision">Decimal precision</label>
+                    <select id="sm-precision"><option value="0">0 — integers</option><option value="1">1 decimal</option><option value="2" selected>2 decimals</option><option value="3">3 decimals</option></select>
+                  </div>
+                  <label class="check"><input type="checkbox" id="sm-meta" checked> Remove metadata, title, desc and editor namespaces</label>
+                  <label class="check"><input type="checkbox" id="sm-comments" checked> Remove comments</label>
+                  <div class="btn-row" style="margin-top:12px">
+                    <button class="btn primary sm" type="button" id="sm-run">Minify</button>
+                    <button class="btn ghost sm" type="button" id="sm-sample">Load sample</button>
+                    <button class="btn ghost sm" type="button" id="sm-download">Download</button>
+                  </div>
+                  <p class="status" id="sm-status"></p>
+                </div>
+                <div>
+                  <div class="field"><label for="sm-out">Output</label><textarea id="sm-out" rows="14" spellcheck="false" style="font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;font-size:12px"></textarea></div>
+                  <div id="sm-stats"></div>
+                  <div class="btn-row" style="margin-top:12px"><button class="btn ghost sm" type="button" id="sm-copy">Copy output</button></div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <p class="note">Two decimals is a sensible default for UI icons; use three for large illustrations and zero only for pixel-aligned shapes.</p>
+        </div>
+
+        <div class="tab-panel" id="panel-sizes" role="tabpanel" aria-labelledby="tab-sizes" data-panel="sizes" hidden>
+          <p>Logical viewport sizes for phones, tablets, laptops and desktops in CSS pixels, each with a copyable size, a copyable media query and a link that opens this site's canvas at that exact width and height — the studio accepts w and h in the query string. Filter by name or width, or narrow to one device class. It is a reference, not a spec sheet: browser chrome changes the usable height, and the breakpoint list below is a starting set rather than a strategy.</p>
+          <div class="tool">
+            <div class="tool-head"><h2>Device viewports</h2><span class="hint">CSS logical pixels · portrait</span></div>
+            <div class="tool-body">
+              <div class="grid two" style="margin-bottom:14px">
+                <div class="field"><label for="ss-filter">Filter</label><input type="search" id="ss-filter" placeholder="iPhone, 390, iPad…"></div>
+                <div class="field"><label for="ss-class">Category</label>
+                  <select id="ss-class"><option value="all">All devices</option><option value="phone">Phones</option><option value="tablet">Tablets</option><option value="laptop">Laptops</option><option value="desktop">Desktops</option></select>
+                </div>
+              </div>
+              <div class="table-wrap">
+                <table>
+                  <thead><tr><th scope="col">Device</th><th scope="col">Viewport</th><th scope="col">DPR</th><th scope="col">Size</th><th scope="col">Query</th><th scope="col">Canvas</th></tr></thead>
+                  <tbody id="ss-rows"></tbody>
+                </table>
+              </div>
+              <p class="note">Portrait values; for landscape, swap width and height. “Open in studio” presets this site's demo canvas, not the real FigCraft editor.</p>
+            </div>
+          </div>
+          <h3>Breakpoints to design against</h3>
+          <ul class="list" id="bp-list"></ul>
+        </div>
+
+        <div class="tab-panel" id="panel-text" role="tabpanel" aria-labelledby="tab-text" data-panel="text" hidden>
+          <p>Generate placeholder copy in paragraphs, sentences or words, with live word, character and line counts so you can match a real string budget instead of guessing. The presets cover the shapes that break layouts: a six-word button label, a card sentence, a forty-word empty state, a long article. English lorem only — no RTL, no CJK — and it is filler, not a copywriting shortcut: replace every block before launch, because shipping lorem ipsum is a content failure rather than a design one.</p>
+          <div class="tool">
+            <div class="tool-head"><h2>Text generator</h2><span class="hint">local · no network after load</span></div>
+            <div class="tool-body tool-grid">
+              <form class="tool-form" autocomplete="off" onsubmit="return false">
+                <div class="field">
+                  <label for="li-preset">Preset</label>
+                  <select id="li-preset">
+                    <option value="paragraphs:3">Three body paragraphs</option>
+                    <option value="sentences:4">Four sentences (card copy)</option>
+                    <option value="words:6">Six words (button label)</option>
+                    <option value="sentences:12">Twelve sentences (long article)</option>
+                    <option value="words:40">Forty words (empty state)</option>
+                  </select>
+                </div>
+                <div class="field">
+                  <label for="li-format">Unit</label>
+                  <select id="li-format"><option value="paragraphs">Paragraphs</option><option value="sentences">Sentences</option><option value="words">Words</option></select>
+                </div>
+                <div class="field">
+                  <label for="li-count">How many</label>
+                  <input type="number" id="li-count" value="3" min="1" max="50" inputmode="numeric">
+                </div>
+                <label class="check"><input type="checkbox" id="li-start" checked> Start with “Lorem ipsum dolor sit amet”</label>
+                <div class="btn-row">
+                  <button class="btn primary sm" type="button" id="li-again">Regenerate</button>
+                  <button class="btn ghost sm" type="button" id="li-copy">Copy</button>
+                  <button class="btn ghost sm" type="button" id="li-download">Download .txt</button>
+                </div>
+                <p class="status" id="li-status"></p>
+              </form>
+              <div class="result">
+                <pre><code id="li-out" style="display:block;white-space:pre-wrap;min-height:180px"></code></pre>
+              </div>
+            </div>
+          </div>
+          <p class="note">The status line reports words, characters and approximate lines at a 60-character measure.</p>
         </div>
       </section>
 
-      <section>
+      <section id="why">
         <h2>Why these five</h2>
-        <p class="sub">They are the checks that come up between a design being drawn and a design being handed off. Each one is also a page that a design tool vendor tends to publish — Figma ships its own colour contrast checker, palette generator and lorem ipsum generator — so the floor for a decent design tool site now includes working utilities rather than screenshots of utilities.</p>
-        <div class="grid three">
-          <div class="card"><span class="k">Check</span><h3>Contrast before review</h3><p>Text/background pairs fail review, not design. Checking a pair takes seconds and the fix suggestion keeps the hue.</p></div>
-          <div class="card"><span class="k">Build</span><h3>Ramps before tokens</h3><p>A ramp with a held hue gives you 50–950 names you can paste into variables instead of inventing shades per component.</p></div>
-          <div class="card"><span class="k">Ship</span><h3>Weight before deploy</h3><p>Design-tool SVG exports carry editor namespaces and four decimal places. Removing them is free bytes.</p></div>
+        <p class="sub">They are the checks that come up between a design being drawn and a design being handed off, and they are small enough to run in one page instead of five. Each is also a page a design tool vendor tends to publish, so a decent design tool site now ships working utilities rather than screenshots of utilities.</p>
+        <div class="grid">
+          <div class="card"><span class="k">Check</span><h3>Contrast before review</h3><p>Text and background pairs fail review, not design. A ratio takes seconds, and the fix suggestion moves lightness while keeping the hue, so a failing blue becomes a darker blue rather than a muddy black.</p></div>
+          <div class="card"><span class="k">Build</span><h3>Ramps before tokens</h3><p>A ramp with a held hue gives eleven names you can paste into variables instead of inventing a shade per component. Name the steps, not the jobs: brand-600 survives a redesign and brand-button does not.</p></div>
+          <div class="card"><span class="k">Ship</span><h3>Weight before deploy</h3><p>Design-tool SVG exports carry an XML declaration, editor namespaces, metadata and four decimal places. Removing the overhead is free bytes, as long as ids stay where the references expect them and no number inside a text element is rounded.</p></div>
         </div>
+        <p class="note">FigCraft is an open-source Figma alternative in Rust, early alpha at roughly 49% parity by its own estimate. None of these tools depends on it: they work if you use Figma, Penpot, Sketch or nothing at all. Where a result maps onto FigCraft, a ramp becomes local styles and variables, and a canvas size opens the browser studio at /#demo with w and h set.</p>
       </section>
 
-      <section>
-        <h2>How the tools relate to FigCraft</h2>
-        <p class="sub">FigCraft is an open-source design app written in Rust, currently early alpha at roughly 49% parity by the project's own estimate. These tools do not depend on it: they work if you use Figma, Penpot, Sketch or nothing at all. Where a result maps onto FigCraft, the page says how — a ramp becomes local styles and variables, a canvas size opens in the <a href="/#demo">browser studio</a>, a minified SVG lands in the same file you exported it from.</p>
-        <p class="note">This site is independent. It is not affiliated with Figma, Penpot, Sketch or ArtCraft, and none of these tools uploads your files anywhere.</p>
+      <section id="limits">
+        <h2>What none of them do</h2>
+        <p class="sub">One honest line per tool, because a utility that hides its edges is worse than no utility.</p>
+        <ul class="list">
+          <li><strong>Contrast — no simulation, no APCA</strong><span>It compares two flat colours. Two colours can pass 4.5:1 and still be indistinguishable with deuteranopia; gradients, text over images and the WCAG 3 APCA model are out of scope.</span></li>
+          <li><strong>Palette — no semantic or dark-mode colours</strong><span>Success, warning and danger need their own hues, and a 950 step is not automatically the dark-mode version of 50. The output is sRGB hex, so P3 and print need another pipeline.</span></li>
+          <li><strong>SVG — no path rewriting</strong><span>Primitives are not converted to paths, shapes are not merged, duplicate gradients are not deduplicated and curve precision is not reduced with an error bound.</span></li>
+          <li><strong>Sizes — not a spec sheet</strong><span>Vendors do not publish a guaranteed CSS viewport per model, fold and zoom are not modelled, and one frame per device is not a responsive strategy.</span></li>
+          <li><strong>Text — English lorem only</strong><span>Line counts assume a 60-character measure and a Latin word list. For RTL, CJK or accented-language testing, use real strings from that language.</span></li>
+        </ul>
+      </section>
+
+      <section id="notes">
+        <h2>Where your state lives</h2>
+        <p>Nothing is uploaded. The contrast checker writes fg, bg and size into the URL; the palette generator writes base and name; the other three keep their input in the page only. Switching tabs does not lose what you typed, because a panel is hidden rather than rebuilt — a pasted SVG and a half-typed hex are both still there when you come back. Reloading restores contrast and palette state from the URL and starts the rest fresh.</p>
       </section>
     
 
     <section id="faq">
       <h2>Questions this page answers</h2>
       <p class="sub">Straight answers, with the limits stated. Every claim here is checkable against the sources linked above.</p>
-      <details><summary>Do these tools send my colours or SVG files anywhere?</summary><p>No. The contrast checker, palette generator, minifier, size sheet and text generator are static JavaScript served from this domain. There is no API call after the page loads, and nothing is written to a server.</p></details>
+      <details><summary>Do these tools send my colours, SVG files or text anywhere?</summary><p>No. All five are static JavaScript served from this domain, with no API call after the page loads and nothing written to a server. The minifier parses and rewrites in the page; the Download button writes a local file through a blob URL.</p></details>
+      <details><summary>Why are five tools on one page instead of five pages?</summary><p>Because they are five small utilities used in the same sitting, and five separate pages meant five sets of near-identical prose around a small form. One page keeps the tools as the main event. Every old address still works: the retired URLs redirect to the matching tab.</p></details>
+      <details><summary>Can I link directly to one tool?</summary><p>Yes. The tab is in the hash — /tools/#contrast, /tools/#palette, /tools/#svg, /tools/#sizes, /tools/#text — and arrow keys move between tabs once one has focus. The contrast checker and the palette generator additionally carry their values in the query string, so a link can reproduce an exact pair or ramp.</p></details>
+      <details><summary>Are these the same tools Figma ships?</summary><p>No. They are independent implementations of the same jobs. Figma publishes a colour contrast checker, a colour palette generator and a lorem ipsum generator; these are separate versions with the same inputs and no account requirement.</p></details>
       <details><summary>Can I use the output commercially?</summary><p>Colour values, SVG markup and placeholder text are not copyrightable in the way code is, and the tools impose no licence on their output. Your own text and artwork remain yours.</p></details>
-      <details><summary>Are these the same tools Figma ships?</summary><p>No. They are independent implementations of the same jobs. Figma publishes a colour contrast checker, a colour palette generator and a lorem ipsum generator; this page publishes its own versions with the same inputs and no account requirement.</p></details>
-      <details><summary>Why do the tools put state in the URL?</summary><p>So a result is linkable. If you find a failing pair, the URL carries the two colours and the text size, which makes a bug report or a design review comment self-contained.</p></details>
+      <details><summary>Do the tools work offline?</summary><p>Once the page and its scripts have loaded, yes — nothing further is fetched. A hard reload without a network connection will not work, because the page itself is served from this domain.</p></details>
     </section>
     <section class="related" id="related">
       <h2>Keep going</h2>
       <div class="grid">
-        <a class="card" href="/tools/contrast-checker/"><span class="k">Free tool</span><h3>Contrast checker with a fix, not just a verdict</h3><p>Paste two colours and see the exact WCAG 2.2 ratio, which levels pass, and the closest colour that would pass while keeping the hue and saturation. Everything runs in this page.</p></a>
-        <a class="card" href="/tools/palette-generator/"><span class="k">Free tool</span><h3>Palette generator: one colour in, eleven steps out</h3><p>Give it a brand colour. It holds the hue, walks lightness in even perceptual steps, and gives you a named ramp you can paste into CSS variables, a Tailwind config or FigCraft local styles.</p></a>
-        <a class="card" href="/tools/svg-minifier/"><span class="k">Free tool</span><h3>SVG minifier that leaves your references alone</h3><p>Design tools export SVG with an XML declaration, editor namespaces, metadata blocks and four decimal places. This strips the overhead and reports exactly what it removed — without touching ids, text content or gradient references.</p></a>
-        <a class="card" href="/tools/screen-sizes/"><span class="k">Free tool</span><h3>Screen sizes, in CSS pixels, with the queries attached</h3><p>A working sheet of logical viewport sizes and breakpoints. Copy a size, copy the media query, or open the canvas studio at that exact size and start drawing.</p></a>
-        <a class="card" href="/learn/keyboard-shortcuts/"><span class="k">Guide</span><h3>FigCraft keyboard shortcuts, split honestly</h3><p>There are two keymaps in play on this site and only one of them is documented here. This page lists the demo studio's shortcuts, then shows how to read the real app's bindings instead of assuming they match.</p></a>
+        <a class="card" href="/templates/"><span class="k">Templates</span><h3>FigCraft templates: eight starters, one menu item</h3><p>The app ships eight starters and they all live behind File ▸ New from template. This is the map: the size each file is drawn at, the frames it is built from, and where it stops being useful.</p></a>
+        <a class="card" href="/learn/"><span class="k">Guides</span><h3>FigCraft guides for the work that actually breaks</h3><p>FigCraft is an early alpha at roughly 49% parity by the project's own estimate. The useful questions are narrower: will my file open, what does the exporter write, can a script drive this, and what does leaving Figma cost. Eight answers below, each with the commands and the issue that tracks the failure.</p></a>
       </div>
     </section>
   </div>
@@ -108,7 +293,7 @@
   <div class="wrap foot">
     <div>
       <strong>FigCraft Guide</strong> — an independent guide and browser studio. Not affiliated with ArtCraft.
-      <div class="note">Last updated 2026-10-22 · covers FigCraft v0.9.0 · corrections welcome via the source repository.</div>
+      <div class="note">Last updated 2026-10-22 · covers FigCraft v0.10.0 · corrections welcome via the source repository.</div>
     </div>
     <nav aria-label="Footer">
       <a href="/tools/">Tools</a>

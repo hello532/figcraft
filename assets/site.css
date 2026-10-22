@@ -173,3 +173,17 @@ footer a{color:var(--muted)}
 footer a:hover{color:var(--fg)}
 .note{font-size:13px;color:var(--muted);margin-top:16px}
 .disclosure{background:var(--surface);border:1px solid var(--border);border-left:3px solid var(--accent);border-radius:0 12px 12px 0;padding:12px 16px;font-size:13px;color:var(--muted);margin:24px 0}
+
+/* tool tabs — one page, five panels */
+.tabs{display:flex;gap:4px;flex-wrap:wrap;padding:6px;background:var(--surface);border:1px solid var(--border);border-radius:12px;margin:0 0 18px}
+.tab{border:1px solid transparent;background:transparent;color:var(--muted);border-radius:8px;padding:9px 16px;font-size:14px;font-weight:650;cursor:pointer;white-space:nowrap}
+.tab:hover{color:var(--fg);background:var(--bg)}
+.tab[aria-selected="true"]{background:color-mix(in srgb,var(--accent) 12%,var(--surface));border-color:color-mix(in srgb,var(--accent) 40%,var(--border));color:var(--accent)}
+.tab:focus-visible{outline:2px solid var(--accent);outline-offset:1px}
+.tab-panel{padding:0}
+.tab-panel[hidden]{display:none}
+.tab-panel>p:first-child{margin:0 0 16px;color:var(--muted);max-width:70ch}
+@media (max-width:560px){
+  .tabs{gap:2px;padding:4px}
+  .tab{padding:8px 11px;font-size:13px}
+}

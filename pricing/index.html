@@ -50,14 +50,14 @@
       <p class="eyebrow">Pricing</p>
       <h1>What free actually costs: FigCraft, Figma, Penpot and Sketch</h1>
       <p class="lede">Four products, four definitions of free — and four different invoices once a team grows past one person. The arithmetic below is the whole point.</p>
-      <div class="meta-line"><span>Independent guide</span><span>·</span><span>Updated 2026-10-22</span><span>·</span><span>Covers FigCraft v0.9.0</span><span>·</span><span>8 min read</span></div>
+      <div class="meta-line"><span>Independent guide</span><span>·</span><span>Updated 2026-10-22</span><span>·</span><span>Covers FigCraft v0.10.0</span><span>·</span><span>7 min read</span></div>
       <div class="cta"><a class="btn primary" href="/install/">Download FigCraft</a><a class="btn ghost" href="/#demo">Open the studio</a></div>
     </div>
 <section>
   <h2>Four products, four definitions of free</h2>
   <div class="prose">
     <p>Free means four things here. FigCraft is free because the source is open and you run the binary. Figma Starter is free because the vendor rents a drafts-only workspace and charges for seats. Penpot Professional is $0 with caps on members, storage and history; Unlimited removes them. Sketch is not free beyond a trial, and its $120 one-time Mac licence excludes collaboration.</p>
-    <p>Everything below is arithmetic on published list prices checked 2026-10-22, using annual billing. Taxes and add-ons are excluded. The aim is to show where the meter starts running.</p>
+    <p>Everything below is arithmetic on published list prices checked 2026-10-22, using annual billing. Taxes and add-ons are excluded. The aim is to show where the meter starts running, and to say plainly what each free tier refuses to give you.</p>
   </div>
 </section>
 
@@ -112,7 +112,7 @@
 
 <section>
   <h2>The invoice FigCraft never sends</h2>
-  <p>FigCraft's price is zero and the cost is time. Fonts must sit in a sibling directory named <code>../craft-fonts</code> (<a href="https://github.com/storytold/figcraft/issues/821" rel="noopener">#821</a>), macOS 27 on M1 crashes at launch (<a href="https://github.com/storytold/figcraft/issues/781" rel="noopener">#781</a>), interface scale breaks at 1440p (<a href="https://github.com/storytold/figcraft/issues/540" rel="noopener">#540</a>, <a href="https://github.com/storytold/figcraft/issues/818" rel="noopener">#818</a>), and FreeBSD aarch64 was dropped in v0.9.0. None of that costs money; all of it costs afternoons.</p>
+  <p>FigCraft's price is zero and the cost is time. Fonts must sit in a sibling directory named <code>../craft-fonts</code> (<a href="https://github.com/storytold/figcraft/issues/821" rel="noopener">#821</a>), macOS 27 on M1 crashes at launch (<a href="https://github.com/storytold/figcraft/issues/781" rel="noopener">#781</a>), interface scale breaks at 1440p (<a href="https://github.com/storytold/figcraft/issues/540" rel="noopener">#540</a>, <a href="https://github.com/storytold/figcraft/issues/818" rel="noopener">#818</a>), and FreeBSD aarch64 was dropped in v0.10.0. None of that costs money; all of it costs afternoons.</p>
   <p>Run it the other way: $16 buys a mature editor with multiplayer, permissions and plugins; $7 buys a browser workspace with team features. FigCraft buys ownership, offline work, an inspectable engine and a CLI and MCP surface past 400 commands, and asks for tolerance of alpha software. <a href="/issues/">Known issues</a> is the honest test.</p>
 </section>
 
@@ -120,15 +120,15 @@
   <h2>The honest conclusion</h2>
   <div class="prose">
     <p>If a team co-edits this quarter, the cheapest serious answer is Penpot Professional at $0 for up to eight members, then $7 per editor with a $175 ceiling. If maturity, plugins and hiring matter more, Figma's $16 seat is expensive but not overpriced. For one designer who never shares a file, $120 once for Sketch is the cheapest option that feels like a purchase.</p>
-    <p>FigCraft is free in the licence sense and self-run in the operational sense. It is not production-ready for a team: multiplayer is a preview, the public collaboration server is not end-to-end encrypted, and parity is around half by the project's own estimate. Use it for local, offline, scriptable work on your own disk, and keep a paid seat elsewhere for the collaboration you cannot yet do without.</p>
+    <p>FigCraft is free in the licence sense and self-run in the operational sense. It is not production-ready for a team: multiplayer is a preview, the public collaboration server is not end-to-end encrypted, and parity is 49% by the project's own estimate. Use it for local, offline, scriptable work on your own disk, and keep a paid seat elsewhere for the collaboration you cannot yet do without.</p>
+  </div>
+  <div class="cta">
+    <a class="btn primary" href="/install/">Install FigCraft</a>
+    <a class="btn ghost sm" href="/alternatives/">Compare it with Penpot and Sketch</a>
+    <a class="btn ghost sm" href="/issues/">Read the known issues first</a>
   </div>
   <p class="note">Prices checked 2026-10-22 from the vendors' own pricing pages; verify before you buy. This site is independent and not affiliated with Figma, Penpot, Sketch or ArtCraft.</p>
-  <ul>
-    <li><a href="/vs-figma/">FigCraft vs Figma, feature by feature</a></li>
-    <li><a href="/vs-penpot/">FigCraft vs Penpot</a> and <a href="/vs-sketch/">FigCraft vs Sketch</a></li>
-    <li><a href="/free-figma-alternative/">Three routes that stay genuinely free</a></li>
-    <li><a href="/open-source-figma-alternative/">What the open-source licences actually permit</a></li>
-  </ul>
+  <p>Related: <a href="/alternatives/#penpot">FigCraft vs Penpot</a>, <a href="/alternatives/#licence">what each licence permits</a>, <a href="/vs-figma/">FigCraft vs Figma</a>, and <a href="/learn/#topic-migrate">migrating from Figma</a>.</p>
 </section>
 
     <section id="faq">
@@ -141,21 +141,13 @@
       <details><summary>Do Figma viewers need a paid seat?</summary><p>Free viewers can inspect and copy CSS on paid plans, so reviewing does not require a Full seat. What the free Starter tier withholds is the team workspace itself: unlimited drafts are free, but shared libraries, team permissions and the dev handoff loop are what the paid seats provide.</p></details>
       <details><summary>What is the hidden cost of FigCraft?</summary><p>Time, not money. Fonts must live in a sibling directory named ../craft-fonts (issue #821 is open), macOS 27 on M1 has a launch crash (#781), Windows has a DX12 blur problem and 1440p interface scaling is broken (#540, #818). Multiplayer is a preview and the public server is not end-to-end encrypted, so a team still needs another tool.</p></details>
     </section>
-    <section class="related" id="related">
-      <h2>Keep going</h2>
-      <div class="grid">
-        <a class="card" href="/vs-penpot/"><span class="k">Comparison</span><h3>FigCraft vs Penpot: local files or a hosted workspace</h3><p>Both are open source, and they disagree about the only question that matters: where the document lives. Everything else follows from that.</p></a>
-        <a class="card" href="/free-figma-alternative/"><span class="k">Comparison</span><h3>Free Figma alternatives: three routes, three different bargains</h3><p>Free is a price, not a category. These three routes cost nothing today and charge you in three different currencies: seats, limits, or maintenance.</p></a>
-        <a class="card" href="/open-source-figma-alternative/"><span class="k">Comparison</span><h3>Open-source Figma alternatives: two licences, two bets</h3><p>Both FigCraft and Penpot publish their source. The licence and the hosting model decide whether that source is a tool you use or a platform you build on.</p></a>
-      </div>
-    </section>
   </div>
 </main>
 <footer>
   <div class="wrap foot">
     <div>
       <strong>FigCraft Guide</strong> — an independent guide and browser studio. Not affiliated with ArtCraft.
-      <div class="note">Last updated 2026-10-22 · covers FigCraft v0.9.0 · corrections welcome via the source repository.</div>
+      <div class="note">Last updated 2026-10-22 · covers FigCraft v0.10.0 · corrections welcome via the source repository.</div>
     </div>
     <nav aria-label="Footer">
       <a href="/tools/">Tools</a>

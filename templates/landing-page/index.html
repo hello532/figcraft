@@ -3,153 +3,29 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>FigCraft Landing Page Template: A 1440 px Page in Sections</title>
-<meta name="description" content="The landing page starter: a 1440-wide page split into hero, logos, features, proof, pricing, FAQ and footer, plus a 390-wide mobile frame.">
-<meta name="robots" content="index,follow,max-image-preview:large">
-<meta name="author" content="FigCraft Guide">
-<meta name="theme-color" content="#2563eb">
-<link rel="canonical" href="https://figcraft.rerivo.com/templates/landing-page/">
-<link rel="alternate" type="text/plain" href="https://figcraft.rerivo.com/llms.txt" title="LLMs.txt">
-<link rel="alternate" type="text/plain" href="https://figcraft.rerivo.com/llms-full.txt" title="LLMs full guide">
-<link rel="icon" type="image/svg+xml" href="/assets/favicon.svg">
-<link rel="stylesheet" href="/assets/site.css">
-<script src="/assets/site.js" defer></script>
-<meta property="og:title" content="FigCraft Landing Page Template: A 1440 px Page in Sections">
-<meta property="og:description" content="The landing page starter: a 1440-wide page split into hero, logos, features, proof, pricing, FAQ and footer, plus a 390-wide mobile frame.">
-<meta property="og:type" content="website">
-<meta property="og:locale" content="en_US">
-<meta property="og:url" content="https://figcraft.rerivo.com/templates/landing-page/">
-<meta property="og:image" content="https://figcraft.rerivo.com/og.png">
-<meta property="og:image:width" content="1200">
-<meta property="og:image:height" content="630">
-<meta property="og:image:alt" content="FigCraft — a Figma alternative written in pure Rust">
-<meta property="article:modified_time" content="2026-10-22">
-<meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:title" content="FigCraft Landing Page Template: A 1440 px Page in Sections">
-<meta name="twitter:description" content="The landing page starter: a 1440-wide page split into hero, logos, features, proof, pricing, FAQ and footer, plus a 390-wide mobile frame.">
-<meta name="twitter:image" content="https://figcraft.rerivo.com/og.png">
-<script type="application/ld+json">{"@context":"https://schema.org","@graph":[{"@type":"WebPage","@id":"https://figcraft.rerivo.com/templates/landing-page/#page","url":"https://figcraft.rerivo.com/templates/landing-page/","name":"Landing page template: a 1440 px page, cut into sections","description":"The landing page starter: a 1440-wide page split into hero, logos, features, proof, pricing, FAQ and footer, plus a 390-wide mobile frame.","isPartOf":{"@type":"WebSite","name":"FigCraft Guide","url":"https://figcraft.rerivo.com/"},"inLanguage":"en","dateModified":"2026-10-22","datePublished":"2026-10-22"},{"@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Templates","item":"https://figcraft.rerivo.com/templates/"},{"@type":"ListItem","position":2,"name":"Landing page","item":"https://figcraft.rerivo.com/templates/landing-page/"}]},{"@type":"FAQPage","@id":"https://figcraft.rerivo.com/templates/landing-page/#faq","mainEntity":[{"@type":"Question","name":"Is the landing page starter responsive?","acceptedAnswer":{"@type":"Answer","text":"It ships two frames: 1440 wide and 390 wide. There is no breakpoint engine, so the middle widths are your call — resize a copy of the desktop frame and let the auto layout stacks reflow, or design a third frame at 834."}},{"@type":"Question","name":"Can I export it as a working website?","acceptedAnswer":{"@type":"Answer","text":"Partly. Export produces CSS, HTML, React, Leptos, SwiftUI or Compose for a frame or selection, which is a static snapshot at one width. There is no routing, no form handling and no content model; you still need your own build to ship the page."}},{"@type":"Question","name":"What grid does the page use?","acceptedAnswer":{"@type":"Answer","text":"Desktop: 12 columns of 82 px with 24 px gutters inside 96 px margins, giving 1248 px of content in a 1440 px frame. Mobile: four 74 px columns with 18 px gutters inside 20 px margins, giving 350 px of content."}},{"@type":"Question","name":"Where does the copy come from?","acceptedAnswer":{"@type":"Answer","text":"The starter ships placeholder text so the type scale is visible. Replace it before any review, and use the lorem ipsum tool if you need realistic line lengths while you are still deciding what the page says."}}]}]}</script>
+<title>Moved — FigCraft Guide</title>
+<meta name="robots" content="noindex,follow">
+<link rel="canonical" href="https://figcraft.rerivo.com/templates/#starter-landing-page">
+<meta http-equiv="refresh" content="0; url=/templates/#starter-landing-page">
+<style>
+  body{margin:0;min-height:100vh;display:grid;place-items:center;background:#f7f7f5;color:#161616;
+       font-family:ui-sans-serif,system-ui,-apple-system,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;line-height:1.6}
+  @media (prefers-color-scheme:dark){body{background:#0f1115;color:#f3f4f6}a{color:#7aa2ff}}
+  main{max-width:46ch;padding:32px;text-align:center}
+  h1{font-size:20px;letter-spacing:-.02em;margin:0 0 10px}
+  p{color:#5f6368;font-size:14px;margin:0 0 18px}
+  @media (prefers-color-scheme:dark){p{color:#a1a7b3}}
+  a{color:#2563eb;font-weight:650;text-decoration:none}
+  a:hover{text-decoration:underline}
+  code{font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;font-size:.9em}
+</style>
 </head>
 <body>
-<a class="skip" href="#main">Skip to content</a>
-<header>
-  <div class="wrap nav">
-    <a class="brand" href="/"><img class="mark-img" src="/assets/mark.svg" alt="" width="28" height="28">FigCraft Guide</a>
-    <nav aria-label="Primary"><a href="/tools/">Tools</a><a href="/templates/" aria-current="page">Templates</a><a href="/alternatives/">Compare</a><a href="/learn/">Learn</a><a href="https://github.com/storytold/figcraft" rel="noopener">GitHub</a><a class="nav-cta" href="/install/">Download</a></nav>
-    <div class="nav-tools">
-      <button class="nav-icon" type="button" data-theme-toggle aria-label="Toggle theme">☾</button>
-      <button class="nav-icon nav-menu-btn" type="button" data-nav-toggle aria-label="Menu" aria-expanded="false" aria-controls="mobile-nav">≡</button>
-    </div>
-  </div>
-  <div class="mobile-nav" id="mobile-nav"><a href="/tools/">Tools</a><a href="/templates/">Templates</a><a href="/alternatives/">Compare</a><a href="/learn/">Learn</a><a href="https://github.com/storytold/figcraft" rel="noopener">GitHub</a><a class="nav-cta" href="/install/">Download FigCraft</a></div>
-</header>
-<main id="main">
-  <div class="wrap">
-    <div class="hero">
-      <ul class="crumbs"><li><a href="/templates/">Templates</a></li><li><span>Landing page</span></li></ul>
-      <p class="eyebrow">Template</p>
-      <h1>Landing page template: a 1440 px page, cut into sections</h1>
-      <p class="lede">One desktop frame at <strong>1440 px</strong>, cut into seven sections on a 12-column grid. Duplicate a section, keep the rhythm, hand the page over.</p>
-      <div class="meta-line"><span>Independent guide</span><span>·</span><span>Updated 2026-10-22</span><span>·</span><span>Covers FigCraft v0.9.0</span><span>·</span><span>4 min read</span></div>
-      <div class="cta"><a class="btn primary" href="/install/">Download FigCraft</a><a class="btn ghost" href="/#demo">Open the studio</a></div>
-    </div>
-<section>
-  <h2>What's in the starter</h2>
-  <p class="disclosure">The project publishes the name of this starter, not its internal pages or frame sizes. What follows is a workable structure for this kind of file — a starting spec to build against — not a transcription of the shipped document. Check it against the build you actually open.</p>
-  <p class="sub">The desktop page is a single vertical stack. Each section is its own frame with fixed padding, so you can duplicate, delete or reorder one without touching the others.</p>
-  <ul class="list">
-    <li><strong>Navigation and hero</strong><span>An 80 px nav row with four links and one button, then a hero with a 64/68 headline, a 20/30 sub-line capped at 640 px, two 48 px buttons and a 960 × 600 product shot.</span></li>
-    <li><strong>Logo strip</strong><span>Five placeholder wordmarks on one row, each 120 px wide, set in one text style so they read as a group.</span></li>
-    <li><strong>Features</strong><span>Three 400 px cards on a grid track row, each with a 48 px icon slot, a 24 px heading and a three-line body.</span></li>
-    <li><strong>Proof</strong><span>An 800 px quote column at 32/44 next to three stacked metrics, so the numbers do not compete with the sentence.</span></li>
-    <li><strong>Pricing, FAQ and footer</strong><span>Three 400 px tiers with the middle one marked, five 72 px disclosure rows, and four 288 px footer columns.</span></li>
-    <li><strong>Mobile page</strong><span>A second frame at 390 px wide with the same sections stacked in one column.</span></li>
-  </ul>
-</section>
-<section>
-  <h2>Canvas spec</h2>
-  <p class="sub">Desktop uses a 12-column grid of 82 px columns with 24 px gutters inside 96 px margins — 1248 px of content. Mobile uses four 74 px columns with 18 px gutters inside 20 px margins — 350 px of content.</p>
-  <div class="table-wrap"><table>
-    <thead><tr><th>Frame</th><th>Size (px)</th><th>Purpose</th></tr></thead>
-    <tbody>
-      <tr><th>Landing / Desktop</th><td>1440 × 3880</td><td>Full page stack, the frame you export from</td></tr>
-      <tr><th>Section / Hero</th><td>1440 × 760</td><td>Headline, sub-line, two buttons, product shot</td></tr>
-      <tr><th>Section / Logos</th><td>1440 × 160</td><td>Five wordmarks on one baseline</td></tr>
-      <tr><th>Section / Features</th><td>1440 × 720</td><td>Three 400 px cards, 24 px gutters</td></tr>
-      <tr><th>Section / Proof</th><td>1440 × 560</td><td>Quote plus three metrics</td></tr>
-      <tr><th>Section / Pricing</th><td>1440 × 720</td><td>Three tiers, middle one accented</td></tr>
-      <tr><th>Section / FAQ</th><td>1440 × 560</td><td>Five rows at 72 px each</td></tr>
-      <tr><th>Section / Footer</th><td>1440 × 320</td><td>Four 288 px link columns</td></tr>
-      <tr><th>Landing / Mobile</th><td>390 × 4380</td><td>Same sections, one column, 350 px content</td></tr>
-    </tbody>
-  </table></div>
-</section>
-<section>
-  <h2>Open it</h2>
-  <ol class="steps">
-    <li><strong>File ▸ New from template</strong> — the starter list opens in place; no file picker, no download.</li>
-    <li><strong>Choose “Landing page”</strong> — the desktop page and the mobile page arrive as two frames on one page.</li>
-    <li><strong>Save as <code>.figcraft</code></strong> — the file is a plain archive on disk. There is no account and no telemetry, which also means no autosave to the cloud.</li>
-    <li><strong>Confirm the fonts</strong> — headline sizes are tuned for the bundled faces; if <code>../craft-fonts</code> is not beside the source, text falls back and lines wrap differently.</li>
-    <li><strong>Keep the grid visible</strong> — duplicate the desktop frame before you change column widths, so the original stays as the reference for section padding.</li>
-  </ol>
-</section>
-<section>
-  <h2>Make it yours</h2>
-  <p class="sub">The page is a container for your argument. These are the four levers that change it fastest.</p>
-  <div class="grid four">
-    <div class="card"><span class="k">Auto layout</span><h3>Sections that hold their rhythm</h3><p>Every section is a vertical stack with 120 px top and bottom padding. The features row uses grid tracks, so a fourth card does not shrink the first three.</p></div>
-    <div class="card"><span class="k">Variables</span><h3>Type and space as tokens</h3><p>An 8-based spacing scale (8, 16, 24, 32, 48, 64, 96, 120) and a text scale from 12 to 64 keep the page consistent when you add a section. A color mode holds the dark hero variant.</p></div>
-    <div class="card"><span class="k">Components</span><h3>Pricing card with a switch</h3><p>The tier card is a component with a boolean property for the accent border, so the middle plan is one property change rather than a copy. Nav links and buttons are sets too.</p></div>
-    <div class="card"><span class="k">Color</span><h3>Decide the palette before the copy</h3><p>Build the ramp in the <a href="/tools/palette-generator/">palette generator</a>, then test headline-on-hero pairs in the <a href="/tools/contrast-checker/">contrast checker</a>.</p></div>
-  </div>
-</section>
-<section>
-  <h2>What it does not give you</h2>
-  <p class="disclosure">There is no responsive engine behind this page. You get two frames — 1440 and 390 — and you maintain both. Export writes CSS, HTML, React, Leptos, SwiftUI or Compose for what you selected, but it is a static snapshot of that frame at that width, with no breakpoints, no form handling and no content model.</p>
-  <p class="note">Copy is deliberately placeholder text; generate replacement body copy with the <a href="/tools/lorem-ipsum/">lorem ipsum tool</a> rather than inventing a product story inside the layout. <code>.fig</code> import remains best effort with large files still failing (#574, #321), and the project is an early alpha at about 49% parity by its own estimate — check <a href="/issues/">known issues</a> before you promise a date.</p>
-</section>
-<section>
-  <h2>See the page at desktop width</h2>
-  <p class="sub">Open the site's canvas at 1440 × 900 to judge the hero and the first fold before you build the rest.</p>
-  <div class="cta" style="margin-top:24px"><a class="btn primary" href="/?w=1440&amp;h=900#demo">Open a 1440 × 900 canvas</a><a class="btn ghost" href="/install/">Get FigCraft</a></div>
-</section>
-
-    <section id="faq">
-      <h2>Questions this page answers</h2>
-      <p class="sub">Straight answers, with the limits stated. Every claim here is checkable against the sources linked above.</p>
-      <details><summary>Is the landing page starter responsive?</summary><p>It ships two frames: 1440 wide and 390 wide. There is no breakpoint engine, so the middle widths are your call — resize a copy of the desktop frame and let the auto layout stacks reflow, or design a third frame at 834.</p></details>
-      <details><summary>Can I export it as a working website?</summary><p>Partly. Export produces CSS, HTML, React, Leptos, SwiftUI or Compose for a frame or selection, which is a static snapshot at one width. There is no routing, no form handling and no content model; you still need your own build to ship the page.</p></details>
-      <details><summary>What grid does the page use?</summary><p>Desktop: 12 columns of 82 px with 24 px gutters inside 96 px margins, giving 1248 px of content in a 1440 px frame. Mobile: four 74 px columns with 18 px gutters inside 20 px margins, giving 350 px of content.</p></details>
-      <details><summary>Where does the copy come from?</summary><p>The starter ships placeholder text so the type scale is visible. Replace it before any review, and use the <a href="/tools/lorem-ipsum/">lorem ipsum tool</a> if you need realistic line lengths while you are still deciding what the page says.</p></details>
-    </section>
-    <section class="related" id="related">
-      <h2>Keep going</h2>
-      <div class="grid">
-        <a class="card" href="/templates/"><span class="k">Templates</span><h3>FigCraft templates: eight starters, one menu</h3><p>The app ships eight starters, and they all live behind one menu item. This is the map: what each file contains, the size it is drawn at, and where it stops being useful.</p></a>
-        <a class="card" href="/templates/mobile-app/"><span class="k">Template</span><h3>Mobile app template: six screens at 390 × 844</h3><p>A phone starter drawn at 390 × 844 with the screens most projects rewrite first. Auto layout does the resizing, so changing a headline does not break the fit.</p></a>
-        <a class="card" href="/templates/design-system/"><span class="k">Template</span><h3>Design system template: foundations first, components second</h3><p>Foundations at 1440 × 1080, then components. Local styles and variables with modes carry the tokens; component sets and their variants carry the states.</p></a>
-      </div>
-    </section>
-  </div>
+<main>
+  <h1>This page moved</h1>
+  <p>It is now part of <code>/templates/</code>. Sending you there.</p>
+  <p><a href="/templates/#starter-landing-page">Continue to https://figcraft.rerivo.com/templates/#starter-landing-page</a></p>
 </main>
-<footer>
-  <div class="wrap foot">
-    <div>
-      <strong>FigCraft Guide</strong> — an independent guide and browser studio. Not affiliated with ArtCraft.
-      <div class="note">Last updated 2026-10-22 · covers FigCraft v0.9.0 · corrections welcome via the source repository.</div>
-    </div>
-    <nav aria-label="Footer">
-      <a href="/tools/">Tools</a>
-      <a href="/templates/">Templates</a>
-      <a href="/pricing/">Pricing</a>
-      <a href="/learn/">Learn</a>
-      <a href="/glossary/">Glossary</a>
-      <a href="/issues/">Known issues</a>
-      <a href="/install/">Install</a>
-      <a href="https://github.com/storytold/figcraft" rel="noopener">Source</a>
-    </nav>
-  </div>
-</footer>
+<script>location.replace("/templates/#starter-landing-page");</script>
 </body>
 </html>

@@ -3,150 +3,29 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Open a .fig File in FigCraft Without Losing the Original</title>
-<meta name="description" content="Open a Figma .fig file in FigCraft: check it with figcraft-cli info, convert to .figcraft, and know which parts of a large or complex file will need rebuilding.">
-<meta name="robots" content="index,follow,max-image-preview:large">
-<meta name="author" content="FigCraft Guide">
-<meta name="theme-color" content="#2563eb">
-<link rel="canonical" href="https://figcraft.rerivo.com/learn/open-fig-file/">
-<link rel="alternate" type="text/plain" href="https://figcraft.rerivo.com/llms.txt" title="LLMs.txt">
-<link rel="alternate" type="text/plain" href="https://figcraft.rerivo.com/llms-full.txt" title="LLMs full guide">
-<link rel="icon" type="image/svg+xml" href="/assets/favicon.svg">
-<link rel="stylesheet" href="/assets/site.css">
-<script src="/assets/site.js" defer></script>
-<meta property="og:title" content="Open a .fig File in FigCraft Without Losing the Original">
-<meta property="og:description" content="Open a Figma .fig file in FigCraft: check it with figcraft-cli info, convert to .figcraft, and know which parts of a large or complex file will need rebuilding.">
-<meta property="og:type" content="website">
-<meta property="og:locale" content="en_US">
-<meta property="og:url" content="https://figcraft.rerivo.com/learn/open-fig-file/">
-<meta property="og:image" content="https://figcraft.rerivo.com/og.png">
-<meta property="og:image:width" content="1200">
-<meta property="og:image:height" content="630">
-<meta property="og:image:alt" content="FigCraft — a Figma alternative written in pure Rust">
-<meta property="article:modified_time" content="2026-10-22">
-<meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:title" content="Open a .fig File in FigCraft Without Losing the Original">
-<meta name="twitter:description" content="Open a Figma .fig file in FigCraft: check it with figcraft-cli info, convert to .figcraft, and know which parts of a large or complex file will need rebuilding.">
-<meta name="twitter:image" content="https://figcraft.rerivo.com/og.png">
-<script type="application/ld+json">{"@context":"https://schema.org","@graph":[{"@type":"WebPage","@id":"https://figcraft.rerivo.com/learn/open-fig-file/#page","url":"https://figcraft.rerivo.com/learn/open-fig-file/","name":"Opening a .fig file in FigCraft","description":"Open a Figma .fig file in FigCraft: check it with figcraft-cli info, convert to .figcraft, and know which parts of a large or complex file will need rebuilding.","isPartOf":{"@type":"WebSite","name":"FigCraft Guide","url":"https://figcraft.rerivo.com/"},"inLanguage":"en","dateModified":"2026-10-22","datePublished":"2026-10-22"},{"@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Learn","item":"https://figcraft.rerivo.com/learn/"},{"@type":"ListItem","position":2,"name":"Open a .fig file","item":"https://figcraft.rerivo.com/learn/open-fig-file/"}]},{"@type":"Article","@id":"https://figcraft.rerivo.com/learn/open-fig-file/#article","headline":"Opening a .fig file in FigCraft","description":"Open a Figma .fig file in FigCraft: check it with figcraft-cli info, convert to .figcraft, and know which parts of a large or complex file will need rebuilding.","datePublished":"2026-10-22","dateModified":"2026-10-22","author":{"@type":"Organization","name":"FigCraft Guide","url":"https://figcraft.rerivo.com/"},"publisher":{"@type":"Organization","name":"FigCraft Guide","url":"https://figcraft.rerivo.com/"},"mainEntityOfPage":{"@id":"https://figcraft.rerivo.com/learn/open-fig-file/#page"},"about":{"@type":"SoftwareApplication","name":"FigCraft","applicationCategory":"DesignApplication","operatingSystem":"macOS, Windows, Linux, FreeBSD, Web","offers":{"@type":"Offer","price":"0","priceCurrency":"USD"}}},{"@type":"FAQPage","@id":"https://figcraft.rerivo.com/learn/open-fig-file/#faq","mainEntity":[{"@type":"Question","name":"Can FigCraft open a Figma .fig file?","acceptedAnswer":{"@type":"Answer","text":"Yes, on a best-effort basis: .fig import is implemented and improves between releases, but features without an equivalent in FigCraft's model are dropped. Large files are a known failure mode (#574). Check the file with figcraft-cli info before opening it in the UI."}},{"@type":"Question","name":"Is .fig import lossless?","acceptedAnswer":{"@type":"Answer","text":"No. Grid auto layout loses tracks and cell anchors (#465), instance-swap overrides fall back to the main component (#464), and the import does not report everything it discards (#467). Keep the original .fig and treat the import as a starting point."}},{"@type":"Question","name":"Do I need Figma installed to open a .fig file?","acceptedAnswer":{"@type":"Answer","text":"No. FigCraft reads the file itself. You need Figma only if you want to export frames as SVG to work around an import that will not finish."}},{"@type":"Question","name":"Should I keep the original .fig after converting?","acceptedAnswer":{"@type":"Answer","text":"Yes. Keep it, and keep a checksum. Export from FigCraft writes .fig experimentally, but the reliable round trip is Figma to .fig to .figcraft, one way."}},{"@type":"Question","name":"Why does my text look wrong after import?","acceptedAnswer":{"@type":"Answer","text":"The file names fonts that are not installed on this machine, so text is laid out in a fallback. Install the families, or load them into the running session; missing fonts are listed by figcraft-cli info."}}]}]}</script>
+<title>Moved — FigCraft Guide</title>
+<meta name="robots" content="noindex,follow">
+<link rel="canonical" href="https://figcraft.rerivo.com/learn/#topic-open-fig">
+<meta http-equiv="refresh" content="0; url=/learn/#topic-open-fig">
+<style>
+  body{margin:0;min-height:100vh;display:grid;place-items:center;background:#f7f7f5;color:#161616;
+       font-family:ui-sans-serif,system-ui,-apple-system,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;line-height:1.6}
+  @media (prefers-color-scheme:dark){body{background:#0f1115;color:#f3f4f6}a{color:#7aa2ff}}
+  main{max-width:46ch;padding:32px;text-align:center}
+  h1{font-size:20px;letter-spacing:-.02em;margin:0 0 10px}
+  p{color:#5f6368;font-size:14px;margin:0 0 18px}
+  @media (prefers-color-scheme:dark){p{color:#a1a7b3}}
+  a{color:#2563eb;font-weight:650;text-decoration:none}
+  a:hover{text-decoration:underline}
+  code{font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;font-size:.9em}
+</style>
 </head>
 <body>
-<a class="skip" href="#main">Skip to content</a>
-<header>
-  <div class="wrap nav">
-    <a class="brand" href="/"><img class="mark-img" src="/assets/mark.svg" alt="" width="28" height="28">FigCraft Guide</a>
-    <nav aria-label="Primary"><a href="/tools/">Tools</a><a href="/templates/">Templates</a><a href="/alternatives/">Compare</a><a href="/learn/" aria-current="page">Learn</a><a href="https://github.com/storytold/figcraft" rel="noopener">GitHub</a><a class="nav-cta" href="/install/">Download</a></nav>
-    <div class="nav-tools">
-      <button class="nav-icon" type="button" data-theme-toggle aria-label="Toggle theme">☾</button>
-      <button class="nav-icon nav-menu-btn" type="button" data-nav-toggle aria-label="Menu" aria-expanded="false" aria-controls="mobile-nav">≡</button>
-    </div>
-  </div>
-  <div class="mobile-nav" id="mobile-nav"><a href="/tools/">Tools</a><a href="/templates/">Templates</a><a href="/alternatives/">Compare</a><a href="/learn/">Learn</a><a href="https://github.com/storytold/figcraft" rel="noopener">GitHub</a><a class="nav-cta" href="/install/">Download FigCraft</a></div>
-</header>
-<main id="main">
-  <div class="wrap">
-    <div class="hero">
-      <ul class="crumbs"><li><a href="/learn/">Learn</a></li><li><span>Open a .fig file</span></li></ul>
-      <p class="eyebrow">Guide</p>
-      <h1>Opening a .fig file in FigCraft</h1>
-      <p class="lede">Import is best effort, not a migration guarantee. This is the order of operations that keeps your original file untouched and tells you what survived before you start editing.</p>
-      <div class="meta-line"><span>Independent guide</span><span>·</span><span>Updated 2026-10-22</span><span>·</span><span>Covers FigCraft v0.9.0</span><span>·</span><span>7 min read</span></div>
-      <div class="cta"><a class="btn primary" href="/install/">Download FigCraft</a><a class="btn ghost" href="/#demo">Open the studio</a></div>
-    </div>
-<section class="prose">
-      <h2>What "best effort" actually means</h2>
-      <p>FigCraft reads <code>.fig</code> files and turns them into its own document model, then writes <code>.figcraft</code>. The import is explicitly best effort: where a Figma feature has no equivalent in FigCraft's model, the importer drops it. Large files are the known weak point — a big <code>.fig</code> can fail outright or take a very long time (<a href="https://github.com/storytold/figcraft/issues/574" rel="noopener">#574</a>, umbrella <a href="https://github.com/storytold/figcraft/issues/321" rel="noopener">#321</a>). Opening very large files was improved in <a href="https://github.com/storytold/figcraft/issues/315" rel="noopener">#315</a>, which is a real improvement and not a fix for every file.</p>
-      <p>So treat the import as a read-only survey. Keep the <code>.fig</code>. Save a fresh <code>.figcraft</code>. Rebuild the parts that matter, and do not plan to round-trip back to Figma from FigCraft.</p>
-    </section>
-    <section>
-      <h2>Step by step</h2>
-      <ol class="steps">
-        <li><strong>Freeze the original.</strong> Copy it and take a checksum, so you can prove later that the source was never rewritten.
-          <pre><code>cp brand-source.fig brand-source.fig.keep
-shasum -a 256 brand-source.fig.keep   # sha256sum on Linux</code></pre>
-        </li>
-        <li><strong>Get the CLI before the UI.</strong> A prebuilt macOS CLI is attached to the release as <code>figcraft-cli-0.9.0-macos-universal.zip</code>; the Linux AppImage bundles it; otherwise build it.
-          <pre><code>cargo build --release -p figcraft-cli
-./target/release/figcraft-cli --help</code></pre>
-        </li>
-        <li><strong>Survey the file without opening a window.</strong> <code>info</code> prints pages, node counts, top-level frames, style and variable counts, and pushes anything it could not import to stderr as <code>note:</code> lines.
-          <pre><code>./target/release/figcraft-cli info brand-source.fig
-./target/release/figcraft-cli info brand-source.fig --json &gt; import-report.json</code></pre>
-          It also lists missing fonts as <code>missing font</code> lines, which is the fastest way to learn that half your text will render in a fallback.
-        </li>
-        <li><strong>Open a copy, not the source.</strong> Launch the app and open <code>brand-source.fig.keep</code> — or keep the copy separate and open the copy. The app opens <code>.fig</code> through its normal open path (the <code>file.open</code> command, listed by <code>figcraft-cli commands --filter open</code>).</li>
-        <li><strong>Save as .figcraft immediately.</strong> Do not keep editing the import in memory: the native format is what autosave, recovery and every later script will use.
-          <pre><code>./target/release/figcraft-cli convert brand-source.fig brand.figcraft</code></pre>
-        </li>
-        <li><strong>If it stalls, slice by frame.</strong> Export the worst frames from Figma as SVG and import each one as its own document. SVG arrives as an editable frame — groups, shapes, text, gradients, masks and effects — rather than as a flat picture.
-          <pre><code>./target/release/figcraft-cli convert home.svg home.figcraft
-./target/release/figcraft-cli convert settings.svg settings.figcraft</code></pre>
-        </li>
-        <li><strong>Diff the report against what you expected.</strong> Compare the <code>--json</code> node counts with the layer count in Figma. A large gap is your rebuild list, and it is much cheaper to find it now than after a day of editing.</li>
-      </ol>
-    </section>
-    <section>
-      <h2>What does not survive, as far as the tracker states</h2>
-      <div class="table-wrap">
-        <table>
-          <thead><tr><th>Feature</th><th>What happens on import</th><th>Issue</th></tr></thead>
-          <tbody>
-            <tr><td>Grid auto layout</td><td>Comes in without tracks or cell anchors, so the layout collapses on the first edit</td><td><a href="https://github.com/storytold/figcraft/issues/465" rel="noopener">#465</a></td></tr>
-            <tr><td>Instance-swap overrides</td><td>Dropped silently; the instance falls back to the main component's default</td><td><a href="https://github.com/storytold/figcraft/issues/464" rel="noopener">#464</a></td></tr>
-            <tr><td>Import warnings</td><td>The import does not report everything it discarded, so the report is a floor, not a full list</td><td><a href="https://github.com/storytold/figcraft/issues/467" rel="noopener">#467</a></td></tr>
-            <tr><td>Large files</td><td>Can fail or take a very long time; improvement landed in v0.9.0's cycle</td><td><a href="https://github.com/storytold/figcraft/issues/574" rel="noopener">#574</a>, <a href="https://github.com/storytold/figcraft/issues/315" rel="noopener">#315</a></td></tr>
-            <tr><td>Fonts</td><td>Text in a font that is not installed renders in a fallback, and the fallback used to be silent</td><td><a href="https://github.com/storytold/figcraft/issues/752" rel="noopener">#752</a>, <a href="https://github.com/storytold/figcraft/issues/821" rel="noopener">#821</a></td></tr>
-          </tbody>
-        </table>
-      </div>
-      <p>What is <em>not</em> in that table is the honest answer to the common question: there is no published, exhaustive list of what the importer preserves. Test with your own file, and read <code>info</code> output rather than a feature matrix.</p>
-    </section>
-    <section>
-      <h2>What can go wrong</h2>
-      <ul class="list">
-        <li><strong>The app opens nothing for a minute, then gives up</strong><span>Large-file import (<a href="https://github.com/storytold/figcraft/issues/574" rel="noopener">#574</a>). Check the file with <code>info</code> first, then split it.</span></li>
-        <li><strong>Every text layer is in the wrong typeface</strong><span>The document names fonts this machine does not have (<a href="https://github.com/storytold/figcraft/issues/752" rel="noopener">#752</a>). Install them, or load them with <code>text.loadFont</code> over MCP; <a href="https://github.com/storytold/figcraft/issues/821" rel="noopener">#821</a> added rescan and refit.</span></li>
-        <li><strong>The import "worked" but the component grid fell apart</strong><span>Grid auto layout arrived without tracks (<a href="https://github.com/storytold/figcraft/issues/465" rel="noopener">#465</a>). Rebuild the track list; do not re-drag every cell.</span></li>
-        <li><strong>An instance lost its swapped content</strong><span>Overrides are dropped (<a href="https://github.com/storytold/figcraft/issues/464" rel="noopener">#464</a>). Re-apply the swap; check the overrides list, not just the canvas.</span></li>
-      </ul>
-      <p class="note">Unverified: how much of any particular file survives. The importer's coverage is file-dependent and <a href="https://github.com/storytold/figcraft/issues/467" rel="noopener">#467</a> says the report can omit losses. This page did not benchmark import times, and the split-by-SVG route changes what you get — SVG import is a different importer with its own limits.</p>
-    </section>
-
-    <section id="faq">
-      <h2>Questions this page answers</h2>
-      <p class="sub">Straight answers, with the limits stated. Every claim here is checkable against the sources linked above.</p>
-      <details><summary>Can FigCraft open a Figma .fig file?</summary><p>Yes, on a best-effort basis: .fig import is implemented and improves between releases, but features without an equivalent in FigCraft's model are dropped. Large files are a known failure mode (#574). Check the file with <code>figcraft-cli info</code> before opening it in the UI.</p></details>
-      <details><summary>Is .fig import lossless?</summary><p>No. Grid auto layout loses tracks and cell anchors (#465), instance-swap overrides fall back to the main component (#464), and the import does not report everything it discards (#467). Keep the original .fig and treat the import as a starting point.</p></details>
-      <details><summary>Do I need Figma installed to open a .fig file?</summary><p>No. FigCraft reads the file itself. You need Figma only if you want to export frames as SVG to work around an import that will not finish.</p></details>
-      <details><summary>Should I keep the original .fig after converting?</summary><p>Yes. Keep it, and keep a checksum. Export from FigCraft writes .fig experimentally, but the reliable round trip is Figma to .fig to .figcraft, one way.</p></details>
-      <details><summary>Why does my text look wrong after import?</summary><p>The file names fonts that are not installed on this machine, so text is laid out in a fallback. Install the families, or load them into the running session; missing fonts are listed by <code>figcraft-cli info</code>.</p></details>
-    </section>
-    <section class="related" id="related">
-      <h2>Keep going</h2>
-      <div class="grid">
-        <a class="card" href="/learn/migrate-from-figma/"><span class="k">Guide</span><h3>Migrating from Figma to FigCraft</h3><p>The import gets you a document. It does not get you a working design system. This is the order that wastes the least time, and the four places the damage usually lands.</p></a>
-        <a class="card" href="/learn/export-svg/"><span class="k">Guide</span><h3>Exporting SVG from FigCraft</h3><p>Two exporters share the word &quot;SVG&quot; here, and only one of them is FigCraft. This page covers the real exporter first, then the demo studio, and keeps them apart.</p></a>
-      </div>
-    </section>
-  </div>
+<main>
+  <h1>This page moved</h1>
+  <p>It is now part of <code>/learn/</code>. Sending you there.</p>
+  <p><a href="/learn/#topic-open-fig">Continue to https://figcraft.rerivo.com/learn/#topic-open-fig</a></p>
 </main>
-<footer>
-  <div class="wrap foot">
-    <div>
-      <strong>FigCraft Guide</strong> — an independent guide and browser studio. Not affiliated with ArtCraft.
-      <div class="note">Last updated 2026-10-22 · covers FigCraft v0.9.0 · corrections welcome via the source repository.</div>
-    </div>
-    <nav aria-label="Footer">
-      <a href="/tools/">Tools</a>
-      <a href="/templates/">Templates</a>
-      <a href="/pricing/">Pricing</a>
-      <a href="/learn/">Learn</a>
-      <a href="/glossary/">Glossary</a>
-      <a href="/issues/">Known issues</a>
-      <a href="/install/">Install</a>
-      <a href="https://github.com/storytold/figcraft" rel="noopener">Source</a>
-    </nav>
-  </div>
-</footer>
+<script>location.replace("/learn/#topic-open-fig");</script>
 </body>
 </html>

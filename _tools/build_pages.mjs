@@ -159,7 +159,7 @@ function head(page) {
 <link rel="alternate" type="text/plain" href="${SITE}/llms-full.txt" title="LLMs full guide">
 <link rel="icon" type="image/svg+xml" href="/assets/favicon.svg">
 <link rel="stylesheet" href="/assets/site.css">
-<script src="/assets/site.js" defer></script>${page.script ? `\n<script type="module" src="/assets/tools/${page.script}" defer></script>` : ''}
+<script src="/assets/site.js" defer></script>${scriptTags(page)}
 <meta property="og:title" content="${esc(page.ogTitle || page.title)}">
 <meta property="og:description" content="${esc(page.description)}">
 <meta property="og:type" content="website">
@@ -196,7 +196,7 @@ function head(page) {
       <p class="eyebrow">${esc(page.eyebrow || '')}</p>
       <h1>${esc(page.h1)}</h1>
       <p class="lede">${page.lede}</p>
-      <div class="meta-line"><span>Independent guide</span><span>·</span><span>Updated ${updated}</span><span>·</span><span>Covers FigCraft v0.9.0</span>${page.reading ? `<span>·</span><span>${page.reading} read</span>` : ''}</div>
+      <div class="meta-line"><span>Independent guide</span><span>·</span><span>Updated ${updated}</span><span>·</span><span>Covers FigCraft v0.10.0</span>${page.reading ? `<span>·</span><span>${page.reading} read</span>` : ''}</div>
       <div class="cta">${(page.cta || defaultCta()).map((c) => `<a class="btn ${c.primary ? 'primary' : 'ghost'}" href="${c.href}"${c.external ? ' rel="noopener"' : ''}>${esc(c.label)}</a>`).join('')}</div>
     </div>
 ${page.body}
@@ -207,7 +207,7 @@ ${faqBlock(page)}${relatedBlock(page)}
   <div class="wrap foot">
     <div>
       <strong>FigCraft Guide</strong> — an independent guide and browser studio. Not affiliated with ArtCraft.
-      <div class="note">Last updated ${DEFAULT_UPDATED} · covers FigCraft v0.9.0 · corrections welcome via the source repository.</div>
+      <div class="note">Last updated ${DEFAULT_UPDATED} · covers FigCraft v0.10.0 · corrections welcome via the source repository.</div>
     </div>
     <nav aria-label="Footer">
       <a href="/tools/">Tools</a>
@@ -259,6 +259,12 @@ function relatedBlock(page) {
 }
 
 const stripTags = (s) => String(s).replace(/<[^>]+>/g, '');
+
+/** One <script> per module; a page may ship several (tools/ runs six). */
+function scriptTags(page) {
+  const list = page.scripts || (page.script ? [page.script] : []);
+  return list.map((s) => `\n<script type="module" src="/assets/tools/${s}" defer></script>`).join('');
+}
 // Mirrors how a browser flattens markup: block boundaries become spaces,
 // inline tags vanish, so "template</strong>." stays "template." not "template .".
 const BLOCK_TAG = /<\/?(?:p|div|section|article|li|ul|ol|h[1-6]|tr|td|th|thead|tbody|summary|details|pre|blockquote|br|table)\b[^>]*>/gi;
@@ -275,6 +281,87 @@ const plain = (s) =>
     .replace(/\s+/g, ' ')
     .trim();
 
+/* ---------------------------------------------------------------- redirects */
+
+// The site went from 36 pages to 9. Every retired URL keeps a stub that sends
+// the reader to the section that absorbed it, so old links and search results
+// never land on a 404. Stubs are noindex and canonicalise to the target.
+const REDIRECTS = {
+  'tools/contrast-checker/': 'tools/#contrast',
+  'tools/palette-generator/': 'tools/#palette',
+  'tools/svg-minifier/': 'tools/#svg',
+  'tools/screen-sizes/': 'tools/#sizes',
+  'tools/lorem-ipsum/': 'tools/#text',
+  'templates/mobile-app/': 'templates/#starter-mobile-app',
+  'templates/landing-page/': 'templates/#starter-landing-page',
+  'templates/dashboard/': 'templates/#starter-dashboard',
+  'templates/design-system/': 'templates/#starter-design-system',
+  'templates/wireframe-kit/': 'templates/#starter-wireframe-kit',
+  'templates/social-post-sizes/': 'templates/#starter-social-post-sizes',
+  'templates/presentation-slides/': 'templates/#starter-presentation-slides',
+  'templates/icon-set/': 'templates/#starter-icon-set',
+  'learn/open-fig-file/': 'learn/#topic-open-fig',
+  'learn/export-svg/': 'learn/#topic-export',
+  'learn/keyboard-shortcuts/': 'learn/#topic-keys',
+  'learn/offline-design/': 'learn/#topic-offline',
+  'learn/mcp-server/': 'learn/#topic-mcp',
+  'learn/cli-automation/': 'learn/#topic-cli',
+  'learn/install-linux/': 'learn/#topic-linux',
+  'learn/migrate-from-figma/': 'learn/#topic-migrate',
+  'glossary/': 'learn/#glossary',
+  'vs-penpot/': 'alternatives/#penpot',
+  'vs-sketch/': 'alternatives/#sketch',
+  'free-figma-alternative/': 'alternatives/#free',
+  'open-source-figma-alternative/': 'alternatives/#licence',
+  'figma-alternative-for-linux/': 'alternatives/#linux'
+};
+
+for (const from of Object.keys(REDIRECTS)) {
+  if (seen.has(from)) {
+    console.error(`redirect source "${from}" is also a live page`);
+    process.exit(1);
+  }
+}
+
+function redirectStub(from, to) {
+  // Absolute, because a relative "tools/#contrast" from /tools/svg-minifier/
+  // resolves to /tools/svg-minifier/tools/#contrast and 404s.
+  const target = `/${to}`;
+  const url = `${SITE}${target}`;
+  return `<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Moved — FigCraft Guide</title>
+<meta name="robots" content="noindex,follow">
+<link rel="canonical" href="${url}">
+<meta http-equiv="refresh" content="0; url=${target}">
+<style>
+  body{margin:0;min-height:100vh;display:grid;place-items:center;background:#f7f7f5;color:#161616;
+       font-family:ui-sans-serif,system-ui,-apple-system,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;line-height:1.6}
+  @media (prefers-color-scheme:dark){body{background:#0f1115;color:#f3f4f6}a{color:#7aa2ff}}
+  main{max-width:46ch;padding:32px;text-align:center}
+  h1{font-size:20px;letter-spacing:-.02em;margin:0 0 10px}
+  p{color:#5f6368;font-size:14px;margin:0 0 18px}
+  @media (prefers-color-scheme:dark){p{color:#a1a7b3}}
+  a{color:#2563eb;font-weight:650;text-decoration:none}
+  a:hover{text-decoration:underline}
+  code{font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;font-size:.9em}
+</style>
+</head>
+<body>
+<main>
+  <h1>This page moved</h1>
+  <p>It is now part of <code>${target.split('#')[0]}</code>. Sending you there.</p>
+  <p><a href="${target}">Continue to ${url}</a></p>
+</main>
+<script>location.replace(${JSON.stringify(target)});</script>
+</body>
+</html>
+`;
+}
+
 /* ---------------------------------------------------------------- outputs */
 
 const outputs = new Map();
@@ -282,6 +369,10 @@ const outputs = new Map();
 for (const page of PAGES) {
   const file = join(ROOT, page.path, 'index.html');
   outputs.set(file, head(page));
+}
+
+for (const [from, to] of Object.entries(REDIRECTS)) {
+  outputs.set(join(ROOT, from, 'index.html'), redirectStub(from, to));
 }
 
 // sitemap: the five hand-written pages keep their entries, generated pages follow.

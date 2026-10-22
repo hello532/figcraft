@@ -3,162 +3,29 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Connect an AI Agent to FigCraft with the MCP Server</title>
-<meta name="description" content="Run figcraft-cli mcp headless or attach it to the running app, configure Claude Code or Claude Desktop, confine file access, and verify what the agent changed.">
-<meta name="robots" content="index,follow,max-image-preview:large">
-<meta name="author" content="FigCraft Guide">
-<meta name="theme-color" content="#2563eb">
-<link rel="canonical" href="https://figcraft.rerivo.com/learn/mcp-server/">
-<link rel="alternate" type="text/plain" href="https://figcraft.rerivo.com/llms.txt" title="LLMs.txt">
-<link rel="alternate" type="text/plain" href="https://figcraft.rerivo.com/llms-full.txt" title="LLMs full guide">
-<link rel="icon" type="image/svg+xml" href="/assets/favicon.svg">
-<link rel="stylesheet" href="/assets/site.css">
-<script src="/assets/site.js" defer></script>
-<meta property="og:title" content="Connect an AI Agent to FigCraft with the MCP Server">
-<meta property="og:description" content="Run figcraft-cli mcp headless or attach it to the running app, configure Claude Code or Claude Desktop, confine file access, and verify what the agent changed.">
-<meta property="og:type" content="website">
-<meta property="og:locale" content="en_US">
-<meta property="og:url" content="https://figcraft.rerivo.com/learn/mcp-server/">
-<meta property="og:image" content="https://figcraft.rerivo.com/og.png">
-<meta property="og:image:width" content="1200">
-<meta property="og:image:height" content="630">
-<meta property="og:image:alt" content="FigCraft — a Figma alternative written in pure Rust">
-<meta property="article:modified_time" content="2026-10-22">
-<meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:title" content="Connect an AI Agent to FigCraft with the MCP Server">
-<meta name="twitter:description" content="Run figcraft-cli mcp headless or attach it to the running app, configure Claude Code or Claude Desktop, confine file access, and verify what the agent changed.">
-<meta name="twitter:image" content="https://figcraft.rerivo.com/og.png">
-<script type="application/ld+json">{"@context":"https://schema.org","@graph":[{"@type":"WebPage","@id":"https://figcraft.rerivo.com/learn/mcp-server/#page","url":"https://figcraft.rerivo.com/learn/mcp-server/","name":"The FigCraft MCP server","description":"Run figcraft-cli mcp headless or attach it to the running app, configure Claude Code or Claude Desktop, confine file access, and verify what the agent changed.","isPartOf":{"@type":"WebSite","name":"FigCraft Guide","url":"https://figcraft.rerivo.com/"},"inLanguage":"en","dateModified":"2026-10-22","datePublished":"2026-10-22"},{"@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Learn","item":"https://figcraft.rerivo.com/learn/"},{"@type":"ListItem","position":2,"name":"The MCP server","item":"https://figcraft.rerivo.com/learn/mcp-server/"}]},{"@type":"Article","@id":"https://figcraft.rerivo.com/learn/mcp-server/#article","headline":"The FigCraft MCP server","description":"Run figcraft-cli mcp headless or attach it to the running app, configure Claude Code or Claude Desktop, confine file access, and verify what the agent changed.","datePublished":"2026-10-22","dateModified":"2026-10-22","author":{"@type":"Organization","name":"FigCraft Guide","url":"https://figcraft.rerivo.com/"},"publisher":{"@type":"Organization","name":"FigCraft Guide","url":"https://figcraft.rerivo.com/"},"mainEntityOfPage":{"@id":"https://figcraft.rerivo.com/learn/mcp-server/#page"},"about":{"@type":"SoftwareApplication","name":"FigCraft","applicationCategory":"DesignApplication","operatingSystem":"macOS, Windows, Linux, FreeBSD, Web","offers":{"@type":"Offer","price":"0","priceCurrency":"USD"}}},{"@type":"FAQPage","@id":"https://figcraft.rerivo.com/learn/mcp-server/#faq","mainEntity":[{"@type":"Question","name":"Does FigCraft have an MCP server?","acceptedAnswer":{"@type":"Answer","text":"Yes. It ships as part of the project and is started by the CLI: figcraft-cli mcp for a headless session, figcraft-cli mcp --attach PORT to drive a running app. It speaks newline-delimited JSON-RPC 2.0 over stdio."}},{"@type":"Question","name":"What is the difference between headless and attached mode?","acceptedAnswer":{"@type":"Answer","text":"Headless is an in-process engine session with one untitled document, no window and a CPU renderer. Attached drives the running app over its loopback control channel, so the user sees every change live — and attached calls are never replayed after a transport failure."}},{"@type":"Question","name":"How do I stop an agent from touching the rest of my disk?","acceptedAnswer":{"@type":"Answer","text":"Start it with --automation-read-root and --automation-write-root. Reads must fall inside a read or write root, writes only inside a write root, and a refused path returns a tool error without writing. The folders must exist at startup."}},{"@type":"Question","name":"Can an agent open my Figma files?","acceptedAnswer":{"@type":"Answer","text":"It can call open_file on a .fig, which is the same best-effort import the UI uses, and on .svg, JSON and .figcraft. Complex .fig files may import partially; see the .fig guide."}},{"@type":"Question","name":"How do I check what the agent did?","acceptedAnswer":{"@type":"Answer","text":"Read it back with inspect_document or get_node, and render a screenshot. Every mutation is one undo step, a failing command leaves the document unchanged, and programmatic calls never open dialogs."}}]}]}</script>
+<title>Moved — FigCraft Guide</title>
+<meta name="robots" content="noindex,follow">
+<link rel="canonical" href="https://figcraft.rerivo.com/learn/#topic-mcp">
+<meta http-equiv="refresh" content="0; url=/learn/#topic-mcp">
+<style>
+  body{margin:0;min-height:100vh;display:grid;place-items:center;background:#f7f7f5;color:#161616;
+       font-family:ui-sans-serif,system-ui,-apple-system,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;line-height:1.6}
+  @media (prefers-color-scheme:dark){body{background:#0f1115;color:#f3f4f6}a{color:#7aa2ff}}
+  main{max-width:46ch;padding:32px;text-align:center}
+  h1{font-size:20px;letter-spacing:-.02em;margin:0 0 10px}
+  p{color:#5f6368;font-size:14px;margin:0 0 18px}
+  @media (prefers-color-scheme:dark){p{color:#a1a7b3}}
+  a{color:#2563eb;font-weight:650;text-decoration:none}
+  a:hover{text-decoration:underline}
+  code{font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;font-size:.9em}
+</style>
 </head>
 <body>
-<a class="skip" href="#main">Skip to content</a>
-<header>
-  <div class="wrap nav">
-    <a class="brand" href="/"><img class="mark-img" src="/assets/mark.svg" alt="" width="28" height="28">FigCraft Guide</a>
-    <nav aria-label="Primary"><a href="/tools/">Tools</a><a href="/templates/">Templates</a><a href="/alternatives/">Compare</a><a href="/learn/" aria-current="page">Learn</a><a href="https://github.com/storytold/figcraft" rel="noopener">GitHub</a><a class="nav-cta" href="/install/">Download</a></nav>
-    <div class="nav-tools">
-      <button class="nav-icon" type="button" data-theme-toggle aria-label="Toggle theme">☾</button>
-      <button class="nav-icon nav-menu-btn" type="button" data-nav-toggle aria-label="Menu" aria-expanded="false" aria-controls="mobile-nav">≡</button>
-    </div>
-  </div>
-  <div class="mobile-nav" id="mobile-nav"><a href="/tools/">Tools</a><a href="/templates/">Templates</a><a href="/alternatives/">Compare</a><a href="/learn/">Learn</a><a href="https://github.com/storytold/figcraft" rel="noopener">GitHub</a><a class="nav-cta" href="/install/">Download FigCraft</a></div>
-</header>
-<main id="main">
-  <div class="wrap">
-    <div class="hero">
-      <ul class="crumbs"><li><a href="/learn/">Learn</a></li><li><span>The MCP server</span></li></ul>
-      <p class="eyebrow">Guide</p>
-      <h1>The FigCraft MCP server</h1>
-      <p class="lede">FigCraft ships a Model Context Protocol server, so an agent can create layers, run any command, inspect the document as JSON and look at it as a PNG. The difference between headless and attached is the first thing to get right.</p>
-      <div class="meta-line"><span>Independent guide</span><span>·</span><span>Updated 2026-10-22</span><span>·</span><span>Covers FigCraft v0.9.0</span><span>·</span><span>7 min read</span></div>
-      <div class="cta"><a class="btn primary" href="/install/">Download FigCraft</a><a class="btn ghost" href="/#demo">Open the studio</a></div>
-    </div>
-<section class="prose">
-      <h2>Two backends, chosen at launch</h2>
-      <p>The server speaks newline-delimited JSON-RPC 2.0 over stdio and lives in <code>crates/mcp</code>; the CLI starts it. In headless mode it runs an in-process engine session with one untitled document and no window, rendering with the CPU renderer. In attached mode it drives a running app over the app's loopback control channel, so you watch every change happen.</p>
-      <p>The command surface is the same 400+ commands the UI uses. That is the point: an agent calling <code>run_command</code> is not using a reduced API, it is using the menu.</p>
-    </section>
-    <section>
-      <h2>Step by step</h2>
-      <ol class="steps">
-        <li><strong>Build the CLI.</strong> Use the absolute path to the binary in every client config; relative paths break when the client starts in another directory.
-          <pre><code>cargo build --release -p figcraft-cli
-./target/release/figcraft-cli --help</code></pre>
-        </li>
-        <li><strong>Start it headless</strong> for scripted or batch work. Nothing appears on screen, and the session is a single untitled document.
-          <pre><code>./target/release/figcraft-cli mcp</code></pre>
-        </li>
-        <li><strong>Or attach to a running app</strong> when you want to see the edits. Start the app with a control port first — the channel listens on <code>127.0.0.1</code> only.
-          <pre><code>figcraft --control 7979
-./target/release/figcraft-cli mcp --attach 7979</code></pre>
-          <code>--attach</code> also accepts <code>host:port</code>. From a source checkout the same app start is <code>cargo run -p figcraft -- --control 7979</code>.
-        </li>
-        <li><strong>Register it with Claude Code.</strong>
-          <pre><code>claude mcp add figcraft -- /absolute/path/to/target/release/figcraft-cli mcp
-claude mcp add figcraft-app -- /absolute/path/to/target/release/figcraft-cli mcp --attach 7979</code></pre>
-        </li>
-        <li><strong>Or write the JSON config.</strong> The same shape works in a project's <code>.mcp.json</code> and in Claude Desktop's <code>claude_desktop_config.json</code> (Settings, Developer, Edit Config).
-          <pre><code>{
-  "mcpServers": {
-    "figcraft": { "command": "/path/to/figcraft-cli", "args": ["mcp"] }
-  }
-}</code></pre>
-        </li>
-        <li><strong>Confine what it can touch.</strong> Both flags are repeatable, and the folders must already exist.
-          <pre><code>./target/release/figcraft-cli mcp --automation-read-root /work/project --automation-write-root /work/project/out</code></pre>
-          A write outside the roots is refused with a readable tool error and nothing is written. With only a read root, the agent cannot write at all. Combining either flag with <code>--attach</code> is a usage error: the app runs the commands, so start the app with the flags instead.
-        </li>
-        <li><strong>Verify the result, do not trust the transcript.</strong> Every mutation is one undo step, and a failing command leaves the document as it was. Read the numbers back with <code>inspect_document</code> or <code>get_node</code>, then render <code>screenshot</code> and look at it.
-          <pre><code>{"jsonrpc":"2.0","id":1,"method":"tools/call","params":{"name":"run_command","arguments":{"command":"file.newFromTemplate","params":{"template":"dashboard"}}}}
-{"jsonrpc":"2.0","id":2,"method":"tools/call","params":{"name":"export","arguments":{"format":"png","path":"dashboard.png"}}}</code></pre>
-        </li>
-      </ol>
-    </section>
-    <section>
-      <h2>The tools an agent actually uses</h2>
-      <div class="table-wrap">
-        <table>
-          <thead><tr><th>Tool</th><th>What it does</th></tr></thead>
-          <tbody>
-            <tr><td><code>list_commands</code></td><td>Every command with label, menu, shortcut, undoability and parameter docs</td></tr>
-            <tr><td><code>run_command</code></td><td>Run any single command, for example <code>layout.add</code> or <code>inspect.code</code></td></tr>
-            <tr><td><code>batch</code></td><td>Several commands as one undo step, all-or-nothing, with <code>{"$step": n}</code> references</td></tr>
-            <tr><td><code>create_node</code> / <code>set_properties</code></td><td>Create layers, then set geometry, fills, layout, text and constraints</td></tr>
-            <tr><td><code>inspect_document</code> / <code>get_node</code></td><td>The document or one layer as JSON, including resolved bounds</td></tr>
-            <tr><td><code>export</code> / <code>screenshot</code></td><td>PNG, JPG, SVG, WebP, PDF, or an experimental <code>.fig</code>; plus a PNG view of the page</td></tr>
-            <tr><td><code>open_file</code> / <code>save_file</code></td><td>Open <code>.figcraft</code>, JSON, <code>.fig</code> or SVG; save as <code>.figcraft</code></td></tr>
-            <tr><td><code>pointer</code> / <code>key</code> / <code>type_text</code></td><td>The canvas gestures and keystrokes a UI-only task would need</td></tr>
-          </tbody>
-        </table>
-      </div>
-    </section>
-    <section>
-      <h2>What can go wrong</h2>
-      <ul class="list">
-        <li><strong>The session dies after one huge request</strong><span>A line is limited to 32 MiB before the newline. An oversized or unterminated frame returns JSON-RPC error <code>-32600</code> and closes the session without dispatching later requests.</span></li>
-        <li><strong>An edit failed and you are not sure whether it applied</strong><span>Attached calls are never replayed after a transport failure, because the app may have applied the request before the reply was lost. Inspect before retrying.</span></li>
-        <li><strong>Your roots are rejected at startup even attached</strong><span>The flags and <code>--attach</code> cannot be combined. Start the app with the roots: <code>figcraft --control 7979 --automation-read-root ... --automation-write-root ...</code>.</span></li>
-        <li><strong>The agent reports success and the canvas disagrees</strong><span>Known rough edges in the current MCP surface: open reports include <a href="https://github.com/storytold/figcraft/issues/927" rel="noopener">#927</a> and <a href="https://github.com/storytold/figcraft/issues/967" rel="noopener">#967</a>. Verify every run with <code>inspect_document</code>.</span></li>
-        <li><strong>Text sizes on the server differ from the app</strong><span>The headless server indexes system fonts on first text layout. For CI-stable renders use <code>--no-system-fonts</code> or <code>FIGCRAFT_NO_SYSTEM_FONTS=1</code>.</span></li>
-      </ul>
-      <p class="note">Unverified: which third-party MCP clients work end-to-end. The configuration shapes and tool list come from the project's documentation; this page did not run a client against a v0.9.0 server.</p>
-    </section>
-
-    <section id="faq">
-      <h2>Questions this page answers</h2>
-      <p class="sub">Straight answers, with the limits stated. Every claim here is checkable against the sources linked above.</p>
-      <details><summary>Does FigCraft have an MCP server?</summary><p>Yes. It ships as part of the project and is started by the CLI: <code>figcraft-cli mcp</code> for a headless session, <code>figcraft-cli mcp --attach PORT</code> to drive a running app. It speaks newline-delimited JSON-RPC 2.0 over stdio.</p></details>
-      <details><summary>What is the difference between headless and attached mode?</summary><p>Headless is an in-process engine session with one untitled document, no window and a CPU renderer. Attached drives the running app over its loopback control channel, so the user sees every change live — and attached calls are never replayed after a transport failure.</p></details>
-      <details><summary>How do I stop an agent from touching the rest of my disk?</summary><p>Start it with <code>--automation-read-root</code> and <code>--automation-write-root</code>. Reads must fall inside a read or write root, writes only inside a write root, and a refused path returns a tool error without writing. The folders must exist at startup.</p></details>
-      <details><summary>Can an agent open my Figma files?</summary><p>It can call <code>open_file</code> on a .fig, which is the same best-effort import the UI uses, and on .svg, JSON and .figcraft. Complex .fig files may import partially; see the .fig guide.</p></details>
-      <details><summary>How do I check what the agent did?</summary><p>Read it back with <code>inspect_document</code> or <code>get_node</code>, and render a <code>screenshot</code>. Every mutation is one undo step, a failing command leaves the document unchanged, and programmatic calls never open dialogs.</p></details>
-    </section>
-    <section class="related" id="related">
-      <h2>Keep going</h2>
-      <div class="grid">
-        <a class="card" href="/learn/cli-automation/"><span class="k">Guide</span><h3>Automating FigCraft with the CLI</h3><p>The CLI is the same engine without a window: inspect, export, convert, render, run command scripts, and report the command table. Everything here is repeatable in CI.</p></a>
-        <a class="card" href="/learn/open-fig-file/"><span class="k">Guide</span><h3>Opening a .fig file in FigCraft</h3><p>Import is best effort, not a migration guarantee. This is the order of operations that keeps your original file untouched and tells you what survived before you start editing.</p></a>
-      </div>
-    </section>
-  </div>
+<main>
+  <h1>This page moved</h1>
+  <p>It is now part of <code>/learn/</code>. Sending you there.</p>
+  <p><a href="/learn/#topic-mcp">Continue to https://figcraft.rerivo.com/learn/#topic-mcp</a></p>
 </main>
-<footer>
-  <div class="wrap foot">
-    <div>
-      <strong>FigCraft Guide</strong> — an independent guide and browser studio. Not affiliated with ArtCraft.
-      <div class="note">Last updated 2026-10-22 · covers FigCraft v0.9.0 · corrections welcome via the source repository.</div>
-    </div>
-    <nav aria-label="Footer">
-      <a href="/tools/">Tools</a>
-      <a href="/templates/">Templates</a>
-      <a href="/pricing/">Pricing</a>
-      <a href="/learn/">Learn</a>
-      <a href="/glossary/">Glossary</a>
-      <a href="/issues/">Known issues</a>
-      <a href="/install/">Install</a>
-      <a href="https://github.com/storytold/figcraft" rel="noopener">Source</a>
-    </nav>
-  </div>
-</footer>
+<script>location.replace("/learn/#topic-mcp");</script>
 </body>
 </html>
