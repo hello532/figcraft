@@ -3,8 +3,8 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>FigCraft — Open-Source Figma Alternative in Rust (Guide, Issues, Studio)</title>
-<meta name="description" content="FigCraft is an open-source Figma alternative written in pure Rust: auto layout, components, vector networks, prototypes, Dev Mode, offline files. Guide with known GitHub issues, install steps, FAQ and a customizable browser studio with 69 line and iOS-style icons.">
+<title>FigCraft: Free Open-Source Figma Alternative + Known Issues</title>
+<meta name="description" content="Independent FigCraft guide: open-source Figma alternative in Rust at ~49% parity. Known GitHub issues, install steps, Figma comparison, browser demo.">
 <meta name="robots" content="index,follow,max-image-preview:large">
 <meta name="author" content="FigCraft Guide">
 <meta name="theme-color" content="#2563eb">
@@ -13,7 +13,7 @@
 <link rel="alternate" type="text/plain" href="https://figcraft.rerivo.com/llms-full.txt" title="LLMs full guide">
 <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='16' fill='%232563eb'/%3E%3Ctext x='32' y='45' font-family='Arial,sans-serif' font-size='38' font-weight='700' fill='white' text-anchor='middle'%3EF%3C/text%3E%3C/svg%3E">
 <meta property="og:title" content="FigCraft — Open-Source Figma Alternative in Rust">
-<meta property="og:description" content="What FigCraft does, where it stands against Figma, the known GitHub issues, how to install it, and a customizable browser canvas studio.">
+<meta property="og:description" content="Independent FigCraft guide: open-source Figma alternative in Rust at ~49% parity. Known GitHub issues, install steps, Figma comparison, browser demo.">
 <meta property="og:type" content="website">
 <meta property="og:locale" content="en_US">
 <meta property="article:published_time" content="2026-10-19">
@@ -25,7 +25,7 @@
 <meta property="og:image:alt" content="FigCraft — a Figma alternative written in pure Rust">
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:title" content="FigCraft — Open-Source Figma Alternative in Rust">
-<meta name="twitter:description" content="Guide, known GitHub issues, install steps, FAQ and a customizable browser studio for FigCraft.">
+<meta name="twitter:description" content="Independent FigCraft guide: open-source Figma alternative in Rust at ~49% parity. Known GitHub issues, install steps, Figma comparison, browser demo.">
 <meta name="twitter:image" content="https://figcraft.rerivo.com/og.png">
 <style>
   :root{
@@ -265,7 +265,8 @@
       <a href="#what">What it is</a>
       <a href="#compare">vs Figma</a>
       <a href="#issues">Issues</a>
-      <a href="#get-started">Install</a>
+      <a href="/install/">Install</a>
+      <a href="/issues/">Issues</a>
       <a href="#demo">Studio</a>
       <a href="#faq">FAQ</a>
       <a class="nav-cta" href="#demo">Open studio</a>
@@ -280,8 +281,9 @@
     <a href="#demo">Studio</a>
     <a href="#compare">vs Figma</a>
     <a href="#search-intent">Search intent</a>
-    <a href="#issues">Issues</a>
-    <a href="#get-started">Install</a>
+    <a href="/issues/">Issues</a>
+    <a href="/install/">Install</a>
+    <a href="/alternatives/">Alternatives</a>
     <a href="#guides">Guides</a>
     <a href="#faq">FAQ</a>
     <a class="nav-cta" href="#demo">Open studio</a>
@@ -541,7 +543,7 @@
     </div>
     <p class="note">“Better” depends on the job. For a solo designer who wants a local file and an inspectable engine, FigCraft is interesting now. For a team that needs multiplayer and a mature plugin ecosystem today, Figma is still the safer choice.</p>
     <p class="note"><strong>Penpot</strong> is the other major open-source design platform: web-first, self-hostable, and stronger on team collaboration today. Choose Penpot when you need a browser-based team workspace now; choose FigCraft when you want a native Rust app, local files and a command engine you can inspect. <a href="https://penpot.app/" rel="noopener">penpot.app</a></p>
-  </section>
+  <p style="margin-top:14px;font-size:14px"><a href="/vs-figma/">Read the full FigCraft vs Figma comparison →</a></p></section>
 
   <section id="alternatives">
     <h2>FigCraft alternatives at a glance</h2>
@@ -552,7 +554,7 @@
       <div class="card"><h3>Plasmic</h3><p>Open-source visual builder for existing codebases, aimed at production web apps and content teams. Strong when the design must map directly to React components. <a href="https://www.plasmic.app/" rel="noopener">plasmic.app</a></p></div>
       <div class="card"><h3>Figma</h3><p>The mature incumbent: real-time collaboration, a deep plugin ecosystem and a large hiring/tooling network. The safest choice when the team needs a proven cloud workflow now. <a href="https://www.figma.com/" rel="noopener">figma.com</a></p></div>
     </div>
-  </section>
+  <p style="margin-top:14px;font-size:14px"><a href="/alternatives/">All FigCraft alternatives compared →</a></p></section>
 
   <section id="issues">
     <h2>Known issues from the GitHub tracker</h2>
@@ -569,7 +571,7 @@
       <div class="card"><h3>Collaboration is a preview</h3><p>Live sessions have no accounts, teams or cloud yet, and the public server is not end-to-end encrypted. Self-host the server or use local-network sharing for confidential work.</p></div>
     </div>
     <p class="note">A closed issue is not a guarantee that every build has the fix: check the release date against the issue’s close date. The most useful bug report includes the OS, build, exact steps and a sample file that can be shared.</p>
-  </section>
+  <p style="margin-top:14px;font-size:14px"><a href="/issues/">Full list of known FigCraft issues and workarounds →</a></p></section>
 
   <section id="whats-new">
     <h2>What's new in FigCraft 0.7.0</h2>
@@ -600,7 +602,7 @@ cargo run --release -p figcraft
 # collaboration server (optional)
 cargo run --release -p figcraft-server</code></pre>
     <p class="note">Browser build: install <a href="https://trunkrs.dev/" rel="noopener">trunk</a> and run <code>cargo xtask wasm</code>. FigCraft is early alpha; keep a copy of anything you open and expect some rough edges.</p>
-  </section>
+  <p style="margin-top:14px;font-size:14px"><a href="/install/">Step-by-step install guide for every platform →</a></p></section>
 
   <section id="how">
     <h2>How the browser studio works</h2>
@@ -748,8 +750,8 @@ cargo run --release -p figcraft-server</code></pre>
        {"@type":"HowToStep","position":2,"name":"Create and arrange","text":"Pick Frame, Rectangle or Text and click the canvas. Drag layers, resize with the eight handles, and edit position, size, fill and text in the inspector."},
        {"@type":"HowToStep","position":3,"name":"Export","text":"Export PNG at 1x, 2x or 3x, SVG, or JSON. The design is saved in localStorage automatically."}
      ]},
-    {"@type":"Article","headline":"FigCraft: an open-source Figma alternative written in pure Rust",
-     "description":"A guide to FigCraft: what it does, how it compares with Figma, the known GitHub issues, install steps and a customizable browser studio.",
+    {"@type":"Article","headline":"FigCraft: Free Open-Source Figma Alternative + Known Issues",
+     "description":"Independent FigCraft guide: what it does, how it compares with Figma, the known GitHub issues, install steps and a customizable browser studio.",
      "datePublished":"2026-10-19","dateModified":"2026-10-19",
      "author":{"@type":"Organization","name":"FigCraft Guide","url":"https://figcraft.rerivo.com/"},
      "publisher":{"@type":"Organization","name":"FigCraft Guide","url":"https://figcraft.rerivo.com/","logo":{"@type":"ImageObject","url":"https://figcraft.rerivo.com/og.png","width":1200,"height":630}},
