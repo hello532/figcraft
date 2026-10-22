@@ -1,0 +1,155 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Open-source Figma alternatives: FigCraft and Penpot licences</title>
+<meta name="description" content="MIT/Apache-2.0 versus MPL-2.0, local files versus a self-hosted server, and what each licence lets a company do with design-tool code.">
+<meta name="robots" content="index,follow,max-image-preview:large">
+<meta name="author" content="FigCraft Guide">
+<meta name="theme-color" content="#2563eb">
+<link rel="canonical" href="https://figcraft.rerivo.com/open-source-figma-alternative/">
+<link rel="alternate" type="text/plain" href="https://figcraft.rerivo.com/llms.txt" title="LLMs.txt">
+<link rel="alternate" type="text/plain" href="https://figcraft.rerivo.com/llms-full.txt" title="LLMs full guide">
+<link rel="icon" type="image/svg+xml" href="/assets/favicon.svg">
+<link rel="stylesheet" href="/assets/site.css">
+<script src="/assets/site.js" defer></script>
+<meta property="og:title" content="Open-source Figma alternatives: FigCraft and Penpot licences">
+<meta property="og:description" content="MIT/Apache-2.0 versus MPL-2.0, local files versus a self-hosted server, and what each licence lets a company do with design-tool code.">
+<meta property="og:type" content="website">
+<meta property="og:locale" content="en_US">
+<meta property="og:url" content="https://figcraft.rerivo.com/open-source-figma-alternative/">
+<meta property="og:image" content="https://figcraft.rerivo.com/og.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="FigCraft — a Figma alternative written in pure Rust">
+<meta property="article:modified_time" content="2026-10-22">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Open-source Figma alternatives: FigCraft and Penpot licences">
+<meta name="twitter:description" content="MIT/Apache-2.0 versus MPL-2.0, local files versus a self-hosted server, and what each licence lets a company do with design-tool code.">
+<meta name="twitter:image" content="https://figcraft.rerivo.com/og.png">
+<script type="application/ld+json">{"@context":"https://schema.org","@graph":[{"@type":"WebPage","@id":"https://figcraft.rerivo.com/open-source-figma-alternative/#page","url":"https://figcraft.rerivo.com/open-source-figma-alternative/","name":"Open-source Figma alternatives: two licences, two bets","description":"MIT/Apache-2.0 versus MPL-2.0, local files versus a self-hosted server, and what each licence lets a company do with design-tool code.","isPartOf":{"@type":"WebSite","name":"FigCraft Guide","url":"https://figcraft.rerivo.com/"},"inLanguage":"en","dateModified":"2026-10-22","datePublished":"2026-10-22"},{"@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Compare","item":"https://figcraft.rerivo.com/alternatives/"},{"@type":"ListItem","position":2,"name":"Open source","item":"https://figcraft.rerivo.com/open-source-figma-alternative/"}]},{"@type":"Article","@id":"https://figcraft.rerivo.com/open-source-figma-alternative/#article","headline":"Open-source Figma alternatives: two licences, two bets","description":"MIT/Apache-2.0 versus MPL-2.0, local files versus a self-hosted server, and what each licence lets a company do with design-tool code.","datePublished":"2026-10-22","dateModified":"2026-10-22","author":{"@type":"Organization","name":"FigCraft Guide","url":"https://figcraft.rerivo.com/"},"publisher":{"@type":"Organization","name":"FigCraft Guide","url":"https://figcraft.rerivo.com/"},"mainEntityOfPage":{"@id":"https://figcraft.rerivo.com/open-source-figma-alternative/#page"},"about":{"@type":"SoftwareApplication","name":"FigCraft","applicationCategory":"DesignApplication","operatingSystem":"macOS, Windows, Linux, FreeBSD, Web","offers":{"@type":"Offer","price":"0","priceCurrency":"USD"}}},{"@type":"FAQPage","@id":"https://figcraft.rerivo.com/open-source-figma-alternative/#faq","mainEntity":[{"@type":"Question","name":"Is FigCraft or Penpot more open?","acceptedAnswer":{"@type":"Answer","text":"FigCraft uses MIT OR Apache-2.0, which is permissive: modifications can stay private and the code can be embedded in closed products with attribution. Penpot uses MPL-2.0, which requires changes to MPL-covered files to be published when distributed. FigCraft is more permissive; Penpot is still genuinely open source and self-hostable."}},{"@type":"Question","name":"Can I self-host Penpot for free?","acceptedAnswer":{"@type":"Answer","text":"Penpot is open source and self-hostable, and the vendor also sells a Private Server deployment at $50,000 a year. The vendor prices that offering around operations and isolation rather than the licence. Whether a free self-hosted deployment is supportable for your team is an operational question this page does not test."}},{"@type":"Question","name":"What does MPL-2.0 require of my company?","acceptedAnswer":{"@type":"Answer","text":"MPL-2.0 is file-level copyleft: if you modify MPL-covered files and distribute the result, those files must be made available under MPL. A larger work that merely combines them may use other terms. Internal use without distribution triggers no publication duty. Read the licence or ask counsel before relying on a summary."}},{"@type":"Question","name":"Does FigCraft have a company behind it?","acceptedAnswer":{"@type":"Answer","text":"There is no vendor selling seats, support or hosting for FigCraft: the project is open source at github.com/storytold/figcraft, with bugs handled in a public tracker. That means no support contract and no SLA, and it also means no pricing page to renegotiate."}},{"@type":"Question","name":"Which has better Figma parity?","acceptedAnswer":{"@type":"Answer","text":"Only FigCraft publishes an estimate: roughly 49% by the project own reckoning, and it labels itself early alpha. We did not produce a comparable parity figure for Penpot and will not guess one. Penpot is the more mature product in the narrow sense of shipping paid team tiers; parity with Figma specifically was not measured for this page."}}]}]}</script>
+</head>
+<body>
+<a class="skip" href="#main">Skip to content</a>
+<header>
+  <div class="wrap nav">
+    <a class="brand" href="/"><img class="mark-img" src="/assets/mark.svg" alt="" width="28" height="28">FigCraft Guide</a>
+    <nav aria-label="Primary"><a href="/tools/">Tools</a><a href="/templates/">Templates</a><a href="/alternatives/" aria-current="page">Compare</a><a href="/learn/">Learn</a><a href="https://github.com/storytold/figcraft" rel="noopener">GitHub</a><a class="nav-cta" href="/install/">Download</a></nav>
+    <div class="nav-tools">
+      <button class="nav-icon" type="button" data-theme-toggle aria-label="Toggle theme">☾</button>
+      <button class="nav-icon nav-menu-btn" type="button" data-nav-toggle aria-label="Menu" aria-expanded="false" aria-controls="mobile-nav">≡</button>
+    </div>
+  </div>
+  <div class="mobile-nav" id="mobile-nav"><a href="/tools/">Tools</a><a href="/templates/">Templates</a><a href="/alternatives/">Compare</a><a href="/learn/">Learn</a><a href="https://github.com/storytold/figcraft" rel="noopener">GitHub</a><a class="nav-cta" href="/install/">Download FigCraft</a></div>
+</header>
+<main id="main">
+  <div class="wrap">
+    <div class="hero">
+      <ul class="crumbs"><li><a href="/alternatives/">Compare</a></li><li><span>Open source</span></li></ul>
+      <p class="eyebrow">Comparison</p>
+      <h1>Open-source Figma alternatives: two licences, two bets</h1>
+      <p class="lede">Both FigCraft and Penpot publish their source. The licence and the hosting model decide whether that source is a tool you use or a platform you build on.</p>
+      <div class="meta-line"><span>Independent guide</span><span>·</span><span>Updated 2026-10-22</span><span>·</span><span>Covers FigCraft v0.9.0</span><span>·</span><span>7 min read</span></div>
+      <div class="cta"><a class="btn primary" href="/install/">Download FigCraft</a><a class="btn ghost" href="/#demo">Open the studio</a></div>
+    </div>
+<section>
+  <h2>The two credible open-source answers</h2>
+  <div class="prose">
+    <p>FigCraft is a native Rust application under MIT OR Apache-2.0: a dual licence, which means a downstream user may pick either set of terms. Penpot is a web platform under MPL-2.0, the Mozilla Public License, with a hosted service and paid team tiers on top. Both are open source; they are open in different directions, which matters to anyone building on the code.</p>
+  </div>
+  <div class="table-wrap">
+    <table>
+      <thead><tr><th></th><th>FigCraft</th><th>Penpot</th></tr></thead>
+      <tbody>
+        <tr><td>Licence</td><td>MIT OR Apache-2.0</td><td>MPL-2.0</td></tr>
+        <tr><td>Platform</td><td>macOS, Windows, Linux, FreeBSD; WebAssembly</td><td>Browser</td></tr>
+        <tr><td>Hosting</td><td>Your machine; self-hosted preview server</td><td>Vendor cloud or self-hosted</td></tr>
+        <tr><td>File format</td><td><code>.figcraft</code> files on disk</td><td>Unverified (server-side projects)</td></tr>
+        <tr><td>Real-time collaboration</td><td>Preview; no accounts</td><td>Yes; members and viewers</td></tr>
+        <tr><td>Offline</td><td>Yes</td><td>Unverified</td></tr>
+        <tr><td>Handoff / dev mode</td><td>Inspect, annotations, six code targets</td><td>Unverified</td></tr>
+        <tr><td>Extensibility</td><td>CLI, JSON channel, MCP server, 400+ commands</td><td>Unverified</td></tr>
+        <tr><td>Maturity</td><td>Early alpha; ~49% parity by its own estimate</td><td>Shipped; paid team tiers</td></tr>
+        <tr><td>Price</td><td>$0, no hosted service</td><td>$0 Professional; $7/editor, capped $175/team</td></tr>
+      </tbody>
+    </table>
+  </div>
+  <p class="note">MPL-2.0 is commonly summarised as file-level copyleft: changes to MPL-covered files must be published under MPL, while larger works that merely combine with them may carry other terms. Read the licence, or ask counsel, before relying on that summary.</p>
+</section>
+
+<section>
+  <h2>Permissive versus file-level copyleft</h2>
+  <div class="prose">
+    <p>MIT and Apache-2.0 ask almost nothing. You may use, modify, embed and redistribute the code, including inside a closed product, provided the copyright and licence notice travel with it. For a design tool, that means a company can fork FigCraft, restyle it, ship it internally or bundle it into a commercial product without publishing those changes. The Apache-2.0 half of the dual licence adds an explicit patent grant.</p>
+    <p>MPL-2.0 is a middle position: not the viral copyleft of the GPL, since a larger work can combine MPL files with proprietary ones under other terms. But any file that is itself MPL-covered, and any modification to it, must stay available under MPL. For Penpot that is a reasonable fit: a company can run and modify it, and if it distributes a modified version it publishes the modified source files.</p>
+    <p>The practical question is where your investment lands. If you plan to change the editor and keep those changes private, FigCraft's licence is simpler. If you run a workspace internally and never distribute it, the distinction barely bites, because the obligations attach to distribution.</p>
+  </div>
+</section>
+
+<section>
+  <h2>Hosting is where open source meets the invoice</h2>
+  <p>Penpot's open-source code is offset by a commercial service. The Professional tier is $0 for 8 team members, 10GB and 7 days of history; Unlimited is $7 per editor, capped at $175 a month per team; Enterprise is $25 per member; and a Private Server is $50,000 a year. Those are hosted-service prices, not licence prices: the code is open, and the vendor is selling operations, support and isolation.</p>
+  <p>FigCraft has no mirror-image offer. There is no hosted product, no enterprise plan and no paid support, so self-hosting is not an option that costs extra; running the binary is the whole product. The trade is reversed. You keep all the operational control and you inherit all the operational work, from fonts sitting in a sibling <code>../craft-fonts</code> directory (#821 is open) to a macOS 27/M1 launch crash (<a href="https://github.com/storytold/figcraft/issues/781" rel="noopener">#781</a>) and broken 1440p interface scaling (<a href="https://github.com/storytold/figcraft/issues/540" rel="noopener">#540</a>, <a href="https://github.com/storytold/figcraft/issues/818" rel="noopener">#818</a>).</p>
+  <p>For a company comparing total cost, the honest framing is this: Penpot's free tier buys less code freedom and more operational certainty; FigCraft's permissive licence buys maximum freedom and zero operational certainty. Neither is cheaper in every case.</p>
+</section>
+
+<section>
+  <h2>Parity and community, without the numbers game</h2>
+  <div class="prose">
+    <p>FigCraft's roughly 49% parity is the project's own estimate of how much of Figma it covers, and it is the only parity number on this page with a source. We did not produce an equivalent figure for Penpot, and no credible public count of either project's users was verified here, so no chart of adoption appears. What can be observed is structure: FigCraft is a young project with a public issue tracker where bugs are numbered and discussed in the open; Penpot is a shipped platform with a commercial organisation selling seats and a private server around it.</p>
+    <p>That structure predicts where each will hurt. A young project can change direction quickly and can also stall. A funded platform ships steadily and prices accordingly. For a company placing a five-year bet, the licence is the durable part and the roadmap is the volatile part.</p>
+  </div>
+</section>
+
+<section>
+  <h2>Who should pick which</h2>
+  <ul class="list">
+    <li><strong>Embedding a design engine in a product</strong><span>FigCraft, if the alpha state is acceptable. MIT/Apache-2.0 lets modifications stay private; MPL would require publishing changes to covered files.</span></li>
+    <li><strong>Running a design workspace for staff</strong><span>Penpot. The free tier is a real workspace, and there is a paid path with support when the team grows.</span></li>
+    <li><strong>Security review or air-gapped deployment</strong><span>FigCraft has no telemetry and no account system, which is the shortest possible review. Penpot can be self-hosted, but the deployment is a server you must run.</span></li>
+    <li><strong>Needing a vendor to escalate to</strong><span>Penpot, via its Enterprise tier or Private Server. FigCraft has no support contract to buy.</span></li>
+  </ul>
+  <p class="note">Prices checked 2026-10-22 from the vendors' own pricing pages; verify before you buy. This site is independent and not affiliated with Figma, Penpot, Sketch or ArtCraft.</p>
+  <p>Related: <a href="/pricing/">the pricing arithmetic</a>, <a href="/vs-penpot/">FigCraft vs Penpot in practice</a>, <a href="/free-figma-alternative/">free routes compared</a>, and <a href="/learn/migrate-from-figma/">migrating from Figma</a>.</p>
+</section>
+
+    <section id="faq">
+      <h2>Questions this page answers</h2>
+      <p class="sub">Straight answers, with the limits stated. Every claim here is checkable against the sources linked above.</p>
+      <details><summary>Is FigCraft or Penpot more open?</summary><p>FigCraft uses MIT OR Apache-2.0, which is permissive: modifications can stay private and the code can be embedded in closed products with attribution. Penpot uses MPL-2.0, which requires changes to MPL-covered files to be published when distributed. FigCraft is more permissive; Penpot is still genuinely open source and self-hostable.</p></details>
+      <details><summary>Can I self-host Penpot for free?</summary><p>Penpot is open source and self-hostable, and the vendor also sells a Private Server deployment at $50,000 a year. The vendor prices that offering around operations and isolation rather than the licence. Whether a free self-hosted deployment is supportable for your team is an operational question this page does not test.</p></details>
+      <details><summary>What does MPL-2.0 require of my company?</summary><p>MPL-2.0 is file-level copyleft: if you modify MPL-covered files and distribute the result, those files must be made available under MPL. A larger work that merely combines them may use other terms. Internal use without distribution triggers no publication duty. Read the licence or ask counsel before relying on a summary.</p></details>
+      <details><summary>Does FigCraft have a company behind it?</summary><p>There is no vendor selling seats, support or hosting for FigCraft: the project is open source at github.com/storytold/figcraft, with bugs handled in a public tracker. That means no support contract and no SLA, and it also means no pricing page to renegotiate.</p></details>
+      <details><summary>Which has better Figma parity?</summary><p>Only FigCraft publishes an estimate: roughly 49% by the project own reckoning, and it labels itself early alpha. We did not produce a comparable parity figure for Penpot and will not guess one. Penpot is the more mature product in the narrow sense of shipping paid team tiers; parity with Figma specifically was not measured for this page.</p></details>
+    </section>
+    <section class="related" id="related">
+      <h2>Keep going</h2>
+      <div class="grid">
+        <a class="card" href="/vs-penpot/"><span class="k">Comparison</span><h3>FigCraft vs Penpot: local files or a hosted workspace</h3><p>Both are open source, and they disagree about the only question that matters: where the document lives. Everything else follows from that.</p></a>
+        <a class="card" href="/pricing/"><span class="k">Pricing</span><h3>What free actually costs: FigCraft, Figma, Penpot and Sketch</h3><p>Four products, four definitions of free — and four different invoices once a team grows past one person. The arithmetic below is the whole point.</p></a>
+        <a class="card" href="/free-figma-alternative/"><span class="k">Comparison</span><h3>Free Figma alternatives: three routes, three different bargains</h3><p>Free is a price, not a category. These three routes cost nothing today and charge you in three different currencies: seats, limits, or maintenance.</p></a>
+      </div>
+    </section>
+  </div>
+</main>
+<footer>
+  <div class="wrap foot">
+    <div>
+      <strong>FigCraft Guide</strong> — an independent guide and browser studio. Not affiliated with ArtCraft.
+      <div class="note">Last updated 2026-10-22 · covers FigCraft v0.9.0 · corrections welcome via the source repository.</div>
+    </div>
+    <nav aria-label="Footer">
+      <a href="/tools/">Tools</a>
+      <a href="/templates/">Templates</a>
+      <a href="/pricing/">Pricing</a>
+      <a href="/learn/">Learn</a>
+      <a href="/glossary/">Glossary</a>
+      <a href="/issues/">Known issues</a>
+      <a href="/install/">Install</a>
+      <a href="https://github.com/storytold/figcraft" rel="noopener">Source</a>
+    </nav>
+  </div>
+</footer>
+</body>
+</html>

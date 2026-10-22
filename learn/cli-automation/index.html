@@ -1,0 +1,173 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>FigCraft CLI Automation: Export, Convert and Script Runs</title>
+<meta name="description" content="Script FigCraft with figcraft-cli: info, export, convert, render, all-or-nothing command scripts, and the automation roots that confine a run to chosen folders.">
+<meta name="robots" content="index,follow,max-image-preview:large">
+<meta name="author" content="FigCraft Guide">
+<meta name="theme-color" content="#2563eb">
+<link rel="canonical" href="https://figcraft.rerivo.com/learn/cli-automation/">
+<link rel="alternate" type="text/plain" href="https://figcraft.rerivo.com/llms.txt" title="LLMs.txt">
+<link rel="alternate" type="text/plain" href="https://figcraft.rerivo.com/llms-full.txt" title="LLMs full guide">
+<link rel="icon" type="image/svg+xml" href="/assets/favicon.svg">
+<link rel="stylesheet" href="/assets/site.css">
+<script src="/assets/site.js" defer></script>
+<meta property="og:title" content="FigCraft CLI Automation: Export, Convert and Script Runs">
+<meta property="og:description" content="Script FigCraft with figcraft-cli: info, export, convert, render, all-or-nothing command scripts, and the automation roots that confine a run to chosen folders.">
+<meta property="og:type" content="website">
+<meta property="og:locale" content="en_US">
+<meta property="og:url" content="https://figcraft.rerivo.com/learn/cli-automation/">
+<meta property="og:image" content="https://figcraft.rerivo.com/og.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="FigCraft — a Figma alternative written in pure Rust">
+<meta property="article:modified_time" content="2026-10-22">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="FigCraft CLI Automation: Export, Convert and Script Runs">
+<meta name="twitter:description" content="Script FigCraft with figcraft-cli: info, export, convert, render, all-or-nothing command scripts, and the automation roots that confine a run to chosen folders.">
+<meta name="twitter:image" content="https://figcraft.rerivo.com/og.png">
+<script type="application/ld+json">{"@context":"https://schema.org","@graph":[{"@type":"WebPage","@id":"https://figcraft.rerivo.com/learn/cli-automation/#page","url":"https://figcraft.rerivo.com/learn/cli-automation/","name":"Automating FigCraft with the CLI","description":"Script FigCraft with figcraft-cli: info, export, convert, render, all-or-nothing command scripts, and the automation roots that confine a run to chosen folders.","isPartOf":{"@type":"WebSite","name":"FigCraft Guide","url":"https://figcraft.rerivo.com/"},"inLanguage":"en","dateModified":"2026-10-22","datePublished":"2026-10-22"},{"@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Learn","item":"https://figcraft.rerivo.com/learn/"},{"@type":"ListItem","position":2,"name":"CLI automation","item":"https://figcraft.rerivo.com/learn/cli-automation/"}]},{"@type":"Article","@id":"https://figcraft.rerivo.com/learn/cli-automation/#article","headline":"Automating FigCraft with the CLI","description":"Script FigCraft with figcraft-cli: info, export, convert, render, all-or-nothing command scripts, and the automation roots that confine a run to chosen folders.","datePublished":"2026-10-22","dateModified":"2026-10-22","author":{"@type":"Organization","name":"FigCraft Guide","url":"https://figcraft.rerivo.com/"},"publisher":{"@type":"Organization","name":"FigCraft Guide","url":"https://figcraft.rerivo.com/"},"mainEntityOfPage":{"@id":"https://figcraft.rerivo.com/learn/cli-automation/#page"},"about":{"@type":"SoftwareApplication","name":"FigCraft","applicationCategory":"DesignApplication","operatingSystem":"macOS, Windows, Linux, FreeBSD, Web","offers":{"@type":"Offer","price":"0","priceCurrency":"USD"}}},{"@type":"FAQPage","@id":"https://figcraft.rerivo.com/learn/cli-automation/#faq","mainEntity":[{"@type":"Question","name":"Is there a FigCraft command line tool?","acceptedAnswer":{"@type":"Answer","text":"Yes: figcraft-cli, built with cargo build --release -p figcraft-cli or bundled in the Linux AppImage as a cli subcommand. It exposes info, export, convert, render, run, commands, mcp, plugin publish and perf."}},{"@type":"Question","name":"Can the CLI run FigCraft menu commands?","acceptedAnswer":{"@type":"Answer","text":"Yes. run executes a JSON script of command ids and params in a headless session, printing one JSON line per step. The whole script is one undo step and is all-or-nothing, the same guarantee the MCP batch tool gives."}},{"@type":"Question","name":"How do I find a command id?","acceptedAnswer":{"@type":"Answer","text":"Run figcraft-cli commands for the human-readable table, or figcraft-cli commands --json --filter layout for machine-readable output. The same list is available over MCP as list_commands."}},{"@type":"Question","name":"Can I limit what a script may read and write?","acceptedAnswer":{"@type":"Answer","text":"Yes. --automation-read-root and --automation-write-root confine info, export, convert, render and run. Each is repeatable, each folder must exist, and reads are allowed inside either root while writes need a write root."}},{"@type":"Question","name":"What happens if a step in my script fails?","acceptedAnswer":{"@type":"Answer","text":"The script stops, prints a line with \"ok\": false and \"rolledBack\": true, writes nothing including --out, restores the session documents, and exits 1."}}]}]}</script>
+</head>
+<body>
+<a class="skip" href="#main">Skip to content</a>
+<header>
+  <div class="wrap nav">
+    <a class="brand" href="/"><img class="mark-img" src="/assets/mark.svg" alt="" width="28" height="28">FigCraft Guide</a>
+    <nav aria-label="Primary"><a href="/tools/">Tools</a><a href="/templates/">Templates</a><a href="/alternatives/">Compare</a><a href="/learn/" aria-current="page">Learn</a><a href="https://github.com/storytold/figcraft" rel="noopener">GitHub</a><a class="nav-cta" href="/install/">Download</a></nav>
+    <div class="nav-tools">
+      <button class="nav-icon" type="button" data-theme-toggle aria-label="Toggle theme">☾</button>
+      <button class="nav-icon nav-menu-btn" type="button" data-nav-toggle aria-label="Menu" aria-expanded="false" aria-controls="mobile-nav">≡</button>
+    </div>
+  </div>
+  <div class="mobile-nav" id="mobile-nav"><a href="/tools/">Tools</a><a href="/templates/">Templates</a><a href="/alternatives/">Compare</a><a href="/learn/">Learn</a><a href="https://github.com/storytold/figcraft" rel="noopener">GitHub</a><a class="nav-cta" href="/install/">Download FigCraft</a></div>
+</header>
+<main id="main">
+  <div class="wrap">
+    <div class="hero">
+      <ul class="crumbs"><li><a href="/learn/">Learn</a></li><li><span>CLI automation</span></li></ul>
+      <p class="eyebrow">Guide</p>
+      <h1>Automating FigCraft with the CLI</h1>
+      <p class="lede">The CLI is the same engine without a window: inspect, export, convert, render, run command scripts, and report the command table. Everything here is repeatable in CI.</p>
+      <div class="meta-line"><span>Independent guide</span><span>·</span><span>Updated 2026-10-22</span><span>·</span><span>Covers FigCraft v0.9.0</span><span>·</span><span>8 min read</span></div>
+      <div class="cta"><a class="btn primary" href="/install/">Download FigCraft</a><a class="btn ghost" href="/#demo">Open the studio</a></div>
+    </div>
+<section class="prose">
+      <h2>One engine, no window</h2>
+      <p><code>figcraft-cli</code> runs the same 400+ command layer as the UI, so a script is not a second implementation with its own bugs. Bad arguments print usage and exit 2; failures exit 1; the CLI does not panic on input. On Linux the AppImage bundles it, so <code>./figcraft-0.9.0-linux-x86_64.AppImage cli ...</code> is the same tool wherever <code>figcraft-cli ...</code> appears below.</p>
+    </section>
+    <section>
+      <h2>Step by step</h2>
+      <ol class="steps">
+        <li><strong>Build it once.</strong>
+          <pre><code>cargo build --release -p figcraft-cli
+./target/release/figcraft-cli --help</code></pre>
+        </li>
+        <li><strong>Inspect before you export.</strong> <code>info</code> prints pages, node counts, top-level frames, styles, variables and images, and lists missing fonts. <code>--json</code> gives the same as a machine-readable document for a build check.
+          <pre><code>./target/release/figcraft-cli info app.figcraft
+./target/release/figcraft-cli info app.figcraft --json &gt; report.json</code></pre>
+        </li>
+        <li><strong>Export deterministically.</strong> A directory output gives one file per top-level frame; an extension output gives one file, chosen with <code>--node</code>.
+          <pre><code>mkdir -p exports
+./target/release/figcraft-cli export app.figcraft -o exports/ --scale 2
+./target/release/figcraft-cli export app.figcraft -o hero.svg --node "Hero"
+./target/release/figcraft-cli export app.figcraft -o screens.pdf --page "Screens"</code></pre>
+        </li>
+        <li><strong>Convert between formats.</strong> The format follows the extensions: <code>.figcraft</code>, <code>.json</code>, <code>.fig</code>, <code>.svg</code>, images, and outputs of the same families.
+          <pre><code>./target/release/figcraft-cli convert app.figcraft app.svg
+./target/release/figcraft-cli convert home.svg home.figcraft</code></pre>
+        </li>
+        <li><strong>Run a command script.</strong> A script is a JSON array of command/params pairs, an object with a <code>commands</code> array, or JSON lines. It runs in a headless session and, once it is through, prints one JSON line per step. The whole script is one undo step — and all-or-nothing.
+          <pre><code>[
+  {"command": "frame.create", "params": {"preset": "iPhone 16", "x": 0, "y": 0, "name": "Home"}},
+  {"command": "node.create", "params": {"type": "text", "parent": 2, "x": 24, "y": 64, "text": "Welcome", "props": {"fontSize": 32}}},
+  {"command": "layout.add", "params": {"ids": [2], "direction": "vertical"}}
+]</code></pre>
+          Save that as <code>start.json</code>, then run it:
+          <pre><code>./target/release/figcraft-cli run start.json --out dashboard.figcraft</code></pre>
+          In a new document the first page is id 1, so the first layer is id 2. A later step can refer to an earlier step's result with <code>{"$step": n}</code>.
+        </li>
+        <li><strong>Start from a template instead of an empty page.</strong> <code>template.list</code> names the built-in starters; <code>file.newFromTemplate</code> opens one as the document the following steps act on.
+          <pre><code>echo '[{"command": "file.newFromTemplate", "params": {"template": "dashboard"}}]' &gt; start.json
+./target/release/figcraft-cli run start.json --out dashboard.figcraft
+./target/release/figcraft-cli export dashboard.figcraft -o dashboard.png</code></pre>
+        </li>
+        <li><strong>Confine the run.</strong> Both root flags are repeatable and confine every file the subcommand touches. A path outside them is refused, and the output is otherwise identical.
+          <pre><code>./target/release/figcraft-cli render in/doc.figcraft -o out/ok.png --automation-read-root in --automation-write-root out</code></pre>
+        </li>
+        <li><strong>Print the command table instead of guessing.</strong> Use it when a script needs a command id you have not used before.
+          <pre><code>./target/release/figcraft-cli commands --filter layout
+./target/release/figcraft-cli commands --json --filter export</code></pre>
+        </li>
+      </ol>
+    </section>
+    <section>
+      <h2>Subcommands worth knowing</h2>
+      <div class="table-wrap">
+        <table>
+          <thead><tr><th>Subcommand</th><th>Use it for</th></tr></thead>
+          <tbody>
+            <tr><td><code>info</code></td><td>Node counts, styles, variables, missing fonts, import notes</td></tr>
+            <tr><td><code>export</code></td><td>Frames or a single layer to png, jpg, svg, webp, pdf, or an experimental fig</td></tr>
+            <tr><td><code>convert</code></td><td>Format to format, including SVG and image import</td></tr>
+            <tr><td><code>render</code></td><td>The whole page as one raster, scaled to fit 16384 px</td></tr>
+            <tr><td><code>run</code></td><td>A JSON command script, all-or-nothing</td></tr>
+            <tr><td><code>commands</code></td><td>Every command with label, shortcut and parameter docs</td></tr>
+            <tr><td><code>mcp</code></td><td>The MCP server, headless or attached</td></tr>
+            <tr><td><code>perf</code></td><td>Synthetic documents and a Markdown table of hot paths</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+    <section>
+      <h2>What can go wrong</h2>
+      <ul class="list">
+        <li><strong>Exit 1 and no output file</strong><span>A step failed and the script rolled back: nothing was written, the session's documents are as they were, and the failing line carries <code>"rolledBack": true</code>. Fix the step; do not retry blindly.</span></li>
+        <li><strong>A later step cannot find the layer an earlier step made</strong><span>Reference the returned id with <code>{"$step": n}</code> rather than hard-coding an id you guessed.</span></li>
+        <li><strong>SVG or PDF export refuses a document</strong><span>Visible descendants more than 256 levels below the exported root fail by design. Use <code>--node</code> on an inner layer or reduce nesting.</span></li>
+        <li><strong>Renders differ between machines</strong><span>System fonts differ. Add <code>--no-system-fonts</code> or set <code>FIGCRAFT_NO_SYSTEM_FONTS=1</code> to use only the built-in fonts.</span></li>
+        <li><strong>A path outside the roots is refused</strong><span>That is the confinement working; it landed for these subcommands in <a href="https://github.com/storytold/figcraft/issues/839" rel="noopener">#839</a>. Widen the root, do not work around it.</span></li>
+      </ul>
+      <p class="note">Unverified: wall-clock timings for export or script runs on your documents. The 16384 px render cap, the exit codes and the rollback behaviour come from the project's CLI documentation, not from timings measured here.</p>
+    </section>
+
+    <section id="faq">
+      <h2>Questions this page answers</h2>
+      <p class="sub">Straight answers, with the limits stated. Every claim here is checkable against the sources linked above.</p>
+      <details><summary>Is there a FigCraft command line tool?</summary><p>Yes: <code>figcraft-cli</code>, built with <code>cargo build --release -p figcraft-cli</code> or bundled in the Linux AppImage as a <code>cli</code> subcommand. It exposes info, export, convert, render, run, commands, mcp, plugin publish and perf.</p></details>
+      <details><summary>Can the CLI run FigCraft menu commands?</summary><p>Yes. <code>run</code> executes a JSON script of command ids and params in a headless session, printing one JSON line per step. The whole script is one undo step and is all-or-nothing, the same guarantee the MCP <code>batch</code> tool gives.</p></details>
+      <details><summary>How do I find a command id?</summary><p>Run <code>figcraft-cli commands</code> for the human-readable table, or <code>figcraft-cli commands --json --filter layout</code> for machine-readable output. The same list is available over MCP as <code>list_commands</code>.</p></details>
+      <details><summary>Can I limit what a script may read and write?</summary><p>Yes. <code>--automation-read-root</code> and <code>--automation-write-root</code> confine info, export, convert, render and run. Each is repeatable, each folder must exist, and reads are allowed inside either root while writes need a write root.</p></details>
+      <details><summary>What happens if a step in my script fails?</summary><p>The script stops, prints a line with <code>"ok": false</code> and <code>"rolledBack": true</code>, writes nothing including <code>--out</code>, restores the session documents, and exits 1.</p></details>
+    </section>
+    <section class="related" id="related">
+      <h2>Keep going</h2>
+      <div class="grid">
+        <a class="card" href="/learn/mcp-server/"><span class="k">Guide</span><h3>The FigCraft MCP server</h3><p>FigCraft ships a Model Context Protocol server, so an agent can create layers, run any command, inspect the document as JSON and look at it as a PNG. The difference between headless and attached is the first thing to get right.</p></a>
+        <a class="card" href="/learn/export-svg/"><span class="k">Guide</span><h3>Exporting SVG from FigCraft</h3><p>Two exporters share the word &quot;SVG&quot; here, and only one of them is FigCraft. This page covers the real exporter first, then the demo studio, and keeps them apart.</p></a>
+        <a class="card" href="/learn/install-linux/"><span class="k">Guide</span><h3>Installing FigCraft on Linux</h3><p>There is no installer wizard and no system-wide step for the AppImage: download, chmod +x, run. The package formats exist for people who prefer their distro to own the binary.</p></a>
+      </div>
+    </section>
+  </div>
+</main>
+<footer>
+  <div class="wrap foot">
+    <div>
+      <strong>FigCraft Guide</strong> — an independent guide and browser studio. Not affiliated with ArtCraft.
+      <div class="note">Last updated 2026-10-22 · covers FigCraft v0.9.0 · corrections welcome via the source repository.</div>
+    </div>
+    <nav aria-label="Footer">
+      <a href="/tools/">Tools</a>
+      <a href="/templates/">Templates</a>
+      <a href="/pricing/">Pricing</a>
+      <a href="/learn/">Learn</a>
+      <a href="/glossary/">Glossary</a>
+      <a href="/issues/">Known issues</a>
+      <a href="/install/">Install</a>
+      <a href="https://github.com/storytold/figcraft" rel="noopener">Source</a>
+    </nav>
+  </div>
+</footer>
+</body>
+</html>

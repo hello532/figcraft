@@ -1,41 +1,55 @@
 # FigCraft Guide — allow search and AI answer engines to read and cite the page.
+# /_tools/ holds the page generator and content sources, not reader-facing pages.
 User-agent: *
 Allow: /
+Disallow: /_tools/
 
 User-agent: GPTBot
 Allow: /
+Disallow: /_tools/
 
 User-agent: ChatGPT-User
 Allow: /
+Disallow: /_tools/
 
 User-agent: OAI-SearchBot
 Allow: /
+Disallow: /_tools/
 
 User-agent: ClaudeBot
 Allow: /
+Disallow: /_tools/
 
 User-agent: Claude-Web
 Allow: /
+Disallow: /_tools/
 
 User-agent: PerplexityBot
 Allow: /
+Disallow: /_tools/
 
 User-agent: Google-Extended
 Allow: /
+Disallow: /_tools/
 
 User-agent: Bingbot
 Allow: /
+Disallow: /_tools/
 
 User-agent: Applebot
 Allow: /
+Disallow: /_tools/
 
 User-agent: Applebot-Extended
 Allow: /
+Disallow: /_tools/
 
 User-agent: CCBot
 Allow: /
+Disallow: /_tools/
 
 User-agent: cohere-ai
 Allow: /
+Disallow: /_tools/
 
 Sitemap: https://figcraft.rerivo.com/sitemap.xml

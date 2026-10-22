@@ -1,0 +1,149 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>FigCraft vs Sketch: Mac-only original or cross-platform Rust</title>
+<meta name="description" content="Sketch is the Mac-only tool with a $120 one-time licence; FigCraft is a free Rust app on four platforms. Collaboration, files and price compared.">
+<meta name="robots" content="index,follow,max-image-preview:large">
+<meta name="author" content="FigCraft Guide">
+<meta name="theme-color" content="#2563eb">
+<link rel="canonical" href="https://figcraft.rerivo.com/vs-sketch/">
+<link rel="alternate" type="text/plain" href="https://figcraft.rerivo.com/llms.txt" title="LLMs.txt">
+<link rel="alternate" type="text/plain" href="https://figcraft.rerivo.com/llms-full.txt" title="LLMs full guide">
+<link rel="icon" type="image/svg+xml" href="/assets/favicon.svg">
+<link rel="stylesheet" href="/assets/site.css">
+<script src="/assets/site.js" defer></script>
+<meta property="og:title" content="FigCraft vs Sketch: Mac-only original or cross-platform Rust">
+<meta property="og:description" content="Sketch is the Mac-only tool with a $120 one-time licence; FigCraft is a free Rust app on four platforms. Collaboration, files and price compared.">
+<meta property="og:type" content="website">
+<meta property="og:locale" content="en_US">
+<meta property="og:url" content="https://figcraft.rerivo.com/vs-sketch/">
+<meta property="og:image" content="https://figcraft.rerivo.com/og.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="FigCraft — a Figma alternative written in pure Rust">
+<meta property="article:modified_time" content="2026-10-22">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="FigCraft vs Sketch: Mac-only original or cross-platform Rust">
+<meta name="twitter:description" content="Sketch is the Mac-only tool with a $120 one-time licence; FigCraft is a free Rust app on four platforms. Collaboration, files and price compared.">
+<meta name="twitter:image" content="https://figcraft.rerivo.com/og.png">
+<script type="application/ld+json">{"@context":"https://schema.org","@graph":[{"@type":"WebPage","@id":"https://figcraft.rerivo.com/vs-sketch/#page","url":"https://figcraft.rerivo.com/vs-sketch/","name":"FigCraft vs Sketch: the Mac original versus a Rust rewrite","description":"Sketch is the Mac-only tool with a $120 one-time licence; FigCraft is a free Rust app on four platforms. Collaboration, files and price compared.","isPartOf":{"@type":"WebSite","name":"FigCraft Guide","url":"https://figcraft.rerivo.com/"},"inLanguage":"en","dateModified":"2026-10-22","datePublished":"2026-10-22"},{"@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Compare","item":"https://figcraft.rerivo.com/alternatives/"},{"@type":"ListItem","position":2,"name":"Vs Sketch","item":"https://figcraft.rerivo.com/vs-sketch/"}]},{"@type":"Article","@id":"https://figcraft.rerivo.com/vs-sketch/#article","headline":"FigCraft vs Sketch: the Mac original versus a Rust rewrite","description":"Sketch is the Mac-only tool with a $120 one-time licence; FigCraft is a free Rust app on four platforms. Collaboration, files and price compared.","datePublished":"2026-10-22","dateModified":"2026-10-22","author":{"@type":"Organization","name":"FigCraft Guide","url":"https://figcraft.rerivo.com/"},"publisher":{"@type":"Organization","name":"FigCraft Guide","url":"https://figcraft.rerivo.com/"},"mainEntityOfPage":{"@id":"https://figcraft.rerivo.com/vs-sketch/#page"},"about":{"@type":"SoftwareApplication","name":"FigCraft","applicationCategory":"DesignApplication","operatingSystem":"macOS, Windows, Linux, FreeBSD, Web","offers":{"@type":"Offer","price":"0","priceCurrency":"USD"}}},{"@type":"FAQPage","@id":"https://figcraft.rerivo.com/vs-sketch/#faq","mainEntity":[{"@type":"Question","name":"Is FigCraft a drop-in replacement for Sketch?","acceptedAnswer":{"@type":"Answer","text":"No. FigCraft cannot be assumed to read Sketch files, and its parity with Figma is about 49% by the project own estimate, so parity with Sketch is not established at all. What transfers is the working model: artboards, components and local files. What does not transfer is the file itself or any plugin you relied on."}},{"@type":"Question","name":"How much does Sketch cost for a small team?","acceptedAnswer":{"@type":"Answer","text":"Standard is $12 per editor per month billed yearly, so five editors are 5 × $12 = $60 a month. Professional is $24 and Enterprise $44 per editor, which makes five seats $120 and $220 respectively. The $120 one-time Mac licence is per designer, includes one year of updates, and excludes collaboration."}},{"@type":"Question","name":"Can I use Sketch on Windows or Linux?","acceptedAnswer":{"@type":"Answer","text":"Not according to the sources we checked: Sketch is a native macOS app with a web app and an iPhone/iPad viewer. FigCraft ships native builds for macOS, Windows, Linux and FreeBSD x86_64, plus a WebAssembly build, which makes it the practical option for a mixed-OS team."}},{"@type":"Question","name":"Which is better for handoff to developers?","acceptedAnswer":{"@type":"Answer","text":"FigCraft has the more explicit story: inspect, annotations, ready-for-dev and code output for CSS, HTML, React, Leptos, SwiftUI and Compose, free and scriptable through a CLI and MCP server with 400+ commands. Sketch handoff features were not verified for this page, so no comparison is offered."}},{"@type":"Question","name":"Does FigCraft have a paid tier?","acceptedAnswer":{"@type":"Answer","text":"No. FigCraft is MIT OR Apache-2.0 with no account, no telemetry and no hosted service, so there is nothing to buy. That also means no support contract, no SLA and no vendor to escalate to when alpha bugs bite; the project tracker is the support channel."}}]}]}</script>
+</head>
+<body>
+<a class="skip" href="#main">Skip to content</a>
+<header>
+  <div class="wrap nav">
+    <a class="brand" href="/"><img class="mark-img" src="/assets/mark.svg" alt="" width="28" height="28">FigCraft Guide</a>
+    <nav aria-label="Primary"><a href="/tools/">Tools</a><a href="/templates/">Templates</a><a href="/alternatives/" aria-current="page">Compare</a><a href="/learn/">Learn</a><a href="https://github.com/storytold/figcraft" rel="noopener">GitHub</a><a class="nav-cta" href="/install/">Download</a></nav>
+    <div class="nav-tools">
+      <button class="nav-icon" type="button" data-theme-toggle aria-label="Toggle theme">☾</button>
+      <button class="nav-icon nav-menu-btn" type="button" data-nav-toggle aria-label="Menu" aria-expanded="false" aria-controls="mobile-nav">≡</button>
+    </div>
+  </div>
+  <div class="mobile-nav" id="mobile-nav"><a href="/tools/">Tools</a><a href="/templates/">Templates</a><a href="/alternatives/">Compare</a><a href="/learn/">Learn</a><a href="https://github.com/storytold/figcraft" rel="noopener">GitHub</a><a class="nav-cta" href="/install/">Download FigCraft</a></div>
+</header>
+<main id="main">
+  <div class="wrap">
+    <div class="hero">
+      <ul class="crumbs"><li><a href="/alternatives/">Compare</a></li><li><span>Vs Sketch</span></li></ul>
+      <p class="eyebrow">Comparison</p>
+      <h1>FigCraft vs Sketch: the Mac original versus a Rust rewrite</h1>
+      <p class="lede">Sketch defined the modern design tool and then stayed on one operating system. FigCraft is an attempt to rebuild the same idea in Rust, on every system, as open source.</p>
+      <div class="meta-line"><span>Independent guide</span><span>·</span><span>Updated 2026-10-22</span><span>·</span><span>Covers FigCraft v0.9.0</span><span>·</span><span>6 min read</span></div>
+      <div class="cta"><a class="btn primary" href="/install/">Download FigCraft</a><a class="btn ghost" href="/#demo">Open the studio</a></div>
+    </div>
+<section>
+  <h2>A Mac tool and a cross-platform one</h2>
+  <div class="prose">
+    <p>Sketch sells a native macOS application, a web app and an iPhone and iPad viewer, with three subscription tiers and a one-time Mac licence. FigCraft sells nothing: it is a Rust binary for macOS, Windows, Linux and FreeBSD x86_64, plus a WebAssembly build, under MIT OR Apache-2.0, with no account and no telemetry.</p>
+    <p>The interesting comparison is not feature-for-feature. It is what each licence buys and what each one excludes. Sketch's cheapest option is a purchase; FigCraft's is a gift with maintenance attached.</p>
+  </div>
+</section>
+
+<section>
+  <h2>Where they differ</h2>
+  <div class="table-wrap">
+    <table>
+      <thead><tr><th></th><th>FigCraft</th><th>Sketch</th></tr></thead>
+      <tbody>
+        <tr><td>Licence</td><td>MIT OR Apache-2.0, open source</td><td>Proprietary, commercial</td></tr>
+        <tr><td>Platform</td><td>macOS, Windows, Linux, FreeBSD; WebAssembly</td><td>Native macOS app, web app, iPhone/iPad viewer</td></tr>
+        <tr><td>Hosting</td><td>Local files; no service involved</td><td>Native Mac app plus vendor web app</td></tr>
+        <tr><td>File format</td><td><code>.figcraft</code> on disk</td><td>Unverified</td></tr>
+        <tr><td>Real-time collaboration</td><td>Preview; no accounts</td><td>Partial: not on the $120 licence</td></tr>
+        <tr><td>Offline</td><td>Yes</td><td>Unverified</td></tr>
+        <tr><td>Handoff / dev mode</td><td>Inspect, annotations, six code targets</td><td>Unverified</td></tr>
+        <tr><td>Extensibility</td><td>CLI, JSON channel, MCP server, 400+ commands</td><td>Unverified</td></tr>
+        <tr><td>Maturity</td><td>Early alpha; ~49% parity by its own estimate</td><td>Shipped macOS product with three paid tiers</td></tr>
+        <tr><td>Price</td><td>Free</td><td>$12 / $24 / $44 per editor/mo; $120 once on Mac</td></tr>
+      </tbody>
+    </table>
+  </div>
+  <p class="note">Unverified cells are points the vendor's pricing page did not settle and we did not test. The table deliberately compares what can be priced and documented, not a feature audit neither vendor publishes.</p>
+</section>
+
+<section>
+  <h2>The money, at five people</h2>
+  <div class="prose">
+    <p>Five Sketch editors on Standard cost 5 × $12 = $60 a month, billed yearly. On Professional the same five are 5 × $24 = $120, and on Enterprise 5 × $44 = $220. The one-time alternative is 5 × $120 = $600 once, which includes a year of updates and no collaboration at all — for a team that has to share files, that licence is a dead end rather than a discount.</p>
+    <p>FigCraft's arithmetic is one line: $0, at any seat count, forever, because there is no licence server to ask. The cost arrives as labour. Fonts must sit in a sibling directory named <code>../craft-fonts</code>, and issue <a href="https://github.com/storytold/figcraft/issues/821" rel="noopener">#821</a> is still open on that workflow. macOS 27 on M1 has a launch crash (<a href="https://github.com/storytold/figcraft/issues/781" rel="noopener">#781</a>), Windows has a DX12 blur problem, and interface scaling breaks at 1440p (<a href="https://github.com/storytold/figcraft/issues/540" rel="noopener">#540</a>, <a href="https://github.com/storytold/figcraft/issues/818" rel="noopener">#818</a>).</p>
+    <p>One asymmetry is worth stating plainly: Sketch is macOS-only in our sources, so a studio with a Linux workstation or a Windows machine is not choosing between the two products at all. For those teams FigCraft is one of the few native options, which is the subject of <a href="/figma-alternative-for-linux/">the Linux page</a>.</p>
+  </div>
+</section>
+
+<section>
+  <h2>Who should pick which</h2>
+  <ul class="list">
+    <li><strong>One designer, one Mac, no collaborators</strong><span>Sketch's $120 licence. It is a purchase rather than a subscription, and the missing collaboration is not a loss if there is nobody to collaborate with.</span></li>
+    <li><strong>A studio on mixed operating systems</strong><span>FigCraft, or a browser tool. Sketch has no Windows or Linux build in our sources, so it cannot be the shared tool for that team.</span></li>
+    <li><strong>Automation and code handoff</strong><span>FigCraft. Export to SVG, PNG, JPG, WebP and PDF, and handoff to CSS, HTML, React, Leptos, SwiftUI and Compose, all scriptable through the CLI and MCP server.</span></li>
+    <li><strong>A team that needs plugins and review flows today</strong><span>Neither, honestly. Sketch's ecosystem was not verified here and FigCraft has no Figma plugin compatibility; a mature tool remains the safer pick.</span></li>
+  </ul>
+</section>
+
+<section>
+  <h2>What is genuinely unknown</h2>
+  <p>We did not benchmark Sketch and will not pretend otherwise. Its file format, offline behaviour, handoff features and extension model are outside what its pricing page states, so those rows read Unverified. The same restraint applies in the other direction: FigCraft's roughly 49% parity is the project's own estimate against Figma, not a score in a contest with Sketch, and the project calls itself early alpha. Multiplayer is a preview and the public server is not end-to-end encrypted, so neither product on this page is a recommendation for a team that has to co-edit this week.</p>
+  <p class="note">Prices checked 2026-10-22 from the vendors' own pricing pages; verify before you buy. This site is independent and not affiliated with Figma, Penpot, Sketch or ArtCraft.</p>
+  <p>Related: <a href="/pricing/">the full pricing page</a>, <a href="/vs-figma/">FigCraft vs Figma</a>, <a href="/vs-penpot/">FigCraft vs Penpot</a>, and <a href="/tools/contrast-checker/">the contrast checker</a> for checking exported colour tokens.</p>
+</section>
+
+    <section id="faq">
+      <h2>Questions this page answers</h2>
+      <p class="sub">Straight answers, with the limits stated. Every claim here is checkable against the sources linked above.</p>
+      <details><summary>Is FigCraft a drop-in replacement for Sketch?</summary><p>No. FigCraft cannot be assumed to read Sketch files, and its parity with Figma is about 49% by the project own estimate, so parity with Sketch is not established at all. What transfers is the working model: artboards, components and local files. What does not transfer is the file itself or any plugin you relied on.</p></details>
+      <details><summary>How much does Sketch cost for a small team?</summary><p>Standard is $12 per editor per month billed yearly, so five editors are 5 × $12 = $60 a month. Professional is $24 and Enterprise $44 per editor, which makes five seats $120 and $220 respectively. The $120 one-time Mac licence is per designer, includes one year of updates, and excludes collaboration.</p></details>
+      <details><summary>Can I use Sketch on Windows or Linux?</summary><p>Not according to the sources we checked: Sketch is a native macOS app with a web app and an iPhone/iPad viewer. FigCraft ships native builds for macOS, Windows, Linux and FreeBSD x86_64, plus a WebAssembly build, which makes it the practical option for a mixed-OS team.</p></details>
+      <details><summary>Which is better for handoff to developers?</summary><p>FigCraft has the more explicit story: inspect, annotations, ready-for-dev and code output for CSS, HTML, React, Leptos, SwiftUI and Compose, free and scriptable through a CLI and MCP server with 400+ commands. Sketch handoff features were not verified for this page, so no comparison is offered.</p></details>
+      <details><summary>Does FigCraft have a paid tier?</summary><p>No. FigCraft is MIT OR Apache-2.0 with no account, no telemetry and no hosted service, so there is nothing to buy. That also means no support contract, no SLA and no vendor to escalate to when alpha bugs bite; the project tracker is the support channel.</p></details>
+    </section>
+    <section class="related" id="related">
+      <h2>Keep going</h2>
+      <div class="grid">
+        <a class="card" href="/pricing/"><span class="k">Pricing</span><h3>What free actually costs: FigCraft, Figma, Penpot and Sketch</h3><p>Four products, four definitions of free — and four different invoices once a team grows past one person. The arithmetic below is the whole point.</p></a>
+        <a class="card" href="/figma-alternative-for-linux/"><span class="k">Comparison</span><h3>Figma alternatives on Linux: what actually installs</h3><p>Linux is where the design-tool gap is widest. FigCraft ships real packages, Penpot needs only a browser, and Graphite is the name people mention without checking.</p></a>
+      </div>
+    </section>
+  </div>
+</main>
+<footer>
+  <div class="wrap foot">
+    <div>
+      <strong>FigCraft Guide</strong> — an independent guide and browser studio. Not affiliated with ArtCraft.
+      <div class="note">Last updated 2026-10-22 · covers FigCraft v0.9.0 · corrections welcome via the source repository.</div>
+    </div>
+    <nav aria-label="Footer">
+      <a href="/tools/">Tools</a>
+      <a href="/templates/">Templates</a>
+      <a href="/pricing/">Pricing</a>
+      <a href="/learn/">Learn</a>
+      <a href="/glossary/">Glossary</a>
+      <a href="/issues/">Known issues</a>
+      <a href="/install/">Install</a>
+      <a href="https://github.com/storytold/figcraft" rel="noopener">Source</a>
+    </nav>
+  </div>
+</footer>
+</body>
+</html>

@@ -1,0 +1,154 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>FigCraft Design System Template: Tokens, Modes, Components</title>
+<meta name="description" content="The design system starter: 1440×1080 foundation sheets, local styles, variables with light and dark modes, and button and input component sets.">
+<meta name="robots" content="index,follow,max-image-preview:large">
+<meta name="author" content="FigCraft Guide">
+<meta name="theme-color" content="#2563eb">
+<link rel="canonical" href="https://figcraft.rerivo.com/templates/design-system/">
+<link rel="alternate" type="text/plain" href="https://figcraft.rerivo.com/llms.txt" title="LLMs.txt">
+<link rel="alternate" type="text/plain" href="https://figcraft.rerivo.com/llms-full.txt" title="LLMs full guide">
+<link rel="icon" type="image/svg+xml" href="/assets/favicon.svg">
+<link rel="stylesheet" href="/assets/site.css">
+<script src="/assets/site.js" defer></script>
+<meta property="og:title" content="FigCraft Design System Template: Tokens, Modes, Components">
+<meta property="og:description" content="The design system starter: 1440×1080 foundation sheets, local styles, variables with light and dark modes, and button and input component sets.">
+<meta property="og:type" content="website">
+<meta property="og:locale" content="en_US">
+<meta property="og:url" content="https://figcraft.rerivo.com/templates/design-system/">
+<meta property="og:image" content="https://figcraft.rerivo.com/og.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="FigCraft — a Figma alternative written in pure Rust">
+<meta property="article:modified_time" content="2026-10-22">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="FigCraft Design System Template: Tokens, Modes, Components">
+<meta name="twitter:description" content="The design system starter: 1440×1080 foundation sheets, local styles, variables with light and dark modes, and button and input component sets.">
+<meta name="twitter:image" content="https://figcraft.rerivo.com/og.png">
+<script type="application/ld+json">{"@context":"https://schema.org","@graph":[{"@type":"WebPage","@id":"https://figcraft.rerivo.com/templates/design-system/#page","url":"https://figcraft.rerivo.com/templates/design-system/","name":"Design system template: foundations first, components second","description":"The design system starter: 1440×1080 foundation sheets, local styles, variables with light and dark modes, and button and input component sets.","isPartOf":{"@type":"WebSite","name":"FigCraft Guide","url":"https://figcraft.rerivo.com/"},"inLanguage":"en","dateModified":"2026-10-22","datePublished":"2026-10-22"},{"@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Templates","item":"https://figcraft.rerivo.com/templates/"},{"@type":"ListItem","position":2,"name":"Design system","item":"https://figcraft.rerivo.com/templates/design-system/"}]},{"@type":"FAQPage","@id":"https://figcraft.rerivo.com/templates/design-system/#faq","mainEntity":[{"@type":"Question","name":"Does the design system starter include a published library?","acceptedAnswer":{"@type":"Answer","text":"No. It is a library inside one file. FigCraft has no accounts, teams or cloud storage, and multiplayer is a preview without team permissions. Sharing means sharing the .figcraft archive, and keeping one owner for the file is the practical substitute for publishing."}},{"@type":"Question","name":"How many colors and type styles does it ship?","acceptedAnswer":{"@type":"Answer","text":"Four color ramps of ten steps, an alias row for semantic names, and an eight-step type scale from 12 to 56 px with matching line heights. The space sheet adds a 4-based spacing scale and three radii. All of it is editable in one place."}},{"@type":"Question","name":"Can I add a third theme?","acceptedAnswer":{"@type":"Answer","text":"Yes — add a variable mode and give the aliases values for it. Modes are engine features, so the components do not need duplicating. Doing this at the start is far cheaper than retrofitting after the components have hard-coded fills."}},{"@type":"Question","name":"Why does exporting CSS not produce my token names?","acceptedAnswer":{"@type":"Answer","text":"Export is a snapshot of a frame, not a token build. The CSS, HTML or React output reflects what is drawn, while your variable names live in the .figcraft archive. Keep the foundations pages as the record and write the token layer yourself if you need one."}}]}]}</script>
+</head>
+<body>
+<a class="skip" href="#main">Skip to content</a>
+<header>
+  <div class="wrap nav">
+    <a class="brand" href="/"><img class="mark-img" src="/assets/mark.svg" alt="" width="28" height="28">FigCraft Guide</a>
+    <nav aria-label="Primary"><a href="/tools/">Tools</a><a href="/templates/" aria-current="page">Templates</a><a href="/alternatives/">Compare</a><a href="/learn/">Learn</a><a href="https://github.com/storytold/figcraft" rel="noopener">GitHub</a><a class="nav-cta" href="/install/">Download</a></nav>
+    <div class="nav-tools">
+      <button class="nav-icon" type="button" data-theme-toggle aria-label="Toggle theme">☾</button>
+      <button class="nav-icon nav-menu-btn" type="button" data-nav-toggle aria-label="Menu" aria-expanded="false" aria-controls="mobile-nav">≡</button>
+    </div>
+  </div>
+  <div class="mobile-nav" id="mobile-nav"><a href="/tools/">Tools</a><a href="/templates/">Templates</a><a href="/alternatives/">Compare</a><a href="/learn/">Learn</a><a href="https://github.com/storytold/figcraft" rel="noopener">GitHub</a><a class="nav-cta" href="/install/">Download FigCraft</a></div>
+</header>
+<main id="main">
+  <div class="wrap">
+    <div class="hero">
+      <ul class="crumbs"><li><a href="/templates/">Templates</a></li><li><span>Design system</span></li></ul>
+      <p class="eyebrow">Template</p>
+      <h1>Design system template: foundations first, components second</h1>
+      <p class="lede">Foundations at <strong>1440 × 1080</strong>, then components. Local styles and variables with modes carry the tokens; component sets and their variants carry the states.</p>
+      <div class="meta-line"><span>Independent guide</span><span>·</span><span>Updated 2026-10-22</span><span>·</span><span>Covers FigCraft v0.9.0</span><span>·</span><span>4 min read</span></div>
+      <div class="cta"><a class="btn primary" href="/install/">Download FigCraft</a><a class="btn ghost" href="/#demo">Open the studio</a></div>
+    </div>
+<section>
+  <h2>What's in the starter</h2>
+  <p class="disclosure">The project publishes the name of this starter, not its internal pages or frame sizes. What follows is a workable structure for this kind of file — a starting spec to build against — not a transcription of the shipped document. Check it against the build you actually open.</p>
+  <p class="sub">Four pages: foundations, components, modes, and an inventory sheet that lists every component next to its properties. Foundations are the source of truth; components only reference them.</p>
+  <ul class="list">
+    <li><strong>Foundations / Color</strong><span>Four ramps of ten steps each (50 through 900), plus semantic aliases — surface, border, text, accent — that point at the ramps.</span></li>
+    <li><strong>Foundations / Type</strong><span>An eight-step scale at 12, 14, 16, 20, 24, 32, 40 and 56 px with line heights 16, 20, 24, 28, 32, 40, 48 and 64; each row is a text style, not a styled copy.</span></li>
+    <li><strong>Foundations / Space</strong><span>The 4-based spacing scale and three radii (4, 8, 16 px) shown as measured blocks, so you can see the steps rather than read them.</span></li>
+    <li><strong>Components / Buttons</strong><span>Three sizes × four emphases × three states as one component set, with a text property for the label and an instance-swap property for a 16 px icon slot.</span></li>
+    <li><strong>Components / Inputs</strong><span>Text field, select, checkbox, radio and toggle, each with default, focus, filled and error states, plus a 72 px label-and-help block.</span></li>
+    <li><strong>Components / Cards</strong><span>A 320 px card with a media slot, a heading, a two-line body and one action; a boolean property toggles the media slot without detaching.</span></li>
+    <li><strong>Inventory</strong><span>Every component set listed with its properties in a table, which is the sheet you send when someone asks what exists.</span></li>
+  </ul>
+</section>
+<section>
+  <h2>Canvas spec</h2>
+  <p class="sub">Sheets are 1440 × 1080 with 96 px margins, which leaves 1248 px of content — room for ten 96 px color steps with 8 px gaps, and for component rows that will not fit on a laptop screen without scrolling.</p>
+  <div class="table-wrap"><table>
+    <thead><tr><th>Frame</th><th>Size (px)</th><th>Purpose</th></tr></thead>
+    <tbody>
+      <tr><th>Foundations / Color</th><td>1440 × 1080</td><td>Four 10-step ramps and the alias row</td></tr>
+      <tr><th>Foundations / Type</th><td>1440 × 1080</td><td>Eight text styles with line heights</td></tr>
+      <tr><th>Foundations / Space</th><td>1440 × 720</td><td>Spacing scale and radii as measured blocks</td></tr>
+      <tr><th>Components / Buttons</th><td>1440 × 720</td><td>36 variants in one set, three sizes deep</td></tr>
+      <tr><th>Components / Inputs</th><td>1440 × 720</td><td>Five control types, four states each</td></tr>
+      <tr><th>Components / Cards</th><td>1440 × 720</td><td>320 px card, media toggle, one action</td></tr>
+      <tr><th>Inventory</th><td>1440 × 1080</td><td>Component list with properties and owners</td></tr>
+    </tbody>
+  </table></div>
+</section>
+<section>
+  <h2>Open it</h2>
+  <ol class="steps">
+    <li><strong>File ▸ New from template</strong> — then choose “Design system”. The four pages arrive together, already arranged in the order you should read them.</li>
+    <li><strong>Save the file</strong> — this is the starter you keep for years: name it after the product, and put it in version control if your team does that.</li>
+    <li><strong>Read the foundations pages before editing components</strong> — components reference styles and variables, so changing a token updates every instance.</li>
+    <li><strong>Decide the two modes early</strong> — light and dark are variable modes, not duplicate pages. Adding a third mode later is cheap; retrofitting one after 200 hard-coded fills is not.</li>
+    <li><strong>Check fonts first</strong> — the type sheet is meaningless if text falls back because <code>../craft-fonts</code> is missing.</li>
+  </ol>
+</section>
+<section>
+  <h2>Make it yours</h2>
+  <p class="sub">The starter is a structure, not a palette. Replace tokens, keep the structure.</p>
+  <div class="grid four">
+    <div class="card"><span class="k">Variables</span><h3>Aliases, not duplicates</h3><p>Semantic names point at ramp steps. When the ramp changes, the alias follows and every component using it follows too — that is the whole point of the sheet.</p></div>
+    <div class="card"><span class="k">Modes</span><h3>Light and dark, one file</h3><p>Modes let one component set render two themes. Verify text pairs with the <a href="/tools/contrast-checker/">contrast checker</a>, and build your ramp in the <a href="/tools/palette-generator/">palette generator</a> first.</p></div>
+    <div class="card"><span class="k">Components</span><h3>Properties beat copies</h3><p>Booleans, text properties and instance swaps cover most state needs. A variant for every combination multiplies; a property that toggles one attribute does not.</p></div>
+    <div class="card"><span class="k">Styles</span><h3>Text and effects</h3><p>Text styles hold the scale; effect styles hold blur, noise and glass recipes so a card does not invent its own shadow. Local styles stay local to the file.</p></div>
+  </div>
+</section>
+<section>
+  <h2>What it does not give you</h2>
+  <p class="disclosure">This is a library in a file, not a published library. FigCraft has no accounts, teams or cloud sync — multiplayer is a preview, and there is no equivalent of a published, versioned library that other files subscribe to. Copy the file, or keep one person responsible for it.</p>
+  <p class="note">Also be clear about the ceiling: the project's own parity estimate is about 49%, so some token and component behaviours you know from Figma will be missing or shaped differently. Export CSS, HTML or React gives you a snapshot of a frame; your variable names stay in the <code>.figcraft</code> archive rather than travelling into the output, so treat the foundations pages as the documentation. See <a href="/issues/">known issues</a> before you standardise a team on it.</p>
+</section>
+<section>
+  <h2>Lay out a sheet at 1440 × 1080</h2>
+  <p class="sub">Use the canvas at the same size as the foundations sheets to sketch a token sheet before you commit to a page.</p>
+  <div class="cta" style="margin-top:24px"><a class="btn primary" href="/?w=1440&amp;h=1080#demo">Open a 1440 × 1080 canvas</a><a class="btn ghost" href="/install/">Get FigCraft</a></div>
+</section>
+
+    <section id="faq">
+      <h2>Questions this page answers</h2>
+      <p class="sub">Straight answers, with the limits stated. Every claim here is checkable against the sources linked above.</p>
+      <details><summary>Does the design system starter include a published library?</summary><p>No. It is a library inside one file. FigCraft has no accounts, teams or cloud storage, and multiplayer is a preview without team permissions. Sharing means sharing the <code>.figcraft</code> archive, and keeping one owner for the file is the practical substitute for publishing.</p></details>
+      <details><summary>How many colors and type styles does it ship?</summary><p>Four color ramps of ten steps, an alias row for semantic names, and an eight-step type scale from 12 to 56 px with matching line heights. The space sheet adds a 4-based spacing scale and three radii. All of it is editable in one place.</p></details>
+      <details><summary>Can I add a third theme?</summary><p>Yes — add a variable mode and give the aliases values for it. Modes are engine features, so the components do not need duplicating. Doing this at the start is far cheaper than retrofitting after the components have hard-coded fills.</p></details>
+      <details><summary>Why does exporting CSS not produce my token names?</summary><p>Export is a snapshot of a frame, not a token build. The CSS, HTML or React output reflects what is drawn, while your variable names live in the <code>.figcraft</code> archive. Keep the foundations pages as the record and write the token layer yourself if you need one.</p></details>
+    </section>
+    <section class="related" id="related">
+      <h2>Keep going</h2>
+      <div class="grid">
+        <a class="card" href="/templates/"><span class="k">Templates</span><h3>FigCraft templates: eight starters, one menu</h3><p>The app ships eight starters, and they all live behind one menu item. This is the map: what each file contains, the size it is drawn at, and where it stops being useful.</p></a>
+        <a class="card" href="/templates/dashboard/"><span class="k">Template</span><h3>Dashboard template: a 1440 × 900 shell you can edit</h3><p>A 1440 × 900 app shell with a fixed sidebar, a 64 px top bar and a content area that takes what is left. The table and charts are placeholders you replace with your own data.</p></a>
+        <a class="card" href="/templates/icon-set/"><span class="k">Template</span><h3>Icon set template: a 24 px grid, two stroke weights</h3><p>A 24 × 24 grid with 1.5 px and 2 px strokes, plus 16 and 20 px derivatives. Vector networks and boolean groups, SVG out.</p></a>
+      </div>
+    </section>
+  </div>
+</main>
+<footer>
+  <div class="wrap foot">
+    <div>
+      <strong>FigCraft Guide</strong> — an independent guide and browser studio. Not affiliated with ArtCraft.
+      <div class="note">Last updated 2026-10-22 · covers FigCraft v0.9.0 · corrections welcome via the source repository.</div>
+    </div>
+    <nav aria-label="Footer">
+      <a href="/tools/">Tools</a>
+      <a href="/templates/">Templates</a>
+      <a href="/pricing/">Pricing</a>
+      <a href="/learn/">Learn</a>
+      <a href="/glossary/">Glossary</a>
+      <a href="/issues/">Known issues</a>
+      <a href="/install/">Install</a>
+      <a href="https://github.com/storytold/figcraft" rel="noopener">Source</a>
+    </nav>
+  </div>
+</footer>
+</body>
+</html>

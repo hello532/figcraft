@@ -1,0 +1,168 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Colour Palette Generator — 11-Step Ramp, CSS &amp; Tailwind</title>
+<meta name="description" content="Turn one base colour into an 11-step 50–950 ramp in OKLCH. Copy CSS variables, Tailwind config, SCSS or JSON. No signup, runs locally.">
+<meta name="robots" content="index,follow,max-image-preview:large">
+<meta name="author" content="FigCraft Guide">
+<meta name="theme-color" content="#2563eb">
+<link rel="canonical" href="https://figcraft.rerivo.com/tools/palette-generator/">
+<link rel="alternate" type="text/plain" href="https://figcraft.rerivo.com/llms.txt" title="LLMs.txt">
+<link rel="alternate" type="text/plain" href="https://figcraft.rerivo.com/llms-full.txt" title="LLMs full guide">
+<link rel="icon" type="image/svg+xml" href="/assets/favicon.svg">
+<link rel="stylesheet" href="/assets/site.css">
+<script src="/assets/site.js" defer></script>
+<script type="module" src="/assets/tools/palette.js" defer></script>
+<meta property="og:title" content="Colour Palette Generator — 11-Step Ramp, CSS &amp; Tailwind">
+<meta property="og:description" content="Turn one base colour into an 11-step 50–950 ramp in OKLCH. Copy CSS variables, Tailwind config, SCSS or JSON. No signup, runs locally.">
+<meta property="og:type" content="website">
+<meta property="og:locale" content="en_US">
+<meta property="og:url" content="https://figcraft.rerivo.com/tools/palette-generator/">
+<meta property="og:image" content="https://figcraft.rerivo.com/og.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="FigCraft — a Figma alternative written in pure Rust">
+<meta property="article:modified_time" content="2026-10-22">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Colour Palette Generator — 11-Step Ramp, CSS &amp; Tailwind">
+<meta name="twitter:description" content="Turn one base colour into an 11-step 50–950 ramp in OKLCH. Copy CSS variables, Tailwind config, SCSS or JSON. No signup, runs locally.">
+<meta name="twitter:image" content="https://figcraft.rerivo.com/og.png">
+<script type="application/ld+json">{"@context":"https://schema.org","@graph":[{"@type":"WebPage","@id":"https://figcraft.rerivo.com/tools/palette-generator/#page","url":"https://figcraft.rerivo.com/tools/palette-generator/","name":"Palette generator: one colour in, eleven steps out","description":"Turn one base colour into an 11-step 50–950 ramp in OKLCH. Copy CSS variables, Tailwind config, SCSS or JSON. No signup, runs locally.","isPartOf":{"@type":"WebSite","name":"FigCraft Guide","url":"https://figcraft.rerivo.com/"},"inLanguage":"en","dateModified":"2026-10-22","datePublished":"2026-10-22"},{"@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Tools","item":"https://figcraft.rerivo.com/tools/"},{"@type":"ListItem","position":2,"name":"Palette generator","item":"https://figcraft.rerivo.com/tools/palette-generator/"}]},{"@type":"WebApplication","@id":"https://figcraft.rerivo.com/tools/palette-generator/#app","name":"Palette generator: one colour in, eleven steps out","url":"https://figcraft.rerivo.com/tools/palette-generator/","applicationCategory":"DesignApplication","operatingSystem":"Any (browser)","browserRequirements":"Requires JavaScript","isAccessibleForFree":true,"offers":{"@type":"Offer","price":"0","priceCurrency":"USD"},"description":"OKLCH-based 11-step colour ramp generator exporting CSS variables, Tailwind config, SCSS and JSON.","publisher":{"@type":"Organization","name":"FigCraft Guide","url":"https://figcraft.rerivo.com/"}},{"@type":"FAQPage","@id":"https://figcraft.rerivo.com/tools/palette-generator/#faq","mainEntity":[{"@type":"Question","name":"Why eleven steps and not five?","acceptedAnswer":{"@type":"Answer","text":"Eleven is enough to cover surfaces, borders, text and accents without inventing one-off shades, and it matches the 50–950 convention most Tailwind-based systems already use. Fewer steps forces compromises at the extremes; more steps invites near-duplicates."}},{"@type":"Question","name":"Does the base colour appear exactly in the ramp?","acceptedAnswer":{"@type":"Answer","text":"Not always. The base sets the hue and the chroma scale, and the nearest step is usually within a few percent of it. If you need the exact brand hex, keep it as a separate token and treat the ramp as the scale around it."}},{"@type":"Question","name":"Can I get the same ramp in Figma or Penpot?","acceptedAnswer":{"@type":"Answer","text":"Yes — copy the hex list. The output is plain sRGB, so it pastes into any tool. In FigCraft the values map onto local styles and variables; in Penpot they map onto colour assets."}},{"@type":"Question","name":"Why do two steps look closer than others?","acceptedAnswer":{"@type":"Answer","text":"Perceptual lightness is not linear in hex values. The 50–200 range covers a small numeric span but a large visual one near white. The steps are even in OKLCH L, not in RGB."}}]}]}</script>
+</head>
+<body>
+<a class="skip" href="#main">Skip to content</a>
+<header>
+  <div class="wrap nav">
+    <a class="brand" href="/"><img class="mark-img" src="/assets/mark.svg" alt="" width="28" height="28">FigCraft Guide</a>
+    <nav aria-label="Primary"><a href="/tools/" aria-current="page">Tools</a><a href="/templates/">Templates</a><a href="/alternatives/">Compare</a><a href="/learn/">Learn</a><a href="https://github.com/storytold/figcraft" rel="noopener">GitHub</a><a class="nav-cta" href="/install/">Download</a></nav>
+    <div class="nav-tools">
+      <button class="nav-icon" type="button" data-theme-toggle aria-label="Toggle theme">☾</button>
+      <button class="nav-icon nav-menu-btn" type="button" data-nav-toggle aria-label="Menu" aria-expanded="false" aria-controls="mobile-nav">≡</button>
+    </div>
+  </div>
+  <div class="mobile-nav" id="mobile-nav"><a href="/tools/">Tools</a><a href="/templates/">Templates</a><a href="/alternatives/">Compare</a><a href="/learn/">Learn</a><a href="https://github.com/storytold/figcraft" rel="noopener">GitHub</a><a class="nav-cta" href="/install/">Download FigCraft</a></div>
+</header>
+<main id="main">
+  <div class="wrap">
+    <div class="hero">
+      <ul class="crumbs"><li><a href="/tools/">Tools</a></li><li><span>Palette generator</span></li></ul>
+      <p class="eyebrow">Free tool</p>
+      <h1>Palette generator: one colour in, eleven steps out</h1>
+      <p class="lede">Give it a brand colour. It holds the hue, walks lightness in even perceptual steps, and gives you a named ramp you can paste into CSS variables, a Tailwind config or FigCraft local styles.</p>
+      <div class="meta-line"><span>Independent guide</span><span>·</span><span>Updated 2026-10-22</span><span>·</span><span>Covers FigCraft v0.9.0</span><span>·</span><span>5 min read</span></div>
+      <div class="cta"><a class="btn primary" href="/#demo">Open the studio</a><a class="btn ghost" href="/tools/contrast-checker/">Check contrast</a></div>
+    </div>
+
+      <section id="generate">
+        <div class="tool">
+          <div class="tool-head"><h2>Palette generator</h2><span class="hint">OKLCH · 11 steps · runs locally</span></div>
+          <div class="tool-body tool-grid">
+            <form class="tool-form" autocomplete="off" onsubmit="return false">
+              <div class="field">
+                <label for="pl-base">Base colour</label>
+                <div class="row"><input type="color" id="pl-pick" value="#2563EB" aria-label="Pick base colour"><input type="text" id="pl-base" value="#2563EB" spellcheck="false" aria-label="Base colour hex"></div>
+              </div>
+              <div class="field">
+                <label for="pl-name">Token name</label>
+                <input type="text" id="pl-name" value="brand" spellcheck="false" aria-label="Token name">
+              </div>
+              <div class="field">
+                <label for="pl-format">Export format</label>
+                <select id="pl-format">
+                  <option value="css">CSS custom properties</option>
+                  <option value="tailwind">Tailwind theme</option>
+                  <option value="scss">SCSS variables</option>
+                  <option value="json">JSON tokens</option>
+                </select>
+              </div>
+              <div class="btn-row">
+                <button class="btn ghost sm" type="button" id="pl-sample">Try another colour</button>
+                <button class="btn ghost sm" type="button" id="pl-share" data-share>Share result</button>
+              </div>
+              <p class="status" id="pl-status"></p>
+            </form>
+            <div class="result">
+              <div class="swatches" id="pl-swatches"></div>
+              <pre><code id="pl-code" style="display:block;white-space:pre-wrap"></code></pre>
+              <p class="note">Click a swatch to copy its hex. The ramp updates as you type; the URL keeps the base colour and token name.</p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section id="oklch">
+        <h2>Why OKLCH instead of HSL</h2>
+        <p class="sub">HSL lightness is not perceptual. Two HSL colours with the same <code>L</code> can look wildly different in brightness — pure yellow at 50% is far lighter than pure blue at 50%. A ramp built in HSL produces uneven steps and a muddy middle.</p>
+        <div class="prose">
+          <p>OKLCH splits a colour into perceptual lightness (<code>L</code>), chroma (<code>C</code>) and hue (<code>h</code>). Changing only <code>L</code> keeps the hue and the "colourfulness" feeling constant, which is exactly what a design-system ramp needs.</p>
+          <ul>
+            <li><strong>Hue is held constant</strong> — the 11 steps are one colour family, not a gradient that drifts toward grey or purple.</li>
+            <li><strong>Chroma tapers at the ends</strong> — near white and near black there is less room for saturation. Each step's chroma is scaled down as it moves away from the base lightness, so 50 and 950 do not turn into muddy pastels.</li>
+            <li><strong>Out-of-gamut colours lose chroma, not hue</strong> — if a step cannot be shown in sRGB, the generator reduces chroma until it fits instead of clipping a channel and shifting the hue.</li>
+          </ul>
+        </div>
+      </section>
+
+      <section id="use">
+        <h2>Using the ramp in a file</h2>
+        <ol class="steps">
+          <li><strong>Pick the base.</strong> Start from your brand colour rather than a mid-grey; the generator will place it near its natural lightness in the ramp.</li>
+          <li><strong>Copy the output.</strong> CSS for a stylesheet, Tailwind for a config, SCSS for a legacy build, JSON for a token pipeline.</li>
+          <li><strong>Name the steps, not the jobs.</strong> <code>brand-600</code> survives a redesign; <code>brand-button</code> does not. Semantic names belong in a second layer that points at ramp steps.</li>
+          <li><strong>Check the pairs you will ship.</strong> A ramp is not an accessibility pass. Run the text/background pairs through the <a href="/tools/contrast-checker/">contrast checker</a> before you commit tokens.</li>
+        </ol>
+        <p class="note">In FigCraft, local styles and variables take these values directly: one variable per step, modes for light and dark. The app is early alpha, so verify that variables round-trip through export before you depend on it for a team library.</p>
+      </section>
+
+      <section id="limits">
+        <h2>What the generator does not decide</h2>
+        <ul class="list">
+          <li><strong>Semantic colours</strong><span>Success, warning and danger need their own hues. Deriving them from the brand ramp produces reds that read as brown and greens that read as teal.</span></li>
+          <li><strong>Dark-mode inversion</strong><span>A 950 step is not automatically the dark-mode version of 50. Dark themes usually need their own lightness targets and slightly lower chroma.</span></li>
+          <li><strong>Contrast guarantees</strong><span>Steps are perceptual, not compliance-checked. 600-on-50 passes far more often than 500-on-100, but the pair is what counts.</span></li>
+          <li><strong>Print and wide-gamut</strong><span>The output is sRGB hex. P3 or CMYK work needs a colour-managed pipeline.</span></li>
+        </ul>
+      </section>
+    
+
+    <section id="faq">
+      <h2>Questions this page answers</h2>
+      <p class="sub">Straight answers, with the limits stated. Every claim here is checkable against the sources linked above.</p>
+      <details><summary>Why eleven steps and not five?</summary><p>Eleven is enough to cover surfaces, borders, text and accents without inventing one-off shades, and it matches the 50–950 convention most Tailwind-based systems already use. Fewer steps forces compromises at the extremes; more steps invites near-duplicates.</p></details>
+      <details><summary>Does the base colour appear exactly in the ramp?</summary><p>Not always. The base sets the hue and the chroma scale, and the nearest step is usually within a few percent of it. If you need the exact brand hex, keep it as a separate token and treat the ramp as the scale around it.</p></details>
+      <details><summary>Can I get the same ramp in Figma or Penpot?</summary><p>Yes — copy the hex list. The output is plain sRGB, so it pastes into any tool. In FigCraft the values map onto local styles and variables; in Penpot they map onto colour assets.</p></details>
+      <details><summary>Why do two steps look closer than others?</summary><p>Perceptual lightness is not linear in hex values. The 50–200 range covers a small numeric span but a large visual one near white. The steps are even in OKLCH L, not in RGB.</p></details>
+    </section>
+    <section class="related" id="related">
+      <h2>Keep going</h2>
+      <div class="grid">
+        <a class="card" href="/tools/contrast-checker/"><span class="k">Free tool</span><h3>Contrast checker with a fix, not just a verdict</h3><p>Paste two colours and see the exact WCAG 2.2 ratio, which levels pass, and the closest colour that would pass while keeping the hue and saturation. Everything runs in this page.</p></a>
+        <a class="card" href="/tools/svg-minifier/"><span class="k">Free tool</span><h3>SVG minifier that leaves your references alone</h3><p>Design tools export SVG with an XML declaration, editor namespaces, metadata blocks and four decimal places. This strips the overhead and reports exactly what it removed — without touching ids, text content or gradient references.</p></a>
+        <a class="card" href="/tools/screen-sizes/"><span class="k">Free tool</span><h3>Screen sizes, in CSS pixels, with the queries attached</h3><p>A working sheet of logical viewport sizes and breakpoints. Copy a size, copy the media query, or open the canvas studio at that exact size and start drawing.</p></a>
+        <a class="card" href="/templates/design-system/"><span class="k">Template</span><h3>Design system template: foundations first, components second</h3><p>Foundations at 1440 × 1080, then components. Local styles and variables with modes carry the tokens; component sets and their variants carry the states.</p></a>
+      </div>
+    </section>
+  </div>
+</main>
+<footer>
+  <div class="wrap foot">
+    <div>
+      <strong>FigCraft Guide</strong> — an independent guide and browser studio. Not affiliated with ArtCraft.
+      <div class="note">Last updated 2026-10-22 · covers FigCraft v0.9.0 · corrections welcome via the source repository.</div>
+    </div>
+    <nav aria-label="Footer">
+      <a href="/tools/">Tools</a>
+      <a href="/templates/">Templates</a>
+      <a href="/pricing/">Pricing</a>
+      <a href="/learn/">Learn</a>
+      <a href="/glossary/">Glossary</a>
+      <a href="/issues/">Known issues</a>
+      <a href="/install/">Install</a>
+      <a href="https://github.com/storytold/figcraft" rel="noopener">Source</a>
+    </nav>
+  </div>
+</footer>
+</body>
+</html>

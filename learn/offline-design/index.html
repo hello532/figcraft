@@ -1,0 +1,155 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Designing Offline in FigCraft: Local Files, No Account</title>
+<meta name="description" content="How FigCraft's offline model works: .figcraft files on disk, no account or telemetry, the optional local collaboration server, and the backup duty you take on.">
+<meta name="robots" content="index,follow,max-image-preview:large">
+<meta name="author" content="FigCraft Guide">
+<meta name="theme-color" content="#2563eb">
+<link rel="canonical" href="https://figcraft.rerivo.com/learn/offline-design/">
+<link rel="alternate" type="text/plain" href="https://figcraft.rerivo.com/llms.txt" title="LLMs.txt">
+<link rel="alternate" type="text/plain" href="https://figcraft.rerivo.com/llms-full.txt" title="LLMs full guide">
+<link rel="icon" type="image/svg+xml" href="/assets/favicon.svg">
+<link rel="stylesheet" href="/assets/site.css">
+<script src="/assets/site.js" defer></script>
+<meta property="og:title" content="Designing Offline in FigCraft: Local Files, No Account">
+<meta property="og:description" content="How FigCraft's offline model works: .figcraft files on disk, no account or telemetry, the optional local collaboration server, and the backup duty you take on.">
+<meta property="og:type" content="website">
+<meta property="og:locale" content="en_US">
+<meta property="og:url" content="https://figcraft.rerivo.com/learn/offline-design/">
+<meta property="og:image" content="https://figcraft.rerivo.com/og.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="FigCraft — a Figma alternative written in pure Rust">
+<meta property="article:modified_time" content="2026-10-22">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Designing Offline in FigCraft: Local Files, No Account">
+<meta name="twitter:description" content="How FigCraft's offline model works: .figcraft files on disk, no account or telemetry, the optional local collaboration server, and the backup duty you take on.">
+<meta name="twitter:image" content="https://figcraft.rerivo.com/og.png">
+<script type="application/ld+json">{"@context":"https://schema.org","@graph":[{"@type":"WebPage","@id":"https://figcraft.rerivo.com/learn/offline-design/#page","url":"https://figcraft.rerivo.com/learn/offline-design/","name":"Designing offline with FigCraft","description":"How FigCraft's offline model works: .figcraft files on disk, no account or telemetry, the optional local collaboration server, and the backup duty you take on.","isPartOf":{"@type":"WebSite","name":"FigCraft Guide","url":"https://figcraft.rerivo.com/"},"inLanguage":"en","dateModified":"2026-10-22","datePublished":"2026-10-22"},{"@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Learn","item":"https://figcraft.rerivo.com/learn/"},{"@type":"ListItem","position":2,"name":"Design offline","item":"https://figcraft.rerivo.com/learn/offline-design/"}]},{"@type":"Article","@id":"https://figcraft.rerivo.com/learn/offline-design/#article","headline":"Designing offline with FigCraft","description":"How FigCraft's offline model works: .figcraft files on disk, no account or telemetry, the optional local collaboration server, and the backup duty you take on.","datePublished":"2026-10-22","dateModified":"2026-10-22","author":{"@type":"Organization","name":"FigCraft Guide","url":"https://figcraft.rerivo.com/"},"publisher":{"@type":"Organization","name":"FigCraft Guide","url":"https://figcraft.rerivo.com/"},"mainEntityOfPage":{"@id":"https://figcraft.rerivo.com/learn/offline-design/#page"},"about":{"@type":"SoftwareApplication","name":"FigCraft","applicationCategory":"DesignApplication","operatingSystem":"macOS, Windows, Linux, FreeBSD, Web","offers":{"@type":"Offer","price":"0","priceCurrency":"USD"}}},{"@type":"FAQPage","@id":"https://figcraft.rerivo.com/learn/offline-design/#faq","mainEntity":[{"@type":"Question","name":"Does FigCraft work offline?","acceptedAnswer":{"@type":"Answer","text":"Yes, by design. Documents are .figcraft archives on your disk, there is no account and no telemetry, and nothing leaves the machine unless you explicitly share it or join a live session."}},{"@type":"Question","name":"Where are my files stored?","acceptedAnswer":{"@type":"Answer","text":"Wherever you saved them: a .figcraft archive on the local filesystem. There is no server-side copy, so the file you saved is the only copy unless you make another."}},{"@type":"Question","name":"Does FigCraft have cloud sync or version history?","acceptedAnswer":{"@type":"Answer","text":"No cloud and no accounts. Undo history lives in the session, and the practical substitute for cloud history is putting the .figcraft file in git and keeping an off-machine backup."}},{"@type":"Question","name":"Is the collaboration server private?","acceptedAnswer":{"@type":"Answer","text":"Only as private as where you run it. figcraft-server is optional and self-hostable; live sessions are a preview with no accounts or teams, and the public server is not end-to-end encrypted."}},{"@type":"Question","name":"Can I open the same file on macOS and Linux?","acceptedAnswer":{"@type":"Answer","text":"Yes. The native format is the same and builds exist for macOS, Windows, Linux and FreeBSD. Fonts are the caveat: they come from the machine, so install the same families on both."}}]}]}</script>
+</head>
+<body>
+<a class="skip" href="#main">Skip to content</a>
+<header>
+  <div class="wrap nav">
+    <a class="brand" href="/"><img class="mark-img" src="/assets/mark.svg" alt="" width="28" height="28">FigCraft Guide</a>
+    <nav aria-label="Primary"><a href="/tools/">Tools</a><a href="/templates/">Templates</a><a href="/alternatives/">Compare</a><a href="/learn/" aria-current="page">Learn</a><a href="https://github.com/storytold/figcraft" rel="noopener">GitHub</a><a class="nav-cta" href="/install/">Download</a></nav>
+    <div class="nav-tools">
+      <button class="nav-icon" type="button" data-theme-toggle aria-label="Toggle theme">☾</button>
+      <button class="nav-icon nav-menu-btn" type="button" data-nav-toggle aria-label="Menu" aria-expanded="false" aria-controls="mobile-nav">≡</button>
+    </div>
+  </div>
+  <div class="mobile-nav" id="mobile-nav"><a href="/tools/">Tools</a><a href="/templates/">Templates</a><a href="/alternatives/">Compare</a><a href="/learn/">Learn</a><a href="https://github.com/storytold/figcraft" rel="noopener">GitHub</a><a class="nav-cta" href="/install/">Download FigCraft</a></div>
+</header>
+<main id="main">
+  <div class="wrap">
+    <div class="hero">
+      <ul class="crumbs"><li><a href="/learn/">Learn</a></li><li><span>Design offline</span></li></ul>
+      <p class="eyebrow">Guide</p>
+      <h1>Designing offline with FigCraft</h1>
+      <p class="lede">FigCraft stores documents as <code>.figcraft</code> archives on your disk, with no account and no telemetry. That is a real trade: total ownership of the file, and total responsibility for it.</p>
+      <div class="meta-line"><span>Independent guide</span><span>·</span><span>Updated 2026-10-22</span><span>·</span><span>Covers FigCraft v0.9.0</span><span>·</span><span>6 min read</span></div>
+      <div class="cta"><a class="btn primary" href="/install/">Download FigCraft</a><a class="btn ghost" href="/#demo">Open the studio</a></div>
+    </div>
+<section class="prose">
+      <h2>The model in one paragraph</h2>
+      <p>A FigCraft document is a <code>.figcraft</code> archive on your filesystem. There is no sign-in, no workspace, no server component in the loop, and no telemetry — nothing leaves the machine unless you share it deliberately. The app is native Rust on macOS, Windows, Linux and FreeBSD, so the same document opens on any of them without a network round trip.</p>
+      <p>This is the part of the project that is genuinely finished, not a preview: local editing is the primary workflow, not a fallback. Collaboration is the preview.</p>
+    </section>
+    <section>
+      <h2>What stays local, and what leaves</h2>
+      <div class="table-wrap">
+        <table>
+          <thead><tr><th>Thing</th><th>Where it lives</th></tr></thead>
+          <tbody>
+            <tr><td>Document content and history</td><td>The <code>.figcraft</code> file you saved; undo history is in the session</td></tr>
+            <tr><td>Account, team, workspace</td><td>Does not exist</td></tr>
+            <tr><td>Telemetry</td><td>None</td></tr>
+            <tr><td>Fonts</td><td>Built into the app plus your system fonts; a source build also needs the <code>craft-fonts</code> checkout</td></tr>
+            <tr><td>A live session</td><td>Leaves only when you host, join or publish one on a collaboration server</td></tr>
+            <tr><td>Exports you upload</td><td>Leave when you upload them; the exporter itself writes to disk or returns bytes</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+    <section>
+      <h2>Step by step: an offline setup that survives</h2>
+      <ol class="steps">
+        <li><strong>Use a native build, not the web build.</strong> The WebAssembly build is the editor in a tab; a desktop build is the one that owns files on disk.
+          <pre><code># macOS
+open figcraft-0.9.0-macos-universal.dmg
+# Linux, no install step
+chmod +x figcraft-0.9.0-linux-x86_64.AppImage &amp;&amp; ./figcraft-0.9.0-linux-x86_64.AppImage</code></pre>
+        </li>
+        <li><strong>Keep one file per product, saved as .figcraft.</strong> Import once, then work in the native format. Converting on demand keeps the archive authoritative:
+          <pre><code># build the CLI once, or use the AppImage's cli subcommand
+cargo build --release -p figcraft-cli
+./target/release/figcraft-cli convert brand-source.fig brand.figcraft</code></pre>
+        </li>
+        <li><strong>Put the file under version control.</strong> A <code>.figcraft</code> is a binary archive, so history is snapshot-based rather than line-based — but a commit per milestone is still the cheapest undo you will ever get.
+          <pre><code>mkdir -p ~/work/brand &amp;&amp; cd ~/work/brand
+git init
+cp ~/Downloads/brand.figcraft .
+git add brand.figcraft
+git commit -m "brand: first .figcraft import from v0.9.0"</code></pre>
+        </li>
+        <li><strong>Keep a second copy off the machine.</strong> With no cloud there is no server-side history. A nightly <code>rsync</code> to another disk is the whole backup strategy:
+          <pre><code>rsync -a --delete ~/work/brand/ /Volumes/Backup/brand/</code></pre>
+        </li>
+        <li><strong>Share deliberately, if at all.</strong> The collaboration server is a separate optional binary, and live sessions are a preview with no accounts or teams. Self-host it rather than trusting a public instance:
+          <pre><code>cargo run --release -p figcraft-server</code></pre>
+        </li>
+        <li><strong>Check the claim yourself.</strong> With the app open and a document loaded, watch outbound traffic for a minute. Nothing should be initiating connections: there is no account, so there is nothing to phone home about.</li>
+      </ol>
+    </section>
+    <section>
+      <h2>What can go wrong</h2>
+      <ul class="list">
+        <li><strong>The file is gone and there is no cloud copy</strong><span>This is the model. A launch crash on macOS 27.0.1 with an M1 machine (<a href="https://github.com/storytold/figcraft/issues/781" rel="noopener">#781</a>) is a work-stopping event precisely because nothing is stored elsewhere for you. Keep the off-machine copy before you need it.</span></li>
+        <li><strong>You assumed the live session encrypted everything</strong><span>The optional server is not end-to-end encrypted on a public instance. Self-host it, or do not use it for material you would not post.</span></li>
+        <li><strong>Your fonts are wrong on the second machine</strong><span>Fonts are local. A missing family falls back silently in the document (<a href="https://github.com/storytold/figcraft/issues/752" rel="noopener">#752</a>), so the same file can look different on two laptops. Install the families on both.</span></li>
+        <li><strong>You edited the import and never saved a .figcraft</strong><span>Recovery is a local file, not a server snapshot. Save to the native format before you invest an hour in edits.</span></li>
+      </ul>
+      <p class="note">Unverified: the absence of telemetry was not packet-inspected for this page; it is the project's stated design and the reason there is no account system. Backup commands shown are generic shell, not FigCraft features.</p>
+    </section>
+
+    <section id="faq">
+      <h2>Questions this page answers</h2>
+      <p class="sub">Straight answers, with the limits stated. Every claim here is checkable against the sources linked above.</p>
+      <details><summary>Does FigCraft work offline?</summary><p>Yes, by design. Documents are .figcraft archives on your disk, there is no account and no telemetry, and nothing leaves the machine unless you explicitly share it or join a live session.</p></details>
+      <details><summary>Where are my files stored?</summary><p>Wherever you saved them: a .figcraft archive on the local filesystem. There is no server-side copy, so the file you saved is the only copy unless you make another.</p></details>
+      <details><summary>Does FigCraft have cloud sync or version history?</summary><p>No cloud and no accounts. Undo history lives in the session, and the practical substitute for cloud history is putting the .figcraft file in git and keeping an off-machine backup.</p></details>
+      <details><summary>Is the collaboration server private?</summary><p>Only as private as where you run it. figcraft-server is optional and self-hostable; live sessions are a preview with no accounts or teams, and the public server is not end-to-end encrypted.</p></details>
+      <details><summary>Can I open the same file on macOS and Linux?</summary><p>Yes. The native format is the same and builds exist for macOS, Windows, Linux and FreeBSD. Fonts are the caveat: they come from the machine, so install the same families on both.</p></details>
+    </section>
+    <section class="related" id="related">
+      <h2>Keep going</h2>
+      <div class="grid">
+        <a class="card" href="/learn/open-fig-file/"><span class="k">Guide</span><h3>Opening a .fig file in FigCraft</h3><p>Import is best effort, not a migration guarantee. This is the order of operations that keeps your original file untouched and tells you what survived before you start editing.</p></a>
+        <a class="card" href="/learn/migrate-from-figma/"><span class="k">Guide</span><h3>Migrating from Figma to FigCraft</h3><p>The import gets you a document. It does not get you a working design system. This is the order that wastes the least time, and the four places the damage usually lands.</p></a>
+      </div>
+    </section>
+  </div>
+</main>
+<footer>
+  <div class="wrap foot">
+    <div>
+      <strong>FigCraft Guide</strong> — an independent guide and browser studio. Not affiliated with ArtCraft.
+      <div class="note">Last updated 2026-10-22 · covers FigCraft v0.9.0 · corrections welcome via the source repository.</div>
+    </div>
+    <nav aria-label="Footer">
+      <a href="/tools/">Tools</a>
+      <a href="/templates/">Templates</a>
+      <a href="/pricing/">Pricing</a>
+      <a href="/learn/">Learn</a>
+      <a href="/glossary/">Glossary</a>
+      <a href="/issues/">Known issues</a>
+      <a href="/install/">Install</a>
+      <a href="https://github.com/storytold/figcraft" rel="noopener">Source</a>
+    </nav>
+  </div>
+</footer>
+</body>
+</html>

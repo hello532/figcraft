@@ -1,0 +1,158 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Export SVG from FigCraft: App, CLI and Demo Studio</title>
+<meta name="description" content="Export SVG from the FigCraft app or its CLI, and see why the browser demo writes a different file. Covers text, fonts, batch export and the deep-nesting limit.">
+<meta name="robots" content="index,follow,max-image-preview:large">
+<meta name="author" content="FigCraft Guide">
+<meta name="theme-color" content="#2563eb">
+<link rel="canonical" href="https://figcraft.rerivo.com/learn/export-svg/">
+<link rel="alternate" type="text/plain" href="https://figcraft.rerivo.com/llms.txt" title="LLMs.txt">
+<link rel="alternate" type="text/plain" href="https://figcraft.rerivo.com/llms-full.txt" title="LLMs full guide">
+<link rel="icon" type="image/svg+xml" href="/assets/favicon.svg">
+<link rel="stylesheet" href="/assets/site.css">
+<script src="/assets/site.js" defer></script>
+<meta property="og:title" content="Export SVG from FigCraft: App, CLI and Demo Studio">
+<meta property="og:description" content="Export SVG from the FigCraft app or its CLI, and see why the browser demo writes a different file. Covers text, fonts, batch export and the deep-nesting limit.">
+<meta property="og:type" content="website">
+<meta property="og:locale" content="en_US">
+<meta property="og:url" content="https://figcraft.rerivo.com/learn/export-svg/">
+<meta property="og:image" content="https://figcraft.rerivo.com/og.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="FigCraft — a Figma alternative written in pure Rust">
+<meta property="article:modified_time" content="2026-10-22">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Export SVG from FigCraft: App, CLI and Demo Studio">
+<meta name="twitter:description" content="Export SVG from the FigCraft app or its CLI, and see why the browser demo writes a different file. Covers text, fonts, batch export and the deep-nesting limit.">
+<meta name="twitter:image" content="https://figcraft.rerivo.com/og.png">
+<script type="application/ld+json">{"@context":"https://schema.org","@graph":[{"@type":"WebPage","@id":"https://figcraft.rerivo.com/learn/export-svg/#page","url":"https://figcraft.rerivo.com/learn/export-svg/","name":"Exporting SVG from FigCraft","description":"Export SVG from the FigCraft app or its CLI, and see why the browser demo writes a different file. Covers text, fonts, batch export and the deep-nesting limit.","isPartOf":{"@type":"WebSite","name":"FigCraft Guide","url":"https://figcraft.rerivo.com/"},"inLanguage":"en","dateModified":"2026-10-22","datePublished":"2026-10-22"},{"@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Learn","item":"https://figcraft.rerivo.com/learn/"},{"@type":"ListItem","position":2,"name":"Export SVG","item":"https://figcraft.rerivo.com/learn/export-svg/"}]},{"@type":"Article","@id":"https://figcraft.rerivo.com/learn/export-svg/#article","headline":"Exporting SVG from FigCraft","description":"Export SVG from the FigCraft app or its CLI, and see why the browser demo writes a different file. Covers text, fonts, batch export and the deep-nesting limit.","datePublished":"2026-10-22","dateModified":"2026-10-22","author":{"@type":"Organization","name":"FigCraft Guide","url":"https://figcraft.rerivo.com/"},"publisher":{"@type":"Organization","name":"FigCraft Guide","url":"https://figcraft.rerivo.com/"},"mainEntityOfPage":{"@id":"https://figcraft.rerivo.com/learn/export-svg/#page"},"about":{"@type":"SoftwareApplication","name":"FigCraft","applicationCategory":"DesignApplication","operatingSystem":"macOS, Windows, Linux, FreeBSD, Web","offers":{"@type":"Offer","price":"0","priceCurrency":"USD"}}},{"@type":"FAQPage","@id":"https://figcraft.rerivo.com/learn/export-svg/#faq","mainEntity":[{"@type":"Question","name":"Does FigCraft export SVG?","acceptedAnswer":{"@type":"Answer","text":"Yes. The app exports SVG, PNG, JPG, WebP and PDF, and the CLI writes the same formats headless with figcraft-cli export, convert and render. Inspect additionally generates CSS, HTML, React, Leptos, SwiftUI and Compose for handoff."}},{"@type":"Question","name":"Is the SVG from the demo studio the same as the app's SVG?","acceptedAnswer":{"@type":"Answer","text":"No. The studio at /#demo is an independent canvas on this site with its own renderer and its own export set (PNG 1x/2x/3x, SVG, JSON layer tree). It cannot open .figcraft and it is not a substitute for the app's exporter."}},{"@type":"Question","name":"Why is my exported text not selectable?","acceptedAnswer":{"@type":"Answer","text":"It was outlined. SVG export keeps <text> unless you ask for outlines, so selectable text is the default; if yours is paths, an outline option was set on the layer or in the export call."}},{"@type":"Question","name":"Why does SVG export fail on a deeply nested design?","acceptedAnswer":{"@type":"Answer","text":"Exports with visible descendants more than 256 levels below the exported root fail on purpose instead of writing an incomplete file, and an existing destination file is left untouched. Export an inner layer with --node or reduce the nesting."}},{"@type":"Question","name":"Can I export all frames at once?","acceptedAnswer":{"@type":"Answer","text":"Yes. Point -o at a directory with --format svg and you get one file per top-level frame, named after the frame. For PDF, frames become separate pages."}}]}]}</script>
+</head>
+<body>
+<a class="skip" href="#main">Skip to content</a>
+<header>
+  <div class="wrap nav">
+    <a class="brand" href="/"><img class="mark-img" src="/assets/mark.svg" alt="" width="28" height="28">FigCraft Guide</a>
+    <nav aria-label="Primary"><a href="/tools/">Tools</a><a href="/templates/">Templates</a><a href="/alternatives/">Compare</a><a href="/learn/" aria-current="page">Learn</a><a href="https://github.com/storytold/figcraft" rel="noopener">GitHub</a><a class="nav-cta" href="/install/">Download</a></nav>
+    <div class="nav-tools">
+      <button class="nav-icon" type="button" data-theme-toggle aria-label="Toggle theme">☾</button>
+      <button class="nav-icon nav-menu-btn" type="button" data-nav-toggle aria-label="Menu" aria-expanded="false" aria-controls="mobile-nav">≡</button>
+    </div>
+  </div>
+  <div class="mobile-nav" id="mobile-nav"><a href="/tools/">Tools</a><a href="/templates/">Templates</a><a href="/alternatives/">Compare</a><a href="/learn/">Learn</a><a href="https://github.com/storytold/figcraft" rel="noopener">GitHub</a><a class="nav-cta" href="/install/">Download FigCraft</a></div>
+</header>
+<main id="main">
+  <div class="wrap">
+    <div class="hero">
+      <ul class="crumbs"><li><a href="/learn/">Learn</a></li><li><span>Export SVG</span></li></ul>
+      <p class="eyebrow">Guide</p>
+      <h1>Exporting SVG from FigCraft</h1>
+      <p class="lede">Two exporters share the word "SVG" here, and only one of them is FigCraft. This page covers the real exporter first, then the demo studio, and keeps them apart.</p>
+      <div class="meta-line"><span>Independent guide</span><span>·</span><span>Updated 2026-10-22</span><span>·</span><span>Covers FigCraft v0.9.0</span><span>·</span><span>6 min read</span></div>
+      <div class="cta"><a class="btn primary" href="/install/">Download FigCraft</a><a class="btn ghost" href="/#demo">Open the studio</a></div>
+    </div>
+<section class="prose">
+      <h2>Two exporters, one name</h2>
+      <p>The FigCraft app exports SVG, PNG, JPG, WebP and PDF from its own Rust engine. The same engine is reachable from the CLI with the <code>export</code>, <code>convert</code> and <code>render</code> subcommands, which is what you want in a build script: identical output, no window, no clicking.</p>
+      <p>The studio at <a href="/#demo">/#demo</a> on this site is a separate canvas and writes its own SVG. It is fine for a quick mockup, but it is not the app's exporter and it does not read <code>.figcraft</code>. If the file will be committed, minified and shipped, produce it from the app or the CLI.</p>
+    </section>
+    <section>
+      <h2>What each exporter can write</h2>
+      <div class="table-wrap">
+        <table>
+          <thead><tr><th></th><th>FigCraft app and figcraft-cli</th><th>Demo studio (this site)</th></tr></thead>
+          <tbody>
+            <tr><td>Vector output</td><td>SVG, PDF</td><td>SVG</td></tr>
+            <tr><td>Raster output</td><td>PNG, JPG, WebP, with <code>--scale</code> up to 64</td><td>PNG at 1x, 2x or 3x</td></tr>
+            <tr><td>Structured output</td><td>Code handoff: CSS, HTML, React, Leptos, SwiftUI, Compose (from Inspect)</td><td>JSON layer tree</td></tr>
+            <tr><td>Input</td><td><code>.figcraft</code>, <code>.fig</code>, JSON, SVG, images</td><td>The studio's own layer model</td></tr>
+            <tr><td>Repeatable from a script</td><td>Yes, headless</td><td>No</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+    <section>
+      <h2>Step by step</h2>
+      <ol class="steps">
+        <li><strong>Build or find the CLI.</strong> The Linux AppImage bundles it as a subcommand, so the same command works without a separate binary.
+          <pre><code>cargo build --release -p figcraft-cli
+./target/release/figcraft-cli --help</code></pre>
+        </li>
+        <li><strong>Confirm what you are about to export.</strong> Get the layer name and page name exactly right — both <code>--node</code> and <code>--page</code> accept a name or an id.
+          <pre><code>./target/release/figcraft-cli info app.figcraft</code></pre>
+        </li>
+        <li><strong>Export one layer to one file.</strong> An output path with an extension means one file, and <code>--node</code> picks what goes in it.
+          <pre><code>./target/release/figcraft-cli export app.figcraft -o hero.svg --node "Hero"</code></pre>
+        </li>
+        <li><strong>Export every top-level frame.</strong> An output directory gets one file per frame, named after the frame. With a directory there is no extension to infer from, so pass the format.
+          <pre><code>mkdir -p exports
+./target/release/figcraft-cli export app.figcraft -o exports/ --format svg</code></pre>
+          Keep frame names filesystem-safe: when layers are exported through stored export settings, a slash in a name becomes a folder.
+        </li>
+        <li><strong>Raster versions from the same source.</strong> <code>--scale</code> applies to raster formats only, so a 2x context does not silently change your SVG.
+          <pre><code>./target/release/figcraft-cli export app.figcraft -o exports/ --scale 2
+./target/release/figcraft-cli render app.figcraft -o page.png --scale 2</code></pre>
+        </li>
+        <li><strong>Convert a whole document when you want one file, not a set.</strong> <code>convert</code> writes the current page as SVG; for print, PDF keeps frames as separate pages.
+          <pre><code>./target/release/figcraft-cli convert app.figcraft app.svg
+./target/release/figcraft-cli export app.figcraft -o screens.pdf --page "Screens"</code></pre>
+        </li>
+        <li><strong>Shrink the result before shipping it.</strong> The <a href="/tools/svg-minifier/">SVG minifier</a> on this site strips whitespace and metadata in the browser, so the file never leaves your machine.</li>
+      </ol>
+    </section>
+    <section>
+      <h2>Text stays text — which is both the feature and the trap</h2>
+      <p>SVG export keeps <code>&lt;text&gt;</code> elements by default: the file is editable and selectable, and its fonts are whatever the viewer has. That is why an exported SVG can look perfect in your browser and wrong on a colleague's laptop. If the text must look identical everywhere, outline it — the automation <code>export</code> takes <code>svgOutlineText</code>, and the same options can be stored per layer in export settings (<code>export.add</code>). The alternative is to accept that the SVG depends on a font stack you do not control.</p>
+      <p>Missing fonts are a separate failure: if the document names a family that is not installed, FigCraft lays that text out in a fallback before export, so the SVG records the wrong metrics rather than a missing font (<a href="https://github.com/storytold/figcraft/issues/752" rel="noopener">#752</a>). The rescan and load commands that fix a running session are covered by <a href="https://github.com/storytold/figcraft/issues/821" rel="noopener">#821</a>.</p>
+    </section>
+    <section>
+      <h2>What can go wrong</h2>
+      <ul class="list">
+        <li><strong>The command errors instead of writing a file</strong><span>SVG and PDF export refuse documents with visible descendants more than 256 levels below the exported root, rather than writing a truncated file. Select an inner layer with <code>--node</code>, or flatten the nesting.</span></li>
+        <li><strong>Your old destination file is still there</strong><span>On that nesting failure the existing destination is kept. Check the exit code, not the timestamp.</span></li>
+        <li><strong>The text is in the wrong font in the browser</strong><span>Missing source font (<a href="https://github.com/storytold/figcraft/issues/752" rel="noopener">#752</a>), or a viewer without the family. Outline the text for fixed output.</span></li>
+        <li><strong>Nothing matches the demo</strong><span>The demo's SVG comes from a different renderer. See the table above; do not diff the two files and expect parity.</span></li>
+      </ul>
+      <p class="note">Unverified: byte-level fidelity across viewers, and whether a given SVG survives every downstream tool. This page checked command syntax against the project's CLI documentation, not the visual output of a specific file.</p>
+    </section>
+
+    <section id="faq">
+      <h2>Questions this page answers</h2>
+      <p class="sub">Straight answers, with the limits stated. Every claim here is checkable against the sources linked above.</p>
+      <details><summary>Does FigCraft export SVG?</summary><p>Yes. The app exports SVG, PNG, JPG, WebP and PDF, and the CLI writes the same formats headless with <code>figcraft-cli export</code>, <code>convert</code> and <code>render</code>. Inspect additionally generates CSS, HTML, React, Leptos, SwiftUI and Compose for handoff.</p></details>
+      <details><summary>Is the SVG from the demo studio the same as the app's SVG?</summary><p>No. The studio at /#demo is an independent canvas on this site with its own renderer and its own export set (PNG 1x/2x/3x, SVG, JSON layer tree). It cannot open .figcraft and it is not a substitute for the app's exporter.</p></details>
+      <details><summary>Why is my exported text not selectable?</summary><p>It was outlined. SVG export keeps <code>&lt;text&gt;</code> unless you ask for outlines, so selectable text is the default; if yours is paths, an outline option was set on the layer or in the export call.</p></details>
+      <details><summary>Why does SVG export fail on a deeply nested design?</summary><p>Exports with visible descendants more than 256 levels below the exported root fail on purpose instead of writing an incomplete file, and an existing destination file is left untouched. Export an inner layer with <code>--node</code> or reduce the nesting.</p></details>
+      <details><summary>Can I export all frames at once?</summary><p>Yes. Point <code>-o</code> at a directory with <code>--format svg</code> and you get one file per top-level frame, named after the frame. For PDF, frames become separate pages.</p></details>
+    </section>
+    <section class="related" id="related">
+      <h2>Keep going</h2>
+      <div class="grid">
+        <a class="card" href="/learn/open-fig-file/"><span class="k">Guide</span><h3>Opening a .fig file in FigCraft</h3><p>Import is best effort, not a migration guarantee. This is the order of operations that keeps your original file untouched and tells you what survived before you start editing.</p></a>
+        <a class="card" href="/learn/cli-automation/"><span class="k">Guide</span><h3>Automating FigCraft with the CLI</h3><p>The CLI is the same engine without a window: inspect, export, convert, render, run command scripts, and report the command table. Everything here is repeatable in CI.</p></a>
+      </div>
+    </section>
+  </div>
+</main>
+<footer>
+  <div class="wrap foot">
+    <div>
+      <strong>FigCraft Guide</strong> — an independent guide and browser studio. Not affiliated with ArtCraft.
+      <div class="note">Last updated 2026-10-22 · covers FigCraft v0.9.0 · corrections welcome via the source repository.</div>
+    </div>
+    <nav aria-label="Footer">
+      <a href="/tools/">Tools</a>
+      <a href="/templates/">Templates</a>
+      <a href="/pricing/">Pricing</a>
+      <a href="/learn/">Learn</a>
+      <a href="/glossary/">Glossary</a>
+      <a href="/issues/">Known issues</a>
+      <a href="/install/">Install</a>
+      <a href="https://github.com/storytold/figcraft" rel="noopener">Source</a>
+    </nav>
+  </div>
+</footer>
+</body>
+</html>

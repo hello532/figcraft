@@ -1,0 +1,122 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>FigCraft Guides: Import, Export, CLI and Offline Work</title>
+<meta name="description" content="Eight task-level FigCraft guides and a glossary: opening .fig files, SVG export, offline files, keyboard shortcuts, MCP, CLI automation, Linux and Figma migration.">
+<meta name="robots" content="index,follow,max-image-preview:large">
+<meta name="author" content="FigCraft Guide">
+<meta name="theme-color" content="#2563eb">
+<link rel="canonical" href="https://figcraft.rerivo.com/learn/">
+<link rel="alternate" type="text/plain" href="https://figcraft.rerivo.com/llms.txt" title="LLMs.txt">
+<link rel="alternate" type="text/plain" href="https://figcraft.rerivo.com/llms-full.txt" title="LLMs full guide">
+<link rel="icon" type="image/svg+xml" href="/assets/favicon.svg">
+<link rel="stylesheet" href="/assets/site.css">
+<script src="/assets/site.js" defer></script>
+<meta property="og:title" content="FigCraft Guides: Import, Export, CLI and Offline Work">
+<meta property="og:description" content="Eight task-level FigCraft guides and a glossary: opening .fig files, SVG export, offline files, keyboard shortcuts, MCP, CLI automation, Linux and Figma migration.">
+<meta property="og:type" content="website">
+<meta property="og:locale" content="en_US">
+<meta property="og:url" content="https://figcraft.rerivo.com/learn/">
+<meta property="og:image" content="https://figcraft.rerivo.com/og.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="FigCraft — a Figma alternative written in pure Rust">
+<meta property="article:modified_time" content="2026-10-22">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="FigCraft Guides: Import, Export, CLI and Offline Work">
+<meta name="twitter:description" content="Eight task-level FigCraft guides and a glossary: opening .fig files, SVG export, offline files, keyboard shortcuts, MCP, CLI automation, Linux and Figma migration.">
+<meta name="twitter:image" content="https://figcraft.rerivo.com/og.png">
+<script type="application/ld+json">{"@context":"https://schema.org","@graph":[{"@type":"WebPage","@id":"https://figcraft.rerivo.com/learn/#page","url":"https://figcraft.rerivo.com/learn/","name":"FigCraft guides for the work that actually breaks","description":"Eight task-level FigCraft guides and a glossary: opening .fig files, SVG export, offline files, keyboard shortcuts, MCP, CLI automation, Linux and Figma migration.","isPartOf":{"@type":"WebSite","name":"FigCraft Guide","url":"https://figcraft.rerivo.com/"},"inLanguage":"en","dateModified":"2026-10-22","datePublished":"2026-10-22"},{"@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Learn","item":"https://figcraft.rerivo.com/learn/"}]},{"@type":"CollectionPage","@id":"https://figcraft.rerivo.com/learn/#collection","name":"FigCraft guides for the work that actually breaks","description":"Eight task-level FigCraft guides and a glossary: opening .fig files, SVG export, offline files, keyboard shortcuts, MCP, CLI automation, Linux and Figma migration.","mainEntity":{"@type":"ItemList","itemListElement":[{"@type":"ListItem","position":1,"name":"Open a .fig file","url":"https://figcraft.rerivo.com/learn/open-fig-file/"},{"@type":"ListItem","position":2,"name":"Export SVG","url":"https://figcraft.rerivo.com/learn/export-svg/"},{"@type":"ListItem","position":3,"name":"Keyboard shortcuts","url":"https://figcraft.rerivo.com/learn/keyboard-shortcuts/"},{"@type":"ListItem","position":4,"name":"Design offline","url":"https://figcraft.rerivo.com/learn/offline-design/"},{"@type":"ListItem","position":5,"name":"The MCP server","url":"https://figcraft.rerivo.com/learn/mcp-server/"},{"@type":"ListItem","position":6,"name":"CLI automation","url":"https://figcraft.rerivo.com/learn/cli-automation/"},{"@type":"ListItem","position":7,"name":"Install on Linux","url":"https://figcraft.rerivo.com/learn/install-linux/"},{"@type":"ListItem","position":8,"name":"Migrate from Figma","url":"https://figcraft.rerivo.com/learn/migrate-from-figma/"},{"@type":"ListItem","position":9,"name":"Glossary","url":"https://figcraft.rerivo.com/glossary/"}]}},{"@type":"FAQPage","@id":"https://figcraft.rerivo.com/learn/#faq","mainEntity":[{"@type":"Question","name":"Is FigCraft ready for a production design team?","acceptedAnswer":{"@type":"Answer","text":"Not as a replacement for a hosted team tool. It is an early alpha at about 49% parity by the project's own estimate, with no accounts, teams or cloud. It is ready for solo interface work on local files, and for developers who want the same command engine in a script and in a UI."}},{"@type":"Question","name":"Which version do these guides cover?","acceptedAnswer":{"@type":"Answer","text":"v0.9.0, released 2026-10-21, on macOS, Windows, Linux, FreeBSD and the WebAssembly build. Commands come from the project's own CLI, MCP and control-protocol documentation for that release."}},{"@type":"Question","name":"Do these guides apply to the browser studio on this site?","acceptedAnswer":{"@type":"Answer","text":"Only where a page says so. The studio at /#demo is an independent canvas, not the FigCraft app: different renderer, different shortcuts, different export set. The pages that touch either one label it."}},{"@type":"Question","name":"Where do I report a bug or check whether mine is known?","acceptedAnswer":{"@type":"Answer","text":"The tracker at github.com/storytold/figcraft/issues. This guide links the issues it can verify, and the curated shortlist is on known issues."}},{"@type":"Question","name":"Is this an official FigCraft site?","acceptedAnswer":{"@type":"Answer","text":"No. It is an independent guide. The project's repository and release notes are the primary sources, and this site links them rather than paraphrasing them away."}}]}]}</script>
+</head>
+<body>
+<a class="skip" href="#main">Skip to content</a>
+<header>
+  <div class="wrap nav">
+    <a class="brand" href="/"><img class="mark-img" src="/assets/mark.svg" alt="" width="28" height="28">FigCraft Guide</a>
+    <nav aria-label="Primary"><a href="/tools/">Tools</a><a href="/templates/">Templates</a><a href="/alternatives/">Compare</a><a href="/learn/" aria-current="page">Learn</a><a href="https://github.com/storytold/figcraft" rel="noopener">GitHub</a><a class="nav-cta" href="/install/">Download</a></nav>
+    <div class="nav-tools">
+      <button class="nav-icon" type="button" data-theme-toggle aria-label="Toggle theme">☾</button>
+      <button class="nav-icon nav-menu-btn" type="button" data-nav-toggle aria-label="Menu" aria-expanded="false" aria-controls="mobile-nav">≡</button>
+    </div>
+  </div>
+  <div class="mobile-nav" id="mobile-nav"><a href="/tools/">Tools</a><a href="/templates/">Templates</a><a href="/alternatives/">Compare</a><a href="/learn/">Learn</a><a href="https://github.com/storytold/figcraft" rel="noopener">GitHub</a><a class="nav-cta" href="/install/">Download FigCraft</a></div>
+</header>
+<main id="main">
+  <div class="wrap">
+    <div class="hero">
+      <ul class="crumbs"><li><span>Learn</span></li></ul>
+      <p class="eyebrow">Learn</p>
+      <h1>FigCraft guides for the work that actually breaks</h1>
+      <p class="lede">Task-level guides for the parts of FigCraft that catch people out: import, export, automation and the move off Figma. Each one says what is checked for v0.9.0 and where the checking stops.</p>
+      <div class="meta-line"><span>Independent guide</span><span>·</span><span>Updated 2026-10-22</span><span>·</span><span>Covers FigCraft v0.9.0</span><span>·</span><span>4 min read</span></div>
+      <div class="cta"><a class="btn primary" href="/install/">Download FigCraft</a><a class="btn ghost" href="/#demo">Open the studio</a></div>
+    </div>
+<section class="prose">
+      <h2>How to use this section</h2>
+      <p>FigCraft is an early alpha at roughly 49% parity with Figma, by the project's own estimate. That number is not the useful question. The useful questions are narrower: will my file open, what does the exporter actually write, can I drive this from a script, and what does it cost to leave Figma. There is one guide per question.</p>
+      <p>Every page is written against v0.9.0, released 2026-10-21. The project moves quickly, so where a behaviour is still in flux the page links the tracking issue instead of promising an outcome.</p>
+    </section>
+    <section>
+      <h2>The eight guides</h2>
+      <div class="grid">
+        <a class="card" href="/learn/open-fig-file/"><span class="k">Import</span><h3>Open a .fig file</h3><p>Check a .fig before the UI touches it, convert it to .figcraft, and decide what to rebuild.</p></a>
+        <a class="card" href="/learn/export-svg/"><span class="k">Export</span><h3>Export SVG</h3><p>What the real exporter writes, what the demo studio writes, and why they are not the same file.</p></a>
+        <a class="card" href="/learn/keyboard-shortcuts/"><span class="k">Keys</span><h3>Keyboard shortcuts</h3><p>The demo's shortcut list, and how to dump the real app's keymap instead of guessing at it.</p></a>
+        <a class="card" href="/learn/offline-design/"><span class="k">Files</span><h3>Design offline</h3><p>Local .figcraft archives, no account, and the backup duty that comes with that.</p></a>
+        <a class="card" href="/learn/mcp-server/"><span class="k">Agents</span><h3>The MCP server</h3><p>Headless or attached, client configuration, and the file roots that keep an agent in its lane.</p></a>
+        <a class="card" href="/learn/cli-automation/"><span class="k">Automation</span><h3>CLI automation</h3><p>info, export, convert, render, and command scripts that are all-or-nothing.</p></a>
+        <a class="card" href="/learn/install-linux/"><span class="k">Install</span><h3>Install on Linux</h3><p>AppImage, deb, rpm, flatpak, Arch package and tarball, per architecture.</p></a>
+        <a class="card" href="/learn/migrate-from-figma/"><span class="k">Migration</span><h3>Migrate from Figma</h3><p>An honest order of operations, and the four things that usually break.</p></a>
+      </div>
+      <p class="note">Platform installers live on <a href="/install/">install</a>, the bug list on <a href="/issues/">known issues</a>, and the head-to-head on <a href="/vs-figma/">FigCraft vs Figma</a>. If you came for a reference rather than a task, start with the <a href="/glossary/">glossary</a>.</p>
+    </section>
+    <section>
+      <h2>Match the guide to the symptom</h2>
+      <ul class="list">
+        <li><strong>A .fig file hangs, or arrives with pieces missing</strong><span>Start with <a href="/learn/open-fig-file/">open a .fig file</a>, then read <a href="https://github.com/storytold/figcraft/issues/574" rel="noopener">#574</a> and the umbrella <a href="https://github.com/storytold/figcraft/issues/321" rel="noopener">#321</a>.</span></li>
+        <li><strong>An exported SVG looks nothing like the canvas</strong><span>Read <a href="/learn/export-svg/">export SVG</a> before blaming the renderer. Text kept as text and fonts the viewer does not have explain most of it.</span></li>
+        <li><strong>The keys you learned on the demo do nothing in the app</strong><span>They were never the app's keys. <a href="/learn/keyboard-shortcuts/">Keyboard shortcuts</a> separates the two lists.</span></li>
+        <li><strong>You need to build 300 screens overnight</strong><span>That is a script, not a UI session. See <a href="/learn/cli-automation/">CLI automation</a> and the <a href="/learn/mcp-server/">MCP server</a>.</span></li>
+        <li><strong>The AppImage will not start, or you are on ARM</strong><span><a href="/learn/install-linux/">Install on Linux</a> has the format matrix, including where the architecture coverage stops.</span></li>
+      </ul>
+    </section>
+    <section>
+      <h2>Where the demo studio fits</h2>
+      <div class="disclosure"><strong>The canvas at <a href="/#demo">/#demo</a> is not the FigCraft app.</strong> It is this site's own studio, built to demonstrate a design workflow in the browser. Its shortcuts and its export formats are the studio's own, and every guide below marks the line where the two can be confused.</div>
+      <p>Use the demo for quick mockups, a colour or spacing sanity check, or to see how the interaction model feels. Use FigCraft for anything you intend to keep: only it writes <code>.figcraft</code>, runs the 400+ command engine, and opens <code>.fig</code>.</p>
+      <p>The reference tools are the exception — they measure rather than design, so they work either way: <a href="/tools/screen-sizes/">screen sizes</a>, <a href="/tools/svg-minifier/">SVG minifier</a> and <a href="/tools/contrast-checker/">contrast checker</a>. Ready-made starting files are on <a href="/templates/">templates</a>.</p>
+    </section>
+
+    <section id="faq">
+      <h2>Questions this page answers</h2>
+      <p class="sub">Straight answers, with the limits stated. Every claim here is checkable against the sources linked above.</p>
+      <details><summary>Is FigCraft ready for a production design team?</summary><p>Not as a replacement for a hosted team tool. It is an early alpha at about 49% parity by the project's own estimate, with no accounts, teams or cloud. It is ready for solo interface work on local files, and for developers who want the same command engine in a script and in a UI.</p></details>
+      <details><summary>Which version do these guides cover?</summary><p>v0.9.0, released 2026-10-21, on macOS, Windows, Linux, FreeBSD and the WebAssembly build. Commands come from the project's own CLI, MCP and control-protocol documentation for that release.</p></details>
+      <details><summary>Do these guides apply to the browser studio on this site?</summary><p>Only where a page says so. The studio at /#demo is an independent canvas, not the FigCraft app: different renderer, different shortcuts, different export set. The pages that touch either one label it.</p></details>
+      <details><summary>Where do I report a bug or check whether mine is known?</summary><p>The tracker at github.com/storytold/figcraft/issues. This guide links the issues it can verify, and the curated shortlist is on <a href="/issues/">known issues</a>.</p></details>
+      <details><summary>Is this an official FigCraft site?</summary><p>No. It is an independent guide. The project's repository and release notes are the primary sources, and this site links them rather than paraphrasing them away.</p></details>
+    </section>
+  </div>
+</main>
+<footer>
+  <div class="wrap foot">
+    <div>
+      <strong>FigCraft Guide</strong> — an independent guide and browser studio. Not affiliated with ArtCraft.
+      <div class="note">Last updated 2026-10-22 · covers FigCraft v0.9.0 · corrections welcome via the source repository.</div>
+    </div>
+    <nav aria-label="Footer">
+      <a href="/tools/">Tools</a>
+      <a href="/templates/">Templates</a>
+      <a href="/pricing/">Pricing</a>
+      <a href="/learn/">Learn</a>
+      <a href="/glossary/">Glossary</a>
+      <a href="/issues/">Known issues</a>
+      <a href="/install/">Install</a>
+      <a href="https://github.com/storytold/figcraft" rel="noopener">Source</a>
+    </nav>
+  </div>
+</footer>
+</body>
+</html>

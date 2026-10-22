@@ -110,6 +110,15 @@ The page includes an independent browser canvas studio, not the official FigCraf
 - 69 original icons (50 line icons + 19 iOS-style glass tiles);
 - PNG 1x/2x/3x, SVG and JSON export.
 
+## Tools, templates, comparisons and guides
+
+Everything below is generated from one reviewed content source. The same disclaimer applies: this is an independent guide, not the official FigCraft site.
+
+- Tools, all running locally in the browser with no upload: contrast checker at /tools/contrast-checker/ (WCAG 2.2 ratios plus the nearest passing colour), OKLCH palette generator at /tools/palette-generator/ (11 steps, CSS/Tailwind/SCSS/JSON out), SVG minifier at /tools/svg-minifier/ (keeps ids and text, drops editor metadata and float noise), logical screen sizes at /tools/screen-sizes/ (copyable media queries and a canvas handoff), placeholder text at /tools/lorem-ipsum/.
+- Templates at /templates/: the eight starters (mobile app, landing page, dashboard, design system, wireframe kit, social post sizes, presentation slides, icon set), each with a starting frame spec. The project publishes the starter names, not their internal pages or frame sizes, and each page says so.
+- Comparisons: /vs-figma/, /vs-penpot/, /vs-sketch/, /pricing/, /free-figma-alternative/, /open-source-figma-alternative/, /figma-alternative-for-linux/. Vendor prices were checked 2026-10-22 from each vendor's own pricing page; seats are per editor per month on annual billing, excluding add-ons and tax.
+- Guides at /learn/: opening a `.fig` file, SVG and other exports, keyboard shortcuts (demo studio only — the real app's keymap is not documented here), offline work, the MCP server, CLI automation, Linux install, migrating from Figma; plus a 22-term glossary at /glossary/.
+
 ## Citation
 
-FigCraft Guide, “FigCraft: a Figma alternative written in pure Rust,” updated 2026-10-19, https://figcraft.rerivo.com/.
+FigCraft Guide, “FigCraft: a Figma alternative written in pure Rust,” updated 2026-10-22, https://figcraft.rerivo.com/.

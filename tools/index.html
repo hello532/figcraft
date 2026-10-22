@@ -1,0 +1,126 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Free Design Tools for Figma and FigCraft Workflows</title>
+<meta name="description" content="Five browser tools for design work: WCAG contrast checker, OKLCH palette generator, SVG minifier, screen-size sheet and text generator. No signup.">
+<meta name="robots" content="index,follow,max-image-preview:large">
+<meta name="author" content="FigCraft Guide">
+<meta name="theme-color" content="#2563eb">
+<link rel="canonical" href="https://figcraft.rerivo.com/tools/">
+<link rel="alternate" type="text/plain" href="https://figcraft.rerivo.com/llms.txt" title="LLMs.txt">
+<link rel="alternate" type="text/plain" href="https://figcraft.rerivo.com/llms-full.txt" title="LLMs full guide">
+<link rel="icon" type="image/svg+xml" href="/assets/favicon.svg">
+<link rel="stylesheet" href="/assets/site.css">
+<script src="/assets/site.js" defer></script>
+<meta property="og:title" content="Free Design Tools for Figma and FigCraft Workflows">
+<meta property="og:description" content="Five browser tools for design work: WCAG contrast checker, OKLCH palette generator, SVG minifier, screen-size sheet and text generator. No signup.">
+<meta property="og:type" content="website">
+<meta property="og:locale" content="en_US">
+<meta property="og:url" content="https://figcraft.rerivo.com/tools/">
+<meta property="og:image" content="https://figcraft.rerivo.com/og.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="FigCraft — a Figma alternative written in pure Rust">
+<meta property="article:modified_time" content="2026-10-22">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Free Design Tools for Figma and FigCraft Workflows">
+<meta name="twitter:description" content="Five browser tools for design work: WCAG contrast checker, OKLCH palette generator, SVG minifier, screen-size sheet and text generator. No signup.">
+<meta name="twitter:image" content="https://figcraft.rerivo.com/og.png">
+<script type="application/ld+json">{"@context":"https://schema.org","@graph":[{"@type":"WebPage","@id":"https://figcraft.rerivo.com/tools/#page","url":"https://figcraft.rerivo.com/tools/","name":"Free design tools that run in the browser","description":"Five browser tools for design work: WCAG contrast checker, OKLCH palette generator, SVG minifier, screen-size sheet and text generator. No signup.","isPartOf":{"@type":"WebSite","name":"FigCraft Guide","url":"https://figcraft.rerivo.com/"},"inLanguage":"en","dateModified":"2026-10-22","datePublished":"2026-10-22"},{"@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Tools","item":"https://figcraft.rerivo.com/tools/"}]},{"@type":"CollectionPage","@id":"https://figcraft.rerivo.com/tools/#collection","name":"Free design tools that run in the browser","description":"Five browser tools for design work: WCAG contrast checker, OKLCH palette generator, SVG minifier, screen-size sheet and text generator. No signup.","mainEntity":{"@type":"ItemList","itemListElement":[{"@type":"ListItem","position":1,"name":"Contrast checker","url":"https://figcraft.rerivo.com/tools/contrast-checker/"},{"@type":"ListItem","position":2,"name":"Palette generator","url":"https://figcraft.rerivo.com/tools/palette-generator/"},{"@type":"ListItem","position":3,"name":"SVG minifier","url":"https://figcraft.rerivo.com/tools/svg-minifier/"},{"@type":"ListItem","position":4,"name":"Screen sizes","url":"https://figcraft.rerivo.com/tools/screen-sizes/"},{"@type":"ListItem","position":5,"name":"Text generator","url":"https://figcraft.rerivo.com/tools/lorem-ipsum/"}]}},{"@type":"FAQPage","@id":"https://figcraft.rerivo.com/tools/#faq","mainEntity":[{"@type":"Question","name":"Do these tools send my colours or SVG files anywhere?","acceptedAnswer":{"@type":"Answer","text":"No. The contrast checker, palette generator, minifier, size sheet and text generator are static JavaScript served from this domain. There is no API call after the page loads, and nothing is written to a server."}},{"@type":"Question","name":"Can I use the output commercially?","acceptedAnswer":{"@type":"Answer","text":"Colour values, SVG markup and placeholder text are not copyrightable in the way code is, and the tools impose no licence on their output. Your own text and artwork remain yours."}},{"@type":"Question","name":"Are these the same tools Figma ships?","acceptedAnswer":{"@type":"Answer","text":"No. They are independent implementations of the same jobs. Figma publishes a colour contrast checker, a colour palette generator and a lorem ipsum generator; this page publishes its own versions with the same inputs and no account requirement."}},{"@type":"Question","name":"Why do the tools put state in the URL?","acceptedAnswer":{"@type":"Answer","text":"So a result is linkable. If you find a failing pair, the URL carries the two colours and the text size, which makes a bug report or a design review comment self-contained."}}]}]}</script>
+</head>
+<body>
+<a class="skip" href="#main">Skip to content</a>
+<header>
+  <div class="wrap nav">
+    <a class="brand" href="/"><img class="mark-img" src="/assets/mark.svg" alt="" width="28" height="28">FigCraft Guide</a>
+    <nav aria-label="Primary"><a href="/tools/" aria-current="page">Tools</a><a href="/templates/">Templates</a><a href="/alternatives/">Compare</a><a href="/learn/">Learn</a><a href="https://github.com/storytold/figcraft" rel="noopener">GitHub</a><a class="nav-cta" href="/install/">Download</a></nav>
+    <div class="nav-tools">
+      <button class="nav-icon" type="button" data-theme-toggle aria-label="Toggle theme">☾</button>
+      <button class="nav-icon nav-menu-btn" type="button" data-nav-toggle aria-label="Menu" aria-expanded="false" aria-controls="mobile-nav">≡</button>
+    </div>
+  </div>
+  <div class="mobile-nav" id="mobile-nav"><a href="/tools/">Tools</a><a href="/templates/">Templates</a><a href="/alternatives/">Compare</a><a href="/learn/">Learn</a><a href="https://github.com/storytold/figcraft" rel="noopener">GitHub</a><a class="nav-cta" href="/install/">Download FigCraft</a></div>
+</header>
+<main id="main">
+  <div class="wrap">
+    <div class="hero">
+      <ul class="crumbs"><li><span>Tools</span></li></ul>
+      <p class="eyebrow">Tools</p>
+      <h1>Free design tools that run in the browser</h1>
+      <p class="lede">Five small tools built for the boring parts of interface design: checking contrast, building a colour ramp, shrinking an SVG, picking a canvas size, filling a layout with placeholder copy. Every one runs locally in the page.</p>
+      <div class="meta-line"><span>Independent guide</span><span>·</span><span>Updated 2026-10-22</span><span>·</span><span>Covers FigCraft v0.9.0</span><span>·</span><span>3 min read</span></div>
+      <div class="cta"><a class="btn primary" href="/#demo">Open the studio</a><a class="btn ghost" href="/install/">Download FigCraft</a></div>
+    </div>
+
+      <section>
+        <h2>Pick a tool</h2>
+        <p class="sub">No account, no upload, no network call after the page loads. Each tool keeps its result in the URL so you can send someone the exact state you are looking at.</p>
+        <div class="grid">
+          <a class="card" href="/tools/contrast-checker/"><span class="k">Accessibility</span><h3>Contrast checker</h3><p>WCAG 2.2 AA and AAA against any two colours, plus the nearest passing colour when a pair fails.</p></a>
+          <a class="card" href="/tools/palette-generator/"><span class="k">Colour</span><h3>Palette generator</h3><p>An 11-step 50–950 ramp from one base colour, in OKLCH, exported as CSS, Tailwind, SCSS or JSON.</p></a>
+          <a class="card" href="/tools/svg-minifier/"><span class="k">Export</span><h3>SVG minifier</h3><p>Strip the XML preamble, metadata and float noise from a design-tool export without breaking references.</p></a>
+          <a class="card" href="/tools/screen-sizes/"><span class="k">Layout</span><h3>Screen sizes</h3><p>Logical viewport sizes for phones, tablets and laptops, with copyable media queries and a studio handoff.</p></a>
+          <a class="card" href="/tools/lorem-ipsum/"><span class="k">Copy</span><h3>Text generator</h3><p>Placeholder paragraphs sized for real UI strings, with word and character counts.</p></a>
+          <a class="card" href="/#demo"><span class="k">Editor</span><h3>The canvas studio</h3><p>A small browser canvas with frames, text, layers and PNG/SVG/JSON export. Not the full editor.</p></a>
+        </div>
+      </section>
+
+      <section>
+        <h2>Why these five</h2>
+        <p class="sub">They are the checks that come up between a design being drawn and a design being handed off. Each one is also a page that a design tool vendor tends to publish — Figma ships its own colour contrast checker, palette generator and lorem ipsum generator — so the floor for a decent design tool site now includes working utilities rather than screenshots of utilities.</p>
+        <div class="grid three">
+          <div class="card"><span class="k">Check</span><h3>Contrast before review</h3><p>Text/background pairs fail review, not design. Checking a pair takes seconds and the fix suggestion keeps the hue.</p></div>
+          <div class="card"><span class="k">Build</span><h3>Ramps before tokens</h3><p>A ramp with a held hue gives you 50–950 names you can paste into variables instead of inventing shades per component.</p></div>
+          <div class="card"><span class="k">Ship</span><h3>Weight before deploy</h3><p>Design-tool SVG exports carry editor namespaces and four decimal places. Removing them is free bytes.</p></div>
+        </div>
+      </section>
+
+      <section>
+        <h2>How the tools relate to FigCraft</h2>
+        <p class="sub">FigCraft is an open-source design app written in Rust, currently early alpha at roughly 49% parity by the project's own estimate. These tools do not depend on it: they work if you use Figma, Penpot, Sketch or nothing at all. Where a result maps onto FigCraft, the page says how — a ramp becomes local styles and variables, a canvas size opens in the <a href="/#demo">browser studio</a>, a minified SVG lands in the same file you exported it from.</p>
+        <p class="note">This site is independent. It is not affiliated with Figma, Penpot, Sketch or ArtCraft, and none of these tools uploads your files anywhere.</p>
+      </section>
+    
+
+    <section id="faq">
+      <h2>Questions this page answers</h2>
+      <p class="sub">Straight answers, with the limits stated. Every claim here is checkable against the sources linked above.</p>
+      <details><summary>Do these tools send my colours or SVG files anywhere?</summary><p>No. The contrast checker, palette generator, minifier, size sheet and text generator are static JavaScript served from this domain. There is no API call after the page loads, and nothing is written to a server.</p></details>
+      <details><summary>Can I use the output commercially?</summary><p>Colour values, SVG markup and placeholder text are not copyrightable in the way code is, and the tools impose no licence on their output. Your own text and artwork remain yours.</p></details>
+      <details><summary>Are these the same tools Figma ships?</summary><p>No. They are independent implementations of the same jobs. Figma publishes a colour contrast checker, a colour palette generator and a lorem ipsum generator; this page publishes its own versions with the same inputs and no account requirement.</p></details>
+      <details><summary>Why do the tools put state in the URL?</summary><p>So a result is linkable. If you find a failing pair, the URL carries the two colours and the text size, which makes a bug report or a design review comment self-contained.</p></details>
+    </section>
+    <section class="related" id="related">
+      <h2>Keep going</h2>
+      <div class="grid">
+        <a class="card" href="/tools/contrast-checker/"><span class="k">Free tool</span><h3>Contrast checker with a fix, not just a verdict</h3><p>Paste two colours and see the exact WCAG 2.2 ratio, which levels pass, and the closest colour that would pass while keeping the hue and saturation. Everything runs in this page.</p></a>
+        <a class="card" href="/tools/palette-generator/"><span class="k">Free tool</span><h3>Palette generator: one colour in, eleven steps out</h3><p>Give it a brand colour. It holds the hue, walks lightness in even perceptual steps, and gives you a named ramp you can paste into CSS variables, a Tailwind config or FigCraft local styles.</p></a>
+        <a class="card" href="/tools/svg-minifier/"><span class="k">Free tool</span><h3>SVG minifier that leaves your references alone</h3><p>Design tools export SVG with an XML declaration, editor namespaces, metadata blocks and four decimal places. This strips the overhead and reports exactly what it removed — without touching ids, text content or gradient references.</p></a>
+        <a class="card" href="/tools/screen-sizes/"><span class="k">Free tool</span><h3>Screen sizes, in CSS pixels, with the queries attached</h3><p>A working sheet of logical viewport sizes and breakpoints. Copy a size, copy the media query, or open the canvas studio at that exact size and start drawing.</p></a>
+        <a class="card" href="/learn/keyboard-shortcuts/"><span class="k">Guide</span><h3>FigCraft keyboard shortcuts, split honestly</h3><p>There are two keymaps in play on this site and only one of them is documented here. This page lists the demo studio's shortcuts, then shows how to read the real app's bindings instead of assuming they match.</p></a>
+      </div>
+    </section>
+  </div>
+</main>
+<footer>
+  <div class="wrap foot">
+    <div>
+      <strong>FigCraft Guide</strong> — an independent guide and browser studio. Not affiliated with ArtCraft.
+      <div class="note">Last updated 2026-10-22 · covers FigCraft v0.9.0 · corrections welcome via the source repository.</div>
+    </div>
+    <nav aria-label="Footer">
+      <a href="/tools/">Tools</a>
+      <a href="/templates/">Templates</a>
+      <a href="/pricing/">Pricing</a>
+      <a href="/learn/">Learn</a>
+      <a href="/glossary/">Glossary</a>
+      <a href="/issues/">Known issues</a>
+      <a href="/install/">Install</a>
+      <a href="https://github.com/storytold/figcraft" rel="noopener">Source</a>
+    </nav>
+  </div>
+</footer>
+</body>
+</html>

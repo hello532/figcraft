@@ -1,0 +1,179 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Contrast Checker — WCAG AA/AAA With Fix Suggestions</title>
+<meta name="description" content="Check any text/background pair against WCAG 2.2 AA and AAA, and get the nearest passing colour that keeps the hue. Runs locally, no signup.">
+<meta name="robots" content="index,follow,max-image-preview:large">
+<meta name="author" content="FigCraft Guide">
+<meta name="theme-color" content="#2563eb">
+<link rel="canonical" href="https://figcraft.rerivo.com/tools/contrast-checker/">
+<link rel="alternate" type="text/plain" href="https://figcraft.rerivo.com/llms.txt" title="LLMs.txt">
+<link rel="alternate" type="text/plain" href="https://figcraft.rerivo.com/llms-full.txt" title="LLMs full guide">
+<link rel="icon" type="image/svg+xml" href="/assets/favicon.svg">
+<link rel="stylesheet" href="/assets/site.css">
+<script src="/assets/site.js" defer></script>
+<script type="module" src="/assets/tools/contrast.js" defer></script>
+<meta property="og:title" content="Contrast Checker — WCAG AA/AAA With Fix Suggestions">
+<meta property="og:description" content="Check any text/background pair against WCAG 2.2 AA and AAA, and get the nearest passing colour that keeps the hue. Runs locally, no signup.">
+<meta property="og:type" content="website">
+<meta property="og:locale" content="en_US">
+<meta property="og:url" content="https://figcraft.rerivo.com/tools/contrast-checker/">
+<meta property="og:image" content="https://figcraft.rerivo.com/og.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="FigCraft — a Figma alternative written in pure Rust">
+<meta property="article:modified_time" content="2026-10-22">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Contrast Checker — WCAG AA/AAA With Fix Suggestions">
+<meta name="twitter:description" content="Check any text/background pair against WCAG 2.2 AA and AAA, and get the nearest passing colour that keeps the hue. Runs locally, no signup.">
+<meta name="twitter:image" content="https://figcraft.rerivo.com/og.png">
+<script type="application/ld+json">{"@context":"https://schema.org","@graph":[{"@type":"WebPage","@id":"https://figcraft.rerivo.com/tools/contrast-checker/#page","url":"https://figcraft.rerivo.com/tools/contrast-checker/","name":"Contrast checker with a fix, not just a verdict","description":"Check any text/background pair against WCAG 2.2 AA and AAA, and get the nearest passing colour that keeps the hue. Runs locally, no signup.","isPartOf":{"@type":"WebSite","name":"FigCraft Guide","url":"https://figcraft.rerivo.com/"},"inLanguage":"en","dateModified":"2026-10-22","datePublished":"2026-10-22"},{"@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Tools","item":"https://figcraft.rerivo.com/tools/"},{"@type":"ListItem","position":2,"name":"Contrast checker","item":"https://figcraft.rerivo.com/tools/contrast-checker/"}]},{"@type":"WebApplication","@id":"https://figcraft.rerivo.com/tools/contrast-checker/#app","name":"Contrast checker with a fix, not just a verdict","url":"https://figcraft.rerivo.com/tools/contrast-checker/","applicationCategory":"DesignApplication","operatingSystem":"Any (browser)","browserRequirements":"Requires JavaScript","isAccessibleForFree":true,"offers":{"@type":"Offer","price":"0","priceCurrency":"USD"},"description":"Browser-based WCAG 2.2 contrast ratio calculator with nearest-passing-colour suggestions.","publisher":{"@type":"Organization","name":"FigCraft Guide","url":"https://figcraft.rerivo.com/"}},{"@type":"FAQPage","@id":"https://figcraft.rerivo.com/tools/contrast-checker/#faq","mainEntity":[{"@type":"Question","name":"Why does my colour pass in Figma but fail here?","acceptedAnswer":{"@type":"Answer","text":"Usually because a different pair is being measured: a text fill against a frame fill, versus the same fill against a semi-transparent surface above it. Blend the transparency into the background colour first, then check the flattened pair."}},{"@type":"Question","name":"What does \"nearest passing colour\" change?","acceptedAnswer":{"@type":"Answer","text":"Only HSL lightness. Hue and saturation stay where they were and the tool searches for the smallest lightness move that reaches the required ratio. If no lightness on that hue can pass, no suggestion is offered."}},{"@type":"Question","name":"Is 3:1 enough for large text?","acceptedAnswer":{"@type":"Answer","text":"For WCAG 2.2 AA, yes: large text needs 3:1. AAA still wants 4.5:1 for large text, and body text needs 4.5:1 (AA) or 7:1 (AAA)."}},{"@type":"Question","name":"Does this check UI components too?","acceptedAnswer":{"@type":"Answer","text":"It reports the 3:1 non-text threshold, which is the colour requirement in 1.4.11. It cannot tell you whether a focus indicator is large enough or whether a control is distinguishable without colour — those need manual checks."}},{"@type":"Question","name":"Can I link a specific check?","acceptedAnswer":{"@type":"Answer","text":"Yes. The URL carries fg, bg and size, for example /tools/contrast-checker/?fg=5f6368&bg=ffffff&size=body. The Share result button copies the current URL."}}]}]}</script>
+</head>
+<body>
+<a class="skip" href="#main">Skip to content</a>
+<header>
+  <div class="wrap nav">
+    <a class="brand" href="/"><img class="mark-img" src="/assets/mark.svg" alt="" width="28" height="28">FigCraft Guide</a>
+    <nav aria-label="Primary"><a href="/tools/" aria-current="page">Tools</a><a href="/templates/">Templates</a><a href="/alternatives/">Compare</a><a href="/learn/">Learn</a><a href="https://github.com/storytold/figcraft" rel="noopener">GitHub</a><a class="nav-cta" href="/install/">Download</a></nav>
+    <div class="nav-tools">
+      <button class="nav-icon" type="button" data-theme-toggle aria-label="Toggle theme">☾</button>
+      <button class="nav-icon nav-menu-btn" type="button" data-nav-toggle aria-label="Menu" aria-expanded="false" aria-controls="mobile-nav">≡</button>
+    </div>
+  </div>
+  <div class="mobile-nav" id="mobile-nav"><a href="/tools/">Tools</a><a href="/templates/">Templates</a><a href="/alternatives/">Compare</a><a href="/learn/">Learn</a><a href="https://github.com/storytold/figcraft" rel="noopener">GitHub</a><a class="nav-cta" href="/install/">Download FigCraft</a></div>
+</header>
+<main id="main">
+  <div class="wrap">
+    <div class="hero">
+      <ul class="crumbs"><li><a href="/tools/">Tools</a></li><li><span>Contrast checker</span></li></ul>
+      <p class="eyebrow">Free tool</p>
+      <h1>Contrast checker with a fix, not just a verdict</h1>
+      <p class="lede">Paste two colours and see the exact WCAG 2.2 ratio, which levels pass, and the closest colour that would pass while keeping the hue and saturation. Everything runs in this page.</p>
+      <div class="meta-line"><span>Independent guide</span><span>·</span><span>Updated 2026-10-22</span><span>·</span><span>Covers FigCraft v0.9.0</span><span>·</span><span>5 min read</span></div>
+      <div class="cta"><a class="btn primary" href="/#demo">Open the studio</a><a class="btn ghost" href="/install/">Download FigCraft</a></div>
+    </div>
+
+      <section id="check">
+        <div class="tool">
+          <div class="tool-head"><h2>Contrast checker</h2><span class="hint">WCAG 2.2 · runs locally · nothing uploaded</span></div>
+          <div class="tool-body tool-grid">
+            <form class="tool-form" autocomplete="off" onsubmit="return false">
+              <div class="field">
+                <label for="ct-fg">Text colour</label>
+                <div class="row"><input type="color" id="ct-fg-pick" value="#1a1a1a" aria-label="Pick text colour"><input type="text" id="ct-fg" value="#1A1A1A" spellcheck="false" aria-label="Text colour hex"></div>
+              </div>
+              <div class="field">
+                <label for="ct-bg">Background colour</label>
+                <div class="row"><input type="color" id="ct-bg-pick" value="#FFFFFF" aria-label="Pick background colour"><input type="text" id="ct-bg" value="#FFFFFF" spellcheck="false" aria-label="Background colour hex"></div>
+              </div>
+              <div class="field">
+                <label for="ct-size">Text size</label>
+                <select id="ct-size">
+                  <option value="body">Body text — under 18pt (24px)</option>
+                  <option value="large">Large text — 18pt+, or 14pt bold</option>
+                </select>
+              </div>
+              <label class="check"><input type="checkbox" id="ct-bold"> Bold weight (14pt bold counts as large)</label>
+              <div class="btn-row">
+                <button class="btn ghost sm" type="button" id="ct-swap">Swap colours</button>
+                <button class="btn ghost sm" type="button" id="ct-share" data-share>Share result</button>
+              </div>
+              <p class="status" id="ct-status" data-copy-status></p>
+            </form>
+            <div class="result" id="ct-out" aria-live="polite"></div>
+          </div>
+        </div>
+        <p class="note">Click any suggested colour to copy its hex. The URL updates as you type, so the link you share reproduces the exact pair and text size.</p>
+      </section>
+
+      <section id="math">
+        <h2>How the ratio is calculated</h2>
+        <p class="sub">WCAG 2.2 defines contrast on relative luminance, not on perceived lightness. The arithmetic is short enough to check by hand:</p>
+        <div class="prose">
+          <pre><code>c_linear = c/12.92                     if c &lt;= 0.04045
+c_linear = ((c + 0.055)/1.055) ^ 2.4   otherwise     (c = channel / 255)
+
+L = 0.2126·R_linear + 0.7152·G_linear + 0.0722·B_linear
+
+ratio = (L_light + 0.05) / (L_dark + 0.05)          range 1:1 to 21:1</code></pre>
+          <p>Two consequences worth knowing. First, the ratio is symmetric: swapping text and background gives the same number. Second, the +0.05 means dark colours compress — the difference between <code>#000</code> and <code>#111</code> matters far less than between <code>#EEE</code> and <code>#FFF</code>.</p>
+        </div>
+        <div class="table-wrap" style="margin-top:16px">
+          <table>
+            <thead><tr><th>Level</th><th>Normal text</th><th>Large text</th><th>Applies to</th></tr></thead>
+            <tbody>
+              <tr><th scope="row">AA (1.4.3)</th><td>4.5:1</td><td>3:1</td><td>Body copy, labels, links</td></tr>
+              <tr><th scope="row">AAA (1.4.6)</th><td>7:1</td><td>4.5:1</td><td>Long-form reading, low-vision audiences</td></tr>
+              <tr><th scope="row">Non-text (1.4.11)</th><td>3:1</td><td>3:1</td><td>Input borders, icons, focus rings, chart strokes</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <p class="note">Large text is at least 18pt (24px), or 14pt (about 18.66px) when bold. The checkbox above switches which threshold the verdict uses; the individual level pills always show all of them.</p>
+      </section>
+
+      <section id="workflow">
+        <h2>Where this fits in a real design file</h2>
+        <div class="grid">
+          <div class="card"><span class="k">01</span><h3>Check the pair, not the swatch</h3><p>A brand colour can be fine on white and fail on your grey surface. Check the pair you actually ship: text token against surface token, in both themes.</p></div>
+          <div class="card"><span class="k">02</span><h3>Keep the hue when you fix</h3><p>The suggestion moves lightness only. A blue that fails becomes a darker blue, not a muddy black — which is what usually happens when someone nudges a colour picker at random.</p></div>
+          <div class="card"><span class="k">03</span><h3>Store the pair in variables</h3><p>In FigCraft, local styles and variables with modes let one name hold light and dark values. The contrast rule then lives in the token pair rather than in a comment.</p></div>
+        </div>
+        <div class="cta" style="margin-top:24px">
+          <a class="btn primary" href="/tools/palette-generator/">Build a ramp from a passing colour</a>
+          <a class="btn ghost" href="/tools/svg-minifier/">Minify an export</a>
+        </div>
+      </section>
+
+      <section id="limits">
+        <h2>What it does not do</h2>
+        <p class="sub">A ratio is one axis of accessibility, not the whole test.</p>
+        <ul class="list">
+          <li><strong>No colour-blindness simulation</strong><span>Two colours can pass 4.5:1 and still be indistinguishable to a reader with deuteranopia. Pair colour with shape, label or position.</span></li>
+          <li><strong>No background images or gradients</strong><span>The tool compares two flat colours. For text over a photo, check the worst pixel behind the glyphs.</span></li>
+          <li><strong>Not APCA</strong><span>WCAG 3 is still a draft and its APCA model produces different numbers. This page implements WCAG 2.2, which is what audits currently cite.</span></li>
+          <li><strong>Not a full audit</strong><span>Focus visibility, target size, reflow and semantics are separate success criteria. This checks 1.4.3, 1.4.6 and the colour half of 1.4.11.</span></li>
+        </ul>
+      </section>
+    
+
+    <section id="faq">
+      <h2>Questions this page answers</h2>
+      <p class="sub">Straight answers, with the limits stated. Every claim here is checkable against the sources linked above.</p>
+      <details><summary>Why does my colour pass in Figma but fail here?</summary><p>Usually because a different pair is being measured: a text fill against a frame fill, versus the same fill against a semi-transparent surface above it. Blend the transparency into the background colour first, then check the flattened pair.</p></details>
+      <details><summary>What does &quot;nearest passing colour&quot; change?</summary><p>Only HSL lightness. Hue and saturation stay where they were and the tool searches for the smallest lightness move that reaches the required ratio. If no lightness on that hue can pass, no suggestion is offered.</p></details>
+      <details><summary>Is 3:1 enough for large text?</summary><p>For WCAG 2.2 AA, yes: large text needs 3:1. AAA still wants 4.5:1 for large text, and body text needs 4.5:1 (AA) or 7:1 (AAA).</p></details>
+      <details><summary>Does this check UI components too?</summary><p>It reports the 3:1 non-text threshold, which is the colour requirement in 1.4.11. It cannot tell you whether a focus indicator is large enough or whether a control is distinguishable without colour — those need manual checks.</p></details>
+      <details><summary>Can I link a specific check?</summary><p>Yes. The URL carries fg, bg and size, for example /tools/contrast-checker/?fg=5f6368&bg=ffffff&size=body. The Share result button copies the current URL.</p></details>
+    </section>
+    <section class="related" id="related">
+      <h2>Keep going</h2>
+      <div class="grid">
+        <a class="card" href="/tools/palette-generator/"><span class="k">Free tool</span><h3>Palette generator: one colour in, eleven steps out</h3><p>Give it a brand colour. It holds the hue, walks lightness in even perceptual steps, and gives you a named ramp you can paste into CSS variables, a Tailwind config or FigCraft local styles.</p></a>
+        <a class="card" href="/tools/svg-minifier/"><span class="k">Free tool</span><h3>SVG minifier that leaves your references alone</h3><p>Design tools export SVG with an XML declaration, editor namespaces, metadata blocks and four decimal places. This strips the overhead and reports exactly what it removed — without touching ids, text content or gradient references.</p></a>
+        <a class="card" href="/tools/screen-sizes/"><span class="k">Free tool</span><h3>Screen sizes, in CSS pixels, with the queries attached</h3><p>A working sheet of logical viewport sizes and breakpoints. Copy a size, copy the media query, or open the canvas studio at that exact size and start drawing.</p></a>
+      </div>
+    </section>
+  </div>
+</main>
+<footer>
+  <div class="wrap foot">
+    <div>
+      <strong>FigCraft Guide</strong> — an independent guide and browser studio. Not affiliated with ArtCraft.
+      <div class="note">Last updated 2026-10-22 · covers FigCraft v0.9.0 · corrections welcome via the source repository.</div>
+    </div>
+    <nav aria-label="Footer">
+      <a href="/tools/">Tools</a>
+      <a href="/templates/">Templates</a>
+      <a href="/pricing/">Pricing</a>
+      <a href="/learn/">Learn</a>
+      <a href="/glossary/">Glossary</a>
+      <a href="/issues/">Known issues</a>
+      <a href="/install/">Install</a>
+      <a href="https://github.com/storytold/figcraft" rel="noopener">Source</a>
+    </nav>
+  </div>
+</footer>
+</body>
+</html>

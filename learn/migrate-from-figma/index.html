@@ -1,0 +1,152 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Migrating from Figma to FigCraft: What Survives</title>
+<meta name="description" content="A realistic Figma to FigCraft migration: import the .fig first, rebuild what breaks, and expect font, variable and component-override losses. No team cloud yet.">
+<meta name="robots" content="index,follow,max-image-preview:large">
+<meta name="author" content="FigCraft Guide">
+<meta name="theme-color" content="#2563eb">
+<link rel="canonical" href="https://figcraft.rerivo.com/learn/migrate-from-figma/">
+<link rel="alternate" type="text/plain" href="https://figcraft.rerivo.com/llms.txt" title="LLMs.txt">
+<link rel="alternate" type="text/plain" href="https://figcraft.rerivo.com/llms-full.txt" title="LLMs full guide">
+<link rel="icon" type="image/svg+xml" href="/assets/favicon.svg">
+<link rel="stylesheet" href="/assets/site.css">
+<script src="/assets/site.js" defer></script>
+<meta property="og:title" content="Migrating from Figma to FigCraft: What Survives">
+<meta property="og:description" content="A realistic Figma to FigCraft migration: import the .fig first, rebuild what breaks, and expect font, variable and component-override losses. No team cloud yet.">
+<meta property="og:type" content="website">
+<meta property="og:locale" content="en_US">
+<meta property="og:url" content="https://figcraft.rerivo.com/learn/migrate-from-figma/">
+<meta property="og:image" content="https://figcraft.rerivo.com/og.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="FigCraft — a Figma alternative written in pure Rust">
+<meta property="article:modified_time" content="2026-10-22">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Migrating from Figma to FigCraft: What Survives">
+<meta name="twitter:description" content="A realistic Figma to FigCraft migration: import the .fig first, rebuild what breaks, and expect font, variable and component-override losses. No team cloud yet.">
+<meta name="twitter:image" content="https://figcraft.rerivo.com/og.png">
+<script type="application/ld+json">{"@context":"https://schema.org","@graph":[{"@type":"WebPage","@id":"https://figcraft.rerivo.com/learn/migrate-from-figma/#page","url":"https://figcraft.rerivo.com/learn/migrate-from-figma/","name":"Migrating from Figma to FigCraft","description":"A realistic Figma to FigCraft migration: import the .fig first, rebuild what breaks, and expect font, variable and component-override losses. No team cloud yet.","isPartOf":{"@type":"WebSite","name":"FigCraft Guide","url":"https://figcraft.rerivo.com/"},"inLanguage":"en","dateModified":"2026-10-22","datePublished":"2026-10-22"},{"@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Learn","item":"https://figcraft.rerivo.com/learn/"},{"@type":"ListItem","position":2,"name":"Migrate from Figma","item":"https://figcraft.rerivo.com/learn/migrate-from-figma/"}]},{"@type":"Article","@id":"https://figcraft.rerivo.com/learn/migrate-from-figma/#article","headline":"Migrating from Figma to FigCraft","description":"A realistic Figma to FigCraft migration: import the .fig first, rebuild what breaks, and expect font, variable and component-override losses. No team cloud yet.","datePublished":"2026-10-22","dateModified":"2026-10-22","author":{"@type":"Organization","name":"FigCraft Guide","url":"https://figcraft.rerivo.com/"},"publisher":{"@type":"Organization","name":"FigCraft Guide","url":"https://figcraft.rerivo.com/"},"mainEntityOfPage":{"@id":"https://figcraft.rerivo.com/learn/migrate-from-figma/#page"},"about":{"@type":"SoftwareApplication","name":"FigCraft","applicationCategory":"DesignApplication","operatingSystem":"macOS, Windows, Linux, FreeBSD, Web","offers":{"@type":"Offer","price":"0","priceCurrency":"USD"}}},{"@type":"FAQPage","@id":"https://figcraft.rerivo.com/learn/migrate-from-figma/#faq","mainEntity":[{"@type":"Question","name":"Can I open my Figma files in FigCraft?","acceptedAnswer":{"@type":"Answer","text":"Yes, through best-effort .fig import, or by exporting frames as SVG and importing those. Complex files import partially: grid auto layout, instance-swap overrides and missing fonts are the documented casualties."}},{"@type":"Question","name":"What breaks most often in a Figma migration?","acceptedAnswer":{"@type":"Answer","text":"Fonts first, because a missing family is substituted and everything measured around it shifts. Then component overrides on swapped instances, grid auto-layout tracks, and prototype triggers. Rebuild variables and components in that order to contain the damage."}},{"@type":"Question","name":"Can FigCraft replace Figma for a team?","acceptedAnswer":{"@type":"Answer","text":"Not today. There are no accounts, teams or cloud, live sessions are a preview, and the optional public collaboration server is not end-to-end encrypted. Solo work on local files, or a team that splits review elsewhere, is the realistic fit."}},{"@type":"Question","name":"Can I go back to Figma afterwards?","acceptedAnswer":{"@type":"Answer","text":"Exporting .fig exists and is labelled experimental. Do not plan a round trip: keep the original .fig, and treat FigCraft as a one-way destination for the work you move."}},{"@type":"Question","name":"How do I keep my design tokens?","acceptedAnswer":{"@type":"Answer","text":"Rebuild them as FigCraft variables with modes and aliases, then bind the layers. The concept maps, but the table is worth rebuilding by hand rather than trusting an import that does not report everything it dropped."}}]}]}</script>
+</head>
+<body>
+<a class="skip" href="#main">Skip to content</a>
+<header>
+  <div class="wrap nav">
+    <a class="brand" href="/"><img class="mark-img" src="/assets/mark.svg" alt="" width="28" height="28">FigCraft Guide</a>
+    <nav aria-label="Primary"><a href="/tools/">Tools</a><a href="/templates/">Templates</a><a href="/alternatives/">Compare</a><a href="/learn/" aria-current="page">Learn</a><a href="https://github.com/storytold/figcraft" rel="noopener">GitHub</a><a class="nav-cta" href="/install/">Download</a></nav>
+    <div class="nav-tools">
+      <button class="nav-icon" type="button" data-theme-toggle aria-label="Toggle theme">☾</button>
+      <button class="nav-icon nav-menu-btn" type="button" data-nav-toggle aria-label="Menu" aria-expanded="false" aria-controls="mobile-nav">≡</button>
+    </div>
+  </div>
+  <div class="mobile-nav" id="mobile-nav"><a href="/tools/">Tools</a><a href="/templates/">Templates</a><a href="/alternatives/">Compare</a><a href="/learn/">Learn</a><a href="https://github.com/storytold/figcraft" rel="noopener">GitHub</a><a class="nav-cta" href="/install/">Download FigCraft</a></div>
+</header>
+<main id="main">
+  <div class="wrap">
+    <div class="hero">
+      <ul class="crumbs"><li><a href="/learn/">Learn</a></li><li><span>Migrate from Figma</span></li></ul>
+      <p class="eyebrow">Guide</p>
+      <h1>Migrating from Figma to FigCraft</h1>
+      <p class="lede">The import gets you a document. It does not get you a working design system. This is the order that wastes the least time, and the four places the damage usually lands.</p>
+      <div class="meta-line"><span>Independent guide</span><span>·</span><span>Updated 2026-10-22</span><span>·</span><span>Covers FigCraft v0.9.0</span><span>·</span><span>8 min read</span></div>
+      <div class="cta"><a class="btn primary" href="/install/">Download FigCraft</a><a class="btn ghost" href="/#demo">Open the studio</a></div>
+    </div>
+<section class="prose">
+      <h2>Set the expectation first</h2>
+      <p>Figma is a mature hosted product with real-time team collaboration and a plugin ecosystem. FigCraft is an open-source Rust app at about 49% parity by its own estimate, offline-first, with collaboration as a preview. A migration is therefore not a switch; it is a re-platforming with a known finishing cost.</p>
+      <p>Nothing here depends on the hosted side. If your team currently lives in Figma comments, libraries and multiplayer, no part of FigCraft replaces that yet: live sessions have no accounts, teams or cloud, and the optional public server is not end-to-end encrypted.</p>
+    </section>
+    <section>
+      <h2>Step by step</h2>
+      <ol class="steps">
+        <li><strong>Inventory what you actually use, and build the CLI.</strong> Count components, variants, variables and modes, and list the fonts. This list is the migration's work breakdown, and it is cheaper to make it before the import than after.
+          <pre><code>cargo build --release -p figcraft-cli</code></pre>
+        </li>
+        <li><strong>Start with the smallest file that is still representative.</strong> A one-screen marketing page tells you more per minute than a 400-frame product file. Keep the original <code>.fig</code> and a checksum.
+          <pre><code>cp marketing.fig marketing.fig.keep
+shasum -a 256 marketing.fig.keep   # sha256sum on Linux</code></pre>
+        </li>
+        <li><strong>Read the import before you open it.</strong>
+          <pre><code>./target/release/figcraft-cli info marketing.fig --json &gt; import.json</code></pre>
+          Missing fonts and repairs surface here, plus a <code>note:</code> line for each thing the importer could not bring in — though not for everything it drops, which is <a href="https://github.com/storytold/figcraft/issues/467" rel="noopener">#467</a>. If this hangs on a large file, that is <a href="https://github.com/storytold/figcraft/issues/574" rel="noopener">#574</a>, and the umbrella is <a href="https://github.com/storytold/figcraft/issues/321" rel="noopener">#321</a>.
+        </li>
+        <li><strong>Convert and own a native file immediately.</strong>
+          <pre><code>./target/release/figcraft-cli convert marketing.fig marketing.figcraft</code></pre>
+        </li>
+        <li><strong>Rebuild variables and modes before you touch layout.</strong> Colours, spacing and radii as variables with Light and Dark modes are the part that keeps every later screen cheap. Audit the variable panel against your Figma inventory rather than assuming a one-to-one mapping: the import does not report everything it drops (<a href="https://github.com/storytold/figcraft/issues/467" rel="noopener">#467</a>).</li>
+        <li><strong>Rebuild components, then instances, then overrides.</strong> In this order: a component set without its overrides is usable, while 200 instances pointing at nothing are not. Expect the instance-swap overrides to be gone (<a href="https://github.com/storytold/figcraft/issues/464" rel="noopener">#464</a>).</li>
+        <li><strong>Fix fonts deliberately.</strong> Install the families on the machine, or load them into a session with <code>text.loadFont</code>. Text whose font is missing is laid out in a fallback, so every measurement you take before installing the font is wrong.</li>
+        <li><strong>Re-create prototype flows.</strong> Connections, triggers and transitions exist in FigCraft, but treat imported prototype data as something to verify link by link. A flow that looks connected in the layers panel is not proof that the trigger survived.</li>
+        <li><strong>Decide what stays in Figma.</strong> Comments, multiplayer review and plugin-driven workflows have no equivalent here. Splitting the work — design in FigCraft, review elsewhere — is a legitimate end state, and more honest than a half-finished all-in migration.</li>
+      </ol>
+    </section>
+    <section>
+      <h2>What survives, what usually breaks</h2>
+      <div class="table-wrap">
+        <table>
+          <thead><tr><th>Area</th><th>Realistic outcome</th></tr></thead>
+          <tbody>
+            <tr><td>Frames, shapes, text, images</td><td>Usually arrives; text needs the right fonts to look right</td></tr>
+            <tr><td>Auto layout</td><td>Often arrives; grid auto layout loses tracks and cell anchors (<a href="https://github.com/storytold/figcraft/issues/465" rel="noopener">#465</a>)</td></tr>
+            <tr><td>Components and variants</td><td>Imported, but overrides on swapped instances fall back to the main default (<a href="https://github.com/storytold/figcraft/issues/464" rel="noopener">#464</a>)</td></tr>
+            <tr><td>Variables, modes, aliases</td><td>Supported in FigCraft, but expect to rebuild tables rather than trust the import</td></tr>
+            <tr><td>Fonts</td><td>The usual casualty: missing families fall back silently (<a href="https://github.com/storytold/figcraft/issues/752" rel="noopener">#752</a>)</td></tr>
+            <tr><td>Prototype flows</td><td>Verify each link; do not assume the trigger survived</td></tr>
+            <tr><td>Comments, teams, plugins</td><td>Not replaced by anything in FigCraft today</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <p>The import reports less than it should: <a href="https://github.com/storytold/figcraft/issues/467" rel="noopener">#467</a> covers the case where data is dropped without a warning. That is the reason this guide keeps saying "check", and the reason the report from step 3 is worth keeping.</p>
+    </section>
+    <section>
+      <h2>What can go wrong</h2>
+      <ul class="list">
+        <li><strong>The import never finishes</strong><span>Large-file import (<a href="https://github.com/storytold/figcraft/issues/574" rel="noopener">#574</a>, umbrella <a href="https://github.com/storytold/figcraft/issues/321" rel="noopener">#321</a>). Split the file by page or by frame before retrying.</span></li>
+        <li><strong>Every instance looks right until you swap one</strong><span>Swap overrides are dropped (<a href="https://github.com/storytold/figcraft/issues/464" rel="noopener">#464</a>). Re-apply overrides per instance and spot-check a sample.</span></li>
+        <li><strong>Your grid layouts collapse on the first edit</strong><span>Grid tracks did not import (<a href="https://github.com/storytold/figcraft/issues/465" rel="noopener">#465</a>). Rebuild the track definition once per frame.</span></li>
+        <li><strong>Type is a few pixels off everywhere</strong><span>A missing font was substituted (<a href="https://github.com/storytold/figcraft/issues/752" rel="noopener">#752</a>). Install it and re-check, since auto layout will have sized around the wrong metrics.</span></li>
+        <li><strong>A teammate cannot comment or co-edit</strong><span>Not a bug: no accounts, teams or cloud. Self-host <code>figcraft-server</code> for a live session, or keep review in another tool.</span></li>
+      </ul>
+      <p class="note">Unverified: the percentage of any real file that survives, and how long a rebuild takes. Both are file-specific. This page states the failure modes the tracker documents and does not promise that everything else is safe.</p>
+    </section>
+
+    <section id="faq">
+      <h2>Questions this page answers</h2>
+      <p class="sub">Straight answers, with the limits stated. Every claim here is checkable against the sources linked above.</p>
+      <details><summary>Can I open my Figma files in FigCraft?</summary><p>Yes, through best-effort .fig import, or by exporting frames as SVG and importing those. Complex files import partially: grid auto layout, instance-swap overrides and missing fonts are the documented casualties.</p></details>
+      <details><summary>What breaks most often in a Figma migration?</summary><p>Fonts first, because a missing family is substituted and everything measured around it shifts. Then component overrides on swapped instances, grid auto-layout tracks, and prototype triggers. Rebuild variables and components in that order to contain the damage.</p></details>
+      <details><summary>Can FigCraft replace Figma for a team?</summary><p>Not today. There are no accounts, teams or cloud, live sessions are a preview, and the optional public collaboration server is not end-to-end encrypted. Solo work on local files, or a team that splits review elsewhere, is the realistic fit.</p></details>
+      <details><summary>Can I go back to Figma afterwards?</summary><p>Exporting .fig exists and is labelled experimental. Do not plan a round trip: keep the original .fig, and treat FigCraft as a one-way destination for the work you move.</p></details>
+      <details><summary>How do I keep my design tokens?</summary><p>Rebuild them as FigCraft variables with modes and aliases, then bind the layers. The concept maps, but the table is worth rebuilding by hand rather than trusting an import that does not report everything it dropped.</p></details>
+    </section>
+    <section class="related" id="related">
+      <h2>Keep going</h2>
+      <div class="grid">
+        <a class="card" href="/learn/open-fig-file/"><span class="k">Guide</span><h3>Opening a .fig file in FigCraft</h3><p>Import is best effort, not a migration guarantee. This is the order of operations that keeps your original file untouched and tells you what survived before you start editing.</p></a>
+        <a class="card" href="/learn/offline-design/"><span class="k">Guide</span><h3>Designing offline with FigCraft</h3><p>FigCraft stores documents as .figcraft archives on your disk, with no account and no telemetry. That is a real trade: total ownership of the file, and total responsibility for it.</p></a>
+      </div>
+    </section>
+  </div>
+</main>
+<footer>
+  <div class="wrap foot">
+    <div>
+      <strong>FigCraft Guide</strong> — an independent guide and browser studio. Not affiliated with ArtCraft.
+      <div class="note">Last updated 2026-10-22 · covers FigCraft v0.9.0 · corrections welcome via the source repository.</div>
+    </div>
+    <nav aria-label="Footer">
+      <a href="/tools/">Tools</a>
+      <a href="/templates/">Templates</a>
+      <a href="/pricing/">Pricing</a>
+      <a href="/learn/">Learn</a>
+      <a href="/glossary/">Glossary</a>
+      <a href="/issues/">Known issues</a>
+      <a href="/install/">Install</a>
+      <a href="https://github.com/storytold/figcraft" rel="noopener">Source</a>
+    </nav>
+  </div>
+</footer>
+</body>
+</html>

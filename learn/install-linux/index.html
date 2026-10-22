@@ -1,0 +1,163 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Install FigCraft on Linux: AppImage, deb, rpm, flatpak</title>
+<meta name="description" content="Pick the right FigCraft Linux build, run the AppImage with chmod +x, install the deb, rpm, flatpak or Arch package, and know the FreeBSD x86_64-only caveat.">
+<meta name="robots" content="index,follow,max-image-preview:large">
+<meta name="author" content="FigCraft Guide">
+<meta name="theme-color" content="#2563eb">
+<link rel="canonical" href="https://figcraft.rerivo.com/learn/install-linux/">
+<link rel="alternate" type="text/plain" href="https://figcraft.rerivo.com/llms.txt" title="LLMs.txt">
+<link rel="alternate" type="text/plain" href="https://figcraft.rerivo.com/llms-full.txt" title="LLMs full guide">
+<link rel="icon" type="image/svg+xml" href="/assets/favicon.svg">
+<link rel="stylesheet" href="/assets/site.css">
+<script src="/assets/site.js" defer></script>
+<meta property="og:title" content="Install FigCraft on Linux: AppImage, deb, rpm, flatpak">
+<meta property="og:description" content="Pick the right FigCraft Linux build, run the AppImage with chmod +x, install the deb, rpm, flatpak or Arch package, and know the FreeBSD x86_64-only caveat.">
+<meta property="og:type" content="website">
+<meta property="og:locale" content="en_US">
+<meta property="og:url" content="https://figcraft.rerivo.com/learn/install-linux/">
+<meta property="og:image" content="https://figcraft.rerivo.com/og.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="FigCraft — a Figma alternative written in pure Rust">
+<meta property="article:modified_time" content="2026-10-22">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Install FigCraft on Linux: AppImage, deb, rpm, flatpak">
+<meta name="twitter:description" content="Pick the right FigCraft Linux build, run the AppImage with chmod +x, install the deb, rpm, flatpak or Arch package, and know the FreeBSD x86_64-only caveat.">
+<meta name="twitter:image" content="https://figcraft.rerivo.com/og.png">
+<script type="application/ld+json">{"@context":"https://schema.org","@graph":[{"@type":"WebPage","@id":"https://figcraft.rerivo.com/learn/install-linux/#page","url":"https://figcraft.rerivo.com/learn/install-linux/","name":"Installing FigCraft on Linux","description":"Pick the right FigCraft Linux build, run the AppImage with chmod +x, install the deb, rpm, flatpak or Arch package, and know the FreeBSD x86_64-only caveat.","isPartOf":{"@type":"WebSite","name":"FigCraft Guide","url":"https://figcraft.rerivo.com/"},"inLanguage":"en","dateModified":"2026-10-22","datePublished":"2026-10-22"},{"@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Learn","item":"https://figcraft.rerivo.com/learn/"},{"@type":"ListItem","position":2,"name":"Install on Linux","item":"https://figcraft.rerivo.com/learn/install-linux/"}]},{"@type":"Article","@id":"https://figcraft.rerivo.com/learn/install-linux/#article","headline":"Installing FigCraft on Linux","description":"Pick the right FigCraft Linux build, run the AppImage with chmod +x, install the deb, rpm, flatpak or Arch package, and know the FreeBSD x86_64-only caveat.","datePublished":"2026-10-22","dateModified":"2026-10-22","author":{"@type":"Organization","name":"FigCraft Guide","url":"https://figcraft.rerivo.com/"},"publisher":{"@type":"Organization","name":"FigCraft Guide","url":"https://figcraft.rerivo.com/"},"mainEntityOfPage":{"@id":"https://figcraft.rerivo.com/learn/install-linux/#page"},"about":{"@type":"SoftwareApplication","name":"FigCraft","applicationCategory":"DesignApplication","operatingSystem":"macOS, Windows, Linux, FreeBSD, Web","offers":{"@type":"Offer","price":"0","priceCurrency":"USD"}}},{"@type":"FAQPage","@id":"https://figcraft.rerivo.com/learn/install-linux/#faq","mainEntity":[{"@type":"Question","name":"How do I run FigCraft on Linux without installing it?","acceptedAnswer":{"@type":"Answer","text":"Download the AppImage for your architecture, chmod +x it, and run it. There is no system-wide install step and no dependency resolution; the single file is the application."}},{"@type":"Question","name":"Which Linux packages does FigCraft ship?","acceptedAnswer":{"@type":"Answer","text":"For x86_64 and aarch64: AppImage, deb, rpm, flatpak, Arch package and tarball. For riscv64: deb, rpm and tarball only. All of them come from the same CI run on the GitHub release page."}},{"@type":"Question","name":"Is there a FreeBSD build for ARM?","acceptedAnswer":{"@type":"Answer","text":"Not in v0.9.0. FreeBSD is x86_64 only; the aarch64 build was dropped because it could not build inside the 5-hour CI limit. Building from source is the only route on ARM."}},{"@type":"Question","name":"Does the AppImage include the CLI?","acceptedAnswer":{"@type":"Answer","text":"Yes. Running the AppImage with the cli subcommand executes figcraft-cli, so ./figcraft-0.9.0-linux-x86_64.AppImage cli info app.figcraft works without a separate build."}},{"@type":"Question","name":"Do I need a Rust toolchain to install FigCraft?","acceptedAnswer":{"@type":"Answer","text":"No, not for the prebuilt packages. You need a Rust toolchain, git and the separate craft-fonts checkout only if you build the desktop app from source."}}]}]}</script>
+</head>
+<body>
+<a class="skip" href="#main">Skip to content</a>
+<header>
+  <div class="wrap nav">
+    <a class="brand" href="/"><img class="mark-img" src="/assets/mark.svg" alt="" width="28" height="28">FigCraft Guide</a>
+    <nav aria-label="Primary"><a href="/tools/">Tools</a><a href="/templates/">Templates</a><a href="/alternatives/">Compare</a><a href="/learn/" aria-current="page">Learn</a><a href="https://github.com/storytold/figcraft" rel="noopener">GitHub</a><a class="nav-cta" href="/install/">Download</a></nav>
+    <div class="nav-tools">
+      <button class="nav-icon" type="button" data-theme-toggle aria-label="Toggle theme">☾</button>
+      <button class="nav-icon nav-menu-btn" type="button" data-nav-toggle aria-label="Menu" aria-expanded="false" aria-controls="mobile-nav">≡</button>
+    </div>
+  </div>
+  <div class="mobile-nav" id="mobile-nav"><a href="/tools/">Tools</a><a href="/templates/">Templates</a><a href="/alternatives/">Compare</a><a href="/learn/">Learn</a><a href="https://github.com/storytold/figcraft" rel="noopener">GitHub</a><a class="nav-cta" href="/install/">Download FigCraft</a></div>
+</header>
+<main id="main">
+  <div class="wrap">
+    <div class="hero">
+      <ul class="crumbs"><li><a href="/learn/">Learn</a></li><li><span>Install on Linux</span></li></ul>
+      <p class="eyebrow">Guide</p>
+      <h1>Installing FigCraft on Linux</h1>
+      <p class="lede">There is no installer wizard and no system-wide step for the AppImage: download, <code>chmod +x</code>, run. The package formats exist for people who prefer their distro to own the binary.</p>
+      <div class="meta-line"><span>Independent guide</span><span>·</span><span>Updated 2026-10-22</span><span>·</span><span>Covers FigCraft v0.9.0</span><span>·</span><span>6 min read</span></div>
+      <div class="cta"><a class="btn primary" href="/install/">Download FigCraft</a><a class="btn ghost" href="/#demo">Open the studio</a></div>
+    </div>
+<section class="prose">
+      <h2>Which file do I want?</h2>
+      <p>v0.9.0 attaches 29 build artifacts plus <code>SHA256SUMS.txt</code>. Linux builds follow the name <code>figcraft-0.9.0-linux-ARCH.FORMAT</code>, so the filename tells you the architecture and the package type before you download it. Match the architecture first: an aarch64 build will not start on an x86_64 machine, and that is the most common first-run failure.</p>
+    </section>
+    <section>
+      <h2>Linux formats per architecture</h2>
+      <div class="table-wrap">
+        <table>
+          <thead><tr><th>Architecture</th><th>Formats in v0.9.0</th><th>Notes</th></tr></thead>
+          <tbody>
+            <tr><td>x86_64</td><td><code>.AppImage</code>, <code>.deb</code>, <code>.rpm</code>, <code>.flatpak</code>, <code>.pkg.tar.zst</code>, <code>.tar.gz</code></td><td>Everything. The AppImage also carries a <code>.zsync</code> file for delta updates</td></tr>
+            <tr><td>aarch64</td><td>Same set as x86_64</td><td>For ARM servers and ARM laptops running a full desktop</td></tr>
+            <tr><td>riscv64</td><td><code>.deb</code>, <code>.rpm</code>, <code>.tar.gz</code></td><td>No AppImage and no flatpak in this release; use the tarball or a distro package</td></tr>
+            <tr><td>FreeBSD</td><td><code>.tar.gz</code></td><td><strong>x86_64 only</strong> — aarch64 was dropped in v0.9.0 because it could not build inside the 5-hour CI limit</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+    <section>
+      <h2>Step by step</h2>
+      <ol class="steps">
+        <li><strong>Download from the release page</strong>, then verify against the checksum file that ships beside the builds.
+          <pre><code>sha256sum -c SHA256SUMS.txt --ignore-missing</code></pre>
+        </li>
+        <li><strong>AppImage: make it executable and run it.</strong> There is no install step and no dependency resolution; the file is the application.
+          <pre><code>chmod +x figcraft-0.9.0-linux-x86_64.AppImage
+./figcraft-0.9.0-linux-x86_64.AppImage</code></pre>
+          The AppImage bundles the CLI too, so automation works without a second download:
+          <pre><code>./figcraft-0.9.0-linux-x86_64.AppImage cli info app.figcraft</code></pre>
+        </li>
+        <li><strong>Debian or Ubuntu: install the deb.</strong> <code>apt</code> resolves the dependencies of a local file when you give it a path.
+          <pre><code>sudo apt install ./figcraft-0.9.0-linux-x86_64.deb</code></pre>
+        </li>
+        <li><strong>Fedora or RHEL: install the rpm.</strong>
+          <pre><code>sudo dnf install ./figcraft-0.9.0-linux-x86_64.rpm</code></pre>
+        </li>
+        <li><strong>Arch: install the Arch package.</strong>
+          <pre><code>sudo pacman -U figcraft-0.9.0-linux-x86_64.pkg.tar.zst</code></pre>
+        </li>
+        <li><strong>Flatpak, if you already run Flatpak.</strong>
+          <pre><code>flatpak install ./figcraft-0.9.0-linux-x86_64.flatpak</code></pre>
+        </li>
+        <li><strong>Tarball: unpack and run the binary.</strong> This is also the FreeBSD path; check what the archive unpacks into before assuming the binary is in the current directory.
+          <pre><code>tar -xzf figcraft-0.9.0-linux-x86_64.tar.gz
+./figcraft</code></pre>
+        </li>
+        <li><strong>Prefer building it?</strong> You need a Rust toolchain, <code>git</code>, and <code>craft-fonts</code> cloned beside the project. A missing <code>craft-fonts</code> checkout can fall back to another font silently, so do not skip it.
+          <pre><code>git clone https://github.com/storytold/figcraft
+cd figcraft
+git clone https://github.com/storytold/craft-fonts ../craft-fonts
+cargo run --release -p figcraft</code></pre>
+        </li>
+      </ol>
+    </section>
+    <section>
+      <h2>The FreeBSD caveat</h2>
+      <p>FreeBSD gets a single <code>.tar.gz</code> for x86_64 and nothing else. The aarch64 FreeBSD build was dropped in v0.9.0: it could not finish inside the CI job's 5-hour limit, which is an infrastructure constraint rather than a statement about the code. If you need FreeBSD on ARM, building from source is the route, and it is not a supported artifact of this release. Everything else on this page is Linux-only and does not apply.</p>
+    </section>
+    <section>
+      <h2>What can go wrong</h2>
+      <ul class="list">
+        <li><strong>The AppImage opens and immediately exits</strong><span>Usually the wrong architecture — aarch64 on x86_64 or the reverse. Check the filename against <code>uname -m</code>.</span></li>
+        <li><strong>There is no AppImage for riscv64</strong><span>True for v0.9.0: that architecture ships deb, rpm and tarball only. Use the tarball.</span></li>
+        <li><strong>Text renders in the wrong face</strong><span>Fonts come from the machine, and a missing family falls back silently (<a href="https://github.com/storytold/figcraft/issues/752" rel="noopener">#752</a>). Install the families the document names.</span></li>
+        <li><strong>The whole interface is tiny</strong><span>A 1440p scaling problem (<a href="https://github.com/storytold/figcraft/issues/540" rel="noopener">#540</a>), addressed by the interface-size preference added under <a href="https://github.com/storytold/figcraft/issues/818" rel="noopener">#818</a>. Check that before reinstalling anything.</span></li>
+        <li><strong>You installed a package and the CLI is missing</strong><span>The AppImage bundles it as a <code>cli</code> subcommand; the deb, rpm, flatpak and Arch packages are not documented as doing so. Build <code>figcraft-cli</code> separately if you need it there.</span></li>
+      </ul>
+      <p class="note">Unverified: distro-specific runtime dependencies for the deb, rpm and flatpak, and whether <code>pacman -U</code> upgrades cleanly over a previous version. The filenames, the format matrix and the FreeBSD caveat are checked against the v0.9.0 release assets.</p>
+    </section>
+
+    <section id="faq">
+      <h2>Questions this page answers</h2>
+      <p class="sub">Straight answers, with the limits stated. Every claim here is checkable against the sources linked above.</p>
+      <details><summary>How do I run FigCraft on Linux without installing it?</summary><p>Download the AppImage for your architecture, <code>chmod +x</code> it, and run it. There is no system-wide install step and no dependency resolution; the single file is the application.</p></details>
+      <details><summary>Which Linux packages does FigCraft ship?</summary><p>For x86_64 and aarch64: AppImage, deb, rpm, flatpak, Arch package and tarball. For riscv64: deb, rpm and tarball only. All of them come from the same CI run on the GitHub release page.</p></details>
+      <details><summary>Is there a FreeBSD build for ARM?</summary><p>Not in v0.9.0. FreeBSD is x86_64 only; the aarch64 build was dropped because it could not build inside the 5-hour CI limit. Building from source is the only route on ARM.</p></details>
+      <details><summary>Does the AppImage include the CLI?</summary><p>Yes. Running the AppImage with the <code>cli</code> subcommand executes <code>figcraft-cli</code>, so <code>./figcraft-0.9.0-linux-x86_64.AppImage cli info app.figcraft</code> works without a separate build.</p></details>
+      <details><summary>Do I need a Rust toolchain to install FigCraft?</summary><p>No, not for the prebuilt packages. You need a Rust toolchain, git and the separate <code>craft-fonts</code> checkout only if you build the desktop app from source.</p></details>
+    </section>
+    <section class="related" id="related">
+      <h2>Keep going</h2>
+      <div class="grid">
+        <a class="card" href="/learn/cli-automation/"><span class="k">Guide</span><h3>Automating FigCraft with the CLI</h3><p>The CLI is the same engine without a window: inspect, export, convert, render, run command scripts, and report the command table. Everything here is repeatable in CI.</p></a>
+        <a class="card" href="/learn/export-svg/"><span class="k">Guide</span><h3>Exporting SVG from FigCraft</h3><p>Two exporters share the word &quot;SVG&quot; here, and only one of them is FigCraft. This page covers the real exporter first, then the demo studio, and keeps them apart.</p></a>
+      </div>
+    </section>
+  </div>
+</main>
+<footer>
+  <div class="wrap foot">
+    <div>
+      <strong>FigCraft Guide</strong> — an independent guide and browser studio. Not affiliated with ArtCraft.
+      <div class="note">Last updated 2026-10-22 · covers FigCraft v0.9.0 · corrections welcome via the source repository.</div>
+    </div>
+    <nav aria-label="Footer">
+      <a href="/tools/">Tools</a>
+      <a href="/templates/">Templates</a>
+      <a href="/pricing/">Pricing</a>
+      <a href="/learn/">Learn</a>
+      <a href="/glossary/">Glossary</a>
+      <a href="/issues/">Known issues</a>
+      <a href="/install/">Install</a>
+      <a href="https://github.com/storytold/figcraft" rel="noopener">Source</a>
+    </nav>
+  </div>
+</footer>
+</body>
+</html>

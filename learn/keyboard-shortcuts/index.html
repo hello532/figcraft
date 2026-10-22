@@ -1,0 +1,147 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>FigCraft Keyboard Shortcuts: Demo Studio vs the Real App</title>
+<meta name="description" content="The demo studio's shortcuts are documented here, the real FigCraft app's keymap is not. How to tell them apart, and how to dump the app's bindings from the CLI.">
+<meta name="robots" content="index,follow,max-image-preview:large">
+<meta name="author" content="FigCraft Guide">
+<meta name="theme-color" content="#2563eb">
+<link rel="canonical" href="https://figcraft.rerivo.com/learn/keyboard-shortcuts/">
+<link rel="alternate" type="text/plain" href="https://figcraft.rerivo.com/llms.txt" title="LLMs.txt">
+<link rel="alternate" type="text/plain" href="https://figcraft.rerivo.com/llms-full.txt" title="LLMs full guide">
+<link rel="icon" type="image/svg+xml" href="/assets/favicon.svg">
+<link rel="stylesheet" href="/assets/site.css">
+<script src="/assets/site.js" defer></script>
+<meta property="og:title" content="FigCraft Keyboard Shortcuts: Demo Studio vs the Real App">
+<meta property="og:description" content="The demo studio's shortcuts are documented here, the real FigCraft app's keymap is not. How to tell them apart, and how to dump the app's bindings from the CLI.">
+<meta property="og:type" content="website">
+<meta property="og:locale" content="en_US">
+<meta property="og:url" content="https://figcraft.rerivo.com/learn/keyboard-shortcuts/">
+<meta property="og:image" content="https://figcraft.rerivo.com/og.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="FigCraft — a Figma alternative written in pure Rust">
+<meta property="article:modified_time" content="2026-10-22">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="FigCraft Keyboard Shortcuts: Demo Studio vs the Real App">
+<meta name="twitter:description" content="The demo studio's shortcuts are documented here, the real FigCraft app's keymap is not. How to tell them apart, and how to dump the app's bindings from the CLI.">
+<meta name="twitter:image" content="https://figcraft.rerivo.com/og.png">
+<script type="application/ld+json">{"@context":"https://schema.org","@graph":[{"@type":"WebPage","@id":"https://figcraft.rerivo.com/learn/keyboard-shortcuts/#page","url":"https://figcraft.rerivo.com/learn/keyboard-shortcuts/","name":"FigCraft keyboard shortcuts, split honestly","description":"The demo studio's shortcuts are documented here, the real FigCraft app's keymap is not. How to tell them apart, and how to dump the app's bindings from the CLI.","isPartOf":{"@type":"WebSite","name":"FigCraft Guide","url":"https://figcraft.rerivo.com/"},"inLanguage":"en","dateModified":"2026-10-22","datePublished":"2026-10-22"},{"@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Learn","item":"https://figcraft.rerivo.com/learn/"},{"@type":"ListItem","position":2,"name":"Keyboard shortcuts","item":"https://figcraft.rerivo.com/learn/keyboard-shortcuts/"}]},{"@type":"Article","@id":"https://figcraft.rerivo.com/learn/keyboard-shortcuts/#article","headline":"FigCraft keyboard shortcuts, split honestly","description":"The demo studio's shortcuts are documented here, the real FigCraft app's keymap is not. How to tell them apart, and how to dump the app's bindings from the CLI.","datePublished":"2026-10-22","dateModified":"2026-10-22","author":{"@type":"Organization","name":"FigCraft Guide","url":"https://figcraft.rerivo.com/"},"publisher":{"@type":"Organization","name":"FigCraft Guide","url":"https://figcraft.rerivo.com/"},"mainEntityOfPage":{"@id":"https://figcraft.rerivo.com/learn/keyboard-shortcuts/#page"},"about":{"@type":"SoftwareApplication","name":"FigCraft","applicationCategory":"DesignApplication","operatingSystem":"macOS, Windows, Linux, FreeBSD, Web","offers":{"@type":"Offer","price":"0","priceCurrency":"USD"}}},{"@type":"FAQPage","@id":"https://figcraft.rerivo.com/learn/keyboard-shortcuts/#faq","mainEntity":[{"@type":"Question","name":"Are the demo studio shortcuts the same as FigCraft's shortcuts?","acceptedAnswer":{"@type":"Answer","text":"No. The studio at /#demo is an independent canvas with its own small fixed keymap. This guide documents that keymap only, and states plainly that the real app's keymap is not documented here."}},{"@type":"Question","name":"How do I find FigCraft's real keyboard shortcuts?","acceptedAnswer":{"@type":"Answer","text":"Print them from your build: figcraft-cli commands lists every command with its shortcut, and --json --filter narrows the result. Over MCP, list_commands reports each command's first key for the platform the server runs on."}},{"@type":"Question","name":"Why do Windows and macOS shortcuts differ?","acceptedAnswer":{"@type":"Answer","text":"The engine keymap carries macOS keys and, where they differ, the Windows and Linux keys — for example Use as mask is Ctrl+Cmd+M on macOS and Ctrl+Alt+M elsewhere. The dump you print reflects the platform it ran on."}},{"@type":"Question","name":"Can I run a command without knowing its shortcut?","acceptedAnswer":{"@type":"Answer","text":"Yes, and for automation you should. Every menu action is a command reachable by id through the CLI, the control channel and MCP, so run_command with the command id does not depend on a key binding at all."}}]}]}</script>
+</head>
+<body>
+<a class="skip" href="#main">Skip to content</a>
+<header>
+  <div class="wrap nav">
+    <a class="brand" href="/"><img class="mark-img" src="/assets/mark.svg" alt="" width="28" height="28">FigCraft Guide</a>
+    <nav aria-label="Primary"><a href="/tools/">Tools</a><a href="/templates/">Templates</a><a href="/alternatives/">Compare</a><a href="/learn/" aria-current="page">Learn</a><a href="https://github.com/storytold/figcraft" rel="noopener">GitHub</a><a class="nav-cta" href="/install/">Download</a></nav>
+    <div class="nav-tools">
+      <button class="nav-icon" type="button" data-theme-toggle aria-label="Toggle theme">☾</button>
+      <button class="nav-icon nav-menu-btn" type="button" data-nav-toggle aria-label="Menu" aria-expanded="false" aria-controls="mobile-nav">≡</button>
+    </div>
+  </div>
+  <div class="mobile-nav" id="mobile-nav"><a href="/tools/">Tools</a><a href="/templates/">Templates</a><a href="/alternatives/">Compare</a><a href="/learn/">Learn</a><a href="https://github.com/storytold/figcraft" rel="noopener">GitHub</a><a class="nav-cta" href="/install/">Download FigCraft</a></div>
+</header>
+<main id="main">
+  <div class="wrap">
+    <div class="hero">
+      <ul class="crumbs"><li><a href="/learn/">Learn</a></li><li><span>Keyboard shortcuts</span></li></ul>
+      <p class="eyebrow">Guide</p>
+      <h1>FigCraft keyboard shortcuts, split honestly</h1>
+      <p class="lede">There are two keymaps in play on this site and only one of them is documented here. This page lists the demo studio's shortcuts, then shows how to read the real app's bindings instead of assuming they match.</p>
+      <div class="meta-line"><span>Independent guide</span><span>·</span><span>Updated 2026-10-22</span><span>·</span><span>Covers FigCraft v0.9.0</span><span>·</span><span>6 min read</span></div>
+      <div class="cta"><a class="btn primary" href="/install/">Download FigCraft</a><a class="btn ghost" href="/#demo">Open the studio</a></div>
+    </div>
+<section class="prose">
+      <h2>Two keymaps, one of them documented</h2>
+      <p>The studio at <a href="/#demo">/#demo</a> is an independent canvas built for this site. Its shortcuts are fixed, small, documented below, and shown in its own <code>?</code> dialog. They are the studio's, not FigCraft's.</p>
+      <p>The real app has its own default keymap, held in one table in the engine (<code>figcraft_engine::keymap</code>) and grouped the way the project's shortcut reference is grouped. This guide does not reproduce that table: it changes between releases, macOS and Windows/Linux differ, and a copied list would be stale in a way you cannot see. Read it from the build you are running instead — the commands are further down.</p>
+    </section>
+    <section>
+      <h2>Demo studio shortcuts (documented)</h2>
+      <div class="table-wrap">
+        <table>
+          <thead><tr><th>Keys</th><th>Action</th></tr></thead>
+          <tbody>
+            <tr><td><code>V</code> / <code>F</code> / <code>R</code> / <code>T</code></td><td>Select, Frame, Rectangle, Text tool</td></tr>
+            <tr><td>Drag / handle drag</td><td>Move a layer, resize a layer</td></tr>
+            <tr><td><code>Alt</code> + drag</td><td>Disable grid and guide snapping</td></tr>
+            <tr><td><code>Shift</code> + drag</td><td>Keep the aspect ratio while resizing</td></tr>
+            <tr><td><code>Cmd</code>/<code>Ctrl</code> + <code>Z</code></td><td>Undo; add <code>Shift</code> to redo</td></tr>
+            <tr><td><code>Cmd</code>/<code>Ctrl</code> + <code>D</code></td><td>Duplicate the selected layer</td></tr>
+            <tr><td><code>Cmd</code>/<code>Ctrl</code> + <code>C</code> / <code>V</code></td><td>Copy and paste a layer</td></tr>
+            <tr><td><code>Delete</code> or <code>Backspace</code></td><td>Delete the selected layer</td></tr>
+            <tr><td>Arrows</td><td>Nudge 1 px; <code>Shift</code> 10 px; <code>Alt</code> 0.001 px</td></tr>
+            <tr><td><code>Cmd</code>/<code>Ctrl</code> + arrows</td><td>Resize instead of moving</td></tr>
+            <tr><td><code>Space</code> + drag</td><td>Pan the canvas</td></tr>
+            <tr><td><code>Cmd</code>/<code>Ctrl</code> + wheel</td><td>Zoom around the pointer</td></tr>
+            <tr><td><code>Esc</code></td><td>Close a dialog, drop the icon drawer, deselect</td></tr>
+            <tr><td><code>?</code></td><td>Open the shortcut dialog</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <p>Three details worth knowing. The nudge has a sub-pixel tier — <code>Alt</code> moves 0.001 px, which is only visible at high zoom and is there for aligning to a grid you do not want to disturb. Holding <code>Cmd</code>/<code>Ctrl</code> with the arrows converts the same gesture into a resize. And a run of arrow presses collapses into one undo step, so undo does not walk back 40 individual nudges.</p>
+    </section>
+    <section>
+      <h2>The real app's keymap (not documented in this guide)</h2>
+      <p>What this guide can tell you is where the answer lives. The app's shortcuts are entries on commands: every menu action is a command, and each command may carry a shortcut. The CLI prints that table, which makes it the authoritative, version-accurate list for the build you have.</p>
+      <ol class="steps">
+        <li><strong>Open the demo and its own dialog.</strong> Go to <a href="/#demo">/#demo</a> and press <code>?</code>. What appears is the table above, with the studio's own wording.</li>
+        <li><strong>List every command with its shortcut.</strong> The <code>commands</code> subcommand prints label, shortcut and an undoable marker; <code>--filter</code> narrows it, <code>--json</code> makes it machine-readable.
+          <pre><code>./target/release/figcraft-cli commands --filter export
+./target/release/figcraft-cli commands --json &gt; commands.json</code></pre>
+        </li>
+        <li><strong>Read the platform-specific binding.</strong> <code>list_commands</code> over MCP reports each command's first key for the platform the server runs on, so the same dump looks different on macOS and on Linux. Run it on the machine you care about.</li>
+        <li><strong>Check an ambiguous key by its command, not by memory.</strong> Some bindings differ by platform; the project's own documentation gives Use as mask as <code>Ctrl+Cmd+M</code> on macOS and <code>Ctrl+Alt+M</code> elsewhere, and Bring to front as <code>Alt+Cmd+]</code> and <code>Ctrl+Shift+]</code>. Assume nothing you have not printed.</li>
+        <li><strong>Drive the app with a key you have verified.</strong> Over MCP, <code>key</code> resolves keys the way the canvas does, and <code>run_command</code> reaches the command behind the shortcut directly — usually the better choice for automation, because it does not depend on a keymap at all.</li>
+      </ol>
+      <p class="note">Unverified in this guide: the complete real-app keymap. There is no official list here to check against, and this page deliberately does not invent one. If a published shortcut reference disagrees with your build, the build is right.</p>
+    </section>
+    <section>
+      <h2>What can go wrong</h2>
+      <ul class="list">
+        <li><strong>Demo keys do nothing in the app</strong><span>Expected. The studio's <code>V</code>/<code>F</code>/<code>R</code>/<code>T</code> bindings are the studio's. Print the app's table with <code>figcraft-cli commands</code>.</span></li>
+        <li><strong>A shortcut types a character instead of running</strong><span>You are editing text. While a text layer is being edited, text shortcuts and text editing keys take precedence over canvas commands.</span></li>
+        <li><strong>You cannot read the shortcut labels at all</strong><span>The UI is small on a 1440p display (<a href="https://github.com/storytold/figcraft/issues/540" rel="noopener">#540</a>); the interface-size preference was added under <a href="https://github.com/storytold/figcraft/issues/818" rel="noopener">#818</a>. Set it before blaming the keymap.</span></li>
+        <li><strong>The list you found online is wrong</strong><span>It is probably from another version or another platform. Regenerate it from your own build.</span></li>
+      </ul>
+    </section>
+
+    <section id="faq">
+      <h2>Questions this page answers</h2>
+      <p class="sub">Straight answers, with the limits stated. Every claim here is checkable against the sources linked above.</p>
+      <details><summary>Are the demo studio shortcuts the same as FigCraft's shortcuts?</summary><p>No. The studio at /#demo is an independent canvas with its own small fixed keymap. This guide documents that keymap only, and states plainly that the real app's keymap is not documented here.</p></details>
+      <details><summary>How do I find FigCraft's real keyboard shortcuts?</summary><p>Print them from your build: <code>figcraft-cli commands</code> lists every command with its shortcut, and <code>--json --filter</code> narrows the result. Over MCP, <code>list_commands</code> reports each command's first key for the platform the server runs on.</p></details>
+      <details><summary>Why do Windows and macOS shortcuts differ?</summary><p>The engine keymap carries macOS keys and, where they differ, the Windows and Linux keys — for example Use as mask is Ctrl+Cmd+M on macOS and Ctrl+Alt+M elsewhere. The dump you print reflects the platform it ran on.</p></details>
+      <details><summary>Can I run a command without knowing its shortcut?</summary><p>Yes, and for automation you should. Every menu action is a command reachable by id through the CLI, the control channel and MCP, so <code>run_command</code> with the command id does not depend on a key binding at all.</p></details>
+    </section>
+    <section class="related" id="related">
+      <h2>Keep going</h2>
+      <div class="grid">
+        <a class="card" href="/learn/offline-design/"><span class="k">Guide</span><h3>Designing offline with FigCraft</h3><p>FigCraft stores documents as .figcraft archives on your disk, with no account and no telemetry. That is a real trade: total ownership of the file, and total responsibility for it.</p></a>
+        <a class="card" href="/learn/cli-automation/"><span class="k">Guide</span><h3>Automating FigCraft with the CLI</h3><p>The CLI is the same engine without a window: inspect, export, convert, render, run command scripts, and report the command table. Everything here is repeatable in CI.</p></a>
+      </div>
+    </section>
+  </div>
+</main>
+<footer>
+  <div class="wrap foot">
+    <div>
+      <strong>FigCraft Guide</strong> — an independent guide and browser studio. Not affiliated with ArtCraft.
+      <div class="note">Last updated 2026-10-22 · covers FigCraft v0.9.0 · corrections welcome via the source repository.</div>
+    </div>
+    <nav aria-label="Footer">
+      <a href="/tools/">Tools</a>
+      <a href="/templates/">Templates</a>
+      <a href="/pricing/">Pricing</a>
+      <a href="/learn/">Learn</a>
+      <a href="/glossary/">Glossary</a>
+      <a href="/issues/">Known issues</a>
+      <a href="/install/">Install</a>
+      <a href="https://github.com/storytold/figcraft" rel="noopener">Source</a>
+    </nav>
+  </div>
+</footer>
+</body>
+</html>

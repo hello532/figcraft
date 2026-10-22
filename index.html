@@ -328,6 +328,7 @@
       <a href="/issues/">Issues</a>
       <a href="/install/">Install</a>
       <a href="/alternatives/">Alternatives</a>
+      <a href="/tools/">Tools</a>
       <a href="#demo">Studio</a>
       <a href="#faq">FAQ</a>
       <a class="nav-cta" href="#demo">Open studio</a>
@@ -345,6 +346,10 @@
     <a href="/issues/">Issues</a>
     <a href="/install/">Install</a>
     <a href="/alternatives/">Alternatives</a>
+    <a href="/tools/">Tools</a>
+    <a href="/templates/">Templates</a>
+    <a href="/learn/">Learn</a>
+    <a href="/pricing/">Pricing</a>
     <a href="#get-started">How to run it</a>
     <a href="#guides">Guides</a>
     <a href="#faq">FAQ</a>
@@ -359,6 +364,7 @@
     <a href="#facts">In short</a>
     <a href="#compare">vs Figma</a>
     <a href="#alternatives">Alternatives</a>
+    <a href="#toolbox">Tools</a>
     <a href="#search-intent">Search intent</a>
     <a href="#issues">Issues</a>
     <a href="#whats-new">What's new</a>
@@ -592,6 +598,51 @@
   <p>If FigCraft is not the right fit, Penpot, Plasmic, Graphite and Figma are the closest things to evaluate — each with a different tradeoff on hosting, collaboration and maturity.</p>
   <p><a href="/alternatives/"><strong>All alternatives compared →</strong></a></p>
 </section>
+
+  <section id="toolbox">
+    <h2>Free tools, starters and guides</h2>
+    <p class="sub">Working utilities and reference pages for the parts of design work that come up before a file ships: checking a colour pair, building a ramp, trimming an SVG export, picking a canvas size. No account, no upload.</p>
+    <div class="grid intent-grid">
+      <div class="card">
+        <h3>Tools</h3>
+        <p>Five browser tools; each one keeps its result in the URL so a check can be shared.</p>
+        <ul class="intent-list">
+          <li><a href="/tools/contrast-checker/">contrast checker</a></li>
+          <li><a href="/tools/palette-generator/">palette generator</a></li>
+          <li><a href="/tools/svg-minifier/">svg minifier</a></li>
+          <li><a href="/tools/screen-sizes/">screen sizes</a></li>
+          <li><a href="/tools/lorem-ipsum/">text generator</a></li>
+        </ul>
+      </div>
+      <div class="card">
+        <h3>Starters</h3>
+        <p>The eight templates that ship with the app, with frame sizes and what each one gives you.</p>
+        <ul class="intent-list">
+          <li><a href="/templates/mobile-app/">mobile app</a></li>
+          <li><a href="/templates/landing-page/">landing page</a></li>
+          <li><a href="/templates/dashboard/">dashboard</a></li>
+          <li><a href="/templates/design-system/">design system</a></li>
+          <li><a href="/templates/wireframe-kit/">wireframe kit</a></li>
+          <li><a href="/templates/social-post-sizes/">social sizes</a></li>
+          <li><a href="/templates/presentation-slides/">slides</a></li>
+          <li><a href="/templates/icon-set/">icon set</a></li>
+        </ul>
+      </div>
+      <div class="card">
+        <h3>Guides</h3>
+        <p>Short, source-linked answers to the questions that decide whether FigCraft fits your work.</p>
+        <ul class="intent-list">
+          <li><a href="/learn/open-fig-file/">open a .fig file</a></li>
+          <li><a href="/learn/migrate-from-figma/">migrate from Figma</a></li>
+          <li><a href="/learn/mcp-server/">run the MCP server</a></li>
+          <li><a href="/learn/install-linux/">install on Linux</a></li>
+          <li><a href="/pricing/">what it costs</a></li>
+          <li><a href="/glossary/">glossary</a></li>
+        </ul>
+      </div>
+    </div>
+    <p><a href="/tools/"><strong>Browse all five tools →</strong></a></p>
+  </section>
 
   <section id="issues">
   <h2>Known issues from the GitHub tracker</h2>
@@ -972,6 +1023,18 @@ cargo run --release -p figcraft</code></pre></li>
       if (typeof d.snap === 'boolean') state.snap = d.snap;
       if (typeof d.lockRatio === 'boolean') state.lockRatio = d.lockRatio;
     } catch (_) {}
+  };
+  // Deep link from the screen-size sheet and template pages: /?w=390&h=844#demo
+  const applyUrlBoard = () => {
+    const p = new URLSearchParams(location.search);
+    const w = Number(p.get('w')), h = Number(p.get('h'));
+    if (!Number.isFinite(w) || !Number.isFinite(h) || w <= 0 || h <= 0) return;
+    state.board.w = Math.max(100, Math.min(2400, Math.round(w)));
+    state.board.h = Math.max(100, Math.min(2400, Math.round(h)));
+    const bg = (p.get('bg') || '').replace('#', '');
+    if (/^[0-9a-f]{6}$/i.test(bg)) { state.board.bg = '#' + bg; state.board.alpha = false; }
+    if (p.get('grid') === '0') state.board.grid = false;
+    state.fit = false;
   };
   const snapshot = () => {
     state.history.push(clone(state.layers));
@@ -2166,6 +2229,7 @@ cargo run --release -p figcraft</code></pre></li>
 
   window.addEventListener('resize', () => { if (state.fit) fitZoom(); });
   load();
+  applyUrlBoard();
   syncPrecisionChrome();
   if (!state.selected && state.layers.length) state.selected = state.layers[0];
   syncBoardInputs();

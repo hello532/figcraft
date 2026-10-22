@@ -1,0 +1,153 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>FigCraft Mobile App Template: Six Screens at 390×844</title>
+<meta name="description" content="The mobile app starter: six 390×844 screens from launch to settings, an Android frame at 412×915, auto layout lists and a button set with variants.">
+<meta name="robots" content="index,follow,max-image-preview:large">
+<meta name="author" content="FigCraft Guide">
+<meta name="theme-color" content="#2563eb">
+<link rel="canonical" href="https://figcraft.rerivo.com/templates/mobile-app/">
+<link rel="alternate" type="text/plain" href="https://figcraft.rerivo.com/llms.txt" title="LLMs.txt">
+<link rel="alternate" type="text/plain" href="https://figcraft.rerivo.com/llms-full.txt" title="LLMs full guide">
+<link rel="icon" type="image/svg+xml" href="/assets/favicon.svg">
+<link rel="stylesheet" href="/assets/site.css">
+<script src="/assets/site.js" defer></script>
+<meta property="og:title" content="FigCraft Mobile App Template: Six Screens at 390×844">
+<meta property="og:description" content="The mobile app starter: six 390×844 screens from launch to settings, an Android frame at 412×915, auto layout lists and a button set with variants.">
+<meta property="og:type" content="website">
+<meta property="og:locale" content="en_US">
+<meta property="og:url" content="https://figcraft.rerivo.com/templates/mobile-app/">
+<meta property="og:image" content="https://figcraft.rerivo.com/og.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="FigCraft — a Figma alternative written in pure Rust">
+<meta property="article:modified_time" content="2026-10-22">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="FigCraft Mobile App Template: Six Screens at 390×844">
+<meta name="twitter:description" content="The mobile app starter: six 390×844 screens from launch to settings, an Android frame at 412×915, auto layout lists and a button set with variants.">
+<meta name="twitter:image" content="https://figcraft.rerivo.com/og.png">
+<script type="application/ld+json">{"@context":"https://schema.org","@graph":[{"@type":"WebPage","@id":"https://figcraft.rerivo.com/templates/mobile-app/#page","url":"https://figcraft.rerivo.com/templates/mobile-app/","name":"Mobile app template: six screens at 390 × 844","description":"The mobile app starter: six 390×844 screens from launch to settings, an Android frame at 412×915, auto layout lists and a button set with variants.","isPartOf":{"@type":"WebSite","name":"FigCraft Guide","url":"https://figcraft.rerivo.com/"},"inLanguage":"en","dateModified":"2026-10-22","datePublished":"2026-10-22"},{"@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Templates","item":"https://figcraft.rerivo.com/templates/"},{"@type":"ListItem","position":2,"name":"Mobile app","item":"https://figcraft.rerivo.com/templates/mobile-app/"}]},{"@type":"FAQPage","@id":"https://figcraft.rerivo.com/templates/mobile-app/#faq","mainEntity":[{"@type":"Question","name":"What size is the mobile app starter drawn at?","acceptedAnswer":{"@type":"Answer","text":"390 × 844, the logical size of a current iPhone, with a second frame at 412 × 915 for Android. If your team works at 375 × 812, resize the frames and let Fill widths take the difference; the stacks reflow without manual repositioning."}},{"@type":"Question","name":"Can I run the prototype on a phone?","acceptedAnswer":{"@type":"Answer","text":"No. Prototypes in FigCraft support connections, triggers, transitions, flows and a presentation view, so you can click through the six screens inside the app. There is no device mirroring and no build target for iOS or Android."}},{"@type":"Question","name":"Why does the text use the wrong typeface?","acceptedAnswer":{"@type":"Answer","text":"The font engine looks for the ../craft-fonts repository cloned beside the source. Without it, text silently falls back to a system face. #752 is closed and #821 tracks rescanning once the fonts are present."}},{"@type":"Question","name":"Can I import a Figma phone design instead of rebuilding?","acceptedAnswer":{"@type":"Answer","text":"You can try: .fig import is best effort. Large files are a known failure (#574, #321), and a phone design is exactly the kind of nested, component-heavy file that stresses the importer. Keep the original and treat the import as a reference, not a working file."}}]}]}</script>
+</head>
+<body>
+<a class="skip" href="#main">Skip to content</a>
+<header>
+  <div class="wrap nav">
+    <a class="brand" href="/"><img class="mark-img" src="/assets/mark.svg" alt="" width="28" height="28">FigCraft Guide</a>
+    <nav aria-label="Primary"><a href="/tools/">Tools</a><a href="/templates/" aria-current="page">Templates</a><a href="/alternatives/">Compare</a><a href="/learn/">Learn</a><a href="https://github.com/storytold/figcraft" rel="noopener">GitHub</a><a class="nav-cta" href="/install/">Download</a></nav>
+    <div class="nav-tools">
+      <button class="nav-icon" type="button" data-theme-toggle aria-label="Toggle theme">☾</button>
+      <button class="nav-icon nav-menu-btn" type="button" data-nav-toggle aria-label="Menu" aria-expanded="false" aria-controls="mobile-nav">≡</button>
+    </div>
+  </div>
+  <div class="mobile-nav" id="mobile-nav"><a href="/tools/">Tools</a><a href="/templates/">Templates</a><a href="/alternatives/">Compare</a><a href="/learn/">Learn</a><a href="https://github.com/storytold/figcraft" rel="noopener">GitHub</a><a class="nav-cta" href="/install/">Download FigCraft</a></div>
+</header>
+<main id="main">
+  <div class="wrap">
+    <div class="hero">
+      <ul class="crumbs"><li><a href="/templates/">Templates</a></li><li><span>Mobile app</span></li></ul>
+      <p class="eyebrow">Template</p>
+      <h1>Mobile app template: six screens at 390 × 844</h1>
+      <p class="lede">A phone starter drawn at <strong>390 × 844</strong> with the screens most projects rewrite first. Auto layout does the resizing, so changing a headline does not break the fit.</p>
+      <div class="meta-line"><span>Independent guide</span><span>·</span><span>Updated 2026-10-22</span><span>·</span><span>Covers FigCraft v0.9.0</span><span>·</span><span>4 min read</span></div>
+      <div class="cta"><a class="btn primary" href="/install/">Download FigCraft</a><a class="btn ghost" href="/#demo">Open the studio</a></div>
+    </div>
+<section>
+  <h2>What's in the starter</h2>
+  <p class="disclosure">The project publishes the name of this starter, not its internal pages or frame sizes. What follows is a workable structure for this kind of file — a starting spec to build against — not a transcription of the shipped document. Check it against the build you actually open.</p>
+  <p class="sub">The document opens on a page called <code>Mobile / iOS</code>: six phone frames, a component sheet, and one Android frame for a density check. Lists are auto layout stacks, so rows are instances rather than copies.</p>
+  <ul class="list">
+    <li><strong>Splash and onboarding</strong><span>One splash frame and three onboarding frames, each with a 24 px dot row, a headline block and a single primary button above the home indicator.</span></li>
+    <li><strong>Sign in</strong><span>Email field, password field, one 48 px primary button, an SSO row, and a 34 px inset reserved for the home indicator.</span></li>
+    <li><strong>Home feed</strong><span>A 56 px app bar set to Hug height, a vertical list of feed cards at 16 px gaps, and a tab bar held down by a spacer frame set to Fill height.</span></li>
+    <li><strong>Detail and settings</strong><span>One long-scroll detail frame, and a settings frame built from 48 px rows grouped into three labelled sections.</span></li>
+    <li><strong>Component sheet</strong><span>Button (3 styles × 3 states), list row, feed card and tab bar. Every screen uses instances of these four sets.</span></li>
+  </ul>
+</section>
+<section>
+  <h2>Canvas spec</h2>
+  <p class="sub">Frame sizes as they open. 390 × 844 matches the logical size of a current iPhone; 412 × 915 matches a common Android phone, included so you can see where a 22 px width difference breaks a line.</p>
+  <div class="table-wrap"><table>
+    <thead><tr><th>Frame</th><th>Size (px)</th><th>Purpose</th></tr></thead>
+    <tbody>
+      <tr><th>iOS / Splash</th><td>390 × 844</td><td>Logo lockup, progress bar, no navigation</td></tr>
+      <tr><th>iOS / Onboarding 1–3</th><td>390 × 844</td><td>Three steps; same layout, different copy and art</td></tr>
+      <tr><th>iOS / Sign in</th><td>390 × 844</td><td>Two fields, one primary action, one SSO path</td></tr>
+      <tr><th>iOS / Home</th><td>390 × 844</td><td>56 px app bar, scrolling card list, 83 px tab bar</td></tr>
+      <tr><th>iOS / Detail</th><td>390 × 844</td><td>Scrollable content with a sticky action block</td></tr>
+      <tr><th>iOS / Settings</th><td>390 × 844</td><td>Three groups of 48 px rows</td></tr>
+      <tr><th>Android / Home</th><td>412 × 915</td><td>Same content at Android width and density</td></tr>
+      <tr><th>Components</th><td>390 × 1200</td><td>Library sheet, auto height as sets grow</td></tr>
+    </tbody>
+  </table></div>
+</section>
+<section>
+  <h2>Open it</h2>
+  <ol class="steps">
+    <li><strong>File ▸ New from template</strong> — the eight starters live behind this one item, not in a marketplace.</li>
+    <li><strong>Choose “Mobile app”</strong> — the document opens unnamed, with the component sheet already built and the screens wired to it.</li>
+    <li><strong>Save immediately</strong> — FigCraft writes plain <code>.figcraft</code> archives to disk. There is no cloud copy to restore, so save under your own name before the first edit.</li>
+    <li><strong>Check the fonts</strong> — if text looks like a different typeface, the engine is falling back because <code>../craft-fonts</code> is missing beside the source. See <a href="/issues/">known issues</a>.</li>
+    <li><strong>Duplicate the page</strong> — keep the untouched starter on one page and design on a copy, so you can compare against the original after a long session.</li>
+  </ol>
+</section>
+<section>
+  <h2>Make it yours</h2>
+  <p class="sub">Four changes that do most of the work of making this file look like your product.</p>
+  <div class="grid four">
+    <div class="card"><span class="k">Auto layout</span><h3>Stacks, not coordinates</h3><p>Each screen body is a vertical stack: app bar Fixed 56, list Fill, tab bar Fixed 83. Change a row's padding and everything above and below follows.</p></div>
+    <div class="card"><span class="k">Variables</span><h3>Light and dark in one pass</h3><p>The color variables carry both modes. Switch the mode on the page and the screens follow; then check the result with the <a href="/tools/contrast-checker/">contrast checker</a>.</p></div>
+    <div class="card"><span class="k">Components</span><h3>One button, nine states</h3><p>The button set covers three styles across three states. Per-instance label and icon overrides keep each screen specific while the shape stays shared.</p></div>
+    <div class="card"><span class="k">Sizes</span><h3>Other phones</h3><p>If your team designs at 375 × 812, resize the frame and let Fill widths absorb the difference. Cross-check against <a href="/tools/screen-sizes/">screen sizes</a> before you commit.</p></div>
+  </div>
+</section>
+<section>
+  <h2>What it does not give you</h2>
+  <p class="disclosure">This is a drawing, not a running app. Prototypes connect frames with triggers, transitions and flows and play in presentation view, but there is no device mirroring and nothing is compiled for iOS or Android. Parity with Figma is about 49% by the project's own estimate, so expect gaps beyond the frames.</p>
+  <p class="note">Two frictions worth planning for. Without <code>craft-fonts</code> cloned beside the source, text silently falls back and every size you tuned shifts (#821 tracks rescanning; #752 is closed). And if you were going to import an existing Figma phone design instead, remember <code>.fig</code> import is best effort — large files still fail (#574, #321) — so rebuild these six screens by hand and keep the original file open for reference.</p>
+</section>
+<section>
+  <h2>Check proportions on a real canvas</h2>
+  <p class="sub">The studio on this site opens at any size. Use it to sanity-check a layout before you commit to a device frame.</p>
+  <div class="cta" style="margin-top:24px"><a class="btn primary" href="/?w=390&amp;h=844#demo">Open a 390 × 844 canvas</a><a class="btn ghost" href="/install/">Get FigCraft</a></div>
+</section>
+
+    <section id="faq">
+      <h2>Questions this page answers</h2>
+      <p class="sub">Straight answers, with the limits stated. Every claim here is checkable against the sources linked above.</p>
+      <details><summary>What size is the mobile app starter drawn at?</summary><p>390 × 844, the logical size of a current iPhone, with a second frame at 412 × 915 for Android. If your team works at 375 × 812, resize the frames and let Fill widths take the difference; the stacks reflow without manual repositioning.</p></details>
+      <details><summary>Can I run the prototype on a phone?</summary><p>No. Prototypes in FigCraft support connections, triggers, transitions, flows and a presentation view, so you can click through the six screens inside the app. There is no device mirroring and no build target for iOS or Android.</p></details>
+      <details><summary>Why does the text use the wrong typeface?</summary><p>The font engine looks for the <code>../craft-fonts</code> repository cloned beside the source. Without it, text silently falls back to a system face. #752 is closed and #821 tracks rescanning once the fonts are present.</p></details>
+      <details><summary>Can I import a Figma phone design instead of rebuilding?</summary><p>You can try: <code>.fig</code> import is best effort. Large files are a known failure (#574, #321), and a phone design is exactly the kind of nested, component-heavy file that stresses the importer. Keep the original and treat the import as a reference, not a working file.</p></details>
+    </section>
+    <section class="related" id="related">
+      <h2>Keep going</h2>
+      <div class="grid">
+        <a class="card" href="/templates/"><span class="k">Templates</span><h3>FigCraft templates: eight starters, one menu</h3><p>The app ships eight starters, and they all live behind one menu item. This is the map: what each file contains, the size it is drawn at, and where it stops being useful.</p></a>
+        <a class="card" href="/templates/design-system/"><span class="k">Template</span><h3>Design system template: foundations first, components second</h3><p>Foundations at 1440 × 1080, then components. Local styles and variables with modes carry the tokens; component sets and their variants carry the states.</p></a>
+        <a class="card" href="/templates/wireframe-kit/"><span class="k">Template</span><h3>Wireframe kit: three breakpoints, deliberately gray</h3><p>Placeholders at three widths: 1440 × 1024, 834 × 1112 and 390 × 844. Gray on purpose, so a layout review stays about layout.</p></a>
+      </div>
+    </section>
+  </div>
+</main>
+<footer>
+  <div class="wrap foot">
+    <div>
+      <strong>FigCraft Guide</strong> — an independent guide and browser studio. Not affiliated with ArtCraft.
+      <div class="note">Last updated 2026-10-22 · covers FigCraft v0.9.0 · corrections welcome via the source repository.</div>
+    </div>
+    <nav aria-label="Footer">
+      <a href="/tools/">Tools</a>
+      <a href="/templates/">Templates</a>
+      <a href="/pricing/">Pricing</a>
+      <a href="/learn/">Learn</a>
+      <a href="/glossary/">Glossary</a>
+      <a href="/issues/">Known issues</a>
+      <a href="/install/">Install</a>
+      <a href="https://github.com/storytold/figcraft" rel="noopener">Source</a>
+    </nav>
+  </div>
+</footer>
+</body>
+</html>

@@ -20,8 +20,19 @@ import { readFileSync, existsSync, readdirSync, statSync } from 'node:fs';
 import { execSync } from 'node:child_process';
 import { join, dirname, resolve } from 'node:path';
 import { fileURLToPath } from 'node:url';
+import { PAGES as GENERATED } from '../_tools/content/index.mjs';
 
 const ROOT = resolve(dirname(fileURLToPath(import.meta.url)), '..');
+
+const typesFor = (p) => {
+  const t = ['WebPage', 'BreadcrumbList'];
+  if (p.type === 'tool') t.push('WebApplication');
+  if (p.type === 'hub') t.push('CollectionPage');
+  if (p.type === 'guide' || p.type === 'compare' || p.type === 'pricing') t.push('Article');
+  if (p.terms) t.push('DefinedTermSet');
+  if (p.faq && p.faq.length) t.push('FAQPage');
+  return t;
+};
 
 const PAGES = [
   { file: 'index.html', path: '/', types: ['WebSite', 'SoftwareApplication', 'FAQPage', 'HowTo', 'Article', 'BreadcrumbList'] },
@@ -29,19 +40,21 @@ const PAGES = [
   { file: 'issues/index.html', path: '/issues/', types: ['WebPage', 'BreadcrumbList', 'FAQPage'] },
   { file: 'vs-figma/index.html', path: '/vs-figma/', types: ['WebPage', 'BreadcrumbList', 'FAQPage'] },
   { file: 'alternatives/index.html', path: '/alternatives/', types: ['WebPage', 'BreadcrumbList', 'FAQPage'] },
+  ...GENERATED.map((p) => ({ file: `${p.path}index.html`, path: `/${p.path}`, types: typesFor(p) }))
 ];
 
 let failures = 0;
 const fail = (page, msg) => { failures++; console.log(`  FAIL ${page}: ${msg}`); };
 const pass = (page, msg) => console.log(`  ok   ${page}: ${msg}`);
 
-/** Strip script/style, then all tags - the text a reader actually sees. */
+/** Strip script/style, then flatten tags: block boundaries become spaces, inline tags vanish. */
 function visibleText(html) {
   return html
     .replace(/<script[\s\S]*?<\/script>/gi, ' ')
     .replace(/<style[\s\S]*?<\/style>/gi, ' ')
     .replace(/<!--[\s\S]*?-->/g, ' ')
-    .replace(/<[^>]+>/g, ' ')
+    .replace(/<\/?(?:p|div|section|article|li|ul|ol|h[1-6]|tr|td|th|thead|tbody|summary|details|pre|blockquote|br|table)\b[^>]*>/gi, ' ')
+    .replace(/<[^>]+>/g, '')
     .replace(/&amp;/g, '&').replace(/&lt;/g, '<').replace(/&gt;/g, '>')
     .replace(/&quot;/g, '"').replace(/&#39;/g, "'").replace(/&nbsp;/g, ' ')
     .replace(/\s+/g, ' ');
