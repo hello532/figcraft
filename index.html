@@ -1954,8 +1954,7 @@ cargo run --release -p figcraft-server</code></pre>
     state.future = [];
     state.zoom = 1;
     state.fit = false;
-    // "Reset canvas" resets the tools too. Leaving sub-pixel mode armed after a
-    // reset silently defeats grid snapping, which reads as a broken snap toggle.
+    // Loading the sample also resets the tools, same reasoning as #reset.
     state.preciseMode = false;
     state.precise = false;
     state.snap = true;
@@ -1979,7 +1978,15 @@ cargo run --release -p figcraft-server</code></pre>
     state.seq = 1;
     state.zoom = 1;
     state.fit = false;
+    // Reset the tools too: a remembered sub-pixel mode silently defeats the
+    // Snap checkbox, which reads as a broken snap toggle.
+    state.preciseMode = false;
+    state.precise = false;
+    state.snap = true;
+    state.lockRatio = false;
+    state.tool = 'select';
     $('#zoom').value = '1';
+    syncPrecisionChrome();
     syncBoardInputs();
     resizeCanvas();
     syncPanels();
