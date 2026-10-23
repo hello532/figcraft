@@ -2,6 +2,7 @@
 (function () {
   'use strict';
   var root = document.documentElement;
+  window.__siteJs = 'v3';
   var KEY = 'figcraft-theme';
 
   try {
@@ -98,17 +99,45 @@
     done(ok);
   }
 
-  document.addEventListener('DOMContentLoaded', function () {
-    syncThemeButtons();
+  // A hash that points at a collapsed <details> would otherwise scroll to a
+  // closed summary and look like a dead link. Chrome's own fragment reveal runs
+  // after DOMContentLoaded and does not open the details itself, so re-apply on
+  // load and on the next frame rather than trusting one early call.
+  function openHashTarget() {
+    var id = (location.hash || '').replace(/^#/, '');
+    if (!id) return;
+    var el = document.getElementById(id);
+    if (!el || el.tagName !== 'DETAILS' || el.open) return;
+    el.open = true;
+  }
+
+  function wireNav() {
     var toggle = document.querySelector('[data-nav-toggle]');
     var mobile = document.getElementById('mobile-nav');
-    if (toggle && mobile) {
-      toggle.addEventListener('click', function () {
-        var open = mobile.classList.toggle('open');
-        toggle.setAttribute('aria-expanded', open ? 'true' : 'false');
-      });
-    }
-  });
+    if (!toggle || !mobile || toggle.dataset.wired) return;
+    toggle.dataset.wired = '1';
+    toggle.addEventListener('click', function () {
+      var open = mobile.classList.toggle('open');
+      toggle.setAttribute('aria-expanded', open ? 'true' : 'false');
+    });
+  }
 
-  if (document.readyState !== 'loading') syncThemeButtons();
+  function settleHashTarget() {
+    wireNav();
+    openHashTarget();
+    if (typeof requestAnimationFrame === 'function') {
+      requestAnimationFrame(openHashTarget);
+    }
+    setTimeout(openHashTarget, 120);
+  }
+
+  window.addEventListener('hashchange', settleHashTarget);
+  window.addEventListener('load', openHashTarget);
+
+  if (document.readyState !== 'loading') {
+    syncThemeButtons();
+    settleHashTarget();
+  } else {
+    document.addEventListener('DOMContentLoaded', settleHashTarget);
+  }
 })();

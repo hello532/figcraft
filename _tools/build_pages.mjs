@@ -11,6 +11,7 @@
  * tool, template, comparison and guide families around them.
  */
 import { mkdirSync, readFileSync, writeFileSync, existsSync } from 'node:fs';
+import { createHash } from 'node:crypto';
 import { dirname, join, resolve } from 'node:path';
 import { fileURLToPath } from 'node:url';
 import { PAGES } from './content/index.mjs';
@@ -20,6 +21,39 @@ const SITE = 'https://figcraft.rerivo.com';
 const DEFAULT_UPDATED = '2026-10-22';
 const CHECK = process.argv.includes('--check');
 const REPO = 'https://github.com/storytold/figcraft';
+
+// One content hash for the whole asset tree, so a deploy cannot serve a stale
+// script or stylesheet from a heuristic cache. Without this, Chrome kept
+// running the previous site.js after a push and new behaviour silently never
+// shipped. Coarse on purpose: any asset change busts all of them, which is
+// cheap here and impossible to get subtly wrong.
+const ASSET_FILES = [
+  'assets/site.css',
+  'assets/site.js',
+  'assets/tools/tabs.js',
+  'assets/tools/contrast.js',
+  'assets/tools/palette.js',
+  'assets/tools/svg-minifier.js',
+  'assets/tools/screen-sizes.js',
+  'assets/tools/lorem-ipsum.js',
+  'assets/tools/lib/color.js',
+  'assets/tools/lib/ramp.js',
+  'assets/tools/lib/svgmin.js',
+  'assets/tools/lib/lorem.js'
+];
+const ASSET_HASH = createHash('sha256')
+  .update(
+    ASSET_FILES.map((f) => {
+      try {
+        return readFileSync(join(ROOT, f));
+      } catch (e) {
+        return '';
+      }
+    }).join('\u0000')
+  )
+  .digest('hex')
+  .slice(0, 10);
+const assetUrl = (rel) => `/${rel}?v=${ASSET_HASH}`;
 
 const esc = (s) => String(s).replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;');
 
@@ -158,8 +192,8 @@ function head(page) {
 <link rel="alternate" type="text/plain" href="${SITE}/llms.txt" title="LLMs.txt">
 <link rel="alternate" type="text/plain" href="${SITE}/llms-full.txt" title="LLMs full guide">
 <link rel="icon" type="image/svg+xml" href="/assets/favicon.svg">
-<link rel="stylesheet" href="/assets/site.css">
-<script src="/assets/site.js" defer></script>${scriptTags(page)}
+<link rel="stylesheet" href="${assetUrl('assets/site.css')}">
+<script src="${assetUrl('assets/site.js')}" defer></script>${scriptTags(page)}
 <meta property="og:title" content="${esc(page.ogTitle || page.title)}">
 <meta property="og:description" content="${esc(page.description)}">
 <meta property="og:type" content="website">
@@ -197,7 +231,7 @@ function head(page) {
       <h1>${esc(page.h1)}</h1>
       <p class="lede">${page.lede}</p>
       <div class="meta-line"><span>Independent guide</span><span>·</span><span>Updated ${updated}</span><span>·</span><span>Covers FigCraft v0.10.0</span>${page.reading ? `<span>·</span><span>${page.reading} read</span>` : ''}</div>
-      <div class="cta">${(page.cta || defaultCta()).map((c) => `<a class="btn ${c.primary ? 'primary' : 'ghost'}" href="${c.href}"${c.external ? ' rel="noopener"' : ''}>${esc(c.label)}</a>`).join('')}</div>
+      <div class="cta">${(Array.isArray(page.cta) ? page.cta : defaultCta()).map((c) => `<a class="btn ${c.primary ? 'primary' : 'ghost'}" href="${c.href}"${c.external ? ' rel="noopener"' : ''}>${esc(c.label)}</a>`).join('')}</div>
     </div>
 ${page.body}
 ${faqBlock(page)}${relatedBlock(page)}
@@ -263,7 +297,7 @@ const stripTags = (s) => String(s).replace(/<[^>]+>/g, '');
 /** One <script> per module; a page may ship several (tools/ runs six). */
 function scriptTags(page) {
   const list = page.scripts || (page.script ? [page.script] : []);
-  return list.map((s) => `\n<script type="module" src="/assets/tools/${s}" defer></script>`).join('');
+  return list.map((s) => `\n<script type="module" src="${assetUrl('assets/tools/' + s)}" defer></script>`).join('');
 }
 // Mirrors how a browser flattens markup: block boundaries become spaces,
 // inline tags vanish, so "template</strong>." stays "template." not "template .".

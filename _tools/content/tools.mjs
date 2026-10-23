@@ -16,19 +16,16 @@ export const PAGES = [
     h1: 'Five design tools, one page, nothing uploaded',
     eyebrow: 'Free tools',
     lede:
-      'Contrast, colour ramp, SVG minifier, viewport sizes and placeholder text — the five checks that sit between a design being drawn and a design being handed off. Each one runs locally in this page and keeps its state in the URL.',
+      'Contrast, colour ramp, SVG minifier, viewport sizes and placeholder text — five checks that run locally in this page and keep their state in the URL.',
     reading: '4 min',
     appDescription:
       'Five browser-based design utilities in one page: WCAG 2.2 contrast checker, OKLCH 11-step palette generator, SVG minifier, viewport size reference and placeholder text generator.',
-    cta: [
-      { label: 'Open the studio', href: '/#demo', primary: true },
-      { label: 'Download FigCraft', href: '/install/' }
-    ],
+    cta: [],
     scripts: ['tabs.js', 'contrast.js', 'palette.js', 'svg-minifier.js', 'screen-sizes.js', 'lorem-ipsum.js'],
     body: `
       <section id="tools">
         <h2>Pick a tool</h2>
-        <p class="sub">Everything below runs in this page: no account, no upload, no network call after the files load. Switch tabs freely — a panel is hidden, not rebuilt, so a half-typed hex or a pasted SVG is still there when you come back.</p>
+        <p class="sub">No account, no upload, no network call after the files load. Switching tabs hides a panel rather than rebuilding it, so your input survives.</p>
 
         <div class="tabs" role="tablist" aria-label="Tools">
           <button class="tab" type="button" role="tab" id="tab-contrast" aria-controls="panel-contrast" aria-selected="true" data-tab="contrast">Contrast</button>
@@ -39,7 +36,8 @@ export const PAGES = [
         </div>
 
         <div class="tab-panel" id="panel-contrast" role="tabpanel" aria-labelledby="tab-contrast" data-panel="contrast">
-          <p>Type or pick two colours and get the WCAG 2.2 ratio, every level threshold as a pass or fail pill, and — when the pair fails — the nearest colour that passes with hue and saturation untouched. Text size and bold are separate settings because AA wants 4.5:1 for body copy and 3:1 for large text, and the tool reports the 3:1 non-text threshold alongside them. It measures two flat colours and nothing else: no gradients, no text over photographs, no colour-blindness simulation, and no APCA.</p>
+          <span id="contrast" class="tab-anchor" aria-hidden="true"></span>
+          <p>Two flat colours in, the WCAG 2.2 ratio and every level threshold out — plus the nearest passing colour when the pair fails.</p>
           <div class="tool">
             <div class="tool-head"><h2>Contrast checker</h2><span class="hint">WCAG 2.2 · runs locally · nothing uploaded</span></div>
             <div class="tool-body tool-grid">
@@ -73,7 +71,8 @@ export const PAGES = [
         </div>
 
         <div class="tab-panel" id="panel-palette" role="tabpanel" aria-labelledby="tab-palette" data-panel="palette" hidden>
-          <p>One base colour becomes an eleven-step 50–950 ramp in OKLCH, with the hue held constant and chroma tapered at both ends so the extremes do not turn to mud — the reason a ramp built in HSL produces uneven steps and a grey middle. Name the token, then export as CSS custom properties, a Tailwind theme, SCSS or JSON tokens. It does not choose semantic colours, does not build a dark theme, and does not promise that any pair of steps passes contrast.</p>
+          <span id="palette" class="tab-anchor" aria-hidden="true"></span>
+          <p>One base colour becomes an eleven-step 50–950 ramp in OKLCH, hue held constant, exported as CSS, Tailwind, SCSS or JSON.</p>
           <div class="tool">
             <div class="tool-head"><h2>Palette generator</h2><span class="hint">OKLCH · 11 steps · runs locally</span></div>
             <div class="tool-body tool-grid">
@@ -111,7 +110,8 @@ export const PAGES = [
         </div>
 
         <div class="tab-panel" id="panel-svg" role="tabpanel" aria-labelledby="tab-svg" data-panel="svg" hidden>
-          <p>Paste a design-tool export and the minifier removes the XML declaration, comments, metadata, editor namespaces and float noise, then reports the bytes before and after rather than a promised percentage. Numbers inside text elements are left byte-identical — rounding visible copy would be a correctness bug, not an optimisation — and id attributes are never removed, because gradients, masks, clip paths and use references point at them. It does not rewrite paths, merge shapes or deduplicate definitions, so a dedicated optimiser still wins on artwork.</p>
+          <span id="svg" class="tab-anchor" aria-hidden="true"></span>
+          <p>Paste a design-tool export; it strips the preamble, metadata, editor namespaces and float noise, keeps ids and visible text byte-identical, and reports the real byte delta.</p>
           <div class="tool">
             <div class="tool-head"><h2>SVG minifier</h2><span class="hint">local only · output is re-parsed before it is offered</span></div>
             <div class="tool-body">
@@ -143,7 +143,8 @@ export const PAGES = [
         </div>
 
         <div class="tab-panel" id="panel-sizes" role="tabpanel" aria-labelledby="tab-sizes" data-panel="sizes" hidden>
-          <p>Logical viewport sizes for phones, tablets, laptops and desktops in CSS pixels, each with a copyable size, a copyable media query and a link that opens this site's canvas at that exact width and height — the studio accepts w and h in the query string. Filter by name or width, or narrow to one device class. It is a reference, not a spec sheet: browser chrome changes the usable height, and the breakpoint list below is a starting set rather than a strategy.</p>
+          <span id="sizes" class="tab-anchor" aria-hidden="true"></span>
+          <p>Logical viewport sizes in CSS pixels, each with a copyable media query and a link that opens the canvas at that size.</p>
           <div class="tool">
             <div class="tool-head"><h2>Device viewports</h2><span class="hint">CSS logical pixels · portrait</span></div>
             <div class="tool-body">
@@ -167,7 +168,8 @@ export const PAGES = [
         </div>
 
         <div class="tab-panel" id="panel-text" role="tabpanel" aria-labelledby="tab-text" data-panel="text" hidden>
-          <p>Generate placeholder copy in paragraphs, sentences or words, with live word, character and line counts so you can match a real string budget instead of guessing. The presets cover the shapes that break layouts: a six-word button label, a card sentence, a forty-word empty state, a long article. English lorem only — no RTL, no CJK — and it is filler, not a copywriting shortcut: replace every block before launch, because shipping lorem ipsum is a content failure rather than a design one.</p>
+          <span id="text" class="tab-anchor" aria-hidden="true"></span>
+          <p>Placeholder copy in paragraphs, sentences or words, with live word and character counts. English lorem only.</p>
           <div class="tool">
             <div class="tool-head"><h2>Text generator</h2><span class="hint">local · no network after load</span></div>
             <div class="tool-body tool-grid">
@@ -233,6 +235,16 @@ export const PAGES = [
       <section id="notes">
         <h2>Where your state lives</h2>
         <p>Nothing is uploaded. The contrast checker writes fg, bg and size into the URL; the palette generator writes base and name; the other three keep their input in the page only. Switching tabs does not lose what you typed, because a panel is hidden rather than rebuilt — a pasted SVG and a half-typed hex are both still there when you come back. Reloading restores contrast and palette state from the URL and starts the rest fresh.</p>
+      </section>
+
+      <section id="next">
+        <h2>What to open next</h2>
+        <p class="sub">The tools stop where the design starts: a canvas, a starter file, or the app itself.</p>
+        <div class="cta">
+          <a class="btn primary" href="/#demo">Open the studio</a>
+          <a class="btn ghost" href="/templates/">Browse the eight starters</a>
+          <a class="btn ghost" href="/install/">Download FigCraft</a>
+        </div>
       </section>
     `,
     faq: [

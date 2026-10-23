@@ -95,7 +95,7 @@ h3{font-size:17px;letter-spacing:-.01em;margin:0 0 6px}
 .list li{background:var(--surface);border:1px solid var(--border);border-radius:12px;padding:14px 16px}
 .list li strong{display:block;font-size:14px}
 .list li span{color:var(--muted);font-size:13px}
-.steps{counter-reset:s;display:grid;gap:12px;padding:0;list-style:none;margin:0}
+.steps{counter-reset:s;display:grid;grid-template-columns:minmax(0,1fr);gap:12px;padding:0;list-style:none;margin:0}
 .steps li{counter-increment:s;background:var(--surface);border:1px solid var(--border);border-radius:12px;padding:16px 18px 16px 52px;position:relative}
 .steps li::before{content:counter(s);position:absolute;left:16px;top:16px;width:24px;height:24px;border-radius:50%;background:var(--accent);color:#fff;font-size:12px;display:grid;place-items:center;font-weight:700}
 
@@ -187,3 +187,6 @@ footer a:hover{color:var(--fg)}
   .tabs{gap:2px;padding:4px}
   .tab{padding:8px 11px;font-size:13px}
 }
+
+/* Hash target for /tools/#contrast and friends: zero-size, no layout effect. */
+.tab-anchor{display:block;position:relative;top:-76px;height:0;visibility:hidden}
