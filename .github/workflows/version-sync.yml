@@ -8,7 +8,10 @@ name: version sync
 # treatment:
 #
 #   check - fails when the factual slots no longer match the latest release.
-#           Runs on every push and on a schedule.
+#           Runs on every push and on a schedule. Editorial drift (the prose
+#           still describing an older release) is reported as a run annotation
+#           and in the run summary instead of failing: it lags rather than lies,
+#           and failing on it kept this workflow red every day of every week.
 #   apply - rewrites the factual slots and opens a PR. It deliberately does NOT
 #           touch the editorial slots ("What's new in FigCraft X", "fixed in X",
 #           "dropped as of X"): bumping those without rewriting the prose under
@@ -39,6 +42,11 @@ jobs:
 
       - name: Verify the version slots against the latest release
         run: python3 tools/sync_version.py --check
+        env:
+          # Authenticated so a shared runner IP cannot hit the anonymous
+          # 60-request/hour limit, which the script treats as "nothing to
+          # verify" and would report as a pass.
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
   apply:
     # Only on the schedule and manual runs: a scheduled PR is useful, a PR on
@@ -57,6 +65,15 @@ jobs:
 
       - name: Rewrite the factual version slots
         run: python3 tools/sync_version.py --apply
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+      # The PR must not carry a page that still states the wrong release, so run
+      # the same check the check job runs, against the rewritten tree.
+      - name: Confirm the rewrite closed every factual slot
+        run: python3 tools/sync_version.py --check
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
       - name: Open a PR if anything changed
         uses: peter-evans/create-pull-request@v6

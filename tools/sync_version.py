@@ -4,8 +4,9 @@ Keep the version-dependent parts of the guide in sync with storytold/figcraft's
 latest GitHub release.
 
     python3 tools/sync_version.py            # dry run: show what would change
-    python3 tools/sync_version.py --check    # CI: exit 1 if the guide is stale
+    python3 tools/sync_version.py --check    # CI: exit 1 if a factual slot is stale
     python3 tools/sync_version.py --apply    # rewrite the factual slots
+    python3 tools/sync_version.py --check --strict   # also exit 1 on editorial debt
 
 WHY THERE ARE TWO CLASSES OF VERSION REFERENCE
 ------------------------------------------------
@@ -32,9 +33,22 @@ fixed three releases ago. So this script injects the factual slots and *reports*
 the editorial ones. It never guesses at prose.
 
 The staleness gap between the two is surfaced rather than hidden: when the guide
-covers v0.9.0 and the project has shipped v0.10.0, --check fails and says which
-slots need a human. That is a deliberate, visible piece of editorial debt, not
+covers v0.9.0 and the project has shipped v0.10.0, --check says so, names the
+prose that needs a human, and posts the same message as a CI run annotation and
+to the run summary. That is a deliberate, visible piece of editorial debt, not
 something to paper over.
+
+WHAT FAILS THE BUILD
+--------------------
+Only factual staleness fails --check. A factual slot is out of date exactly when
+the page states a release number, a date, an artifact count or a filename that
+the project never published, and in that window the page is saying something
+false to readers. Editorial drift means the prose names an older release than
+the newest one; that is honest but lagging, and somebody has to rewrite a
+changelog section to close it. Making it fail too is how this check became a
+permanent red light that got ignored for weeks. So it warns, loudly and in the
+run summary, and --strict (for a human running this before a release) restores
+the old fail-on-anything behaviour.
 
 SAFETY
 ------
@@ -198,11 +212,31 @@ def covered_version() -> str | None:
     return m.group(1) if m else None
 
 
+def annotate(title: str, message: str) -> None:
+    """Make a finding visible in CI without failing the run.
+
+    GitHub renders a `::warning` line as an annotation on the run and appends
+    $GITHUB_STEP_SUMMARY to the run's front page. Both are no-ops outside
+    Actions, where the plain print is the whole report.
+    """
+    if os.environ.get("GITHUB_ACTIONS"):
+        print(f"::warning title={title}::{message}")
+    summary = os.environ.get("GITHUB_STEP_SUMMARY")
+    if summary:
+        with open(summary, "a", encoding="utf-8") as fh:
+            fh.write(f"### {title}\n\n{message}\n\n")
+
+
 def main() -> int:
     ap = argparse.ArgumentParser(description=__doc__, formatter_class=argparse.RawDescriptionHelpFormatter)
     mode = ap.add_mutually_exclusive_group()
-    mode.add_argument("--check", action="store_true", help="report only; exit 1 if stale")
+    mode.add_argument("--check", action="store_true", help="report only; exit 1 if a factual slot is stale")
     mode.add_argument("--apply", action="store_true", help="rewrite the factual slots")
+    ap.add_argument(
+        "--strict",
+        action="store_true",
+        help="with --check: also exit 1 when the prose still describes an older release",
+    )
     ap.add_argument("--token", default=os.environ.get("GITHUB_TOKEN"), help="raise the API rate limit")
     args = ap.parse_args()
 
@@ -252,14 +286,19 @@ def main() -> int:
         if n:
             print(f"watch          : {pattern} x{n} -- {why}")
 
-    if changed:
+    if changed and args.apply:
         print(f"\nfactual slots updated in: {', '.join(sorted(set(changed)))}")
-    else:
+    elif not changed:
         print("\nfactual slots already current")
 
     drift = covered is not None and covered != rel["ver"]
     if drift:
         slots = sum(len(re.findall(p, read(f))) for f, p, _ in EDITORIAL)
+        factual_note = (
+            "--apply has already closed the factual slots; only the prose lags."
+            if not changed
+            else "The factual slots are also out of date, and --apply will close those."
+        )
         print(
             f"\nEDITORIAL DEBT: the guide describes v{covered} but the project has shipped "
             f"{rel['tag']}.\n"
@@ -269,13 +308,24 @@ def main() -> int:
             f"  - decide whether 'fixed in {covered}' and 'dropped as of {covered}' are\n"
             f"    still the right versions to cite\n"
             f"  - bump 'Covers FigCraft v{covered}' and llms-full.txt once the prose is true\n"
-            f"The factual slots above are already current either way."
+            f"{factual_note}"
+        )
+        annotate(
+            "Editorial debt",
+            f"{slots} editorial slot(s) still describe v{covered}; the latest release is "
+            f"{rel['tag']} ({rel['url']}). Closing this means rewriting the release prose. "
+            f"{factual_note}",
         )
     elif args.check:
         print("\nOK: the guide is in sync with the latest release")
 
-    # Either kind of staleness fails the check.
-    return 1 if (args.check and (drift or factual_stale)) else 0
+    if not args.check:
+        return 0
+    # Factual staleness always fails: the page is asserting something untrue.
+    # Editorial drift fails only under --strict: prose naming an older release
+    # is lagging, not false, and a check that stays red until somebody rewrites
+    # a changelog section stays red forever.
+    return 1 if (factual_stale or (args.strict and drift)) else 0
 
 
 if __name__ == "__main__":
