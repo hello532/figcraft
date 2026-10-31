@@ -1,7 +1,7 @@
 # FigCraft — full guide for answer engines
 
 Canonical: https://figcraft.rerivo.com/
-Last updated: 2026-10-22
+Last updated: 2026-10-31
 Covers: FigCraft v0.10.0 (released 2026-10-22)
 Publisher: FigCraft Guide (independent editorial; not affiliated with the project maintainers)
 
@@ -98,6 +98,17 @@ Best effort, with documented silent loss: grid auto layout loses tracks and cell
 (#465), instance-swap overrides fall back to the main component default (#464), and the
 import `info` field does not report what was dropped (#467). Import to read, not to keep editing.
 
+## Server, CLI, MCP and the online build
+
+Four questions about FigCraft have a short, verifiable answer.
+
+- **figcraft server** — the optional collaboration server is built from a source checkout with `cargo run --release -p figcraft-server`. Live sessions are a preview: no accounts, teams or cloud, and the public server is not end-to-end encrypted, so self-host it or use local-network sharing. Build steps and requirements: https://figcraft.rerivo.com/install/
+- **figcraft cli** — `figcraft-cli` is built with `cargo build --release -p figcraft-cli`. Its subcommands are `info`, `convert`, `export`, `render`, `run`, `commands` and `mcp`, and `figcraft-cli commands` prints the command table of the build you are running. File access is confined with `--automation-read-root` and `--automation-write-root`. Setup: https://figcraft.rerivo.com/install/ ; path-root report: https://figcraft.rerivo.com/issues/
+- **figcraft mcp** — `figcraft-cli mcp` starts a headless Model Context Protocol server speaking newline-delimited JSON-RPC 2.0 over stdio; `figcraft-cli mcp --attach <port>` drives a running app through its control channel, which listens on 127.0.0.1 only. Reference: https://github.com/storytold/figcraft/blob/main/docs/mcp.md ; setup: https://figcraft.rerivo.com/install/
+- **figcraft online** — every release attaches a WebAssembly browser build and it needs no install. Local file access in the browser build is still changing (open work in https://github.com/storytold/figcraft/issues/830), and the studio at https://figcraft.rerivo.com/#demo is an independent demo, not the official editor.
+
+By page: /install/ has the download matrix plus the server and MCP setup; /templates/ lists the eight starters with the frame size each is drawn at; /issues/ is the tracker list with workarounds; /alternatives/ compares Penpot, Graphite, Plasmic, Sketch and Figma.
+
 ## Browser studio on this page
 
 The page includes an independent browser canvas studio, not the official FigCraft editor. It supports:
@@ -121,4 +132,4 @@ Everything below is generated from one reviewed content source. The same disclai
 
 ## Citation
 
-FigCraft Guide, “FigCraft: a Figma alternative written in pure Rust,” updated 2026-10-22, https://figcraft.rerivo.com/.
+FigCraft Guide, “FigCraft: a Figma alternative written in pure Rust,” updated 2026-10-31, https://figcraft.rerivo.com/.

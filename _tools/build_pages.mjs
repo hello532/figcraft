@@ -410,12 +410,15 @@ for (const [from, to] of Object.entries(REDIRECTS)) {
 }
 
 // sitemap: the five hand-written pages keep their entries, generated pages follow.
+// TOUCHED is the date the hand-written page was last edited; it is separate from
+// DEFAULT_UPDATED so a sitemap ping names the page that actually changed.
+const TOUCHED = '2026-10-31';
 const pinned = [
-  { loc: '', priority: '1.0', changefreq: 'weekly', lastmod: DEFAULT_UPDATED, image: true },
-  { loc: 'issues/', priority: '0.9', changefreq: 'weekly', lastmod: DEFAULT_UPDATED },
-  { loc: 'install/', priority: '0.8', changefreq: 'monthly', lastmod: DEFAULT_UPDATED },
+  { loc: '', priority: '1.0', changefreq: 'weekly', lastmod: TOUCHED, image: true },
+  { loc: 'issues/', priority: '0.9', changefreq: 'weekly', lastmod: TOUCHED },
+  { loc: 'install/', priority: '0.8', changefreq: 'monthly', lastmod: TOUCHED },
   { loc: 'vs-figma/', priority: '0.8', changefreq: 'monthly', lastmod: DEFAULT_UPDATED },
-  { loc: 'alternatives/', priority: '0.7', changefreq: 'monthly', lastmod: DEFAULT_UPDATED }
+  { loc: 'alternatives/', priority: '0.7', changefreq: 'monthly', lastmod: TOUCHED }
 ];
 
 const entries = [
@@ -466,12 +469,19 @@ const llms = `# FigCraft Guide
 
 ## Pages
 
-- [FigCraft Guide](${SITE}/): what FigCraft is, a FigCraft vs Figma comparison, known issues from the GitHub tracker, how to run it (prebuilt download matrix or a Cargo build with \`craft-fonts\`), a no-signup canvas studio, and an FAQ covering \`.fig\` import, fonts and multiplayer.
+- [FigCraft Guide](${SITE}/): what FigCraft is, a FigCraft vs Figma comparison, known issues from the GitHub tracker, how to run it (prebuilt download matrix or a Cargo build with \`craft-fonts\`), a no-signup canvas studio, and an FAQ covering \`.fig\` import, fonts, multiplayer, the server, the CLI, MCP and the online build.
 - [Known issues](${SITE}/issues/): large \`.fig\` imports and the grid-auto-layout data loss, instance-swap overrides, missing font fallback, macOS 27/M1 launch crash, Windows DX12 blur, 1440p UI scale, web file access and CLI path roots, with links to the source issues.
 - [Install](${SITE}/install/): system requirements, which download to pick (Linux AppImage/.deb/.rpm/flatpak/.pkg.tar.zst, Windows, macOS universal, FreeBSD x86_64, Web), or build from source with Cargo and \`craft-fonts\`.
 - [FigCraft vs Figma](${SITE}/vs-figma/): license, platform, account, file format, collaboration, Dev Mode, maturity and price compared side by side, plus what a \`.fig\` import actually loses and which team should pick which.
 - [FigCraft alternatives](${SITE}/alternatives/): Penpot, Plasmic and Figma, and which open-source option fits which team.
 - [Studio](${SITE}/#demo): a browser canvas with size presets, custom width/height, background, transparency, grid, zoom, layers, properties, undo/redo and PNG/JSON export.
+
+## figcraft server, figcraft cli, figcraft mcp and the online build
+
+- figcraft server: an optional collaboration server, built from a source checkout with "cargo run --release -p figcraft-server". Live sessions are a preview with no accounts, teams or cloud, and the public server is not end-to-end encrypted. Build steps: [Install](${SITE}/install/); what the preview does not do: [Known issues](${SITE}/issues/).
+- figcraft cli: "figcraft-cli", built with "cargo build --release -p figcraft-cli". Subcommands are info, convert, export, render, run, commands and mcp; keep inputs and outputs inside --automation-read-root and --automation-write-root. Setup: [Install](${SITE}/install/); path-root report: [Known issues](${SITE}/issues/).
+- figcraft mcp: "figcraft-cli mcp" starts a headless Model Context Protocol server speaking JSON-RPC 2.0 over stdio; "figcraft-cli mcp --attach <port>" drives a running app over a control channel that listens on 127.0.0.1 only. Setup: [Install](${SITE}/install/).
+- figcraft online: each release attaches a WebAssembly browser build and it needs no install; local file access in the browser build still has open work (#830), and the studio at [/#demo](${SITE}/#demo) is an independent demo rather than the official editor.
 
 ${groups
   .map(

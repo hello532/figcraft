@@ -153,7 +153,7 @@ WATCH = [
     ("index.html", r"early alpha, about \d+% parity",
      "parity percentage is the project's own estimate and moves independently"),
     ("index.html", r"~49%",
-     "parity figure appears in the hero, meta description and og:description"),
+     "parity figure appears in the hero status line and the comparison copy"),
 ]
 
 

@@ -7,9 +7,9 @@ export const PAGES = [
     path: 'templates/',
     group: 'templates',
     type: 'hub',
-    title: 'FigCraft Templates: Eight Starters and Their Frame Sizes',
+    title: 'FigCraft Templates: Eight Starters, Frame Sizes, How to Open',
     description:
-      'All eight FigCraft starters in one place: mobile app, landing page, dashboard, design system, wireframes, social posts, slides and icons, with frame sizes.',
+      'The eight FigCraft templates and the frame size each is drawn at, plus how to open them: mobile app, landing page, dashboard, design system, wireframes.',
     h1: 'FigCraft templates: eight starters, one menu item',
     eyebrow: 'Templates',
     lede:
@@ -194,6 +194,6 @@ export const PAGES = [
     crumbs: [{ name: 'Templates', path: 'templates/' }],
     priority: '0.8',
     changefreq: 'monthly',
-    updated: '2026-10-22'
+    updated: '2026-10-31'
   }
 ];
