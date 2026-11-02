@@ -738,6 +738,35 @@ cargo run --release -p figcraft</code></pre></li>
     </div>
   </div>
 
+  <section id="questions-people-ask" aria-labelledby="qpa-h">
+  <h2 id="qpa-h">What people search before they land here</h2>
+  <p>These are the questions this site actually receives in Search Console, in the words people type. Each links to the page that answers it.</p>
+  <ul class="qpa">
+    <li><a href="#get-started"><strong>How to install FigCraft</strong></a> — prebuilt downloads and a Cargo build</li>
+    <li><a href="/install/"><strong>FigCraft server: how to run it</strong></a> — self-hosted collaboration, what the preview does not do</li>
+    <li><a href="/install/"><strong>figcraft-cli</strong> / <strong>figcraft-cli mcp</strong></a> — build the CLI, then start the MCP server</li>
+    <li><a href="/install/"><strong>FigCraft MCP server setup</strong></a> — JSON-RPC over stdio, and attaching to a running app</li>
+    <li><a href="/learn/"><strong>FigCraft tutorial</strong></a> and <strong>how to use FigCraft</strong> — start with import and export</li>
+    <li><a href="/learn/open-fig-file/"><strong>Open a .fig file in FigCraft</strong></a> — what import keeps and what it loses</li>
+    <li><a href="/learn/export-svg/"><strong>Export SVG from FigCraft</strong></a> — per-frame export through the CLI</li>
+    <li><a href="/learn/offline-design/"><strong>FigCraft offline</strong></a> — no account checkpoint, files stay local</li>
+    <li><a href="/learn/install-linux/"><strong>FigCraft on Linux</strong></a> — AppImage, .deb, .rpm, flatpak, pkg.tar.zst</li>
+    <li><a href="/learn/cli-automation/"><strong>FigCraft CLI automation</strong></a> — the read-root and write-root contract</li>
+    <li><a href="/learn/keyboard-shortcuts/"><strong>FigCraft keyboard shortcuts</strong></a></li>
+    <li><a href="/learn/migrate-from-figma/"><strong>Migrate from Figma to FigCraft</strong></a></li>
+    <li><a href="/templates/"><strong>FigCraft templates</strong></a> — eight starters with their frame sizes</li>
+    <li><a href="/pricing/"><strong>FigCraft pricing</strong></a> — what free costs, and the seat arithmetic</li>
+    <li><a href="/vs-figma/"><strong>figcraft vs figma</strong></a> · <a href="/vs-penpot/"><strong>FigCraft vs Penpot</strong></a> · <a href="/vs-sketch/"><strong>FigCraft vs Sketch</strong></a></li>
+    <li><a href="/alternatives/"><strong>Figma alternatives</strong></a> — Penpot, Plasmic, Graphite, and which fits which team</li>
+    <li><a href="/free-figma-alternative/"><strong>A free Figma alternative</strong></a> — no account, no telemetry</li>
+    <li><a href="/figma-alternative-for-linux/"><strong>A Figma alternative for Linux</strong></a> — where the native app runs</li>
+    <li><a href="/open-source-figma-alternative/"><strong>Open-source Figma alternative</strong></a> — MIT OR Apache-2.0</li>
+    <li><a href="/#demo"><strong>FigCraft online</strong></a> — the browser studio, no install</li>
+    <li><a href="/glossary/"><strong>What is FigCraft</strong></a> — terms, and the project's own status</li>
+    <li><a href="/issues/"><strong>FigCraft plugins</strong> and known gaps</a> — what does not work yet</li>
+  </ul>
+  </section>
+
   <section id="faq"><h2>FAQ</h2>
     <details><summary>What is the FigCraft server and how do I run it?</summary><p>FigCraft ships an optional collaboration server, built from a source checkout with <code>cargo run --release -p figcraft-server</code>. Live sessions are a preview: there are no accounts, teams or cloud yet, and the public server is not end-to-end encrypted — self-host it or use local-network sharing for confidential work. The <a href="/install/">install page</a> has the server build steps next to the desktop build, and the <a href="/issues/">known issues</a> list what the preview does not do yet.</p></details>
     <details><summary>How do I use the FigCraft CLI (figcraft-cli)?</summary><p>Build it with <code>cargo build --release -p figcraft-cli</code>, then run <code>./target/release/figcraft-cli --help</code>. The subcommands are <code>info</code>, <code>convert</code>, <code>export</code>, <code>render</code>, <code>run</code>, <code>commands</code> and <code>mcp</code>: <code>figcraft-cli info app.figcraft --json</code> prints a machine-readable report, <code>export</code> writes one file per top-level frame as SVG, PNG, JPG, WebP or PDF, and <code>figcraft-cli commands</code> prints the command table of the build you are running. Keep inputs and outputs inside <code>--automation-read-root</code> and <code>--automation-write-root</code> (<a href="https://github.com/storytold/figcraft/issues/839" rel="noopener">#839</a>).</p></details>
