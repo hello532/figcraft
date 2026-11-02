@@ -405,7 +405,7 @@
       <nav class="crumbs" aria-label="Breadcrumb"><a href="/">Home</a><span>/</span><span>FigCraft guide</span></nav>
       <div class="eyebrow">Open-source · native · early alpha</div>
       <h1>FigCraft: a Figma alternative written in pure Rust.</h1>
-      <p class="lede">FigCraft is an open-source interface design and prototyping app: frames, auto layout, components and variants, vector networks, prototypes and Dev Mode. It runs as a native app on macOS, Windows, Linux and FreeBSD, and compiles to WebAssembly for the browser. No account, no telemetry, files stay on your disk.</p>
+      <p class="lede">FigCraft is an open-source Figma alternative written in pure Rust, covering frames, auto layout, components and variants, vector networks, prototypes and Dev Mode. It runs natively on macOS, Windows, Linux and FreeBSD, compiles to WebAssembly for the browser, and needs no account and no telemetry: files stay on your disk.</p>
       <div class="meta-line">
         <span class="badge"><span class="dot"></span>Independent guide</span>
         <span class="badge">Updated 2026-10-31</span>
@@ -627,6 +627,19 @@
   <section id="compare">
   <h2>FigCraft vs Figma, without the marketing</h2>
   <p>They solve the same job with different tradeoffs. FigCraft wins on ownership, offline work and hackability; Figma wins on maturity, real-time collaboration and ecosystem. At roughly 49% parity by the project's own estimate, this is not a drop-in replacement for a team today.</p>
+  <div class="table-wrap">
+  <table class="cmp">
+    <caption>FigCraft vs Figma at a glance &mdash; the full nine-row table is on the <a href="/vs-figma/">comparison page</a>.</caption>
+    <thead><tr><th scope="col">Aspect</th><th scope="col">FigCraft</th><th scope="col">Figma</th></tr></thead>
+    <tbody>
+      <tr><th scope="row">License</th><td>MIT OR Apache-2.0 (open source)</td><td>Proprietary</td></tr>
+      <tr><th scope="row">Where it runs</th><td>Native macOS, Windows, Linux, FreeBSD; browser build via WebAssembly</td><td>Browser and desktop apps</td></tr>
+      <tr><th scope="row">Account</th><td>None; works offline, no telemetry</td><td>Account and cloud workspace</td></tr>
+      <tr><th scope="row">Files</th><td><code>.figcraft</code> archives on your disk; <code>.fig</code> import best effort</td><td>Cloud documents and <code>.fig</code></td></tr>
+      <tr><th scope="row">Maturity</th><td>Early alpha, about 49% parity by the project's own estimate</td><td>Mature, used by large teams</td></tr>
+    </tbody>
+  </table>
+  </div>
   <p><a href="/vs-figma/"><strong>The full comparison table →</strong></a></p>
 </section>
 

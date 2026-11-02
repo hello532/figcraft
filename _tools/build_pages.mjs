@@ -412,7 +412,7 @@ for (const [from, to] of Object.entries(REDIRECTS)) {
 // sitemap: the five hand-written pages keep their entries, generated pages follow.
 // TOUCHED is the date the hand-written page was last edited; it is separate from
 // DEFAULT_UPDATED so a sitemap ping names the page that actually changed.
-const TOUCHED = '2026-10-31';
+const TOUCHED = '2026-11-02';
 const pinned = [
   { loc: '', priority: '1.0', changefreq: 'weekly', lastmod: TOUCHED, image: true },
   { loc: 'issues/', priority: '0.9', changefreq: 'weekly', lastmod: TOUCHED },
