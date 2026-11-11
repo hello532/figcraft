@@ -164,7 +164,7 @@ export const PAGES = [
 <section id="honest">
   <h2>Read this before you trust a spec</h2>
   <p class="disclosure">The project publishes the eight starter names and opens them from <strong>File ▸ New from template</strong>, but it does not publish their internal pages or frame sizes. The tables above are therefore a workable starting structure for each kind of file, not a transcription of the shipped document. Check them against the build you actually open.</p>
-  <p class="note">v0.10.0 is an early alpha, about 49% parity by the project's own estimate. Text needs the <code>craft-fonts</code> repository cloned beside the source or it silently falls back to a system face (#821 tracks rescanning; #752 is closed). macOS 27 on M1 has a launch crash (#781), <code>.fig</code> import is best effort with large files still failing (#574, #321), and FreeBSD aarch64 builds were dropped in v0.9.0.</p>
+  <p class="note">v0.17.0 is an early alpha, about 49% parity by the project's own estimate. Text needs the <code>craft-fonts</code> repository cloned beside the source. The silent fallback (#752) and font rescan/load work (#821) are closed, and the macOS 27 / M1 launch crash was fixed; <code>.fig</code> import is still best effort with large files failing (#574), and FreeBSD aarch64 builds are available again in v0.17.0.</p>
   <p class="note">Files are plain <code>.figcraft</code> archives on disk, with no account and no telemetry — which also means no cloud copy to restore. Multiplayer is a preview with no accounts, teams or cloud, so sharing a starter means sharing the file. Output is where it goes next: Inspect gives measurements and annotations, a frame can be marked ready for dev, and export writes CSS, HTML, React, Leptos, SwiftUI or Compose, or SVG, PNG, JPG, WebP and PDF. The studio here takes <code>?w=</code> and <code>?h=</code> and has a 100 px minimum canvas.</p>
   <div class="cta" style="margin-top:24px"><a class="btn primary" href="/?w=1440&amp;h=900#demo">Open a 1440 × 900 canvas</a><a class="btn ghost" href="/install/">Get FigCraft</a></div>
 </section>`,
@@ -187,13 +187,13 @@ export const PAGES = [
       },
       {
         q: 'Why does text in a starter look wrong?',
-        a: 'Almost always the font path. FigCraft needs the <code>craft-fonts</code> repository cloned beside the source; without it, text silently falls back to a system face and every size you tuned shifts. #752 is closed and #821 tracks rescanning once the fonts are in place.'
+        a: 'Almost always the font path. FigCraft needs the <code>craft-fonts</code> repository cloned beside the source; without it, text can fall back to a system face and every size you tuned shifts. The silent-fallback and font-rescan issues (#752, #821) are closed, but the directory still has to be present.'
       }
     ],
     related: ['tools/', 'learn/', 'install/'],
     crumbs: [{ name: 'Templates', path: 'templates/' }],
     priority: '0.8',
     changefreq: 'monthly',
-    updated: '2026-10-31'
+    updated: '2026-11-11'
   }
 ];

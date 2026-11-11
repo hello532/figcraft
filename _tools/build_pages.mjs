@@ -19,6 +19,7 @@ import { PAGES } from './content/index.mjs';
 const ROOT = resolve(dirname(fileURLToPath(import.meta.url)), '..');
 const SITE = 'https://figcraft.rerivo.com';
 const DEFAULT_UPDATED = '2026-10-22';
+const COVERED_VERSION = '0.17.0';
 const CHECK = process.argv.includes('--check');
 const REPO = 'https://github.com/storytold/figcraft';
 
@@ -189,6 +190,7 @@ function head(page) {
 <meta name="author" content="FigCraft Guide">
 <meta name="theme-color" content="#2563eb">
 <link rel="canonical" href="${url}">
+<link rel="describedby" href="${SITE}/agents.md">
 <link rel="alternate" type="text/plain" href="${SITE}/llms.txt" title="LLMs.txt">
 <link rel="alternate" type="text/plain" href="${SITE}/llms-full.txt" title="LLMs full guide">
 <link rel="icon" type="image/svg+xml" href="/assets/favicon.svg">
@@ -208,6 +210,7 @@ function head(page) {
 <meta name="twitter:title" content="${esc(page.ogTitle || page.title)}">
 <meta name="twitter:description" content="${esc(page.description)}">
 <meta name="twitter:image" content="${SITE}/og.png">
+<meta name="twitter:image:alt" content="FigCraft — a Figma alternative written in pure Rust">
 <script type="application/ld+json">${JSON.stringify({ '@context': 'https://schema.org', '@graph': graph })}</script>
 </head>
 <body>
@@ -230,7 +233,7 @@ function head(page) {
       <p class="eyebrow">${esc(page.eyebrow || '')}</p>
       <h1>${esc(page.h1)}</h1>
       <p class="lede">${page.lede}</p>
-      <div class="meta-line"><span>Independent guide</span><span>·</span><span>Updated ${updated}</span><span>·</span><span>Covers FigCraft v0.10.0</span>${page.reading ? `<span>·</span><span>${page.reading} read</span>` : ''}</div>
+      <div class="meta-line"><span>Independent guide</span><span>·</span><span>Updated ${updated}</span><span>·</span><span>Covers FigCraft v${COVERED_VERSION}</span>${page.reading ? `<span>·</span><span>${page.reading} read</span>` : ''}</div>
       <div class="cta">${(Array.isArray(page.cta) ? page.cta : defaultCta()).map((c) => `<a class="btn ${c.primary ? 'primary' : 'ghost'}" href="${c.href}"${c.external ? ' rel="noopener"' : ''}>${esc(c.label)}</a>`).join('')}</div>
     </div>
 ${page.body}
@@ -241,7 +244,7 @@ ${faqBlock(page)}${relatedBlock(page)}
   <div class="wrap foot">
     <div>
       <strong>FigCraft Guide</strong> — an independent guide and browser studio. Not affiliated with ArtCraft.
-      <div class="note">Last updated ${DEFAULT_UPDATED} · covers FigCraft v0.10.0 · corrections welcome via the source repository.</div>
+      <div class="note">Last updated ${updated} · covers FigCraft v${COVERED_VERSION} · corrections welcome via the source repository.</div>
     </div>
     <nav aria-label="Footer">
       <a href="/tools/">Tools</a>
@@ -413,9 +416,10 @@ for (const [from, to] of Object.entries(REDIRECTS)) {
 // TOUCHED is the date the hand-written page was last edited; it is separate from
 // DEFAULT_UPDATED so a sitemap ping names the page that actually changed.
 const TOUCHED = '2026-11-02';
+const TODAY = '2026-11-11';
 const pinned = [
-  { loc: '', priority: '1.0', changefreq: 'weekly', lastmod: TOUCHED, image: true },
-  { loc: 'issues/', priority: '0.9', changefreq: 'weekly', lastmod: TOUCHED },
+  { loc: '', priority: '1.0', changefreq: 'weekly', lastmod: TODAY, image: true },
+  { loc: 'issues/', priority: '0.9', changefreq: 'weekly', lastmod: TODAY },
   { loc: 'install/', priority: '0.8', changefreq: 'monthly', lastmod: TOUCHED },
   { loc: 'vs-figma/', priority: '0.8', changefreq: 'monthly', lastmod: DEFAULT_UPDATED },
   { loc: 'alternatives/', priority: '0.7', changefreq: 'monthly', lastmod: TOUCHED }
@@ -465,13 +469,14 @@ const llms = `# FigCraft Guide
 
 ## Full source for answer engines
 
+- [Agent instructions](${SITE}/agents.md): what this independent guide is, what agents may quote, and what they must not claim.
 - [llms-full.txt](${SITE}/llms-full.txt): facts, known issues, comparisons, install steps, studio capabilities and citation.
 
 ## Pages
 
 - [FigCraft Guide](${SITE}/): what FigCraft is, a FigCraft vs Figma comparison, known issues from the GitHub tracker, how to run it (prebuilt download matrix or a Cargo build with \`craft-fonts\`), a no-signup canvas studio, and an FAQ covering \`.fig\` import, fonts, multiplayer, the server, the CLI, MCP and the online build.
 - [Known issues](${SITE}/issues/): large \`.fig\` imports and the grid-auto-layout data loss, instance-swap overrides, missing font fallback, macOS 27/M1 launch crash, Windows DX12 blur, 1440p UI scale, web file access and CLI path roots, with links to the source issues.
-- [Install](${SITE}/install/): system requirements, which download to pick (Linux AppImage/.deb/.rpm/flatpak/.pkg.tar.zst, Windows, macOS universal, FreeBSD x86_64, Web), or build from source with Cargo and \`craft-fonts\`.
+- [Install](${SITE}/install/): system requirements, which download to pick (Linux AppImage/.deb/.rpm/flatpak/.pkg.tar.zst, Windows, macOS universal, FreeBSD x86_64/aarch64, Web), or build from source with Cargo and \`craft-fonts\`.
 - [FigCraft vs Figma](${SITE}/vs-figma/): license, platform, account, file format, collaboration, Dev Mode, maturity and price compared side by side, plus what a \`.fig\` import actually loses and which team should pick which.
 - [FigCraft alternatives](${SITE}/alternatives/): Penpot, Plasmic and Figma, and which open-source option fits which team.
 - [Studio](${SITE}/#demo): a browser canvas with size presets, custom width/height, background, transparency, grid, zoom, layers, properties, undo/redo and PNG/JSON export.

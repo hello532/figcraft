@@ -80,7 +80,7 @@ export const PAGES = [
 
 <section>
   <h2>The invoice FigCraft never sends</h2>
-  <p>FigCraft's price is zero and the cost is time. Fonts must sit in a sibling directory named <code>../craft-fonts</code> (<a href="https://github.com/storytold/figcraft/issues/821" rel="noopener">#821</a>), macOS 27 on M1 crashes at launch (<a href="https://github.com/storytold/figcraft/issues/781" rel="noopener">#781</a>), interface scale breaks at 1440p (<a href="https://github.com/storytold/figcraft/issues/540" rel="noopener">#540</a>, <a href="https://github.com/storytold/figcraft/issues/818" rel="noopener">#818</a>), and FreeBSD aarch64 was dropped in v0.10.0. None of that costs money; all of it costs afternoons.</p>
+  <p>FigCraft's price is zero and the cost is time. Fonts must sit in a sibling directory named <code>../craft-fonts</code>, the 1440p interface-size preference is now available, the macOS 27 / M1 launch crash was fixed on 2026-10-28, and FreeBSD aarch64 returned in v0.17.0 after an absence from 0.9.0. Some setup and alpha rough edges still cost afternoons; none of it costs money.</p>
   <p>Run it the other way: $16 buys a mature editor with multiplayer, permissions and plugins; $7 buys a browser workspace with team features. FigCraft buys ownership, offline work, an inspectable engine and a CLI and MCP surface past 400 commands, and asks for tolerance of alpha software. <a href="/issues/">Known issues</a> is the honest test.</p>
 </section>
 
@@ -121,7 +121,7 @@ export const PAGES = [
       },
       {
         q: 'What is the hidden cost of FigCraft?',
-        a: 'Time, not money. Fonts must live in a sibling directory named ../craft-fonts (issue #821 is open), macOS 27 on M1 has a launch crash (#781), Windows has a DX12 blur problem and 1440p interface scaling is broken (#540, #818). Multiplayer is a preview and the public server is not end-to-end encrypted, so a team still needs another tool.'
+        a: 'Time, not money. Fonts must live in a sibling directory named ../craft-fonts, and Windows still has an open DX12 blur report (#779). The macOS 27 / M1 launch crash and 1440p scaling issues are fixed. Multiplayer is a preview and the public server is not end-to-end encrypted, so a team still needs another tool.'
       }
     ],
     related: ['alternatives/', 'install/'],
@@ -131,7 +131,7 @@ export const PAGES = [
     ],
     priority: '0.8',
     changefreq: 'monthly',
-    updated: '2026-10-22'
+    updated: '2026-11-11'
   }
 ];
 
@@ -148,7 +148,7 @@ export const ALTERNATIVES_SECTIONS = `<section id="penpot">
       <thead><tr><th></th><th>FigCraft</th><th>Penpot</th></tr></thead>
       <tbody>
         <tr><td>Licence</td><td>MIT OR Apache-2.0, permissive</td><td>MPL-2.0, file-level copyleft</td></tr>
-        <tr><td>Platform</td><td>Native macOS, Windows, Linux, FreeBSD x86_64; WebAssembly build</td><td>Browser, web-first</td></tr>
+        <tr><td>Platform</td><td>Native macOS, Windows, Linux, FreeBSD (x86_64 and aarch64); WebAssembly build</td><td>Browser, web-first</td></tr>
         <tr><td>Hosting</td><td>Yours: local files, self-hosted collaboration server</td><td>Vendor cloud or self-hosted</td></tr>
         <tr><td>File format</td><td><code>.figcraft</code> files on disk</td><td>Unverified (server-side projects)</td></tr>
         <tr><td>Real-time collaboration</td><td>Preview; no accounts or permissions</td><td>Yes; members and viewers are the unit of the pricing</td></tr>
@@ -211,8 +211,8 @@ export const ALTERNATIVES_SECTIONS = `<section id="penpot">
 
 <section id="linux">
   <h2>Linux and the packaging question</h2>
-  <p>FigCraft ships <code>.AppImage</code>, <code>.deb</code>, <code>.rpm</code>, <code>.flatpak</code>, <code>.pkg.tar.zst</code> and <code>.tar.gz</code> for x86_64, aarch64 and riscv64 — six formats, three architectures, which is unusual for a design tool and matters on ARM servers or RISC-V hardware. The adjacent FreeBSD port is x86_64 only, because aarch64 was dropped in v0.10.0.</p>
-  <p>Penpot needs no Linux package at all: it is a browser tab against the vendor cloud, or a self-hosted deployment your organisation runs. Sketch is macOS only in the sources we checked. So a Linux user has two options, not three — a native binary or a browser — and the native one arrives with the fonts directory (<code>../craft-fonts</code>, issue <a href="https://github.com/storytold/figcraft/issues/821" rel="noopener">#821</a>) and 1440p interface scaling problems (<a href="https://github.com/storytold/figcraft/issues/540" rel="noopener">#540</a>, <a href="https://github.com/storytold/figcraft/issues/818" rel="noopener">#818</a>) to plan around.</p>
+  <p>FigCraft ships <code>.AppImage</code>, <code>.deb</code>, <code>.rpm</code>, <code>.flatpak</code>, <code>.pkg.tar.zst</code> and <code>.tar.gz</code> for x86_64, aarch64 and riscv64 — six formats, three architectures, which is unusual for a design tool and matters on ARM servers or RISC-V hardware. FreeBSD gets a <code>.tar.gz</code> for x86_64 and aarch64 in the v0.17.0 release.</p>
+  <p>Penpot needs no Linux package at all: it is a browser tab against the vendor cloud, or a self-hosted deployment your organisation runs. Sketch is macOS only in the sources we checked. So a Linux user has two options, not three — a native binary or a browser — and the native one still expects the fonts directory (<code>../craft-fonts</code>) beside it.</p>
 </section>
 
 <section id="free">

@@ -3,7 +3,7 @@
 // the tab markup is the contract with assets/tools/tabs.js — five tabs, five
 // panels, data-tab and data-panel values that match the redirect hashes.
 
-const UPDATED = '2026-10-22';
+const UPDATED = '2026-11-11';
 
 export const PAGES = [
   {

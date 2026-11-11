@@ -82,6 +82,12 @@ API = f"https://api.github.com/repos/{REPO}/releases/latest"
 # --------------------------------------------------------------------------
 FACTUAL = [
     (
+        "_tools/build_pages.mjs",
+        r"const COVERED_VERSION = '\d+\.\d+\.\d+';",
+        1,
+        "const COVERED_VERSION = '{ver}';",
+    ),
+    (
         "index.html",
         r"<dd>v\d+\.\d+\.\d+ · \d{4}-\d{2}-\d{2}</dd>",
         1,
@@ -125,26 +131,20 @@ EDITORIAL = [
     ("index.html", r"Covers FigCraft v\d+\.\d+\.\d+", 1),
     ("index.html", r"covers FigCraft v\d+\.\d+\.\d+", 1),
     ("index.html", r"What's new in FigCraft \d+\.\d+\.\d+", 1),
-    ("index.html", r"Released \d{4}-\d{2}-\d{2}\.", 1),
+    # Two dated release headings are kept on the page: the current release and
+    # the 0.9.0 baseline. Both are historical prose, not factual slots.
+    ("index.html", r"Released \d{4}-\d{2}-\d{2}\.", 2),
     ("index.html", r"releases/tag/v\d+\.\d+\.\d+", 1),
     ("index.html", r"v\d+\.\d+\.\d+ release</a>", 1),
     ("index.html", r"early alpha, about \d+% parity", 1),
     ("index.html", r"v\d+\.\d+\.\d+ \(\d{4}-\d{2}-\d{2}\), early alpha", 1),
-    ("index.html", r"dropped as of v\d+\.\d+\.\d+", 1),
-    ("index.html", r"dropped in v\d+\.\d+\.\d+", 2),
-    ("install/index.html", r"as of v\d+\.\d+\.\d+", 3),
-    ("install/index.html", r"dropped as of v\d+\.\d+\.\d+", 2),
     ("issues/index.html", r"What's new in FigCraft \d+\.\d+\.\d+", 1),
     ("issues/index.html", r"Released \d{4}-\d{2}-\d{2}\.", 1),
     ("issues/index.html", r"releases/tag/v\d+\.\d+\.\d+", 1),
     ("issues/index.html", r"v\d+\.\d+\.\d+ release</a>", 1),
-    ("issues/index.html", r"fixed in \d+\.\d+\.\d+", 4),
-    ("issues/index.html", r"dropped as of v\d+\.\d+\.\d+", 1),
-    ("vs-figma/index.html", r"as of v\d+\.\d+\.\d+", 1),
     ("llms-full.txt", r"Covers: FigCraft v\d+\.\d+\.\d+", 1),
     ("llms-full.txt", r"releases/tag/v\d+\.\d+\.\d+", 1),
     ("llms-full.txt", r"Latest release covered here: v\d+\.\d+\.\d+", 1),
-    ("llms-full.txt", r"dropped as of v\d+\.\d+\.\d+", 1),
 ]
 
 # Facts that rot for reasons other than the version number. No API to read them

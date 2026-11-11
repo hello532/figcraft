@@ -9,6 +9,7 @@
 <meta name="author" content="FigCraft Guide">
 <meta name="theme-color" content="#2563eb">
 <link rel="canonical" href="https://figcraft.rerivo.com/alternatives/">
+<link rel="describedby" href="https://figcraft.rerivo.com/agents.md">
 <link rel="alternate" type="text/plain" href="https://figcraft.rerivo.com/llms.txt" title="LLMs.txt">
 <meta property="og:title" content="Figma Alternatives: FigCraft, Penpot, Sketch and Graphite">
 <meta property="og:description" content="How FigCraft, Penpot, Sketch, Graphite, Plasmic and Figma compare on licence, hosting, collaboration and price, and which one fits your team.">
@@ -22,6 +23,7 @@
 <meta name="twitter:title" content="Figma Alternatives: FigCraft, Penpot, Sketch and Graphite">
 <meta name="twitter:description" content="How FigCraft, Penpot, Sketch, Graphite, Plasmic and Figma compare on licence, hosting, collaboration and price, and which one fits your team.">
 <meta name="twitter:image" content="https://figcraft.rerivo.com/og.png">
+<meta name="twitter:image:alt" content="FigCraft — a Figma alternative written in pure Rust">
 <script type="application/ld+json">
 {"@context":"https://schema.org","@graph":[{"@type":"WebPage","@id":"https://figcraft.rerivo.com/alternatives/#page","url":"https://figcraft.rerivo.com/alternatives/","name":"Figma Alternatives: FigCraft, Penpot, Sketch and Graphite","description":"How FigCraft, Penpot, Sketch, Graphite, Plasmic and Figma compare on licence, hosting, collaboration and price, and which one fits your team.","isPartOf":{"@id":"https://figcraft.rerivo.com/#website"},"inLanguage":"en"},{"@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"FigCraft Guide","item":"https://figcraft.rerivo.com/"},{"@type":"ListItem","position":2,"name":"Alternatives","item":"https://figcraft.rerivo.com/alternatives/"}]},{"@type":"FAQPage","mainEntity":[{"@type":"Question","name":"What is the best open-source alternative to Figma?","acceptedAnswer":{"@type":"Answer","text":"It depends on the workflow. Penpot is web-first, self-hostable and stronger on team collaboration today. FigCraft is a native Rust app with local files and an inspectable command engine, at roughly 49% parity. Plasmic targets production web apps that map to React components. Graphite suits illustration and procedural vector work rather than UI design."}},{"@type":"Question","name":"Is there an open-source Figma alternative for Linux?","acceptedAnswer":{"@type":"Answer","text":"Yes. FigCraft ships native Linux builds as .AppImage, .deb, .rpm, .flatpak, .pkg.tar.zst and .tar.gz for x86_64, aarch64 and riscv64. Penpot and Graphite run in the browser, so they work on Linux without a native package."}},{"@type":"Question","name":"Which Figma alternative works offline?","acceptedAnswer":{"@type":"Answer","text":"FigCraft works fully offline: files are .figcraft archives on your disk, there is no account and no telemetry. Penpot and Graphite are browser-first, so they need a reachable server unless you self-host."}},{"@type":"Question","name":"Is there an open-source Figma alternative with MCP support?","acceptedAnswer":{"@type":"Answer","text":"FigCraft exposes an MCP server alongside a CLI and a control protocol, so agents and scripts can drive the app. That is unusual among design tools and is its main difference from Penpot and Graphite."}}]}]}
 </script>
@@ -355,7 +357,7 @@
       <thead><tr><th></th><th>FigCraft</th><th>Penpot</th></tr></thead>
       <tbody>
         <tr><td>Licence</td><td>MIT OR Apache-2.0, permissive</td><td>MPL-2.0, file-level copyleft</td></tr>
-        <tr><td>Platform</td><td>Native macOS, Windows, Linux, FreeBSD x86_64; WebAssembly build</td><td>Browser, web-first</td></tr>
+        <tr><td>Platform</td><td>Native macOS, Windows, Linux, FreeBSD (x86_64 and aarch64); WebAssembly build</td><td>Browser, web-first</td></tr>
         <tr><td>Hosting</td><td>Yours: local files, self-hosted collaboration server</td><td>Vendor cloud or self-hosted</td></tr>
         <tr><td>File format</td><td><code>.figcraft</code> files on disk</td><td>Unverified (server-side projects)</td></tr>
         <tr><td>Real-time collaboration</td><td>Preview; no accounts or permissions</td><td>Yes; members and viewers are the unit of the pricing</td></tr>
@@ -418,8 +420,8 @@
 
 <section id="linux">
   <h2>Linux and the packaging question</h2>
-  <p>FigCraft ships <code>.AppImage</code>, <code>.deb</code>, <code>.rpm</code>, <code>.flatpak</code>, <code>.pkg.tar.zst</code> and <code>.tar.gz</code> for x86_64, aarch64 and riscv64 — six formats, three architectures, which is unusual for a design tool and matters on ARM servers or RISC-V hardware. The adjacent FreeBSD port is x86_64 only, because aarch64 was dropped in v0.9.0.</p>
-  <p>Penpot needs no Linux package at all: it is a browser tab against the vendor cloud, or a self-hosted deployment your organisation runs. Sketch is macOS only in the sources we checked. So a Linux user has two options, not three — a native binary or a browser — and the native one arrives with the fonts directory (<code>../craft-fonts</code>, issue <a href="https://github.com/storytold/figcraft/issues/821" rel="noopener">#821</a>) and 1440p interface scaling problems (<a href="https://github.com/storytold/figcraft/issues/540" rel="noopener">#540</a>, <a href="https://github.com/storytold/figcraft/issues/818" rel="noopener">#818</a>) to plan around.</p>
+  <p>FigCraft ships <code>.AppImage</code>, <code>.deb</code>, <code>.rpm</code>, <code>.flatpak</code>, <code>.pkg.tar.zst</code> and <code>.tar.gz</code> for x86_64, aarch64 and riscv64 — six formats, three architectures, which is unusual for a design tool and matters on ARM servers or RISC-V hardware. The FreeBSD <code>.tar.gz</code> covers x86_64 and aarch64 in v0.17.0; the aarch64 build was unavailable from v0.9.0 through v0.16.0.</p>
+  <p>Penpot needs no Linux package at all: it is a browser tab against the vendor cloud, or a self-hosted deployment your organisation runs. Sketch is macOS only in the sources we checked. So a Linux user has two options, not three — a native binary or a browser — and the native one still expects the fonts directory (<code>../craft-fonts</code>, issue <a href="https://github.com/storytold/figcraft/issues/821" rel="noopener">#821</a>) to be present.</p>
 </section>
 
 <section id="free">

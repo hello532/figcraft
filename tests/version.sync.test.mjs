@@ -29,7 +29,7 @@ const assert = (cond, msg) => (cond ? ok(msg) : bad(msg));
 /** Copy the site into a temp dir so the real working tree is never touched. */
 function snapshot() {
   const dir = mkdtempSync('/tmp/figcraft-sync-');
-  for (const rel of ['index.html', 'install/index.html', 'issues/index.html', 'vs-figma/index.html', 'llms-full.txt', 'tools/sync_version.py']) {
+  for (const rel of ['index.html', 'install/index.html', 'issues/index.html', 'vs-figma/index.html', 'llms-full.txt', '_tools/build_pages.mjs', 'tools/sync_version.py']) {
     const dest = join(dir, rel);
     mkdirSync(join(dest, '..'), { recursive: true });
     cpSync(join(REPO, rel), dest);
@@ -61,32 +61,37 @@ sys.exit(sv.main())
 
 const read = (dir, rel) => readFileSync(join(dir, rel), 'utf8');
 
-const CURRENT = { ver: '0.9.0', tag: 'v0.9.0', date: '2026-10-21', builds: 29, url: 'https://example/v0.9.0' };
-const NEXT = { ver: '0.10.0', tag: 'v0.10.0', date: '2026-10-25', builds: 27, url: 'https://example/v0.10.0' };
+const home = readFileSync(join(REPO, 'index.html'), 'utf8');
+const releaseMeta = home.match(/<dd>v(\d+\.\d+\.\d+) · (\d{4}-\d{2}-\d{2})<\/dd>/);
+const buildCount = home.match(/v\d+\.\d+\.\d+ publishes (\d+) build artifacts/);
+if (!releaseMeta || !buildCount) throw new Error('could not read the current release facts from index.html');
+const CURRENT = {
+  ver: releaseMeta[1],
+  tag: `v${releaseMeta[1]}`,
+  date: releaseMeta[2],
+  builds: Number(buildCount[1]),
+  url: `https://example/v${releaseMeta[1]}`
+};
+const [major, minor] = CURRENT.ver.split('.').map(Number);
+const nextVer = `${major}.${minor + 1}.0`;
+const NEXT = { ver: nextVer, tag: `v${nextVer}`, date: '2026-12-01', builds: CURRENT.builds + 3, url: `https://example/v${nextVer}` };
+const escapedCurrent = CURRENT.ver.replaceAll('.', '\\.');
 
 const EDITORIAL = [
-  ['index.html', /What's new in FigCraft 0\.9\.0/],
-  ['index.html', /Covers FigCraft v0\.9\.0/],
-  ['index.html', /covers FigCraft v0\.9\.0/],
-  ['index.html', /dropped as of v0\.9\.0/],
-  ['index.html', /dropped in v0\.9\.0/g],
-  ['index.html', /early alpha, about 49% parity/],
-  ['issues/index.html', /What's new in FigCraft 0\.9\.0/],
-  ['issues/index.html', /fixed in 0\.9\.0/g],
-  ['issues/index.html', /dropped as of v0\.9\.0/],
-  ['install/index.html', /as of v0\.9\.0/g],
-  ['install/index.html', /dropped as of v0\.9\.0/g],
-  ['vs-figma/index.html', /as of v0\.9\.0/],
-  ['llms-full.txt', /Covers: FigCraft v0\.9\.0/],
-  ['llms-full.txt', /dropped as of v0\.9\.0/],
+  ['index.html', new RegExp(`What's new in FigCraft ${escapedCurrent}`)],
+  ['index.html', new RegExp(`Covers FigCraft v${escapedCurrent}`)],
+  ['index.html', new RegExp(`covers FigCraft v${escapedCurrent}`)],
+  ['index.html', /early alpha, about \d+% parity/],
+  ['issues/index.html', new RegExp(`What's new in FigCraft ${escapedCurrent}`)],
+  ['llms-full.txt', new RegExp(`Covers: FigCraft v${escapedCurrent}`)],
 ];
 
 const FACTUAL = [
-  ['index.html', /<dd>v0\.9\.0 · 2026-10-21<\/dd>/],
-  ['index.html', /"softwareVersion":"0\.9\.0"/],
-  ['index.html', /v0\.9\.0 publishes 29 build artifacts/g],
-  ['index.html', /figcraft-0\.9\.0-linux-x86_64\.AppImage/g],
-  ['install/index.html', /figcraft-0\.9\.0-linux-x86_64\.AppImage/g],
+  ['index.html', new RegExp(`<dd>v${escapedCurrent} · ${CURRENT.date}</dd>`)],
+  ['index.html', new RegExp(`"softwareVersion":"${escapedCurrent}"`)],
+  ['index.html', new RegExp(`v${escapedCurrent} publishes ${CURRENT.builds} build artifacts`, 'g')],
+  ['index.html', new RegExp(`figcraft-${escapedCurrent}-linux-x86_64\\.AppImage`, 'g')],
+  ['install/index.html', new RegExp(`figcraft-${escapedCurrent}-linux-x86_64\\.AppImage`, 'g')],
 ];
 
 // --- 1. in sync: --check passes, nothing is rewritten --------------------
@@ -110,7 +115,10 @@ const FACTUAL = [
 
   for (const [file, re] of FACTUAL) {
     const text = read(dir, file);
-    const after = text.replace(re, (m) => m.replaceAll('0.9.0', '0.10.0').replaceAll('29', '27').replaceAll('2026-10-21', '2026-10-25'));
+    const after = text.replace(re, (m) => m
+      .replaceAll(CURRENT.ver, NEXT.ver)
+      .replaceAll(String(CURRENT.builds), String(NEXT.builds))
+      .replaceAll(CURRENT.date, NEXT.date));
     assert(text === after, `factual slot updated in ${file}: ${re}`);
   }
 
@@ -132,7 +140,7 @@ const FACTUAL = [
   const dir = snapshot();
   const { stdout } = run(dir, ['--check'], NEXT);
   assert(/EDITORIAL DEBT/.test(stdout), 'names the problem as editorial debt');
-  assert(/v0\.9\.0/.test(stdout) && /v0\.10\.0/.test(stdout), 'names both versions');
+  assert(stdout.includes(`v${CURRENT.ver}`) && stdout.includes(`v${NEXT.ver}`), 'names both versions');
   assert(/What's new/.test(stdout), 'points at the section that needs rewriting');
   assert(/Covers FigCraft/.test(stdout), 'points at the badge that needs bumping');
   assert(/\d+ editorial slot/.test(stdout), 'says how many slots are affected');
@@ -146,7 +154,7 @@ const FACTUAL = [
   // Corrupt only the factual slots, leaving "covers" at 0.9.0. The check must
   // not conclude "in sync" from the badge alone.
   let text = read(dir, 'index.html');
-  text = text.replace('"softwareVersion":"0.9.0"', '"softwareVersion":"0.10.0"');
+  text = text.replace(`"softwareVersion":"${CURRENT.ver}"`, `"softwareVersion":"${NEXT.ver}"`);
   writeFileSync(join(dir, 'index.html'), text);
 
   const { code, stdout } = run(dir, ['--check'], CURRENT);
@@ -155,7 +163,7 @@ const FACTUAL = [
 
   const healed = run(dir, ['--apply'], CURRENT);
   assert(healed.code === 0, '--apply succeeds');
-  assert(read(dir, 'index.html').includes('"softwareVersion":"0.9.0"'), '--apply corrects it');
+  assert(read(dir, 'index.html').includes(`"softwareVersion":"${CURRENT.ver}"`), '--apply corrects it');
   assert(run(dir, ['--check'], CURRENT).code === 0, 'the tree is healthy afterwards');
   rmSync(dir, { recursive: true, force: true });
 }
@@ -180,8 +188,8 @@ const FACTUAL = [
 {
   console.log('\nthe real working tree');
   const live = readFileSync(join(REPO, 'index.html'), 'utf8');
-  assert(/"softwareVersion":"0\.9\.0"/.test(live), 'the committed page still says 0.9.0');
-  assert(/What's new in FigCraft 0\.9\.0/.test(live), 'and still describes 0.9.0 in prose');
+  assert(live.includes(`"softwareVersion":"${CURRENT.ver}"`), `the committed page still says ${CURRENT.ver}`);
+  assert(live.includes(`What's new in FigCraft ${CURRENT.ver}`), `and still describes ${CURRENT.ver} in prose`);
 }
 
 console.log(`\n${failures === 0 ? 'PASS' : 'FAIL'} - ${failures} failure(s)`);

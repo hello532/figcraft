@@ -3,6 +3,7 @@
 User-agent: *
 Allow: /
 Disallow: /_tools/
+# Agent-facing summary: https://figcraft.rerivo.com/agents.md
 
 User-agent: GPTBot
 Allow: /

@@ -9,6 +9,7 @@
 <meta name="author" content="FigCraft Guide">
 <meta name="theme-color" content="#2563eb">
 <link rel="canonical" href="https://figcraft.rerivo.com/vs-figma/">
+<link rel="describedby" href="https://figcraft.rerivo.com/agents.md">
 <link rel="alternate" type="text/plain" href="https://figcraft.rerivo.com/llms.txt" title="LLMs.txt">
 <meta property="og:title" content="FigCraft vs Figma: Honest Comparison (2026) | FigCraft Guide">
 <meta property="og:description" content="FigCraft vs Figma without the marketing: what FigCraft does at ~49% parity, where Figma still wins, file import limits, collaboration and cost.">
@@ -22,8 +23,9 @@
 <meta name="twitter:title" content="FigCraft vs Figma: Honest Comparison (2026) | FigCraft Guide">
 <meta name="twitter:description" content="FigCraft vs Figma without the marketing: what FigCraft does at ~49% parity, where Figma still wins, file import limits, collaboration and cost.">
 <meta name="twitter:image" content="https://figcraft.rerivo.com/og.png">
+<meta name="twitter:image:alt" content="FigCraft — a Figma alternative written in pure Rust">
 <script type="application/ld+json">
-{"@context":"https://schema.org","@graph":[{"@type":"WebPage","@id":"https://figcraft.rerivo.com/vs-figma/#page","url":"https://figcraft.rerivo.com/vs-figma/","name":"FigCraft vs Figma: Honest Comparison (2026) | FigCraft Guide","description":"FigCraft vs Figma without the marketing: what FigCraft does at ~49% parity, where Figma still wins, file import limits, collaboration and cost.","isPartOf":{"@id":"https://figcraft.rerivo.com/#website"},"inLanguage":"en"},{"@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"FigCraft Guide","item":"https://figcraft.rerivo.com/"},{"@type":"ListItem","position":2,"name":"vs Figma","item":"https://figcraft.rerivo.com/vs-figma/"}]},{"@type":"FAQPage","mainEntity":[{"@type":"Question","name":"Can FigCraft open Figma .fig files?","acceptedAnswer":{"@type":"Answer","text":".fig import is best effort and loses data silently. Grid auto layout imports with empty column and row tracks so children collapse after the first re-layout (#465), instance-swap overrides fall back to the main component default (#464), and the import info field does not report what was dropped (#467). Import a .fig to read a design, not to keep editing it."}},{"@type":"Question","name":"Is FigCraft a drop-in replacement for Figma?","acceptedAnswer":{"@type":"Answer","text":"No. By the project's own estimate FigCraft is at roughly 49% parity and still early alpha. It wins on ownership, offline work and hackability; Figma wins on maturity, real-time collaboration and plugin ecosystem."}},{"@type":"Question","name":"Does FigCraft support real-time collaboration?","acceptedAnswer":{"@type":"Answer","text":"Only as a preview. FigCraft has live sessions from the app or a self-hosted server, but no accounts or team permissions yet. Figma's multiplayer, permissions and review flows are mature and have no equivalent in FigCraft."}},{"@type":"Question","name":"Can I use Figma plugins in FigCraft?","acceptedAnswer":{"@type":"Answer","text":"No. FigCraft has no Figma plugin compatibility. It exposes a CLI, an MCP server and a control protocol instead, so automation is scripted rather than installed from a plugin marketplace."}},{"@type":"Question","name":"Which is better for a team, FigCraft or Figma?","acceptedAnswer":{"@type":"Answer","text":"For a team that co-edits in real time and relies on plugins, Figma. For a solo designer who wants local files, no account and an inspectable engine, FigCraft. Side-by-side use is the realistic pattern rather than replacing one with the other."}}]}]}
+{"@context":"https://schema.org","@graph":[{"@type":"WebPage","@id":"https://figcraft.rerivo.com/vs-figma/#page","url":"https://figcraft.rerivo.com/vs-figma/","name":"FigCraft vs Figma: Honest Comparison (2026) | FigCraft Guide","description":"FigCraft vs Figma without the marketing: what FigCraft does at ~49% parity, where Figma still wins, file import limits, collaboration and cost.","isPartOf":{"@id":"https://figcraft.rerivo.com/#website"},"inLanguage":"en"},{"@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"FigCraft Guide","item":"https://figcraft.rerivo.com/"},{"@type":"ListItem","position":2,"name":"vs Figma","item":"https://figcraft.rerivo.com/vs-figma/"}]},{"@type":"FAQPage","mainEntity":[{"@type":"Question","name":"Can FigCraft open Figma .fig files?","acceptedAnswer":{"@type":"Answer","text":"It imports them on a best-effort basis. Three silent-loss bugs from the 0.9.0 baseline — grid auto layout tracks (#465), instance-swap overrides (#464) and the import info field (#467) — are closed. Large imports can still fail (#574); keep the original and verify the result on a current build."}},{"@type":"Question","name":"Is FigCraft a drop-in replacement for Figma?","acceptedAnswer":{"@type":"Answer","text":"No. By the project's own estimate FigCraft is at roughly 49% parity and still early alpha. It wins on ownership, offline work and hackability; Figma wins on maturity, real-time collaboration and plugin ecosystem."}},{"@type":"Question","name":"Does FigCraft support real-time collaboration?","acceptedAnswer":{"@type":"Answer","text":"Only as a preview. FigCraft has live sessions from the app or a self-hosted server, but no accounts or team permissions yet. Figma's multiplayer, permissions and review flows are mature and have no equivalent in FigCraft."}},{"@type":"Question","name":"Can I use Figma plugins in FigCraft?","acceptedAnswer":{"@type":"Answer","text":"No. FigCraft has no Figma plugin compatibility. It exposes a CLI, an MCP server and a control protocol instead, so automation is scripted rather than installed from a plugin marketplace."}},{"@type":"Question","name":"Which is better for a team, FigCraft or Figma?","acceptedAnswer":{"@type":"Answer","text":"For a team that co-edits in real time and relies on plugins, Figma. For a solo designer who wants local files, no account and an inspectable engine, FigCraft. Side-by-side use is the realistic pattern rather than replacing one with the other."}}]}]}
 </script>
 <style>
   :root{
@@ -318,17 +320,16 @@
   </section>
 <section>
   <h2>Can FigCraft open a Figma .fig file?</h2>
-  <p><strong>Partly, and with silent data loss.</strong> FigCraft imports <code>.fig</code> files on a best-effort
-  basis: the document renders, but features it cannot represent are dropped rather than converted. Three losses are
-  documented in the public tracker, all still open as of v0.9.0:</p>
+  <p><strong>Partly, and still best effort.</strong> FigCraft imports <code>.fig</code> files on a best-effort
+  basis: the document renders, but features it cannot represent may still be dropped rather than converted. Three
+  silent-loss bugs reported against the 0.9.0 baseline were fixed and closed:</p>
   <ul>
-    <li><strong>Grid auto layout loses its structure.</strong> Frames import with empty column and row tracks and every
-    child at <code>gridColumn: null</code>. The layout looks right until the first edit triggers a re-layout, then all
-    children collapse into one cell (<a href="https://github.com/storytold/figcraft/issues/465" rel="noopener">#465</a>).</li>
-    <li><strong>Instance-swap overrides fall back to the default.</strong> A button instance whose icon was swapped
-    comes back showing the main component&rsquo;s default icon, without a warning (<a href="https://github.com/storytold/figcraft/issues/464" rel="noopener">#464</a>).</li>
-    <li><strong>Dropped data is not reported.</strong> The import <code>info</code> field is the only place loss is
-    visible, and it does not list what was skipped (<a href="https://github.com/storytold/figcraft/issues/467" rel="noopener">#467</a>).</li>
+    <li><strong>Grid auto layout used to lose its structure.</strong> Older builds imported empty column and row tracks
+    and collapsed children after a re-layout; the issue is closed (<a href="https://github.com/storytold/figcraft/issues/465" rel="noopener">#465</a>).</li>
+    <li><strong>Instance-swap overrides used to fall back to the default.</strong> A swapped icon could return as the
+    main component&rsquo;s default; the issue is closed (<a href="https://github.com/storytold/figcraft/issues/464" rel="noopener">#464</a>).</li>
+    <li><strong>Dropped data was not reported.</strong> The import <code>info</code> field did not list skipped content;
+    the issue is closed (<a href="https://github.com/storytold/figcraft/issues/467" rel="noopener">#467</a>).</li>
   </ul>
   <p class="note">Practical rule: import a <code>.fig</code> to <em>read</em> and <em>reference</em> a design, not to
   keep editing it. Always keep the original file. Large imports can fail outright — see
@@ -339,8 +340,8 @@
   <h2>How much work is it to move from Figma?</h2>
   <p>Move only if your team can live without real-time multiplayer for now. What carries over and what does not:</p>
   <ul>
-    <li><strong>Files.</strong> <code>.fig</code> import is best effort (above). If a file matters, rebuild rather than
-    re-import — auto layout and component overrides are where the loss shows up first.</li>
+    <li><strong>Files.</strong> <code>.fig</code> import remains best effort (above). If a file matters, rebuild rather
+    than re-import, and verify the current build first.</li>
     <li><strong>Plugins.</strong> No Figma plugin compatibility. FigCraft exposes a CLI, an MCP server and a control
     protocol instead, so automation is scripted rather than purchased.</li>
     <li><strong>Collaboration.</strong> FigCraft has live sessions as a preview, with a self-hosted server and no
@@ -378,7 +379,7 @@
 <section>
   <h2>Frequently asked about FigCraft vs Figma</h2>
   <div class="faq">
-    <details><summary>Can FigCraft open Figma .fig files?</summary><p>.fig import is best effort and loses data silently. Grid auto layout imports with empty column and row tracks so children collapse after the first re-layout (<a href="https://github.com/storytold/figcraft/issues/465" rel="noopener">#465</a>), instance-swap overrides fall back to the main component default (<a href="https://github.com/storytold/figcraft/issues/464" rel="noopener">#464</a>), and the import info field does not report what was dropped (<a href="https://github.com/storytold/figcraft/issues/467" rel="noopener">#467</a>). Import a .fig to read a design, not to keep editing it.</p></details>
+    <details><summary>Can FigCraft open Figma .fig files?</summary><p>It imports them on a best-effort basis. Three silent-loss bugs from the 0.9.0 baseline — grid auto layout tracks (<a href="https://github.com/storytold/figcraft/issues/465" rel="noopener">#465</a>), instance-swap overrides (<a href="https://github.com/storytold/figcraft/issues/464" rel="noopener">#464</a>) and the import info field (<a href="https://github.com/storytold/figcraft/issues/467" rel="noopener">#467</a>) — are closed. Large imports can still fail (#574); keep the original and verify the result on a current build.</p></details>
     <details><summary>Is FigCraft a drop-in replacement for Figma?</summary><p>No. By the project's own estimate FigCraft is at roughly 49% parity and still early alpha. It wins on ownership, offline work and hackability; Figma wins on maturity, real-time collaboration and plugin ecosystem.</p></details>
     <details><summary>Does FigCraft support real-time collaboration?</summary><p>Only as a preview. FigCraft has live sessions from the app or a self-hosted server, but no accounts or team permissions yet. Figma's multiplayer, permissions and review flows are mature and have no equivalent in FigCraft.</p></details>
     <details><summary>Can I use Figma plugins in FigCraft?</summary><p>No. FigCraft has no Figma plugin compatibility. It exposes a CLI, an MCP server and a control protocol instead, so automation is scripted rather than installed from a plugin marketplace.</p></details>

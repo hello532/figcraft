@@ -4,7 +4,7 @@
  *
  * Every command, flag and issue number below is taken from the project's own
  * documentation (docs/cli.md, docs/mcp.md, docs/control-protocol.md) for
- * v0.10.0 and was checked against the repository's issue tracker. Where a
+ * v0.17.0 and was checked against the repository's issue tracker. Where a
  * behaviour could not be checked against a running build, the topic says
  * "unverified" instead of filling the gap.
  *
@@ -54,8 +54,8 @@ shasum -a 256 brand-source.fig.keep   # sha256sum on Linux</code></pre></li>
           <li><strong>Convert a copy, then edit the native file.</strong><pre><code>./target/release/figcraft-cli convert brand-source.fig brand.figcraft</code></pre></li>
           <li><strong>If it stalls, slice by frame</strong> — export the worst frames from Figma as SVG and convert each alone.<pre><code>./target/release/figcraft-cli convert home.svg home.figcraft</code></pre></li>
         </ol>
-        <p>What goes wrong: a large file fails or takes very long (<a href="https://github.com/storytold/figcraft/issues/574" rel="noopener">#574</a>, umbrella <a href="https://github.com/storytold/figcraft/issues/321" rel="noopener">#321</a>, with large-file opening improved in <a href="https://github.com/storytold/figcraft/issues/315" rel="noopener">#315</a>); grid auto layout arrives without tracks (<a href="https://github.com/storytold/figcraft/issues/465" rel="noopener">#465</a>); instance-swap overrides fall back to the main default (<a href="https://github.com/storytold/figcraft/issues/464" rel="noopener">#464</a>); and the import does not report all it discarded (<a href="https://github.com/storytold/figcraft/issues/467" rel="noopener">#467</a>).</p>
-        <p class="note">Unverified: how much of any file survives. Coverage is file-dependent; <a href="https://github.com/storytold/figcraft/issues/467" rel="noopener">#467</a> says reports can omit losses.</p>
+        <p>What goes wrong: a large file can still fail or take very long (<a href="https://github.com/storytold/figcraft/issues/574" rel="noopener">#574</a>). The broad import umbrella (<a href="https://github.com/storytold/figcraft/issues/321" rel="noopener">#321</a>) and three silent-loss bugs — grid tracks (<a href="https://github.com/storytold/figcraft/issues/465" rel="noopener">#465</a>), instance-swap overrides (<a href="https://github.com/storytold/figcraft/issues/464" rel="noopener">#464</a>) and incomplete loss reporting (<a href="https://github.com/storytold/figcraft/issues/467" rel="noopener">#467</a>) — are closed. Verify the current build and keep the original.</p>
+        <p class="note">Unverified: how much of any real file survives. Coverage is file-dependent even after the closed fixes.</p>
       </details>
 
       <details id="topic-export" style="margin:0 0 14px">
@@ -69,7 +69,7 @@ shasum -a 256 brand-source.fig.keep   # sha256sum on Linux</code></pre></li>
           <li><strong>Rasters from the same source.</strong> PNG, JPG and WebP come from that engine, and <code>--scale</code> (up to 64) applies to rasters only, so the SVG is unchanged.<pre><code>./target/release/figcraft-cli export app.figcraft -o exports/ --scale 2</code></pre></li>
           <li><strong>Print, or outline text.</strong> PDF keeps frames as separate pages; the automation <code>export</code> takes <code>svgOutlineText</code>, and <code>export.add</code> stores it per layer. Inspect generates CSS, HTML, React, Leptos, SwiftUI and Compose for handoff.<pre><code>./target/release/figcraft-cli export app.figcraft -o screens.pdf --page "Screens"</code></pre></li>
         </ol>
-        <p>What goes wrong: SVG and PDF export refuse a document with visible descendants more than 256 levels below the exported root, and the old destination stays — check the exit code, not the timestamp; text stays <code>&lt;text&gt;</code> unless outlined, so a viewer lacking the family differs; a missing font is laid out in a fallback first (<a href="https://github.com/storytold/figcraft/issues/752" rel="noopener">#752</a>, rescan and refit under <a href="https://github.com/storytold/figcraft/issues/821" rel="noopener">#821</a>).</p>
+        <p>What goes wrong: SVG and PDF export refuse a document with visible descendants more than 256 levels below the exported root, and the old destination stays — check the exit code, not the timestamp; text stays <code>&lt;text&gt;</code> unless outlined, so a viewer lacking the family differs; a missing font can be laid out in a fallback, so keep the <code>craft-fonts</code> directory present.</p>
         <p class="note">Unverified: byte-level fidelity across viewers. Syntax was checked against the CLI docs, not real output.</p>
       </details>
 
@@ -83,7 +83,7 @@ shasum -a 256 brand-source.fig.keep   # sha256sum on Linux</code></pre></li>
           <li><strong>Check an ambiguous key by its command.</strong> Use as mask is <code>Ctrl+Cmd+M</code> on macOS, <code>Ctrl+Alt+M</code> elsewhere; your build is authoritative.</li>
           <li><strong>Skip the keymap in automation.</strong> <code>run_command</code> reaches a command by id; <code>key</code> resolves keys as the canvas does.</li>
         </ol>
-        <p>What goes wrong: a shortcut types a character while a text layer is edited, because text keys win; and labels may be unreadable — the UI is small on 1440p (<a href="https://github.com/storytold/figcraft/issues/540" rel="noopener">#540</a>), addressed by the interface-size preference (<a href="https://github.com/storytold/figcraft/issues/818" rel="noopener">#818</a>).</p>
+        <p>What goes wrong: a shortcut types a character while a text layer is edited, because text keys win. The 1440p scaling issue is fixed; use the interface-size preference in current builds (<a href="https://github.com/storytold/figcraft/issues/818" rel="noopener">#818</a>, closed).</p>
         <p class="note">Unverified here: the real app's keymap, not reproduced because it changes between releases and platforms.</p>
       </details>
 
@@ -91,8 +91,8 @@ shasum -a 256 brand-source.fig.keep   # sha256sum on Linux</code></pre></li>
         <summary><strong>There is no cloud copy of my file</strong></summary>
         <p>A document is a <code>.figcraft</code> archive on disk: no sign-in, no workspace, no server, no telemetry. Local editing is finished; collaboration is a preview.</p>
         <ol class="steps">
-          <li><strong>Use a native build, not the web build.</strong> WASM is an editor in a tab; the desktop build owns files.<pre><code>chmod +x figcraft-0.10.0-linux-x86_64.AppImage
-./figcraft-0.10.0-linux-x86_64.AppImage</code></pre></li>
+          <li><strong>Use a native build, not the web build.</strong> WASM is an editor in a tab; the desktop build owns files.<pre><code>chmod +x figcraft-0.17.0-linux-x86_64.AppImage
+./figcraft-0.17.0-linux-x86_64.AppImage</code></pre></li>
           <li><strong>Work in the native format.</strong><pre><code>./target/release/figcraft-cli convert brand-source.fig brand.figcraft</code></pre></li>
           <li><strong>Version the file.</strong> A <code>.figcraft</code> is binary, so history is snapshot-based — a commit per milestone is cheapest.<pre><code>git init
 cp ~/Downloads/brand.figcraft .
@@ -100,7 +100,7 @@ git add brand.figcraft</code></pre></li>
           <li><strong>Keep a copy off the machine.</strong> No cloud means no server-side history.<pre><code>rsync -a --delete ~/work/brand/ /Volumes/Backup/brand/</code></pre></li>
           <li><strong>Share deliberately, if at all.</strong> Self-host the optional server rather than trust a public one.<pre><code>cargo run --release -p figcraft-server</code></pre></li>
         </ol>
-        <p>What goes wrong: a launch crash on macOS 27.0.1 with M1 (<a href="https://github.com/storytold/figcraft/issues/781" rel="noopener">#781</a>) is work-stopping because nothing is stored elsewhere; a missing family falls back silently, so one file differs across laptops (<a href="https://github.com/storytold/figcraft/issues/752" rel="noopener">#752</a>); and the public server is not end-to-end encrypted.</p>
+        <p>What goes wrong: a missing family can still make one file differ across laptops, so keep <code>craft-fonts</code> present. The macOS 27 / M1 launch crash and silent-fallback issues are fixed (<a href="https://github.com/storytold/figcraft/issues/781" rel="noopener">#781</a>, <a href="https://github.com/storytold/figcraft/issues/752" rel="noopener">#752</a>, closed); the public server is still not end-to-end encrypted.</p>
         <p class="note">Unverified: telemetry absence was not packet-inspected; it is the project's stated design. Backup commands are generic shell.</p>
       </details>
 
@@ -135,23 +135,23 @@ git add brand.figcraft</code></pre></li>
 
       <details id="topic-linux" style="margin:0 0 14px">
         <summary><strong>The AppImage will not start</strong></summary>
-        <p>Match architecture first — an aarch64 build will not start on x86_64. Files are <code>figcraft-0.10.0-linux-ARCH.FORMAT</code>.</p>
+        <p>Match architecture first — an aarch64 build will not start on x86_64. Files are <code>figcraft-0.17.0-linux-ARCH.FORMAT</code>.</p>
         <ol class="steps">
           <li><strong>Verify the download.</strong><pre><code>sha256sum -c SHA256SUMS.txt --ignore-missing</code></pre></li>
-          <li><strong>AppImage: no install step.</strong> The file is the application, and bundles the CLI.<pre><code>chmod +x figcraft-0.10.0-linux-x86_64.AppImage
-./figcraft-0.10.0-linux-x86_64.AppImage cli info app.figcraft</code></pre></li>
-          <li><strong>Or let the distro own the binary.</strong> x86_64 and aarch64 ship all six formats; riscv64 deb, rpm, tarball only.<pre><code>sudo apt install ./figcraft-0.10.0-linux-x86_64.deb
-sudo dnf install ./figcraft-0.10.0-linux-x86_64.rpm
-sudo pacman -U figcraft-0.10.0-linux-x86_64.pkg.tar.zst
-flatpak install ./figcraft-0.10.0-linux-x86_64.flatpak</code></pre></li>
-          <li><strong>Tarball, also the FreeBSD path.</strong> Check what it unpacks into.<pre><code>tar -xzf figcraft-0.10.0-linux-x86_64.tar.gz</code></pre></li>
+          <li><strong>AppImage: no install step.</strong> The file is the application, and bundles the CLI.<pre><code>chmod +x figcraft-0.17.0-linux-x86_64.AppImage
+./figcraft-0.17.0-linux-x86_64.AppImage cli info app.figcraft</code></pre></li>
+          <li><strong>Or let the distro own the binary.</strong> x86_64 and aarch64 ship all six formats; riscv64 deb, rpm, tarball only.<pre><code>sudo apt install ./figcraft-0.17.0-linux-x86_64.deb
+sudo dnf install ./figcraft-0.17.0-linux-x86_64.rpm
+sudo pacman -U figcraft-0.17.0-linux-x86_64.pkg.tar.zst
+flatpak install ./figcraft-0.17.0-linux-x86_64.flatpak</code></pre></li>
+          <li><strong>Tarball, also the FreeBSD path.</strong> Check what it unpacks into.<pre><code>tar -xzf figcraft-0.17.0-linux-x86_64.tar.gz</code></pre></li>
           <li><strong>Source builds need <code>craft-fonts</code> beside the project</strong>, or a missing checkout falls back to another font. The browser build needs trunk and <code>cargo xtask wasm</code>.<pre><code>git clone https://github.com/storytold/figcraft
 cd figcraft
 git clone https://github.com/storytold/craft-fonts ../craft-fonts
 cargo run --release -p figcraft</code></pre></li>
         </ol>
-        <p>What goes wrong: FreeBSD gets one <code>.tar.gz</code> for x86_64 only, because aarch64 was dropped (first announced in v0.9.0) when it could not build inside the CI job's 5-hour limit; deb, rpm, flatpak and Arch are not documented as bundling the CLI; a tiny interface is a 1440p problem (<a href="https://github.com/storytold/figcraft/issues/540" rel="noopener">#540</a>) fixed by the interface-size preference (<a href="https://github.com/storytold/figcraft/issues/818" rel="noopener">#818</a>); missing families fall back silently (<a href="https://github.com/storytold/figcraft/issues/752" rel="noopener">#752</a>).</p>
-        <p class="note">Unverified: distro runtime dependencies, and whether <code>pacman -U</code> upgrades cleanly. Filenames and the format matrix are checked against v0.10.0.</p>
+        <p>What goes wrong: FreeBSD ships a <code>.tar.gz</code> for x86_64 and aarch64 in 0.17.0 (aarch64 was absent from 0.9.0 through 0.16.0); deb, rpm, flatpak and Arch are not documented as bundling the CLI; missing font families can still change layout, so keep the <code>craft-fonts</code> directory present. The 1440p scaling fix is in current builds.</p>
+        <p class="note">Unverified: distro runtime dependencies, and whether <code>pacman -U</code> upgrades cleanly. Filenames and the format matrix are checked against v0.17.0.</p>
       </details>
 
       <details id="topic-migrate" style="margin:0 0 14px">
@@ -165,8 +165,8 @@ shasum -a 256 marketing.fig.keep   # sha256sum on Linux</code></pre></li>
           <li><strong>Own a native file immediately.</strong><pre><code>./target/release/figcraft-cli convert marketing.fig marketing.figcraft</code></pre></li>
           <li><strong>Rebuild in cost order:</strong> variables and modes, then components, then instances, then overrides — installing fonts, or loading them with <code>text.loadFont</code>, first.</li>
         </ol>
-        <p>What goes wrong: the import never finishes (<a href="https://github.com/storytold/figcraft/issues/574" rel="noopener">#574</a>, umbrella <a href="https://github.com/storytold/figcraft/issues/321" rel="noopener">#321</a>); instance-swap overrides are gone (<a href="https://github.com/storytold/figcraft/issues/464" rel="noopener">#464</a>); grid tracks did not import (<a href="https://github.com/storytold/figcraft/issues/465" rel="noopener">#465</a>); type sits pixels off because a font was substituted (<a href="https://github.com/storytold/figcraft/issues/752" rel="noopener">#752</a>); and teammates cannot comment or co-edit.</p>
-        <p class="note">Unverified: how much of a real file survives, and how long a rebuild takes. Both are file-specific; <a href="https://github.com/storytold/figcraft/issues/467" rel="noopener">#467</a> makes the report a floor.</p>
+        <p>What goes wrong: a large import may never finish (<a href="https://github.com/storytold/figcraft/issues/574" rel="noopener">#574</a>); type can sit pixels off when a font is substituted; and teammates cannot comment or co-edit. The instance-swap, grid-track and loss-reporting bugs (#464, #465, #467) are closed.</p>
+        <p class="note">Unverified: how much of a real file survives, and how long a rebuild takes. Both are file-specific even after the closed fixes.</p>
       </details>
     </section>
     <section id="glossary">
@@ -191,7 +191,7 @@ shasum -a 256 marketing.fig.keep   # sha256sum on Linux</code></pre></li>
     </section>
     <section id="limits">
       <h2>What this page does not cover</h2>
-      <p class="note">The real app's keymap is not documented here — print it from your build with <code>figcraft-cli commands</code>, since it changes between releases and differs by platform. Nothing here applies to a build newer than v0.9.0. There are no performance numbers: timings are file-specific and unmeasured, and how much of a given <code>.fig</code> survives is unanswered because the report can omit drops.</p>
+      <p class="note">The real app's keymap is not documented here — print it from your build with <code>figcraft-cli commands</code>, since it changes between releases and differs by platform. This page was reviewed against v0.17.0; check your build before relying on a command. There are no performance numbers: timings are file-specific and unmeasured, and how much of a given <code>.fig</code> survives is unanswered because the report can omit drops.</p>
     </section>`,
     faq: [
       {
@@ -200,7 +200,7 @@ shasum -a 256 marketing.fig.keep   # sha256sum on Linux</code></pre></li>
       },
       {
         q: 'Which version does this page cover?',
-        a: 'v0.10.0, on macOS, Windows, Linux, FreeBSD and the WebAssembly build. Commands come from the project\'s own CLI, MCP and control-protocol documentation for that release.'
+        a: 'v0.17.0, on macOS, Windows, Linux, FreeBSD and the WebAssembly build. Commands come from the project\'s own CLI, MCP and control-protocol documentation; release-specific filenames and the FreeBSD matrix were checked against v0.17.0.'
       },
       {
         q: 'Does any of this apply to the browser studio on this site?',
@@ -208,7 +208,7 @@ shasum -a 256 marketing.fig.keep   # sha256sum on Linux</code></pre></li>
       },
       {
         q: 'Can FigCraft open a Figma .fig file?',
-        a: 'Yes, on a best-effort basis. Large files are a known failure mode (#574), grid auto layout loses tracks (#465), instance-swap overrides fall back to the main component (#464), and the import does not report everything it discards (#467). Keep the original .fig.'
+        a: 'Yes, on a best-effort basis. Large files can still fail (#574), but the grid-auto-layout, instance-swap and loss-reporting bugs (#465, #464, #467) are closed. Keep the original .fig and verify the import on a current build.'
       },
       {
         q: 'How do I find the real app\'s keyboard shortcuts?',
@@ -239,6 +239,6 @@ shasum -a 256 marketing.fig.keep   # sha256sum on Linux</code></pre></li>
     crumbs: [{ name: 'Learn', path: 'learn/' }],
     priority: '0.8',
     changefreq: 'monthly',
-    updated: '2026-10-22'
+    updated: '2026-11-11'
   }
 ];

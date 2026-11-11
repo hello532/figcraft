@@ -1,8 +1,8 @@
 # FigCraft — full guide for answer engines
 
 Canonical: https://figcraft.rerivo.com/
-Last updated: 2026-10-31
-Covers: FigCraft v0.10.0 (released 2026-10-22)
+Last updated: 2026-11-11
+Covers: FigCraft v0.17.0 for release facts; issue and comparison notes checked 2026-10-22
 Publisher: FigCraft Guide (independent editorial; not affiliated with the project maintainers)
 
 ## What FigCraft is
@@ -11,12 +11,12 @@ FigCraft is an open-source interface design and prototyping application written 
 
 License: MIT OR Apache-2.0.
 Official repository: https://github.com/storytold/figcraft
-Release notes: https://github.com/storytold/figcraft/releases/tag/v0.10.0
+Release notes: https://github.com/storytold/figcraft/releases/tag/v0.17.0
 
 ## Key facts
 
 - Status: early alpha; about 49% parity with proprietary tools by the project's own estimate.
-- Latest release covered here: v0.10.0, published 2026-10-22. It is housekeeping (HTTPS enforcement, pinned Actions, chrono for UTC); the last release with editor changes was v0.9.0.
+- Latest release covered here: v0.17.0, published 2026-11-09. The guide includes changes through this release; older 0.9.0 notes remain as a historical baseline.
 - Platforms: macOS, Windows, Linux, FreeBSD, Web (WebAssembly).
 - Price: free; no account.
 - Engine: Rust; the same command layer drives the UI, CLI, JSON control channel and MCP server.
@@ -34,16 +34,16 @@ Release notes: https://github.com/storytold/figcraft/releases/tag/v0.10.0
 - A CLI (`figcraft-cli`) is available; see the repository documentation for the current command set.
 - Browser build via `cargo xtask wasm` and trunk.
 
-## Known issues (from the GitHub tracker, checked 2026-10-22)
+## Known issues (from the GitHub tracker, checked 2026-11-11)
 
-- Large `.fig` import can fail or take a long time. Open umbrella: https://github.com/storytold/figcraft/issues/321 ; large-file report: https://github.com/storytold/figcraft/issues/574 ; large-file opening improvements: https://github.com/storytold/figcraft/issues/315
-- Missing fonts can fall back without a warning. https://github.com/storytold/figcraft/issues/752 (closed). Font rescan/load work: https://github.com/storytold/figcraft/issues/821
-- macOS 27.0.1 / M1 launch crash with an uncaught NSException in `_NSTouchBarFinderObservation`. https://github.com/storytold/figcraft/issues/781
+- Large `.fig` import can still fail or take a long time. The large-file report remains open: https://github.com/storytold/figcraft/issues/574 . The broader import umbrella (#321) and silent-loss issues #464, #465 and #467 are closed.
+- Missing-font fallback (#752) and font rescan/load work (#821) are closed. The desktop build still expects the `craft-fonts` repository beside the app.
+- macOS 27.0.1 / M1 launch crash with an uncaught NSException in `_NSTouchBarFinderObservation` was fixed and issue #781 closed on 2026-10-28.
 - Blurred Windows DX12 UI after restoring a window. https://github.com/storytold/figcraft/issues/779
-- Small UI on high-DPI 1440p monitors. https://github.com/storytold/figcraft/issues/540 ; interface-size preference in progress: https://github.com/storytold/figcraft/issues/818
-- Web build local file access. https://github.com/storytold/figcraft/issues/830
+- Small UI on high-DPI 1440p monitors was fixed through the interface-size preference; issues #540 and #818 are closed.
+- Web build local file access shipped; issue #830 is closed.
 - Variable collection crash (fixed, closed): https://github.com/storytold/figcraft/issues/224 and https://github.com/storytold/figcraft/issues/613
-- CLI path confinement: https://github.com/storytold/figcraft/issues/839
+- CLI path confinement is implemented; issue #839 is closed.
 
 ## Comparisons
 
@@ -77,7 +77,7 @@ Prebuilt installers are attached to each GitHub release.
 ### System requirements
 
 - OS: macOS (Apple Silicon and Intel, universal), Windows 10/11 (x64 and ARM64),
-  Linux (x86_64, aarch64, riscv64), FreeBSD x86_64, or any modern browser (WebAssembly).
+  Linux (x86_64, aarch64, riscv64), FreeBSD x86_64 or aarch64, or any modern browser (WebAssembly).
 - No server, account or GPU requirement. Disk footprint is tens of megabytes.
 - Rust toolchain only if building from source; prebuilt installers need none.
 - The desktop build expects the separate `craft-fonts` repository next to the checkout.
@@ -89,14 +89,14 @@ Release assets are named `figcraft-<version>-<os>-<arch>.<format>`.
 - Linux: `.AppImage`, `.deb`, `.rpm`, `.flatpak`, `.pkg.tar.zst`, `.tar.gz` (x86_64, aarch64, riscv64)
 - Windows: installer and portable archive (x64, ARM64)
 - macOS: universal build (Apple Silicon + Intel)
-- FreeBSD: `.tar.gz`, **x86_64 only** — aarch64 dropped as of v0.9.0 (CI time limit)
-- Web: WebAssembly build; cannot open or save local files yet
+- FreeBSD: `.tar.gz` for x86_64 and aarch64 in v0.17.0. The aarch64 build was unavailable from v0.9.0 through v0.16.0.
+- Web: WebAssembly build; current releases can open local files
 
 ### .fig import limits
 
-Best effort, with documented silent loss: grid auto layout loses tracks and cell anchors
-(#465), instance-swap overrides fall back to the main component default (#464), and the
-import `info` field does not report what was dropped (#467). Import to read, not to keep editing.
+Best effort. Three documented silent-loss cases — grid auto layout tracks (#465), instance-swap
+overrides (#464) and the import `info` field (#467) — are closed, but large imports can still
+fail (#574). Verify a current build and keep the original file.
 
 ## Server, CLI, MCP and the online build
 
@@ -105,7 +105,7 @@ Four questions about FigCraft have a short, verifiable answer.
 - **figcraft server** — the optional collaboration server is built from a source checkout with `cargo run --release -p figcraft-server`. Live sessions are a preview: no accounts, teams or cloud, and the public server is not end-to-end encrypted, so self-host it or use local-network sharing. Build steps and requirements: https://figcraft.rerivo.com/install/
 - **figcraft cli** — `figcraft-cli` is built with `cargo build --release -p figcraft-cli`. Its subcommands are `info`, `convert`, `export`, `render`, `run`, `commands` and `mcp`, and `figcraft-cli commands` prints the command table of the build you are running. File access is confined with `--automation-read-root` and `--automation-write-root`. Setup: https://figcraft.rerivo.com/install/ ; path-root report: https://figcraft.rerivo.com/issues/
 - **figcraft mcp** — `figcraft-cli mcp` starts a headless Model Context Protocol server speaking newline-delimited JSON-RPC 2.0 over stdio; `figcraft-cli mcp --attach <port>` drives a running app through its control channel, which listens on 127.0.0.1 only. Reference: https://github.com/storytold/figcraft/blob/main/docs/mcp.md ; setup: https://figcraft.rerivo.com/install/
-- **figcraft online** — every release attaches a WebAssembly browser build and it needs no install. Local file access in the browser build is still changing (open work in https://github.com/storytold/figcraft/issues/830), and the studio at https://figcraft.rerivo.com/#demo is an independent demo, not the official editor.
+- **figcraft online** — every release attaches a WebAssembly browser build and it needs no install. Current releases can open local files; issue #830 is closed. The studio at https://figcraft.rerivo.com/#demo is an independent demo, not the official editor.
 
 By page: /install/ has the download matrix plus the server and MCP setup; /templates/ lists the eight starters with the frame size each is drawn at; /issues/ is the tracker list with workarounds; /alternatives/ compares Penpot, Graphite, Plasmic, Sketch and Figma.
 
@@ -132,4 +132,4 @@ Everything below is generated from one reviewed content source. The same disclai
 
 ## Citation
 
-FigCraft Guide, “FigCraft: a Figma alternative written in pure Rust,” updated 2026-10-31, https://figcraft.rerivo.com/.
+FigCraft Guide, “FigCraft: a Figma alternative written in pure Rust,” updated 2026-11-11, https://figcraft.rerivo.com/.

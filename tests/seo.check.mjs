@@ -194,9 +194,30 @@ for (const target of [...internalTargets].sort()) {
 
 // --- 6. assets referenced by <link>/<img> --------------------------------
 console.log('\nassets');
-for (const asset of ['assets/favicon.svg', 'assets/mark.svg', 'assets/logo.svg', 'og.png', 'llms.txt', 'llms-full.txt', 'robots.txt', 'sitemap.xml', 'CNAME', '.nojekyll']) {
+for (const asset of ['assets/favicon.svg', 'assets/mark.svg', 'assets/logo.svg', 'og.png', 'llms.txt', 'llms-full.txt', 'agents.md', 'robots.txt', 'sitemap.xml', 'CNAME', '.nojekyll']) {
   if (existsSync(join(ROOT, asset))) pass('/', asset);
   else fail('/', `missing ${asset}`);
+}
+
+// --- 6b. agent discovery ------------------------------------------------
+console.log('\nagent discovery');
+{
+  let missing = 0;
+  for (const page of PAGES) {
+    const html = readFileSync(join(ROOT, page.file), 'utf8');
+    if (!html.includes('<link rel="describedby" href="https://figcraft.rerivo.com/agents.md">')) {
+      fail(page.file, 'missing agents.md describedby link');
+      missing++;
+    }
+    if (!html.includes('<meta name="twitter:image:alt"')) {
+      fail(page.file, 'missing twitter:image:alt');
+      missing++;
+    }
+  }
+  if (!missing) pass('agent discovery', `${PAGES.length} pages link agents.md and declare twitter:image:alt`);
+  const agents = readFileSync(join(ROOT, 'agents.md'), 'utf8');
+  if (!agents.includes('not the official')) fail('agents.md', 'must state independence');
+  if (!agents.includes('https://figcraft.rerivo.com/llms-full.txt')) fail('agents.md', 'must link llms-full.txt');
 }
 
 // --- 7. the version sync reports no drift ------------------------------

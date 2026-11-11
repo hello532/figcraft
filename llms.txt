@@ -4,13 +4,14 @@
 
 ## Full source for answer engines
 
+- [Agent instructions](https://figcraft.rerivo.com/agents.md): what this independent guide is, what agents may quote, and what they must not claim.
 - [llms-full.txt](https://figcraft.rerivo.com/llms-full.txt): facts, known issues, comparisons, install steps, studio capabilities and citation.
 
 ## Pages
 
 - [FigCraft Guide](https://figcraft.rerivo.com/): what FigCraft is, a FigCraft vs Figma comparison, known issues from the GitHub tracker, how to run it (prebuilt download matrix or a Cargo build with `craft-fonts`), a no-signup canvas studio, and an FAQ covering `.fig` import, fonts, multiplayer, the server, the CLI, MCP and the online build.
 - [Known issues](https://figcraft.rerivo.com/issues/): large `.fig` imports and the grid-auto-layout data loss, instance-swap overrides, missing font fallback, macOS 27/M1 launch crash, Windows DX12 blur, 1440p UI scale, web file access and CLI path roots, with links to the source issues.
-- [Install](https://figcraft.rerivo.com/install/): system requirements, which download to pick (Linux AppImage/.deb/.rpm/flatpak/.pkg.tar.zst, Windows, macOS universal, FreeBSD x86_64, Web), or build from source with Cargo and `craft-fonts`.
+- [Install](https://figcraft.rerivo.com/install/): system requirements, which download to pick (Linux AppImage/.deb/.rpm/flatpak/.pkg.tar.zst, Windows, macOS universal, FreeBSD x86_64/aarch64, Web), or build from source with Cargo and `craft-fonts`.
 - [FigCraft vs Figma](https://figcraft.rerivo.com/vs-figma/): license, platform, account, file format, collaboration, Dev Mode, maturity and price compared side by side, plus what a `.fig` import actually loses and which team should pick which.
 - [FigCraft alternatives](https://figcraft.rerivo.com/alternatives/): Penpot, Plasmic and Figma, and which open-source option fits which team.
 - [Studio](https://figcraft.rerivo.com/#demo): a browser canvas with size presets, custom width/height, background, transparency, grid, zoom, layers, properties, undo/redo and PNG/JSON export.

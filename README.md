@@ -23,6 +23,7 @@ text/font), copy/paste, undo/redo, autosave, and PNG/SVG/JSON export.
 
 - `robots.txt` explicitly allows GPTBot, ChatGPT-User, OAI-SearchBot, ClaudeBot, Claude-Web, PerplexityBot, Google-Extended, Applebot-Extended and CCBot.
 - `llms.txt` is the short source map; `llms-full.txt` is the full answer-engine source with facts, issues, comparisons, install steps and citation.
+- `agents.md` is the agent-facing contract: what this independent guide is, what may be quoted, and what agents must not claim.
 - Structured data: WebSite, Organization, SoftwareApplication, WebApplication, Article, BreadcrumbList, two HowTo blocks and a 20-question FAQPage.
 - The page includes a visible Key facts section, a citation box and a Google-autocomplete search-intent hub.
 - `404.html` is a branded fallback; `robots.txt` points to the sitemap; the IndexNow key file is at the repository root for Bing/Yandex submission.
