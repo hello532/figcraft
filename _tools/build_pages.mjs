@@ -19,7 +19,7 @@ import { PAGES } from './content/index.mjs';
 const ROOT = resolve(dirname(fileURLToPath(import.meta.url)), '..');
 const SITE = 'https://figcraft.rerivo.com';
 const DEFAULT_UPDATED = '2026-10-22';
-const COVERED_VERSION = '0.17.0';
+const COVERED_VERSION = '0.18.1';
 const CHECK = process.argv.includes('--check');
 const REPO = 'https://github.com/storytold/figcraft';
 
